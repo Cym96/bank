@@ -1,0 +1,399 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>欢迎页</title>
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="index.css" th:href="@{/user/user/index.css}">
+    <link rel="stylesheet" href="font-awesome.css" th:href="@{/user/fundquestion/question/index.css}">
+    <link rel="stylesheet" href="calendar.css" th:href="@{/user/user/calendar.css}">
+    <link rel="stylesheet" href="default.calendar.css" th:href="@{/user/user/default.calendar.css}">
+    <link rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">
+    <link rel="stylesheet" href="jquery.bxslider.css" th:href="@{/user/user/jquery.bxslider.css}">
+    <link rel="stylesheet" href="intro.css" th:href="@{/user/user/intro.css}">
+    <script>
+        function getHeadImageResult() {
+            var result = "";
+            if (result.toString().length > 0) {
+                Alert(result);
+            }
+        }
+    </script>
+</head>
+
+<body onload=" getHeadImageResult() ">
+
+<div class="fullScreen">
+
+    <div class="m-container">
+        <div class="m-leftcontainer fl">
+            <!-- 头像区域 -->
+            <div id="intro4-2" data-step="4" data-position="relative"
+                 class="m-registerportrait">
+                <div class="m-registericon">
+                    <a data-pos="首页/更换头像"
+                       href="https://perbank.abchina.com/EbankSite/SetHeadImageInit.do"
+                       class="headImageLink"> <img id="HeadImage" src="man.png" th:src = "@{/user/user/man.png}"
+                                                   style="height: 90px; width: 90px; border-width: 0px;">
+                    </a>
+                </div>
+                <div
+                        style="background: transparent url(&quot;common-user.png&quot;) no-repeat scroll 0% 0%;"
+                        data-itype="level" class="m-diamondicon fl"></div>
+                <div
+                        style="background: transparent url(&quot;nomanager.png&quot;) no-repeat scroll 0% 0%;"
+                        data-itype="manager" class="m-usericon fl"></div>
+                <div
+                        style="background: transparent url(&quot;sec-green.png&quot;) no-repeat scroll 0% 0%;"
+                        data-itype="kbao" class="m-kbaoicon fl"></div>
+                <h3 class="clear">
+                    尊敬的 <span id="show-custName" class="g-blue g-name" th:text="${name}"></span>
+                    您好
+                </h3>
+                <div id="hov" class="m-hov-text hide">
+                    <div id="hov-triangle" class="m-triangle hide"></div>
+                    <span id="hov-text"></span> <a style="font-size: 12px;"
+                                                   class="hide" data-secflag="" data-keytype="" id="sec-change"></a>
+                </div>
+                <div id="manager-hov" class="m-hov-manager hide">
+                    <div id="hov-triangle-manager" class="m-triangle hide"></div>
+                    <div class="manager-title">专属客户经理</div>
+                    <div class="slide-wrap">
+                        <div class="left-arrow"></div>
+                        <div id="slide" class="slide"></div>
+                        <div class="right-arrow"></div>
+                        <div id="title-cell" class="title-cell"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 快捷菜单区域 -->
+            <div id="intro3-1" data-step="3" data-position="relative"
+                 class="m-menulist">
+                <div class="m-menulisthead">
+                    <h2>常用功能</h2>
+                    <a data-pos="常用功能设置" id="quickMenuSet"
+                       href="https://perbank.abchina.com/EbankSite/CustomerQuickMenuSetInitAct.do">
+                        <div class="m-addicon fl"></div>
+                    </a>
+                </div>
+                <div id="quickMenu" class="m-menulistcontent clear">
+                    <ul>
+                        <li><a data-pos="常用功能/本行账户"
+                               href="https://perbank.abchina.com/EbankSite/MyAccountInitAct.do"><span
+                                class="m-bankaccounticon"><img
+                                src="account-my_account.png" th:src="@{/user/user/account-my_account.png}"></span>本行账户</a></li>
+                        <li><a data-pos="常用功能/单笔转账"
+                               href="https://perbank.abchina.com/EbankSite/SingleTransferInitAct.do"><span
+                                class="m-bankaccounticon"><img src="transfer-single.png" th:src="@{/user/user/transfer-single.png}"></span>单笔转账</a></li>
+                        <li><a data-pos="常用功能/农银快e宝"
+                               href="https://perbank.abchina.com/EbankSite/KYBFundInfoInitAct.do"><span
+                                class="m-bankaccounticon"><img src="invest-e.png" th:src="@{/user/user/invest-e.png}"></span>农银快e宝</a></li>
+                        <li><a data-pos="常用功能/理财产品购买"
+                               href="https://perbank.abchina.com/EbankSite/FinanceProductListInitAct.do"><span
+                                class="m-bankaccounticon"><img
+                                src="invest-financial.png" th:src="@{/user/user/invest-financial.png}"></span>理财产品购买</a></li>
+                        <li><a data-pos="常用功能/还款"
+                               href="https://perbank.abchina.com/EbankSite/CreditCardRepayInitAct.do"><span
+                                class="m-bankaccounticon"><img
+                                src="credit-repayment.png" th:src="@{/user/user/credit-repayment.png}"></span>还款</a></li>
+                        <li><a data-pos="常用功能/结售汇"
+                               href="https://perbank.abchina.com/EbankSite/ForexSettleInitAct.do"><span
+                                class="m-bankaccounticon"><img
+                                src="foreign-exchange.png" th:src="@{/user/user/foreign-exchange.png}"></span>结售汇</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-rightcontainer fl">
+
+            <!-- 金融日历区域 -->
+            <div id="intro2-1" data-step="2" class="m-mytipbanner">
+
+                <div class="imgSlider">
+                    <div style="max-width: 100%;" class="bx-wrapper">
+                        <div
+                                style="width: 100%; overflow: hidden; position: relative; height: 210px;"
+                                class="bx-viewport">
+                            <ul style="width: auto; position: relative;" id="bxslider">
+                                <li
+                                        style="display: none; float: none; list-style: outside none none; position: absolute; width: 742px; z-index: 0;"><a
+                                        href="###"><img src="banner-e.png" th:src = "@{/user/user/banner-e.png}"></a></li>
+                                <li
+                                        style="float: none; list-style: outside none none; position: absolute; width: 742px; z-index: 50; display: list-item;"><img
+                                        src="banner.png" th:src = "@{/user/user/banner.png}"></li>
+                                <li
+                                        style="float: none; list-style: outside none none; position: absolute; width: 742px; z-index: 0; display: none;">
+                                    <a
+                                            href="https://perbank.abchina.com/EbankSite/ccAnnualBillForPCAct.do"
+                                            data-pos="信用卡/年度账单"> <img src="banner-c.png" th:src = "@{/user/user/banner-c.png}">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bx-controls bx-has-pager">
+                            <div class="bx-pager bx-default-pager">
+                                <div class="bx-pager-item">
+                                    <a href="#" data-slide-index="0" class="bx-pager-link">1</a>
+                                </div>
+                                <div class="bx-pager-item">
+                                    <a href="#" data-slide-index="1" class="bx-pager-link active">2</a>
+                                </div>
+                                <div class="bx-pager-item">
+                                    <a href="#" data-slide-index="2" class="bx-pager-link">3</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="calendar" style="display: none;"></div>
+                <div class="m-mytiphint-calendar" id="defalut-calendar" style="">
+
+                </div>
+                <div style="display: none;" class="m-mytiphint" id="calendarList">
+                    <div class="m-more">
+                        <a href="#" id="calendarbtn">
+                            <div class="m-moreicon fl"></div> <span>更多</span>
+                        </a>
+                    </div>
+                    <div id="calendarUlListP"
+                         style="margin-top: 25px; margin-left: 8px; width: 90%; background-color: transparent;">
+                        <ul id="calendarUlList">
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- 我的账户区域 -->
+            <div id="intro3-2" data-step="3" data-position="relative"
+                 class="m-myaccount">
+                <div class="m-myaccounthead">
+                    <h2>我的账户</h2>
+                    <a data-pos="账户/我的账户"
+                       href="https://perbank.abchina.com/EbankSite/MyAccountInitAct.do">
+                        <span class="fr">更多</span>
+                        <div class="m-moreicon fr"></div>
+                    </a>
+                </div>
+                <div id="acctContainer" class="m-myaccountcontent">
+
+
+                    <div id="dCard" class="m-card m-debitcard fl">
+                        <h3>借记卡</h3>
+                        <div class="m-paycardcontent" th:if="${dbCardNum} gt 0">
+                            <a th:href="@{/user/debitcard}"> <p th:text="'您持有' + ${dbCardNum} + '张借记卡,点击查看明细'">您持有${requestScope.dbCardNum}张借记卡</p></a>
+
+                        </div>
+                        <div class="m-paycardcontent"  th:if="${#lists.isEmpty(debitcardList)}">
+
+                          <p th:text="'您还没有借记卡，欢迎您的申请'"></p>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <!--<div class="m-paycardcontent">-->
+
+                     <!--<a th:href="@{/user/debitcard}"><p th:text="${dbCardNum}">您持有${dbCardNum}张借记卡</p></a>-->
+                    <!--</div>-->
+
+                        <!--<div class="m-paycardcontent">-->
+                            <!--<p th:text="${dbCardNum}">您持有${dbCardNum}张借记卡</p>-->
+                            <!--<ul>-->
+                                <!--<li  th:each="debitcard : ${debitcardList}">-->
+                                <!--<span th:name="debitcard.cardNum" th:text="${debitcard.cardNum}"></span>-->
+
+                                <!--<p style="padding-top: 24px;">-->
+                                    <!--人民币余额： <span id="dnormal"-->
+                                                 <!--class="hide normal span_6228482208016583178"></span><span-->
+                                        <!--id="dencrypt" class="encrypt" th:text="${debitcard.cardRestmoney}" th:name="debitcard.cardRestmoney"></span>-->
+                                <!--</p>-->
+                                <!--<div class="m-multicard-box">-->
+                                    <!--&lt;!&ndash;<a data-pos="账户/我的账户"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;href="https://perbank.abchina.com/EbankSite/MyAccountInitAct.do"&ndash;&gt;-->
+                                       <!--&lt;!&ndash;class="btn btn-refund m-redefinewidth">详情</a>&ndash;&gt;-->
+                                    <!--<a-->
+                                        <!--data-pos="账户/我的账户" href="###"-->
+                                        <!--class="btn btn-refund m-redefinewidth"-->
+                                        <!--onclick="toDetail('6228482208016583178')">明细</a><a-->
+                                        <!--data-pos="账户/我的账户" href="###"-->
+                                        <!--class="btn btn-refund m-redefinewidth-last"-->
+                                        <!--onclick="toTransfer('6228482208016583178')">转账</a>-->
+                                <!--</div>-->
+                                <!--</li>-->
+
+                            <!--</ul>-->
+
+                        <!--</div>-->
+
+                    <!--</div>-->
+                    <!--<div id="cCard" class="m-card m-creditcard fl">-->
+                        <!--&lt;!&ndash;<h3>信用卡</h3>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="m-creditcardcontent">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<p>您持有${requestScope.CrCardNum}张信用卡</p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<p style="padding-top: 24px; padding-right: 20px;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;本期未还款额： <span id="cnormal"&ndash;&gt;-->
+                                              <!--&lt;!&ndash;class="hide normal span_4041170043069404"></span><span&ndash;&gt;-->
+                                    <!--&lt;!&ndash;id="cencrypt" class="encrypt">${requestScope.CrCardMoney}</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</p>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--<div class="m-multicard-box">-->
+                            <!--<a data-pos="信用卡/还款"-->
+                               <!--href="https://perbank.abchina.com/EbankSite/ccRepayAct.do?ccCardRepay=4041170043069404&amp;ccRepayForm_bk=CcBack2"-->
+                               <!--class="btn btn-creditcard m-redefinewidth">还款</a><a-->
+                                <!--data-pos="信用卡/账单"-->
+                                <!--href="https://perbank.abchina.com/EbankSite/ccBillQryAct.do?ccCardBillQry=4041170043069404&amp;ccBillQryForm_bk=CcBack2"-->
+                                <!--class="btn btn-creditcard m-redefinewidth-last">账单</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+            <!-- 为您推荐 -->
+            <div class="m-recommend">
+                <div class="m-recommendhead">
+                    <h2>为您推荐</h2>
+                    <a id="m-recommend-change" href="###"> <span class="fr">换一组</span>
+                        <div id="m-rec-moreicon" class="m-moreicon fr"></div>
+                    </a>
+                </div>
+                <div class="m-recommendcontent pd-home-investment">
+                    <div id="m-recommen-default" style="overflow: hidden;">
+                        <div class="m-recommendleft fl">
+                            <h3>个人掌银APP下载</h3>
+                            <div class="m-twodimensioncode">
+                                <div class="m-twodimensioncodeinon"></div>
+                            </div>
+                        </div>
+                        <a
+                                href="https://perbank.abchina.com/EbankSite/InsInvProdBuyInitAct.do"
+                                data-pos="投资/保险产品/保险理财产品">
+                            <div class="m-recommendright fl"></div>
+                        </a>
+                    </div>
+                    <div id="m-recommen-fund" class="hide" style="overflow: hidden;">
+							<span id="m-rec-loading" class="m-rec-loading hide"><img
+                                    src="loading_small.gif" alt="loading" height="14" width="14">&nbsp;&nbsp;努力加载中——</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--明细-->
+<form id="AccountTradeDetailQueryInitForm"
+      action="https://perbank.abchina.com/EbankSite/AccountTradeDetailQueryInitAct.do"
+      method="post" name="AccountTradeDetailQueryInitForm">
+    <input name="acctId" type="hidden">
+</form>
+<!--借记/准贷卡转账-->
+<form id="SingleTransferForm"
+      action="https://perbank.abchina.com/EbankSite/SingleTransferInitAct.do"
+      method="post" name="SingleTransferForm">
+    <input name="skipAcctNo" type="hidden">
+</form>
+<!-- 电子账户转账 -->
+<form id="EaTransferForm" name="EaTransferForm" method="post"
+      action="https://perbank.abchina.com/EbankSite/EAccountTransferInitAct.do">
+    <input name="acctNo" type="hidden"> <input name="acctType"
+                                               type="hidden">
+</form>
+<!-- 信用卡交叉营销 -->
+<form id="creditApplyForm" name="creditApplyForm" method="post"
+      action="https://perbank.abchina.com/EbankSite/CreditCardApplyInitAct.do">
+    <input name="entranceTypeIndex" type="hidden"> <input
+        name="cardCodeIndex" type="hidden"> <input
+        name="cardNameIndex" type="hidden"> <input
+        name="picNameIndex" type="hidden"> <input name="orientOp"
+                                                  value="accountInfoQueryOp" type="hidden"> <input
+        name="destinationOp" value="CreditApplyInitOp" type="hidden">
+    <input name="statisticsType" value="markting" type="hidden">
+</form>
+<script type="text/javascript" src="json2.js">
+
+</script>
+<script>
+    /* var cardInfo = JSON
+            .parse('[  {    "card_type": "1",    "card_acctType": "401",    "card_no": "6228482208016583178",    "card_name": "借记卡",    "card_show": "0"  },  {    "card_type": "3",    "card_acctType": "",    "card_no": "",    "card_name": "电子账户",    "card_show": "0"  },  {    "card_type": "2",    "card_acctType": "404",    "card_no": "4041170043069404",    "card_name": "信用卡",    "card_show": "0"  }]');
+    var custName = "${sessionScope.users.userRealname}";
+    var config = {
+        imgpath : "/EbankSite/NetBank/static/img"
+    };
+    var keyForShow = "K宝";
+    var vipCustLevelName = "普通客户";
+    var vipCustLevel = "00";
+    var logonMode = "3";
+    var canUseEA = "1";
+    var userSec = {
+        hasKT : "0",
+        ebflag1 : "0",
+        ebflag2 : "1",
+        certNo : ""
+    };
+    var marketCreditInfo = {
+        custTypes : "",
+        custMaxCredit : "0",
+        custMinCredit : "0",
+        custCreditValue : ""
+    }; */
+</script>
+<script src="jquery-1.12.0.min.js">
+
+</script>
+<script src="jquery.bxslider.js">
+
+</script>
+<script>
+    $('#bxslider').bxSlider({
+        auto : true,
+        mode : 'fade',
+        speed : 1500,
+        controls : false,
+        pause : 6000,
+        afterClickStop : false,
+        autoHover : true
+    });
+</script>
+<script src="jquery.selectric.js" th:src="@{/user/findList/jquery.selectric.js}">
+
+</script>
+<script src="calendar.js">
+
+</script>
+<script src="jAlert.js">
+
+</script>
+<script src="jquery.popupoverlay-1.7.11.js" th:src="@{/user/user/jquery.popupoverlay-1.7.11.js}">
+
+</script>
+<script src="cardBalance.js">
+
+</script>
+<script src="default.calendar.js">
+
+</script>
+<script src="dataHelper.js" th:href="@{/user/userlogin/dataHelper.js}">
+
+</script>
+<script src="index.js">
+
+</script>
+<script src="config.js" th:src="@{/user/findList/config.js}">
+
+</script>
+
+
+
+</body>
+
+</html>

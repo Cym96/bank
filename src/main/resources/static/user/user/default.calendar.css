@@ -1,0 +1,24 @@
+/* Code tidied up by ScrapBook */
+* { margin: 0px; padding: 0px; }
+ul { list-style: outside none none; }
+.clear { clear: both; }
+.month-container { position: relative; background: rgb(255, 255, 255) none repeat scroll 0% 0%; width: 210px; height: 178px; padding: 0px 7px; border-radius: 10px; overflow: hidden; opacity: 0.9; }
+.month-body { padding-top: 24px; }
+.month-head { width: 100%; height: 29px; font: 10px "microsoft yahei"; text-shadow: 2px 2px 3px rgb(255, 255, 255); text-align: center; }
+.month-head span { color: rgb(0, 0, 0); border-color: rgb(255, 251, 223); line-height: 29px; }
+.position { position: absolute; left: 0px; top: 29px; padding: 0px 7px; height: 20px; background: rgb(249, 249, 249) none repeat scroll 0% 0%; }
+.month-cell { float: left; width: 28px; height: 24px; }
+.month-cell:active { box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6) inset; }
+.month-cell span { display: block; color: rgb(92, 189, 175); font: 10px/26px "microsoft yahei"; text-align: center; }
+.position .month-cell span { line-height: 20px; }
+.add { position: absolute; top: 8px; right: 26px; width: 14px; height: 14px; background: transparent url("add-balack13.png") no-repeat scroll center center / 14px auto; cursor: pointer; }
+.month-cell.active span { border-color: rgb(204, 204, 204); }
+.month-cell.pink span { color: rgb(0, 0, 0); border-color: rgb(255, 251, 223); }
+.month-cell.pink.active span { border-color: rgb(255, 226, 149); }
+.month-cell.orange { background: rgb(255, 245, 180) none repeat scroll 0% 0%; }
+.month-cell.orange span { color: rgb(255, 175, 110); border-color: rgb(255, 245, 180); }
+.month-cell.orange.active span { border-color: rgb(255, 207, 113); }
+.month-cell.red span { display: block; width: 22px; height: 22px; line-height: 22px; border-radius: 11px; border: 1px solid rgb(255, 104, 64); color: rgb(0, 0, 0); margin: 0px auto; }
+.month-cell.blue { background: rgb(91, 181, 236) none repeat scroll 0% 0%; }
+.month-cell.blue span { color: rgb(255, 255, 255); border-color: rgb(91, 181, 236); }
+.flipContainer { width: 300px; height: 100px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; padding: 10px; }

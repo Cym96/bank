@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.PowerMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Power" >
+    <result column="power_role" property="powerRole" jdbcType="INTEGER" />
+    <result column="power_fun" property="powerFun" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bank.domain.Power" >
+    insert into power (power_role, power_fun)
+    values (#{powerRole,jdbcType=INTEGER}, #{powerFun,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Power" >
+    insert into power
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="powerRole != null" >
+        power_role,
+      </if>
+      <if test="powerFun != null" >
+        power_fun,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="powerRole != null" >
+        #{powerRole,jdbcType=INTEGER},
+      </if>
+      <if test="powerFun != null" >
+        #{powerFun,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

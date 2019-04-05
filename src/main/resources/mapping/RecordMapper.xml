@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.RecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Record" >
+    <id column="record_id" property="recordId" jdbcType="INTEGER" />
+    <result column="record_fund" property="recordFund" jdbcType="INTEGER" />
+    <result column="record_date" property="recordDate" jdbcType="TIMESTAMP" />
+    <result column="record_npv" property="recordNpv" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    record_id, record_fund, record_date, record_npv
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from record
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from record
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Record" >
+    insert into record (record_id, record_fund, record_date, 
+      record_npv)
+    values (#{recordId,jdbcType=INTEGER}, #{recordFund,jdbcType=INTEGER}, #{recordDate,jdbcType=TIMESTAMP}, 
+      #{recordNpv,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Record" >
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="recordFund != null" >
+        record_fund,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="recordNpv != null" >
+        record_npv,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        #{recordId,jdbcType=INTEGER},
+      </if>
+      <if test="recordFund != null" >
+        #{recordFund,jdbcType=INTEGER},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordNpv != null" >
+        #{recordNpv,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Record" >
+    update record
+    <set >
+      <if test="recordFund != null" >
+        record_fund = #{recordFund,jdbcType=INTEGER},
+      </if>
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordNpv != null" >
+        record_npv = #{recordNpv,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Record" >
+    update record
+    set record_fund = #{recordFund,jdbcType=INTEGER},
+      record_date = #{recordDate,jdbcType=TIMESTAMP},
+      record_npv = #{recordNpv,jdbcType=DECIMAL}
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>我的账户首页</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link rel="stylesheet" href="debitcard.css" th:href="@{/user/user/debitcard.css}">
+    <link rel="stylesheet" href="nav.css" type="text/css" th:href="@{/user/user/nav.css}">
+    <link rel="stylesheet" href="validate_zhuye.css" type="text/css" th:href="@{/user/user/validate_zhuye.css}">
+    <link rel="stylesheet" href="electron_not.css" type="text/css" th:href="@{/user/user/electron_not.css}">
+    <link rel="stylesheet" href="Repayment-new.css" type="text/css" th:href="@{/user/user/Repayment-new.css}">
+    <link rel="stylesheet" href="querySettings.css" type="text/css" th:href="@{/user/user/querySettings.css}">
+
+</head>
+<body>
+<div class="container" id="container" style="visibility: visible;">
+    <div class="row">
+        <div class="tabs">
+            <ul class="tabs-head">
+                <li><a class="active" href="">借记卡</a></li>
+                <!--<li><a class="" href="${pageContext.request.contextPath}/user/creditcard">信用卡</a></li>-->
+                <li style="" class="right" data-bind="visible: showSetting, event: { mouseover: showWin, mouseout: hideWin }">
+                    <span class="setting"></span><a href="###" class="dropdown-title">账户管理</a>
+                    <div class="dropdown-overlay"></div>
+                    <div style="display: none;" class="dropdown-memu" data-bind="visible: opWinVisibleFlag">
+                        <div class="arrow-up"></div>
+                        <ul style="" data-bind="visible: !activeAccType() || activeAccType() == 1">
+                            <li><a href="https://perbank.abchina.com/EbankSite/AddAccountInitAct.do">添加账户</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/ReportLossInitAct.do">账户挂失</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/ChangePwdAct.do">修改密码</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/DeleteAccountInitAct.do">删除账户</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/SetDefaultAccountInitAct.do">设置默认</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/VerifyMobileInitAct.do">账户隐藏</a></li>
+                        </ul>
+                        <ul style="display: none;" data-bind="visible: activeAccType() == 3">
+                            <li><a href="https://perbank.abchina.com/EbankSite/EAccountPwdManageInitAct.do">修改密码</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/EAccountPwdResetCheckAct.do">重置密码</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/EAccountAccBindInitAct.do">更改绑定账户</a></li>
+                            <li><a href="https://perbank.abchina.com/EbankSite/EAccountCancelInitAct.do">电子账户销户</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="tabs-content">
+                <div class="tab-pane active" id="tab1" data-bind="css: !activeAccType() || activeAccType() == 1 ? 'active' : ''">
+                    <div class="debitcardmin">
+                        <p class="header">
+                            <span class="spanone"><i>账号</i></span>
+                            <span class="spanSecond"><i>账户类型</i></span>
+                            <!--<span class="spantwo"><i>别名</i></span>-->
+                            <span class="spanthree"><i>人民币可用余额</i></span>
+                            <span class="spanfour"></span>
+                        </p>
+                        <!--<ul data-bind="foreach: { data: sAccs, as: 'acc' }">-->
+                        <ul>
+                            <li th:each="debitcard : ${debitcardList}" class="decardone evenRowColor" data-bind="css: $index() % 2 == 0 ? 'evenRowColor' : 'oddRowColor'">
+                                  <span class="spanone1">
+                                        <em data-bind="text: acc.acctNo" th:name="debitcard.cardNum" th:text="${debitcard.cardNum }"></em>
+                                    </span>
+                                <span class="spanSecond1">
+                                        <em data-bind="text: $root.accNewType(acc)" th:value="${debitcard.cardType}" th:name="debitcard.cardType">借记卡</em>
+                                    </span>
+                                <!--<span class="spantwo1">-->
+                                        <!--<i class="aliasShow" data-bind="text: acc.aliasTemp, visible: acc.aliasEditFlag" th:text="${debitcard.cardOrdername }" th:name="debitcard.cardOrdername "></i>-->
+                                    <!--</span>-->
+                                <span class="spanthree1">
+                                        <em style="display: none;">显示余额</em>
+                                        <i style="color: black;" th:name="debitcard.cardRestmoney" th:text="${debitcard.cardRestmoney}"></i>
+                                    </span>
+                                <span class="spanfour1">
+                                        <a th:href="@{/download/downloadStreamXLS(cardNum=${debitcard.cardNum})}" class="minxi" >明细</a>
+                                        <a href="${pageContext.request.contextPath}/user/findUserDebitcard" >转账</a>
+                                        <a href="${pageContext.request.contextPath}/user/fund/findAll" >理财</a>
+                                    </span>
+                            </li>
+
+
+                            <!--<c:forEach items="${requestScope.debitcardList }" var="debitcard">-->
+                                <!--<li class="decardone evenRowColor" data-bind="css: $index() % 2 == 0 ? 'evenRowColor' : 'oddRowColor'">-->
+                                    <!--<span class="spanone1">-->
+                                        <!--<em data-bind="text: acc.acctNo">${debitcard.cardNum }</em>-->
+                                    <!--</span>-->
+                                    <!--<span class="spanSecond1">-->
+                                        <!--<em data-bind="text: $root.accNewType(acc)">${debitcard.cardType }类</em>-->
+                                    <!--</span>-->
+                                    <!--<span class="spantwo1">-->
+                                        <!--<i class="aliasShow" data-bind="text: acc.aliasTemp, visible: acc.aliasEditFlag">${debitcard.cardOrdername }</i>-->
+                                    <!--</span>-->
+                                    <!--<span class="spanthree1">-->
+                                        <!--<em style="display: none;">显示余额</em>-->
+                                        <!--<i style="color: black;">${debitcard.cardRestmoney }</i>-->
+                                    <!--</span>-->
+                                    <!--<span class="spanfour1">-->
+                                        <!--<a href="${pageContext.request.contextPath}/download/downloadStreamXLS?cardNum=${debitcard.cardNum } " class="minxi" >明细</a>-->
+                                        <!--<a href="${pageContext.request.contextPath}/user/findUserDebitcard" >转账</a>-->
+                                        <!--<a href="${pageContext.request.contextPath}/user/fund/findAll" >理财</a>-->
+                                    <!--</span>-->
+                                <!--</li>-->
+                            <!--</c:forEach>-->
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+/* Code tidied up by ScrapBook */
+i, em { font-style: normal; }
+.not-activate { margin-top: 15px; margin-bottom: 20px; border-bottom: 1px solid rgb(0, 195, 172); }
+.not-activate-img { width: 120px; height: 34px; cursor: pointer; background: transparent url("not_activation.png") no-repeat scroll 0% 0%; }

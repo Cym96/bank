@@ -1,0 +1,251 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>赎回+确定</title>
+    <link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link rel="stylesheet" href="fund.css" th:href="@{/user/findList/fund.css}">
+    <script type="text/javascript" src="writeObjectNew.js" th:href="@{/user/userlogin/writeObjectNew.js}">
+    </script>
+</head>
+
+<body>
+<div style="height: 0px;"><object id="versionObj" type="application/npABCSafeInputApp" style="width: 0px; height: 0px;" height="0px" width="0px"></object></div>
+
+<div class="container">
+    <form name="errGoForm" action="${pageContext.request.contextPath}/user/buysale/userFundSale" method="post">
+        <input name="rsCode" type="hidden">
+        <input name="nextAction" value="FundHoldInitAct.do" type="hidden">
+    </form>
+    <div id="magContent" class="sign"></div>
+    <span class="loading"></span>
+    <div id="loadingDiv" class="loadingDiv">
+        <img src="loading_big.gif" alt="loading" height="66" width="66">
+    </div>
+
+    <div class="buyFund">
+        <ul class="tabList clearfix">
+            <li>
+                <a href="javascript: ;" class="nowLink">基金赎回</a>
+            </li>
+        </ul>
+        <div class="form-horizontal-half">
+
+            <form action="${pageContext.request.contextPath}/user/buysale/UserSaleFund" method="post" id="purcForm">
+                <input type="hidden" value="${requestScope.userfund.userfundIdObj.fundId }" name="fundId" />
+                <table class="buyMsg">
+                    <tbody>
+                    <tr>
+                        <td class="subscribeName left">基金代码</td>
+                        <td class="right">${requestScope.userfund.userfundIdObj.fundNum }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.userfund.userfundIdObj.fundName}</td>
+                    </tr>
+                    <tr>
+                        <td class="subscribeName left">赎回份额</td>
+                        <td class="right">
+                            <input id="aBuyLotTemp" name="saleNum" value="${requestScope.userfund.userfundIdObj.fundMinsalemoney}" class="form-control" title="赎回最低${requestScope.userfund.userfundIdObj.fundMinsalemoney}份" type="text">可用份额：<span><em>${requestScope.userfund.userfundFundunit}</em></span>&nbsp;&nbsp;&nbsp;
+                            <a href="javascript:;" id="allSaleFunc">全部赎回</a>&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><span id="errorTipSpan" class="redFont"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <span id="errorTipSpan" class="redFont"></span>
+        </div>
+        <p class="kindlyReminder" style="padding-left: 170px; margin: 0px; height: 27px;">温馨提示：该笔交易可能产生费用，详见农银汇理基金管理有限公司相关公告，咨询及投诉电话：400-689-5599/021-61095599</p>
+        <p class="kindlyReminder" style="padding-left: 170px; margin: 0px; height: 27px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赎回本基金产品，基金公司将按规定要求收取【0.015】的赎回费，具体详见基金公司公告。</p>
+        <div class="operaBtn">
+            <a id="subNext" href="javascript:js_method()" class="submitBtn btn btn-primary">提交</a>
+            <a href="https://perbank.abchina.com/EbankSite/FundHoldInitAct.do" class="cancelBtn btn btn-secondary">取消</a>
+        </div>
+        </form>
+        <script type="text/javascript">
+            function js_method(){
+                $("#purcForm").submit();
+            }
+
+        </script>
+        <div class="saleFundSureAlert" style="display: none;">
+            <h2><a id="A1" href="#" class="close" onclick=" closeBg('hideDiv', 'saleFundSureAlert'); "></a>赎回确认</h2>
+            <div id="TBuyFundDialog">
+                <div style="text-align: center; width: 100%;">当前非交易时间，是否进行预约交易？预约申请将于下一开放时段提交至基金公司。</div>
+                <div id="errorMsg1" class="errorMsg"></div>
+                <div class="operaBtn">
+                    <a id="subBtn1" href="#" class="submitBtn btn btn-primary">预约赎回</a>
+                    <a href="#" id="subCacel" class="btn btn-secondary" onclick=" closeBg('hideDiv', 'saleFundSureAlert'); ">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hideDiv">
+    </div>
+
+
+<script src="jquery-1.12.0.min.js" th:src="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+<script src="placeholders.jquery.min.js" th:src="@{/user/findList/placeholders.jquery.min.js}">
+</script>
+
+<script type="text/javascript" src="hiddenPopDiv.js" th:src="@{/user/findList/hiddenPopDiv.js}">
+</script>
+<script type="text/javascript" src="fund_common.js" th:src="@{/user/findList/fund_common.js}">
+</script>
+<script type="text/javascript">
+    //submit提交的时候要自己手动判断如果input text 的值为data - prompt的值就提交后台一个控制
+    $(function() {
+        //			$('.resetBtn').click(function(){
+        //				$('.buyMsg input').each(function(i,n){
+        //					$(n).val("");
+        //				});
+        //			});
+
+        if("0" == "1") {
+            alert("该产品为指数熔断类产品，今日若发生熔断至收市情形，熔断时点后发生的该交易申请将于下一开放日处理。");
+        }
+        $("#aBuyLotTemp").on("blur", function() {
+
+            var buyLotTemp = $("#aBuyLotTemp").val();
+            if(buyLotTemp.length == 0) {
+                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;请输入份额！");
+                $("#subNext").attr("disabled",true);
+                return false;
+            }
+
+            if(checkLot(buyLotTemp) != "") {
+                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;"+checkLot(buyLotTemp));
+                $("#subNext").attr("disabled",true);
+                return false;
+            }
+
+            if(isNaN(buyLotTemp)) {
+                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;请输入数字！");
+                $("#subNext").attr("disabled",true);
+                return false;
+            }
+
+            if(parseFloat(buyLotTemp) < parseFloat("${requestScope.myfund.fund.fundRedemption}")) {
+                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;赎回份额应该大于最小赎回份额！");
+                $("#subNext").attr("disabled",true);
+                return false;
+            }
+
+            if(parseFloat(buyLotTemp) > parseFloat("${requestScope.myfund.myfundNumber}")) {
+                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;赎回份额应该小于可用份额！");
+                $("#subNext").attr("disabled",true);
+                return false;
+            }
+            $("#subNext").attr("disabled",false);
+            $("#buyAmtShow").text(buyLotTemp);
+            showBg('hideDiv', 'buyFundSureAlert');
+        });
+        $('#subNext').click(function() {
+
+        });
+
+        $('#allSaleFunc').click(function() {
+
+            document.getElementById("aBuyLotTemp").value = "${requestScope.userfund.userfundFundunit}";
+
+        });
+
+        $('#subBtn').click(function() {
+
+            if(!password.DealWithPwd("remeedconfirmform", "636605312908788634")) {
+                var powerobj = document.getElementById("powerpass_ie");
+                powerobj.focus();
+                return false;
+            }
+
+            for(var i = 0; i < document.getElementsByName("sRdmDlyTemp").length; i++) {
+                if(document.getElementsByName("sRdmDlyTemp")[i].checked == true) {
+                    document.remeedconfirmform.sRdmDly.value = document.getElementsByName("sRdmDlyTemp")[i].value;
+                }
+            }
+            document.remeedconfirmform.aBuyLot.value = document.getElementById("aBuyLotTemp").value;
+
+            var param = $("#remeedconfirmform").serialize();
+            $.post("FundRedeemNewAct.do", param, function(data) {
+
+                obj = eval('(' + data + ')');
+
+                if(obj.isTradeTime == "0") {
+                    document.getElementById("powerpass_ie").clear();
+                    closeBg('hideDiv', 'buyFundSureAlert');
+                    showBg('hideDiv', 'saleFundSureAlert');
+                } else if(obj.isTradeTime == "1") {
+                    if(obj.errorCode != "") {
+                        document.errGoForm.rsCode.value = obj.errorCode;
+                        document.errGoForm.submit();
+                    } else {
+                        document.remeedconfirmform.submit();
+                    }
+                }
+
+            });
+        });
+    });
+
+    $('#subBtn1').click(function() {
+        document.remeedconfirmform.action = "FundRedeemSubmitAfterTradeTimeNewAct.do";
+        document.remeedconfirmform.cYYFlag.value = "1";
+        document.remeedconfirmform.submit();
+
+    });
+
+    function checkLot(fromAcctAmt) {
+        //*金额有效性检查. 判断数值,可以有小数*
+        if(fromAcctAmt.length == 0) {
+            return "错误！份额必需输入！";
+        }
+        if(fromAcctAmt.charAt(0) == "0") {
+            if(fromAcctAmt.length == 1) {
+                return "份额不能为0，请重新填写！";
+            }
+        }
+        var pointQty = 0;
+        var amtIntPartLength = 0;
+        var amtPointPartLength = 0;
+        //对每位数字进行判断
+        for(var i = 0; i < fromAcctAmt.length; i++) {
+            if(isNaN(parseInt(fromAcctAmt.charAt(i)))) {
+                if(fromAcctAmt.charAt(i) != ".") {
+                    return "错误！请输入数值型数据！";
+                } else {
+                    if(pointQty == 0) {
+                        pointQty++;
+                    } else {
+                        return "错误！小数点只能有一个!";
+                    }
+                }
+            } else {
+                if(pointQty == 0) {
+                    amtIntPartLength++;
+                    if(amtIntPartLength >= 14) {
+                        return "错误！整数部分应小于14位！";
+                    }
+                } else {
+                    amtPointPartLength++;
+                    if(amtPointPartLength > 2) {
+                        return "错误！小数部分应小于等于2位！";
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+    function closeBuyFundSureAlert() {
+        $('.pwdError').html("");
+        document.getElementById("powerpass_ie").clear();
+        closeBg('hideDiv', 'buyFundSureAlert');
+    }
+</script>
+
+
+
+</body>
+
+</html>

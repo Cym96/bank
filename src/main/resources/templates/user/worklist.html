@@ -1,0 +1,211 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>服务单系统</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link type="text/css" rel="stylesheet" href="transfer_accounts.css" th:href="@{/user/user/main.css}">
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.qtip.css" th:href="@{/user/userlogin/jquery.qtip.css}">
+    <script src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+    <script src="placeholders.jquery.min.js" type="text/javascript"></script>
+    <script src="moment-with-locales.min.js" th:src="@{/user/user/moment-with-locales.min.js}"> </script>
+    <script src="pikaday.js" th:src="@{/user/user/pikaday.js}"> </script>
+    <script src="jquery.selectric.js" th:src="@{/user/findList/jquery.selectric.js}"> </script>
+    <script src="jquery.popupoverlay-1.7.11.js" th:src="@{/user/user/jquery.popupoverlay-1.7.11.js}"> </script>
+    <script src="jquery.qtip.min.js" th:src="@{/user/user/jquery.qtip.min.js}"> </script>
+    <script src="jquery.validate.min.js" th:src="@{/user/user/jquery.validate.min.js}"> </script>
+    <script src="messages_zh.js"> </script>
+    <script src="jTabs.js" th:src="@{/user/findList/jTabs.js}"> </script>
+</head>
+
+<script type="text/javascript">
+
+    $(function(){
+        $("#transferNext").click(function(){
+            $("#mainForm").submit();
+        });
+    });
+
+</script>
+
+<body>
+<form id="mainForm" name="mainForm" action="${pageContext.request.contextPath }/user/worklistsave" method="post">
+    <input type="hidden" name="transfer" id="transfer" value="1"><!--transferPublic.js 1019-->
+    <div class="container">
+
+        <div class="tabs">
+            <ul class="tabs-head">
+                <li>
+                    <a href="https://perbank.abchina.com/EbankSite/InnerTransferInitAct.do" data-method="skip" data-toggle="tab" class="active">服务单系统</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="trn_backline">
+            <table class="table table-centre">
+                <tbody>
+
+                <tr>
+                    <td class="">
+                        <label class="trn_mustData">产品名称：</label>
+                    </td>
+                    <td class="right">
+                        ${requestScope.fund.fundName }
+                    </td>
+                </tr>
+                <tr>
+                    <!-- <td class="left"> -->
+                    <td class="">
+                        <label class="trn_mustData">持有份额：</label>
+                    </td>
+                    <td class="right">
+                        ${requestScope.userfund.userfundFundunit }
+                    </td>
+                </tr>
+                <tr>
+
+                </tr>
+                </tbody>
+            </table>
+            <div class="trn_headline" id="moreHeadLine" style=""></div>
+            <table class="table table-centre">
+                <tbody>
+                <tr>
+                    <td>
+                    </td>
+                    <td class="right">
+                        <div id="messagearea">
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="trn_headline"></div>
+            <table class="table table-centre">
+                <tbody>
+                <tr>
+                    <td>
+                        <label class="trn_mustData">*&nbsp;&nbsp;</label>反馈内容&nbsp;&nbsp;
+                    </td>
+                    <td class="right">
+                        <textarea id="message" name="worklistText" class="form-control trn_input_width placeholderTrn" placeholder="反馈内容" maxlength="30" required=""></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="trn_headline" id="moreHeadLine" style=""></div>
+            <div class="row" style="margin-left: 45%; margin-top: 20px;" id="trnButton">
+                <button id="submitworklist" class="btn btn-primary" type="button">提交服务单</button>
+            </div>
+            <div class="row" style="margin-left: 45%; margin-top: 20px;" id="trnButton">
+                <button id="sendmessage" class="btn btn-primary" type="button" style="display: none;">发送消息</button>
+                <button id="overworklist" class="btn btn-primary" type="button" style="display: none;">结束服务单</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var host;
+        var port;
+        var url;
+        var w;
+        var w2;
+        var id;
+        $("#submitworklist").click(function(){
+            host = '127.0.0.1';
+            port = 13081;
+            url = 'ws://' + host + ':' + port + '/';
+            w = new WebSocket(url);
+            w2 = null;
+            w.onmessage = function (e) {
+                //var obj = eval('(' + e + ')');
+                port = e.data;
+                var url2 = 'ws://' + host + ':' + port + '/';
+                w = null;
+                w2 = new WebSocket(url2);
+                w2.onmessage = function (e2) {
+                    if(e2.data.substring(0,1)=="0"){
+                        $("#messagearea").append("<p style=\"color:#336699;\">"+ "您的消息：" + e2.data.substring(1) +"</p>");
+                    }else if(e2.data.substring(0,1)=="1"){
+                        $("#messagearea").append("<p style=\"color:#CC3333;\">"+ "客服消息：" + e2.data.substring(1) +"</p>");
+                    }else if(e2.data.substring(0,1)=="2"){
+                        $.ajax({
+                            type:"POST",
+                            url:"${pageContext.request.contextPath}/user/worklistBegin",
+                            data:{"id":id},
+                            success:function(data){
+                                $("#messagearea").append("<p style=\"color:rgb(0, 195, 172);\">" + e2.data.substring(1) +"</p>");
+                                $("#sendmessage").show();
+                                $("#overworklist").show();
+                            }
+                        });
+                    }
+                }
+                $("#messagearea").append("<p style=\"color:rgb(0, 195, 172);\">服务单系统连接成功</p>");
+                $.ajax({
+                    type:"POST",
+                    url:"${pageContext.request.contextPath}/user/worklistsave",
+                    data:{"num":port,"text":$("#message").val(),"fund":"${requestScope.userfund.userfundId }"},
+                    success:function(data){
+                        $("#messagearea").append("<p style=\"color:rgb(0, 195, 172);\">您的服务单提交成功，等待客户经理回应</p>");
+                        $("#messagearea").append("<p style=\"color:#336699;\">"+ "您的反馈内容：" + $("#message").val() +"</p>");
+                        $("#message").val("");
+                        $("#submitworklist").hide();
+                        id = data;
+                    }
+                });
+            }
+        });
+        $("#sendmessage").click(function(){
+            w2.send("0"+$("#message").val());
+            $("#message").val("");
+        });
+        $("#overworklist").click(function(){
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/user/worklistOver",
+                data:{"id":id},
+                success:function(data){
+                    $("#messagearea").append("<p style=\"color:rgb(0, 195, 172);\">服务单已经结束</p>");
+                    $("#sendmessage").hide();
+                    $("#overworklist").hide();
+                }
+            });
+        });
+    });
+</script>
+<script src="json2.js"></script>
+<script src="jAlert.js"></script>
+<script src="jError.js"></script>
+<script type="text/javascript">
+    $('#toAcctProvince').selectric();
+    $('#toAcctCity').selectric();
+    $('#toAcctNet').selectric();
+</script>
+<!--<script src="cardBalance.js"></script>-->
+<script type="text/javascript" src="public.js">
+</script>
+<!--<script src="dataHelper.js">
+</script>-->
+<script type="text/javascript" src="transferPublic.js">
+</script>
+
+<!--<script type="text/javascript" src="transferInit.js">
+</script>
+<script type="text/javascript" src="transferSubmit.js">
+</script>
+<script type="text/javascript" src="JudgeAccInfo.js">
+</script>-->
+
+</body>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+/* Code tidied up by ScrapBook */
+.m-dredge { width: 985px; height: 398px; margin: 0px auto; background: transparent url("banner_new.png") no-repeat scroll 0% 0%; position: relative; }
+.m-dredge a { position: absolute; left: 425px; bottom: 87px; }
+i { font-style: normal; }
+.m-dredge .m-bid { color: rgb(255, 255, 255); position: absolute; top: 100px; left: 200px; font-style: italic; }
+.evenRowColor { background-color: rgb(255, 255, 255); }
+.oddRowColor { background-color: rgb(249, 249, 249); }

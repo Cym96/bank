@@ -1,0 +1,728 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>我的基金账户</title>
+    <link type="text/css" rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link type="text/css" rel="stylesheet" href="fund.css" th:href="@{/user/findList/fund.css}">
+    <link rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">
+    <script type="text/javascript" src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+    <script type="text/javascript" src="fund_common.js" th:src="@{/user/findList/fund_common.js}"> </script>
+    <script type="text/javascript" src="hiddenPopDiv.js" th:src="@{/user/findList/hiddenPopDiv.js}"> </script>
+    <script type="text/javascript" src="dataHelper.js" th:href="@{/user/userlogin/dataHelper.js}"> </script>
+    <script src="dataObject.js" th:href="@{/user/userlogin/dataObject.js}"></script>
+    <script src="fund_account.js" th:href="@{/user/userlogin/fund_account.js}"> </script>
+    <script src="writeObjectNew.js" th:href="@{/user/userlogin/writeObjectNew.js}"> </script>
+
+</head>
+
+<body>
+<div id="testContentContainer">
+    <div class="subscribeAlertWra">
+        <div class="closeAlertButton" style="text-align: center;"><h2>风险能力评测</h2></div>
+        <form action="${pageContext.request.contextPath }/user/question/userQuestion" name="QuestionName" method="post">
+
+            <!--<div class="agesBox h240" id="agesBox">-->
+            <div class="agesContent" id="agesContent" style="position: inherit;">
+
+                <table class="ageContent">
+                    <tbody>
+                    <!-- 第一题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 1、（个人状况）您的年龄介于</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que0" value="-3" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>≤18岁</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que0" value="3" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>19岁-25岁</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que0" value="5" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>26岁-40岁</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que0" value="4" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>41岁-54岁</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que0" value="-5" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>55岁-64岁</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que0" value="-10" type="radio"></td>
+                        <td class="RadioMsg2">6</td>
+                        <td>≥65岁</td>
+                    </tr>
+                    <!-- 第二题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 2、(个人状况)您的最高学历是</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que1" value="-3" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>初中</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que1" value="-1" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>高中及同等学历</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que1" value="0" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>本科及以上</td>
+                    </tr>
+                    <!-- 第三题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 3、（财务状况）依据您目前的情况，以下哪项最符合您和您的家庭对于自身未来5年收入的预期</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que2" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>快速增长</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que2" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>缓慢增长</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que2" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>维持稳定</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que2" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>不确定</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que2" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>下降</td>
+                    </tr>
+                    <!-- 第四题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 4、（财务状况）以人民币计算，您的家庭净资产总值（不包括自用住宅和私营企业等实业投资，但包括储蓄、现有投资组合、房地产投资、人寿保险、固定收入，同时请扣除债务如房屋贷款、其他贷款、信用卡账单等）介于</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que3" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>≥100万元</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que3" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>70万-99万元</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que3" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>50万-69万元</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que3" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>16万-49万元</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que3" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>≤15万元</td>
+                    </tr>
+                    <!-- 第五题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 5、（财务状况）您是否有尚未清偿的数额较大的债务（数额较大指余额超过资产净值30%以上），如有，其性质是</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que4" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>无</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que4" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>仅有银行发放的住房抵押贷款</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que4" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>以银行发放的信用类贷款为主</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que4" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>以非银行机构提供的短期融资为主</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que4" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>以亲友借款为主</td>
+                    </tr>
+                    <!-- 第六题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 6、（财务状况）您的净资产中，可用于金融投资（储蓄存款除外）的比例是多少？</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que5" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>＞70%</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que5" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>50%-70%（含）</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que5" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>30%-50%（含）</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que5" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>10%-30%（含）</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que5" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>≤10%</td>
+                    </tr>
+                    <!-- 第七题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 7、（财务状况）您未来5年内需要扶养、抚养和赡养的，及无稳定收入（或有稳定收入，但收入无法满足日常生活开支）的人员数量</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que6" value="0" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>1-2人</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que6" value="-1" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>3-4人</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que6" value="-3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>5人以上</td>
+                    </tr>
+
+                    <!-- 第八题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 8、（投资经验）以下哪项最符合对您投资经验的投资描述？</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que7" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>对金融产品及其风险有充分理解，大部分金融投资集中于权证、期货期权等产品的交易</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que7" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>对金融产品及其风险有充分理解，大部分金融投资集中于股票、基金、贵金属等产品的交易</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que7" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>对金融产品及其风险有基本理解，大部分金融投资集中于股票、基金、银行理财、信用债等产品</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que7" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>对金融产品及其风险有基本理解，大部分投资集中于国债和存款</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que7" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>除银行存款外，几乎没有其他投资</td>
+                    </tr>
+
+                    <!-- 第九题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 9、（投资经验）一位客户一个月内做了15笔交易（同一产品、同一品种买卖各一次算一笔），您认为交易频率</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que8" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>偏低</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que8" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>正常</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que8" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>无所谓</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que8" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>偏高</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que8" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>太高</td>
+                    </tr>
+
+                    <!-- 第10题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 10、（投资经验）您在过去一年内购买金融产品的数量</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que9" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>13个以上</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que9" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>7-12个</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que9" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>4-6个</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que9" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>1-3个</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que9" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>0</td>
+                    </tr>
+
+                    <!-- 第11题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 11、（投资风格）对您而言，保本比追求高收益更为重要</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que10" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>非常不同意</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que10" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>不同意</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que10" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>无所谓</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que10" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>同意</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que10" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>非常同意</td>
+                    </tr>
+
+                    <!-- 第12题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 12、（投资风格）您和您的家庭希望将金融产品投资及回报用于</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que11" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>迅速获得高收益，大幅改善生活</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que11" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>在个人经营或证券投资之外，实现投资增值</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que11" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>获得股息、分红等</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que11" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>养老、医疗或育儿</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que11" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>偿付债务</td>
+                    </tr>
+
+                    <!-- 第13题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 13、（投资风格）您打算重点投资于哪种金融产品？</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que12" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>参与私募股权投资、创业投资等</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que12" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>期货、期权、融资融券等</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que12" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>股票、基金、贵金属等收益率波动较大的资产</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que12" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>中等风险以下的银行理财产品</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que12" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>国债、货币市场基金等低风险资产</td>
+                    </tr>
+
+                    <!-- 第14题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 14、（投资风格）综合收益和风险，如果您有100万资金，您最愿意如何安排您投资？<br>投资A：较大可能获取5%收益，可能承担的本金损失较小<br>投资B：较小可能获取30%收益，可能承担的本金损失较大</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que13" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>全部投资于B</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que13" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>大部分投资于B，小部分投资于A</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que13" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>各投一半</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que13" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>大部分投资于A，小部分投资于B</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que13" value="1" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>全部投资于A</td>
+                    </tr>
+
+                    <!-- 第15题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 15、（风险偏好）对于理财产品、股票、基金等金融产品，您可以接受的最长投资期限为</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que14" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>≥5年</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que14" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>3-4年</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que14" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>1-2年</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que14" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>1年以内</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que14" value="3" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>无所谓</td>
+                    </tr>
+
+                    <!-- 第16题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 16、（风险偏好）对您而言，理财产品、股票、基金等金融投资出现那种情况时您会焦虑？</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que15" value="5" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>本金损失50%以上</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que15" value="4" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>本金损失30%-50%</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que15" value="3" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>本金损失10%-30%</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que15" value="2" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>本金损失10%以内</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que15" value="-3" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>本金无损失，但收益未达预期。</td>
+                    </tr>
+
+                    <!-- 第17题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 17、（风险偏好）您对长期投资收益和风险所持的态度是</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que16" value="10" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>我希望承担风险，愿意为获得较高收益而承受较大的负面波动，能够承担本金损失</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que16" value="8" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>我能够承担风险，愿意接受一定范围的负面波动以提高投资的潜在收益，能够承担部分本金损失</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que16" value="6" type="radio"></td>
+                        <td class="RadioMsg2">3</td>
+                        <td>我对风险的态度一般，愿意为较高潜在收益接受较小的负面波动</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que16" value="4" type="radio"></td>
+                        <td class="RadioMsg2">4</td>
+                        <td>我希望避免风险，愿意为较高潜在收益接受轻微的负面波动。</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que16" value="2" type="radio"></td>
+                        <td class="RadioMsg2">5</td>
+                        <td>我不愿意承担风险，也不能接受投资的价值下跌。</td>
+                    </tr>
+
+                    <!-- 第18题 -->
+                    <tr class="ageBackBox">
+                        <td colspan="3"> 18、您认为您是有投资经验的投资者，还是无投资经验的投资者</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que17" value="0" type="radio"></td>
+                        <td class="RadioMsg2">1</td>
+                        <td>有投资经验投资者，曾投资于股票、股票型基金、外汇及其衍生品、贵金属及其衍生品、投资于股票/股指的非保本理财产品、或与利率、汇率、股票、股指、信用、商品等挂钩的非保本结构性理财产品，且累计投资期限在两年以上。</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="RadioMsg"> <input name="que17" value="-35" type="radio"></td>
+                        <td class="RadioMsg2">2</td>
+                        <td>无投资经验投资者，未投资于上述产品，或投资上述产品的期限不满两年。</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!--</div>-->
+            <div class="clearfix"></div>
+            <div class="Department"> <p>根据监管部门规定，您在购买基金时需要进行风险承受能力测评</p></div>
+            <div class="BottomWrapperBox">
+                <div class="BottomWrapper">
+
+                    <a id="btnPassTest2" href="javascript:isSave();" class="submit  btn btn-primary">提交</a>
+
+                    <a id="btnAutoAnswer" data-buttonflag="2" href="javascript:void(0);" class="autoAnswer">自动答题，默认为保守型</a>
+                </div>
+            </div>
+        </form>
+    </div></div>
+</body>
+<script type="text/javascript">
+    function isSave(){
+        document.QuestionName.submit();
+    }
+
+</script>
+</html>

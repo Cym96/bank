@@ -1,0 +1,617 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+    <meta name="description" content="Admin Dashboard Template"/>
+    <meta name="keywords" content="admin,dashboard"/>
+    <meta name="author" content="Lalassu"/>
+
+    <!-- Styles -->
+    <link href="assets/plugins/pace-master/themes/blue/pace-theme-flash.css"
+          th:href="@{/admin/assets/plugins/pace-master/themes/blue/pace-theme-flash.css}" rel="stylesheet"/>
+    <link href="assets/plugins/uniform/css/default.css" rel="stylesheet"
+          th:href="@{/admin/assets/plugins/uniform/css/default.css}"/>
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css"
+          th:href="@{/admin/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"
+          th:href="@{/admin/assets/plugins/fontawesome/css/font-awesome.css}"/>
+    <link href="assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css"
+          th:href="@{/admin/assets/plugins/line-icons/simple-line-icons.css}"/>
+    <link href="assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css"
+          th:href="@{/admin/assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css}" rel="stylesheet"
+          type="text/css"/>
+    <link href="assets/plugins/waves/waves.min.css" th:href="@{/admin/assets/plugins/waves/waves.min.css}"
+          rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"
+          th:href="@{/admin/assets/plugins/switchery/switchery.min.css}"/>
+    <link href="assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"
+          th:href="@{/admin/assets/plugins/3d-bold-navigation/css/style.css}"/>
+
+    <link href="assets/plugins/slidepushmenus/css/component.css" th:href="@{/admin/assets/plugins/slidepushmenus/css/component.css}" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Theme Styles -->
+    <link href="assets/css/layers.min.css" rel="stylesheet" type="text/css"
+          th:href="@{/admin/assets/css/layers.min.css}"/>
+    <link href="assets/css/layers/dark-layer.css" th:href="@{/admin/assets/css/layers/dark-layer.css}"
+          class="theme-color" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/css/custom.css}"/>
+
+    <script src="assets/plugins/3d-bold-navigation/js/modernizr.js"
+            th:href="@{/admin/assets/plugins/3d-bold-navigation/js/modernizr.js}"></script>
+    <script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"
+            th:href="@{/admin/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js}"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+
+        function changImgFace(e) {
+            var facebase64;
+            for (var i = 0; i < e.target.files.length; i++) {
+                var file = e.target.files.item(i);
+                if (!(/^image\/.*$/i.test(file.type))) {
+                    continue;
+                }
+                var freader = new FileReader();
+                freader.readAsDataURL(file);
+                freader.onload = function (e) {
+                    $("#imgface").attr("src", e.target.result);
+                    facebase64 = e.target.result;
+                    $.ajax({
+                        type: "POST",
+                        url: "${pageContext.request.contextPath}/sign/uploadIdentyImg",
+                        data: {"imgCode": facebase64, "side": "face"},
+                        success: function (data) {
+                            if (data == "ok") {
+                                $("#imgface").show();
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        function changImgBack(e) {
+            var backbase64;
+            for (var i = 0; i < e.target.files.length; i++) {
+                var file = e.target.files.item(i);
+                if (!(/^image\/.*$/i.test(file.type))) {
+                    continue;
+                }
+
+                var freader = new FileReader();
+                freader.readAsDataURL(file);
+                freader.onload = function (e) {
+                    $("#imgback").attr("src", e.target.result);
+                    backbase64 = e.target.result;
+                    $.ajax({
+                        type: "POST",
+                        url: "${pageContext.request.contextPath}/sign/uploadIdentyImg",
+                        data: {"imgCode": backbase64, "side": "back"},
+                        success: function (data) {
+                            if (data == "ok") {
+                                $("#imgback").show();
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        var timerCheck;
+
+        function updateCheck() {
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/sign/identityCheckSuccess",
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $("#video").hide();
+                        $(".next").show();
+                        $("#cardtitle").text("审核通过，请点击下一步");
+                        $("#dbcardnum").text("您的银行卡号：" + data.dbCardNum);
+                        $("#cardnum").val(data.dbCardNum);
+                        $("#identitynum").val(data.idCardNum);
+                        window.clearInterval(timerCheck);
+                    }
+                }
+            });
+        }
+
+        function updateUserMessage() {
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/sign/userMessageUpLoad",
+                data: {
+                    "idCardNum": $("#identitynum").val(),
+                    "phoneNum": $("#phonenum").val(),
+                    "dbCardnum": $("#cardnum").val(),
+                    "userPassword": $("#userPassword1").val(),
+                    "cardPassword": $("#cardPassword1").val(),
+                    "email": $("#email").val(),
+                },
+                success: function (data) {
+                    if (data == "ok") {
+                        $("#successtitle").text("申请完成！");
+                        $("#successtext").show();
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body class="compact-menu">
+<div class="overlay"></div>
+<!--<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1">
+    <h3><span class="pull-left">Chat</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i
+            class="icon-close"></i></a></h3>
+    <div class="slimscroll">
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Michael Lewis<small>Nice to meet you</small></span></a>
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>John Doe<small>Nice to meet you</small></span></a>
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Emma Green<small>Nice to meet you</small></span></a>
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Nice to meet you</small></span></a>
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Michael Lewis<small>Nice to meet you</small></span></a>
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>John Doe<small>Nice to meet you</small></span></a>
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Emma Green<small>Nice to meet you</small></span></a>
+        <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Nice to meet you</small></span></a>
+    </div>
+</nav>-->
+<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+    <h3><span class="pull-left">Michael Lewis</span> <a href="javascript:void(0);" class="pull-right"
+                                                        id="closeRight2"><i class="fa fa-angle-right"></i></a></h3>
+    <!--<div class="slimscroll chat">
+        <div class="chat-item chat-item-left">
+            <div class="chat-image">
+                <img src="assets/images/avatar2.png" alt="">
+            </div>
+            <div class="chat-message">
+                Duis aute irure dolor?
+            </div>
+        </div>
+        <div class="chat-item chat-item-right">
+            <div class="chat-message">
+                Lorem ipsum dolor sit amet, dapibus quis, laoreet et.
+            </div>
+        </div>
+        <div class="chat-item chat-item-left">
+            <div class="chat-image">
+                <img src="assets/images/avatar2.png" alt="">
+            </div>
+            <div class="chat-message">
+                Ut ullamcorper, ligula.
+            </div>
+        </div>
+        <div class="chat-item chat-item-right">
+            <div class="chat-message">
+                In hac habitasse platea dict umst. ligula eu tempor eu id tincidunt.
+            </div>
+        </div>
+        <div class="chat-item chat-item-left">
+            <div class="chat-image">
+                <img src="assets/images/avatar2.png" alt="">
+            </div>
+            <div class="chat-message">
+                Curabitur pretium?
+            </div>
+        </div>
+        <div class="chat-item chat-item-right">
+            <div class="chat-message">
+                Etiam tempor. Ut tempor! ull amcorper.
+            </div>
+        </div>
+    </div>-->
+    <div class="chat-write">
+        <form class="form-horizontal" action="javascript:void(0);">
+            <input type="text" class="form-control" placeholder="Say something">
+        </form>
+    </div>
+</nav>
+
+<main class="page-content content-wrap">
+    <div class="navbar">
+        <div class="navbar-inner">
+       <!--     <div class="sidebar-pusher">
+                <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+                    <i class="icon-arrow-right"></i>
+                </a>
+            </div>-->
+            <div class="logo-box" style="width: 200px;">
+                <a href="index.html" class="logo-text"><span>中国农业银行后台管理</span></a>
+            </div><!-- Logo Box -->
+
+            <div class="topmenu-outer">
+                <div class="top-menu">
+                    <ul class="nav navbar-nav navbar-left">
+
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                    </ul><!-- Nav -->
+                </div><!-- Top Menu -->
+            </div>
+        </div>
+    </div><!-- Navbar -->
+    <div class="page-sidebar sidebar">
+        <div class="page-sidebar-inner slimscroll">
+            <ul class="menu accordion-menu">
+                <li class="active"><a href="" class="waves-effect waves-button"><span
+                        class="menu-icon icon-credit-card"></span>
+                    <p>银行卡审核</p></a></li>
+            </ul>
+        </div><!-- Page Sidebar Inner -->
+    </div><!-- Page Sidebar -->
+    <div class="page-inner">
+        <div class="page-title">
+            <h3 class="breadcrumb-header">借记卡申请</h3>
+            <div class="page-breadcrumb">
+                <ol class="breadcrumb breadcrumb-with-header">
+
+                    <li class="active" id="headmsg"></li>
+                </ol>
+            </div>
+        </div>
+        <div id="main-wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-white">
+                        <div class="panel-body">
+                            <div id="rootwizard">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tab1" data-toggle="tab"><i
+                                            class="fa icon-doc m-r-xs"></i>许可协议</a></li>
+                                    <li role="presentation"><a href="#tab2" data-toggle="tab"><i
+                                            class="fa fa-credit-card m-r-xs"></i>身份证上传</a></li>
+                                    <li role="presentation"><a href="#tab3" data-toggle="tab"><i
+                                            class="fa fa-user m-r-xs"></i>身份验证</a></li>
+                                    <li role="presentation"><a href="#tab4" data-toggle="tab"><i
+                                            class="fa icon-bag m-r-xs"></i>信息填写</a></li>
+                                    <li role="presentation"><a href="#tab5" data-toggle="tab"><i
+                                            class="fa fa-check m-r-xs"></i>完成申请</a></li>
+                                </ul>
+                                <div class="progress progress-sm m-t-sm">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    </div>
+                                </div>
+                                <form id="wizardForm">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active fade in" id="tab1">
+                                            <div class="row m-b-lg">
+
+                                                <div class="col-md-12">
+                                                    <h3>中国农业银行借记卡申请许可协议</h3>
+                                                    <p>第一条
+                                                        为满足广大居民和单位消费支付的需求，向社会各界提供更好的金融服务，同时为规范中国农业银行各发卡机构（以下简称发卡机构）和持卡人的权利义务，根据适用的法律法规（包括其后的任何修改或替代，以下简称"适用法律"）及有关规定，制定本章程。</p>
+                                                    <p>第二条 中国农业银行借记卡是由中国农业银行发行的带有"银联"标识以人民币结算的金融支付工具（含联名/ 认同/ 主题/
+                                                        照片卡等），可在发卡机构营业网点，电话银行、网上银行、自助柜员机、多媒体终端等自助设备，以及其他境内外贴有中国银联标识的特约商户、机具、自助终端等使用。该卡具有消费、存取现金、圈存、查询、转账、支付结算等功能。</p>
+                                                    <p>第三条 中国农业银行借记卡按是否带有磁条，分为集芯片和磁条于一体的复合卡，和仅有芯片的IC
+                                                        卡；按芯片的读取方式不同，分为接触式IC 卡、非接触式IC 卡、同时支持接触式和非接触式的双界面IC
+                                                        卡；按发行对象分为单位（商务）卡和个人卡，其中个人卡分为主卡和附属卡;
+                                                        按资信等级不同分为白金卡、金卡和普通卡；以及依附上述银行卡品种发行的联名卡、认同卡。</p>
+                                                    <p>第四条
+                                                        申请人可凭公安部门认可的本人有效身份证件（包括身份证、护照、军官证等）向发卡机构申领个人卡。中国农业银行借记卡只限申请人本人使用，不得转让或转借。凡因转让、转接借记卡或将密码提供他人使用而产生的一切后果由持卡人本人承担。</p>
+                                                    <p>第五条
+                                                        凡注册于中国境内的企业法人和机关、事业单位、社会团体法人，可凭中国人民银行核发的开户许可证和指定申领人的有效身份证件等资料向发卡机构申领单位（商务）卡。申领单位可为其指定的持卡人申领若干张单位（商务）卡，并对单位（商务）卡的所有应付款项负偿还责任。</p>
+                                                    <p>第六条
+                                                        单位和个人申领中国农业银行借记卡须如实填写申请表、并同意遵守《中国农业银行中国农业银行借记卡章程》（以下简称章程），《中国农业银行理财宝个人IC
+                                                        卡领用合约》或《中国农业银行理财宝单位（商务）IC
+                                                        卡领用合约》（以下简称领用合约）。发卡机构有权决定是否批准申请人的领卡申请。</p>
+                                                    <p>第七条
+                                                        个人卡账户的资金以其持有的现金存入或以其工资性款项以及属于个人的合法劳务报酬、投资回报等收入转账存入，严禁将单位的款项存入个人卡账户；单位（商务）卡账户的资金一律从其基本存款账户转账存入，不得存取现金或将其销售收入的款项存入单位（商务）卡账户。</p>
+                                                    <p>第八条
+                                                        中国农业银行借记卡账户包括主账户和电子现金账户。主账户存款金额不限，并可随时续存，发卡机构按照中国人民银行规定的活期存款利率计付利息，并依法代扣缴利息税。电子现金账户余额上限为1000
+                                                        元（含），不计付利息。中国农业银行借记卡主账户和电子现金账户不允许透支。</p>
+                                                    <p>第九条 个人卡主账户每日在自动柜员机（ATM）上的累计提款额不得超过规定限额；单位（商务）卡不得取现。</p>
+                                                    <p>第十条
+                                                        中国农业银行借记卡持卡人需缴纳卡片工本费、年费及账户管理费。持卡人若发现卡片损坏，应凭中国农业银行借记卡向发卡机构提出书面换卡的申请，换卡时需缴纳卡片工本费。</p>
+                                                    <p>第十一条 持卡人在境内外查询、消费、圈存、存取现金和转账时，须遵守发卡机构、中国银联、收单银行和有关受理机构的相关规定。</p>
+                                                    <p>第十二条
+                                                        中国农业银行借记卡的有效期以中国农业银行借记卡卡面记载的有效期为准。持卡人到期如需继续用卡，应办理更换新卡手续。持卡人若在中国农业银行借记卡有效期届满前停止使用中国农业银行借记卡的，应向发卡机构提出书面销户申请，并及时将中国农业银行借记卡交回发卡机构。销户时，单位（商务）卡账户的资金应转入其基本存款账户，不得提取现金。</p>
+                                                    <p>第十三条
+                                                        持卡人领取中国农业银行借记卡时，应立即在中国农业银行借记卡背面的签名栏内签上持卡人本人姓名，并在用卡时使用此签名。凡使用密码（包括交易密码和查询密码，下同）进行的交易，发卡机构均视为持卡人本人所为。凡依据密码等电子信息办理的各类交易所产生的电子信息记录均为该项交易的有效凭据；凡未用密码进行的交易，则登记有持卡人签名的交易凭证或电子交易记录为该项交易的有效凭据，发卡机构有权将持卡人使用中国农业银行借记卡的收支款项、费用记入其账户。</p>
+                                                    <p>第十四条
+                                                        发卡机构应向持卡人提供查询、对账、挂失、咨询、投诉等服务。持卡人应每月及时通过电话银行、网上银行或多媒体查询机等方式查询中国农业银行借记卡项下的账务内容，对有异议的账务内容须在该笔交易的银行记账日起30
+                                                        天内提出查询和更正要求。如持卡人在该笔交易的银行记账日起30 天内未提出异议，则视同持卡人认可全部交易。</p>
+                                                    <p>第十五条 持卡人须妥善保管中国农业银行借记卡和密码，因卡片保管不善和密码泄露所造成的全部损失由持卡人承担。发卡机构设立24
+                                                        小时客户服务电话，持卡人遗失中国农业银行借记卡应及时办理书面或电话等非书面方式的挂失，发卡机构接到挂失申请后应及时办理挂失手续，挂失自挂失手续完成时立即生效。在发卡机构办理挂失手续完成之前的经济损失由持卡人承担。电子现金部分不可挂失，该账户所发生的任何资金损失由持卡人承担。持卡人办理挂失时须缴纳挂失手续费。挂失后如需补办新卡，可凭本人有效身份证件办理补卡手续，补换新卡需缴纳卡片工本费。持卡人遗忘或遗失密码，应凭中国农业银行借记卡和本人有效身份证件向发卡机构提出书面更换密码的申请。</p>
+                                                    <p>第十六条
+                                                        中国农业银行借记卡持卡人在申请表中填写的资料如有变更，如通讯地址、联系电话、住址等，应立即以书面方式通知发卡机构，否则，由此引起的任何延误或损失均由持卡人承担。</p>
+                                                    <p>第十七条
+                                                        中国农业银行借记卡持卡人不得以和商户发生纠纷为由拒绝支付所欠款项。因通讯网络故障等客观原因导致持卡人交易失败而造成的损失，以及持卡人在互联网上使用中国农业银行借记卡所导致的风险和损失，由持卡人自行承担，发卡机构不承担任何责任。</p>
+                                                    <p>第十八条
+                                                        伪造、变造中国农业银行借记卡，使用伪造或作废的中国农业银行借记卡及冒用他人中国农业银行借记卡进行诈骗财物的，发卡机构应及时处理，必要时移送司法机关；对由于持卡人违背章程有关条款给发卡机构造成损失的，发卡机构有权申请法律保护并依法追究持卡人或有关当事人的法律责任。</p>
+                                                    <p>第十九条
+                                                        持卡人应遵守本章程及《领用合约》，如持卡人违背本章程有关条款和《领用合约》的，发卡机构有权取消持卡人的用卡资格，并可授权所属机构和特约商户收回其中国农业银行借记卡。</p>
+                                                    <p>第二十条
+                                                        发卡机构有权根据银行监管部门的标准调整本章程所涉及的利率，并有权根据《商业银行服务价格管理暂行办法》的有关规定制定或调整中国农业银行借记卡收费项目、收费标准及收费方式等收费内容，经发卡机构公布后，持卡人应按发卡机构公布的收费内容支付费用。</p>
+                                                    <p>第二十一条 本章程的修改或中国农业银行借记卡收费内容等发生调整，发卡机构于执行的10
+                                                        个工作日前在相关营业场所公告。公告期满后，修改后的章程或收费内容即为生效。在公告期内，持卡人可以选择是否继续使用中国农业银行借记卡。持卡人因对章程的修改或收费内容的调整有异议而决定不再继续使用中国农业银行借记卡的，可向发卡机构提出销户申请，发卡机构为其办理销户手续。公告期满，持卡人未提出销户申请的，视为同意章程的修改或收费内容的调整。</p>
+                                                    <p>第二十二条
+                                                        本章程未尽事宜，按照适用法律及中国农业银行相关业务规定执行，发卡机构与持卡人的具体权利义务由《领用合约》予以约定。</p>
+                                                    <p>第二十三条 本章程由中国农业银行负责制定、解释，经中国银行业监督管理委员会批准后实施。</p>
+                                                </div>
+                                                <div class="form-group col-md-12">
+
+                                                    <input type="checkbox" class="form-control"
+                                                           name="exampleInputHolder" id="exampleInputHolder"
+                                                           style="width: 100px;">我已阅读并同意《中国农业银行借记卡申请许可协议》
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab2">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-white">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">身份证正面</h3>
+                                                        </div>
+                                                        <div class="panel-body">
+
+                                                            <div class="fallback">
+                                                                <input id="identityFace" name="identityFace" type="file"
+                                                                       onchange="changImgFace(event)"
+                                                                       accept=".gif,.jpg,.jpeg,.png"/>
+                                                                <img id="imgface"
+                                                                     style="width: 90%; height: auto; display:none"
+                                                                     alt="身份证正面图片"/>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-white">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">身份证反面</h3>
+                                                        </div>
+                                                        <div class="panel-body">
+
+                                                            <div class="fallback">
+                                                                <input id="identityBack" name="identityBack" type="file"
+                                                                       onchange="changImgBack(event)"
+                                                                       accept=".gif,.jpg,.jpeg,.png"/>
+                                                                <img id="imgback"
+                                                                     style="width: 90%; height: auto; display:none"
+                                                                     alt="身份证反面图片"/>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab3">
+                                            <h3 class="no-s" id="cardtitle">请对准摄像头，管理员正在视频验证</h3>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <video id="video" style="background:#000; width: 90%; height: auto;"
+                                                           autoplay></video>
+                                                    <canvas style="display:none" id="canvas" width="320"
+                                                            height="320"></canvas>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="tab4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="exampleInputCard" id="dbcardnum">您的银行卡号：</label>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <input type="password" class="form-control"
+                                                                       name="cardPassword1" id="cardPassword1"
+                                                                       placeholder="请输入6位交易密码">
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <input type="password" class="form-control"
+                                                                       name="cardPassword2" id="cardPassword2"
+                                                                       placeholder="再次输入">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="exampleInputCard">请设置账户密码</label>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <input type="password" class="form-control"
+                                                                       name="userPassword1" id="userPassword1"
+                                                                       placeholder="请输入8-12位交易密码">
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <input type="password" class="form-control"
+                                                                       name="userPassword2" id="userPassword2"
+                                                                       placeholder="再次输入">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="exampleInputCard">请输入手机号</label>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <input type="text" class="form-control" name="telephone"
+                                                                       id="telephone" placeholder="手机号">
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <input type="text" class="form-control" name="code"
+                                                                       id="code" placeholder="验证码">
+
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <p id="codewait"></p>
+                                                                <button id="codebutton" type="button"
+                                                                        class="btn btn-default">获取验证码
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="exampleInputExpiration">邮箱</label>
+                                                        <input type="email" class="form-control" name="email"
+                                                               id="email">
+                                                    </div>
+                                                    <input id="identitynum" type="hidden" name="identitynum"/>
+                                                    <input id="phonenum" type="hidden" name="phonenum"/>
+                                                    <input id="cardnum" type="hidden" name="cardnum"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab5">
+                                            <h3 class="no-s" id="successtitle">数据提交中，请稍后....</h3>
+                                            <div id="successtext" class="alert alert-info m-t-sm m-b-lg" role="alert"
+                                                 style="display: none;">
+                                                您的借记卡已经成功激活
+                                            </div>
+                                        </div>
+                                        <ul class="pager wizard">
+                                            <li class="previous">
+                                                <button type="button" class="btn btn-default" style="display: none;">
+                                                    上一步
+                                                </button>
+                                            </li>
+                                            <li class="next">
+                                                <button type="button" class="btn btn-default">下一步</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Row -->
+        </div><!-- Main Wrapper -->
+        <div class="page-footer">
+            <p class="no-s">Made with <i class="fa fa-heart"></i> by ORACLE</p>
+        </div>
+    </div><!-- Page Inner -->
+</main><!-- Page Content -->
+<nav class="cd-nav-container" id="cd-nav">
+    <header>
+        <h3>LAYERS</h3>
+    </header>
+    <div class="col-md-6 demo-block demo-selected demo-active">
+        <p>Dark<br>Design</p>
+    </div>
+    <div class="col-md-6 demo-block">
+        <a href="../admin2/index.html"><p>Light<br>Design</p></a>
+    </div>
+    <div class="col-md-6 demo-block demo-coming-soon">
+        <p>Horizontal<br>(Coming)</p>
+    </div>
+    <div class="col-md-6 demo-block demo-coming-soon">
+        <p>Material<br>(Coming)</p>
+    </div>
+    <div class="col-md-6 demo-block demo-coming-soon">
+        <p>Coming<br>Soon</p>
+    </div>
+    <div class="col-md-6 demo-block demo-coming-soon">
+        <p>Coming<br>Soon</p>
+    </div>
+</nav>
+<div class="cd-overlay"></div>
+
+
+<!-- Javascripts -->
+<script src="assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="assets/plugins/pace-master/pace.min.js"></script>
+<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/plugins/switchery/switchery.min.js"></script>
+<script src="assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+<script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
+<script src="assets/plugins/waves/waves.min.js"></script>
+<script src="assets/plugins/3d-bold-navigation/js/main.js"></script>
+<script src="assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="assets/js/layers.min.js"></script>
+<script src="assets/js/pages/form-wizard.js"></script>
+<script type="text/javascript">
+    var wait;
+    var timer;
+    var port;
+    $(function () {
+
+        $("#codebutton").click(function () {
+            $("#phonenum").val($("#telephone").val());
+            $("#codebutton").hide();
+            wait = 60;
+            timer = window.setInterval(codewaitfun, 1000);
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/sign/phoneCodeRequest",
+                data: {
+                    "phoneNum": $("#phonenum").val()
+                },
+                success: function (data) {
+                    if (data == "ok") {
+                        alert("验证码发送成功！");
+                    }
+                }
+            });
+        });
+        $("#code").change(function () {
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/sign/phoneCodeCheck",
+                data: {
+                    "code": $("#code").val()
+                },
+                success: function (data) {
+                    if (data == "ok") {
+                        $(".next").show();
+                    }
+                }
+            });
+        });
+        $("#main-wrapper").hide();
+        $("#headmsg").text("正在连接服务器...请稍后");
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/sign/PortRequest",
+            success: function (data) {
+                alert(data.port);
+                if (data.port != "") {
+                    port = data.port;
+                    $("#main-wrapper").show();
+                    $("#headmsg").text("尊敬的用户您好，请按照下下面的步骤完成借记卡申请");
+                }
+            }
+        });
+
+    });
+
+    function codewaitfun() {
+        if (wait > 0) {
+            $("codewait").show();
+            $("codewait").text("请在" + wait + "秒后重试");
+            wait--;
+        } else {
+            $("codewait").hide();
+            $("#codebutton").show();
+            window.clearInterval(timer);
+        }
+
+    }
+</script>
+
+
+</body>
+
+
+</html>

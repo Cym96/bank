@@ -1,0 +1,106 @@
+/* Code tidied up by ScrapBook */
+body { background: rgb(255, 255, 255) none repeat scroll 0% 0%; font-size: 12px; color: rgb(0, 0, 0); font-family: 宋体,Arial,Helvetica,sans-serif; }
+a:link, a:visited { color: rgb(0, 0, 0); }
+.bgfa { background-color: rgb(250, 250, 250); }
+.bgf4 { background-color: rgb(244, 244, 244); }
+.con962 { float: left; width: 962px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.con930 { float: left; width: 930px; margin: 0px 15px; display: inline; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.con440 { float: left; width: 440px; }
+.innerBanner { float: left; height: 38px; line-height: 38px; margin-top: 10px; font-size: 18px; font-family: 微软雅黑; color: rgb(255, 255, 255); background-color: rgb(137, 175, 195); width: 100%; display: inline; }
+.wrapper { margin: 0px auto; width: 962px; padding: 0px 15px 20px; position: relative; overflow: hidden; background-color: rgb(248, 249, 249); }
+.top { width: 100%; background: rgb(255, 255, 255) none repeat scroll 0% 0%; height: 31px; border-bottom: 1px solid rgb(211, 212, 211); overflow: visible; }
+.top-wrap { width: 992px; margin: 0px auto; font-family: "Microsoft Yahei"; line-height: 31px; overflow: visible; }
+.top-left { float: left; display: inline; margin-left: 5px; }
+.top-left li { float: left; line-height: 31px; margin-right: 20px; display: inline; }
+div .top-right, .top-right div, .top-right ul, .top-right ul li { word-wrap: normal; }
+.top-right { width: auto; height: 31px; float: right; margin-right: 10px; position: relative; overflow: visible; }
+.top-right li { display: inline; float: left; width: auto; margin-left: 20px; position: relative; overflow: visible; word-wrap: normal; }
+.top-right li a { color: rgb(0, 0, 0); }
+.top-right li a:hover { color: rgb(0, 102, 102); text-decoration: underline; }
+.logo-header { width: 992px; height: 80px; margin: 0px auto; position: relative; }
+.logo { background: transparent url("logo_001.png") no-repeat scroll 0% 0%; width: 225px; height: 62px; position: absolute; top: 13px; left: 16px; }
+.logo a { width: 225px; height: 62px; display: block; }
+.search-txt { position: absolute; right: 83px; top: 25px; width: 139px; height: 20px; padding: 5px 10px; color: rgb(196, 196, 196); font: 400 12px "Microsoft Yahei"; background: transparent url("searchTxt_001.jpg") no-repeat scroll 0% 0%; border: medium none; text-indent: 0px; }
+.search-btn { position: absolute; right: 10px; top: 25px; width: 73px; height: 30px; border: medium none; color: white; text-indent: 20px; cursor: pointer; font: 400 12px/30px "Microsoft Yahei"; background: transparent url("searchBtn_001.jpg") no-repeat scroll 0% 0%; }
+#header { width: 992px; margin: 0px auto; position: relative; height: 79px; }
+#fstMenu { float: left; width: 992px; height: 48px; }
+.fstMenuM { float: left; width: 990px; height: 48px; background: transparent url("fstmenuM.jpg") repeat-x scroll 0% 0%; }
+.fstMenuR { float: left; width: 2px; height: 48px; background: transparent url("fstmenuR.jpg") no-repeat scroll 0% 0%; }
+.fstMenu_l { width: 145px; float: left; height: 48px; }
+.fstMenu_r { float: left; width: 830px; height: 48px; }
+.ul_split li { float: left; height: 48px; line-height: 48px; width: 100px; text-align: center; background: transparent url("fstmenuLiBg1.jpg") no-repeat scroll right center; }
+.ul_split .current { background: transparent url("fstmenuLiBg2.jpg") no-repeat scroll 0% 0%; }
+.ul_split li a { font: 16px/48px 微软雅黑; color: white; }
+.ul_split li a:hover, .ul_split li a:link, .ul_split li a:visited { font: 16px/48px 微软雅黑; color: white; text-decoration: none; }
+.secMenu { width: 950px; padding-left: 42px; background: transparent url("secMenuBg.jpg") repeat-x scroll 0% 0%; height: 31px; line-height: 31px; overflow: hidden; }
+.secMenu a { color: rgb(0, 0, 0); }
+.secMenu a:hover { color: rgb(0, 0, 0); }
+.None { display: none; }
+img { border: 0px none; }
+.btn_buy_xq { float: left; width: 70px; height: 27px; line-height: 27px; background: transparent url("btn_buy.jpg") no-repeat scroll 0% 0%; border: 0px none; cursor: pointer; color: rgb(255, 255, 255); padding-left: 40px; margin-right: 20px; text-align: center; }
+.btn_buy_xq a { text-decoration: none; color: rgb(255, 255, 255); }
+.btn_buy_xq a:hover { text-decoration: underline; color: rgb(255, 255, 255); }
+.btn_buy_xq a:link, .btn_buy_xq a:visited { color: rgb(255, 255, 255); }
+.btn_gz { float: left; width: 70px; height: 27px; line-height: 27px; background: transparent url("btn_gz.jpg") no-repeat scroll 0% 0%; border: 0px none; cursor: pointer; color: rgb(255, 255, 255); padding-left: 40px; margin-right: 20px; text-align: center; }
+.btn_gz a { text-decoration: none; color: rgb(255, 255, 255); display: inline-block; width: 70px; height: 27px; }
+.btn_gz a:hover { text-decoration: underline; color: rgb(255, 255, 255); }
+.btn_gz a:link, .btn_gz a:visited { color: rgb(255, 255, 255); }
+.btn_cx { float: left; width: 70px; height: 28px; line-height: 28px; background: transparent url("btn_yellow_70.jpg") no-repeat scroll 0% 0%; border: 0px none; cursor: pointer; color: rgb(255, 255, 255); text-align: center; }
+.detailTopCon { float: left; width: 962px; background-color: rgb(255, 255, 255); }
+.detailBanner { float: left; height: 37px; width: 955px; border-bottom: 3px solid rgb(127, 148, 167); padding-top: 15px; padding-left: 5px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.detailBanner div { float: left; width: 79px; margin-left: 10px; display: inline; font: 16px 微软雅黑; padding-left: 15px; text-align: center; }
+.detailBanner div a { font: 16px 微软雅黑; text-decoration: none; }
+.detailBanner div a:hover { font: 16px 微软雅黑; color: rgb(0, 102, 102); text-decoration: underline; }
+.detailZsqxOff { background: transparent url("icon_fundZsqxOff.gif") no-repeat scroll left center; }
+.detailJzxxOff { background: transparent url("icon_fundJzxxOff.gif") no-repeat scroll left center; }
+.detailGmxxOff { background: transparent url("icon_fundGmxxOff.gif") no-repeat scroll left center; }
+.detailTzzhOff { background: transparent url("icon_fundTzzhOff.gif") no-repeat scroll left center; }
+.detailJjggOff { background: transparent url("icon_fundJjggOff.gif") no-repeat scroll left center; }
+.detailTzmbOff { background: transparent url("icon_fundTzmbOff.gif") no-repeat scroll left center; }
+.detailTzbdOff { background: transparent url("icon_fundTzbdOff.gif") no-repeat scroll left center; }
+.detailJjgsOff { background: transparent url("icon_fundJjgsOff.gif") no-repeat scroll left center; }
+.detailInnerBanner { float: left; height: 27px; width: 941px; background-color: rgb(223, 231, 237); border-bottom: 1px solid rgb(198, 202, 207); margin: 15px 3px 0px; padding-top: 9px; padding-left: 13px; display: inline; }
+.detailInnerBanner span { float: left; width: 79px; font: 16px 微软雅黑; padding-left: 20px; }
+.detailNewsCon { float: left; }
+.detailNewsCon li { background: rgb(250, 250, 250) url("icon_arrow.jpg") no-repeat scroll 40px 12px; line-height: 30px; height: 30px; vertical-align: middle; text-align: left; padding-left: 50px; margin-top: 10px; display: inline; float: left; width: 880px; }
+.detailNewsCon li span { float: left; }
+.detailLljlCon { float: left; padding-bottom: 10px; }
+.detailNewsCon li .listDate { float: right; width: 70px; text-align: right; padding-right: 60px; }
+.selDate { float: left; margin-left: 145px; margin-top: 27px; display: inline; width: 592px; height: 30px; }
+.selDate .dateText { float: left; width: 240px; line-height: 28px; padding-right: 10px; }
+.innerTag { float: left; height: 36px; line-height: 36px; font-size: 12px; font-weight: bold; margin-top: 10px; color: rgb(111, 111, 111); background-color: rgb(234, 240, 241); width: 100%; display: inline; }
+.innerTag li { float: left; width: 310px; height: 35px; line-height: 35px; text-align: center; }
+.innerDetail { float: left; height: 30px; font-size: 12px; color: rgb(54, 54, 54); width: 100%; margin-top: 10px; display: inline; }
+.innerDetail li { float: left; width: 310px; height: 30px; line-height: 30px; text-align: center; }
+.fundJzxx li { float: left; width: 310px; height: auto; }
+.fundTzzh li { float: left; width: 220px; height: auto; }
+.xq { float: left; width: 890px; padding: 20px 50px; font-family: "微软雅黑"; display: inline; }
+.xq_l { width: 560px; float: left; }
+.xq_l li { float: left; width: 220px; font-size: 14px; line-height: 38px; }
+.xq_l li span { color: rgb(127, 127, 127); padding-right: 10px; }
+.xq_r { float: left; width: 370px; }
+.xq_r span { float: left; text-align: center; }
+.list_cp_fund { border: 0px none; border-collapse: collapse; text-align: left; width: 100%; }
+.list_cp_fund th { background-color: rgb(234, 240, 241); padding-left: 15px; color: rgb(0, 0, 0); width: 165px; text-align: center; line-height: 20px; height: 70px; font-weight: bold; }
+.list_cp_fund td { background-color: rgb(244, 244, 244); height: 70px; vertical-align: middle; padding-left: 20px; color: rgb(89, 89, 89); width: 265px; text-align: center; line-height: 20px; }
+.proNum { float: left; width: 100%; font: bold 45px 微软雅黑; color: rgb(255, 144, 0); }
+.proT3 { float: left; width: 100%; color: rgb(142, 142, 142); line-height: 30px; }
+.footer-content div ul li { word-wrap: normal ! important; }
+.footer-content { width: 100%; height: 92px; margin-top: 15px; background: rgb(255, 255, 255) url("footer_bg_001.png") repeat-x scroll 0% 0%; }
+.footer { width: 992px; height: 92px; overflow: hidden; color: rgb(88, 88, 88); position: relative; margin: 0px auto; }
+.footer-nav { width: 100%; height: 60px; }
+.footer-nav li { float: left; color: rgb(65, 65, 65); padding: 0px 20px; background: transparent url("footer_line_001.jpg") no-repeat scroll right center; font: 400 12px/60px "微软雅黑"; }
+.footer-nav li.bgNone { background: transparent none repeat scroll 0% 0%; }
+.footer-nav li a { color: rgb(65, 65, 65); }
+.footer_sel { width: 190px; line-height: 22px; color: rgb(175, 175, 175); border: 1px solid rgb(214, 214, 214); }
+.footer-copyright { width: 394px; margin: 0px auto; }
+.footer-copyright li { float: left; display: inline; color: rgb(65, 65, 65); padding: 0px 20px; font-family: "微软雅黑"; background: transparent url("footer_line_001.jpg") no-repeat scroll right center; }
+.footer-copyright li a { color: rgb(65, 65, 65); }
+.footer-copyright li.bgNone { background: transparent none repeat scroll 0% 0%; }
+.footer-location { display: inline-block; background: transparent url("footer_location_001.gif") no-repeat scroll left center; padding-left: 25px; margin-left: -6px; }
+.footer-ext { position: absolute; right: 10px; top: 10px; }
+.footer-ext a { display: block; }
+.footer-logo { width: 108px; height: 40px; background: transparent url("szfw_001.gif") no-repeat scroll 0% 0%; }
+.footer-select { position: absolute; top: 19px; right: 150px; word-wrap: normal; }
+.hotFsTitle { float: left; height: 32px; line-height: 32px; width: 150px; border-bottom: 2px solid rgb(255, 175, 23); padding-left: 50px; font-size: 20px; font-weight: bold; }
+.None { display: none; }

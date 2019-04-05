@@ -1,0 +1,475 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="Keywords" content="基金，优选基金，农银汇理基金，新发基金，基金池，主题基金，基金申购，基金认购，基金定投，基金净值">
+    <meta name="Description" content="农行基金频道为用户24小时提供全面及时的基金资讯信息，涵盖市场要闻、专家视点、基金净值、基金涨幅、基金走势、基金排名、基金数据、基金评级等信息，提供了按基金类型、基金回报、基金公司的产品筛选功能，并且有专业的线上理财师实时为用户提供咨询服务。">
+    <meta name="WT.cg_abc" content="理财e站;基金">
+    <title>基金_理财e站_中国农业银行</title>
+    <link href="base.css" rel="stylesheet" th:href="@{/user/companymsg/base.css}">
+    <link href="jqui.css" rel="stylesheet" th:href="@{/user/companymsg/jqui.css}">
+    <link href="styles.css" rel="stylesheet" th:href="@{/user/companymsg/styles.css}">
+    <link href="irezNew.css" rel="stylesheet" th:href="@{/user/companymsg/irezNew.css}">
+    <script src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+
+
+    <script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8" th:href="@{/user/message/jquery-1.11.1.js}"></script>
+    <script src="about:blank"></script>
+    <script src="about:blank" type="text/javascript" charset="utf-8"></script>
+    <script src="about:blank" type="text/javascript" charset="utf-8"></script>
+    <script src="about:blank" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        /* Code removed by ScrapBook */
+    </script>
+    <script type="text/javascript" src="laydate.js" th:src = "@{/user/message/laydate.js}"></script>
+
+
+
+</head>
+
+<body>
+
+<div class="innerBanner" style="padding-left: 20px; width: 942px;">${requestScope.fund.fundName }(${requestScope.fund.fundNum })</div>
+<div class="detailTopCon">
+    <!--False 平衡型-->
+
+    <div class="xq" id="hbxNo">
+        <div class="xq_l" style="width: 600px;">
+            <ul id="aaaa">
+
+                <li style="width: 270px;"><span th:text="${fund.userInveststateObj.stateName}">投资类型：</span> ${requestScope.fund.userInveststateObj.stateName} <br>
+                    <span th:text="${fund.userProductstateObj.stateName}">基金类型：</span> ${requestScope.fund.userProductstateObj.stateName}<br>
+
+                    <span>基金经理：</span>${requestScope.fund.userMangerObj.adminName }　　<br>
+                    <span>基金公司：</span>
+                    <a href="${pageContext.request.contextPath}/user/findKey?companyId=${requestScope.fund.userCompanyObj.companyId }">${requestScope.fund.userCompanyObj.companyName }</a>
+
+                </li>
+
+            </ul>
+        </div>
+        <div class="xq_r" style="width: 260px; margin-top: 20px; display: inline;">
+            <span class="proNum">${requestScope.fund.fundNpv }</span>
+            <span class="proT3">当前净值</span>
+
+            <div style="float: left; width: 100%;">
+                <script>
+                    /* Code removed by ScrapBook */
+                </script><span class="btn_buy_xq"><a id="buyAction" data-productid="270041" data-producttype="基金">购买</a></span>
+                <span class="btn_gz">
+<a id="followAction" data-productid="270041" data-productname="广发消费品精选混合型证券投资基金" data-producttype="基金">关注</a>
+</span>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="con962 marginTop10">
+
+    <div class="detailBanner" id="nav">
+        <div class="detailZsqxOff">
+            <a href="#zsqx" th:href="@{#zsqx}">走势曲线</a>
+        </div>
+        <div class="detailJzxxOff current">
+            <a href="#jzxx" th:href="@{#jzxx}">净值信息</a>
+        </div>
+        <div class="detailGmxxOff">
+            <a href="#gmxx" th:href="@{#gmxx}">购买信息</a>
+        </div>
+
+        <div class="detailTzmbOff">
+            <a href="#tzmb" th:href="@{#tzmb}">投资目标</a>
+        </div>
+        <div class="detailTzbdOff">
+            <a href="#tzbd" th:href="@{#tzbd}">投资标准</a>
+        </div>
+        <div class="detailJjgsOff">
+            <a href="#jjgs" th:href="@{#jjgs}">基金公司</a>
+        </div>
+    </div>
+    <div class="detailInnerBanner" id="zsqx"><span class="detailZsqxOff">走势曲线</span></div>
+    <div id="container" style="float: left;margin: 0;height: 300px; width: 100%; position: relative;">
+
+    </div>
+
+    <div style="float: left; dwidth: 960px;" id="fundNetValueTable">
+
+        <div class="detailInnerBanner" id="jzxx"><span class="detailJzxxOff">净值信息</span></div>
+        <div class="con930">
+            <div class="selDate ">
+                <form id="myform">
+                    <div class="dateText">开始时间:
+                        <input id="start" name="minDate" size="20p" class="f-text inline laydate-icon" type="text"/></div>
+
+                    <div class="dateText">截止时间:
+
+                        <input id="end" name="maxDate" size="20p" class="f-text inline laydate-icon" type="text"/></div>
+                    <input type="button" id="net" value="查询"/>
+                </form>
+
+            </div>
+
+            <ul class="innerTag fundJzxx" style="height: 35px; background-color: rgb(234, 240, 241);">
+                <li>净值日期</li>
+                <li>最新净值</li>
+
+            </ul>
+            <span data-bind="foreach:FundNets" id="datebody" >
+
+                       </span>
+        </div>
+        <div class="detailInnerBanner" id="gmxx"><span class="detailGmxxOff">购买信息</span></div>
+        <div class="con930">
+            <table class="list_cp_fund" cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr>
+                    <td colspan="4" style="height: 8px; background-color: rgb(255, 255, 255);"></td>
+                </tr>
+                <tr>
+                    <th>首次申购下限</th>
+                    <td style="background-color: rgb(250, 250, 250);">
+                        <script>
+                            /* Code removed by ScrapBook */
+                        </script>${requestScope.fund.fundMinbuymoney }元
+                    <th>申购费率</th>
+                    <td style="background-color: rgb(250, 250, 250);">
+                        <script>
+                            /* Code removed by ScrapBook */
+                        </script>${requestScope.fund.fundBuyratio }</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="height: 8px; background-color: rgb(255, 255, 255);"></td>
+                </tr>
+                <tr>
+                    <th>最低赎回份额</th>
+                    <td style="background-color: rgb(250, 250, 250);">
+                        <script>
+                            /* Code removed by ScrapBook */
+                        </script>${requestScope.fund.fundMinsalemoney }</td>
+                    <th>赎回费率</th>
+                    <td style="background-color: rgb(250, 250, 250);">
+                        <script>
+                            /* Code removed by ScrapBook */
+                        </script>${requestScope.fund.fundSaleratio }</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="height: 8px; background-color: rgb(255, 255, 255);"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <%-- 		<div class="detailInnerBanner" id="tzmb"><span class="detailTzmbOff">投资目标</span></div>
+        <div class="con930" style="line-height: 24px; margin-top: 10px;">
+            ${requestScope.fund.fundInvest }
+        </div> --%>
+        <div class="detailInnerBanner" id="tzbd"><span class="detailTzbdOff">投资标的</span></div>
+        <div class="con930" style="line-height: 24px; margin-top: 10px;">
+            ${requestScope.fund.fundText }
+        </div>
+
+        <div class="con930">
+            <div style="float: left; padding: 10px 0px 10px 350px;">
+                <script>
+                    /* Code removed by ScrapBook */
+                </script><span class="btn_buy_xq"><a id="buyAction" data-productid="270041" data-producttype="基金">购物车</a></span>
+                <span class="btn_gz">
+<a id="followAction" data-productid="270041" data-productname="广发消费品精选混合型证券投资基金" data-producttype="基金">关注</a>
+</span></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- <script src="../images/ewealth.min.js"></script> -->
+
+<!--加入浏览历史-->
+<div style="display: none;">
+    <a id="browseAction" data-productid="270041" data-producttype="基金" data-productname="广发消费品混合基金" data-productrate="2.6700"></a>
+</div>
+
+<script src="about:blank"></script>
+<script src="about:blank"></script>
+<!--<script src="../images/calender.js"></script>  -->
+<script src="about:blank"></script>
+<!--<script src="../images/funddetial.js"></script>-->
+<script type="text/javascript">
+    !function(){
+        laydate.skin('molv');
+        laydate({elem: '#demo'});
+    }();
+
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: true,
+        istoday: false,
+        choose: function(datas){
+            end.min = datas;
+            end.start = datas
+        }
+    };
+
+    var end = {
+        elem: '#end',
+        format: 'YYYY-MM-DD',
+        min: start.max,
+        istime: true,
+        istoday: false,
+        choose: function(datas){
+            start.max = datas;
+        }
+    };
+    laydate(start);
+    laydate(end);
+
+    laydate({
+        elem: '#test1',
+        format: 'YYYY年MM月DD日',
+        festival: true,
+        choose: function(datas){
+            alert('得到：'+datas);
+        }
+    });
+    laydate({
+        elem: '#hello3',
+        min: laydate.now(-1),
+        max: laydate.now(+1)
+    });
+</script>
+<script type="text/javascript">
+    $(function() {
+        $("#net").click(function() {
+            $.ajax({
+                type : "POST",
+                url : "/bank-web-user/user/findRecord?fundId=${fund.fundId}",
+                data : $('#myform').serialize(),
+                dataType : "json",
+                success : function(json) {
+                    $("#datebody").empty();
+                    for(var i=0;i<json.length;i++){
+                        $("#datebody").append("<ul class=\"innerDetail fundJzxx bgfa\" ><li data-bind=\"text:NetDate\">"+json[i].recordDate+"</li><li data-bind=\"text:NetValue\">"+json[i].recordNpv+"</li></ul>");
+                    }
+                }
+            });
+        });
+        $("#net").click();
+    });
+</script>
+
+
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var a = [];
+    var s=[];
+    option = null;
+    $.ajax({
+        type : "POST",
+        url : "/bank-web-user/user/findRecord?fundId=${fund.fundId}",
+        dataType : "json",
+        success : function(json) {
+            /* var json = eval(msg); */
+            for(var i=0;i<json.length;i++){
+                s.push(json[i].recordDate)
+                a.push(json[i].recordNpv)
+                option = {
+                    xAxis: {
+                        type: 'category',
+                        data: ""
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: a,
+                        type: 'line',
+                        smooth: true
+                    }]
+                };
+                ;
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+
+                }}}		//myChart.setOption(option);
+    });
+
+</script>
+<script type="text/javascript">
+    $(function() {
+        $("#aaaa").load(function() {
+            $.ajax({
+                type : "POST",
+                url : "/bank-web-user/user/findRecord?fundId=${fund.fundId}",
+                //data :  $('#myform').serialize() ,
+                dataType : "json",
+                success : function(json) {
+                    //$("#aaaa").empty();
+                    for(var i=0;i<json.length;i++){
+                    }
+                    if(json.length >= 730){
+                        var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+                        a=a.toFixed(2);
+
+                        var b1 = 0;
+                        for(var i=0;i<7;i++){
+                            b1+=json[i].recordNpv;
+                        }
+                        var b2=0;
+                        for(var i=7;i<14;i++){
+                            b2+=json[i].recordNpv;
+                        }
+                        b1=(b1-b2)/b2*100;
+                        b1=b1.toFixed(2);
+
+                        var c1 = 0;
+                        for(var i=0;i<30;i++){
+                            c1+=json[i].recordNpv;
+                        }
+                        var c2=0;
+                        for(var i=30;i<60;i++){
+                            c2+=json[i].recordNpv;
+                        }
+                        c1=(c1-c2)/c2*100;
+                        c1=c1.toFixed(2);
+
+                        var d1 = 0;
+                        for(var i=0;i<90;i++){
+                            d1+=json[i].recordNpv;
+                        }
+                        var d2=0;
+                        for(var i=90;i<180;i++){
+                            d2+=json[i].recordNpv;
+                        }
+                        d1=(d1-d2)/d2*100;
+                        d1=d1.toFixed(2);
+
+                        var e1 = 0;
+                        for(var i=0;i<365;i++){
+                            e1+=json[i].recordNpv;
+                        }
+                        var e2=0;
+                        for(var i=365;i<730;i++){
+                            e2+=json[i].recordNpv;
+                        }
+                        e1=(e1-e2)/e2*100;
+                        e1=e1.toFixed(2);
+                        $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+c1+"%"+"</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+d1+"%"+"</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+e1+"%"+"</font></li>");
+                    }
+                    if(json.length >=180 && json.length<730){
+                        var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+                        a=a.toFixed(2);
+
+                        var b1 = 0;
+                        for(var i=0;i<7;i++){
+                            b1+=json[i].recordNpv;
+                        }
+                        var b2=0;
+                        for(var i=7;i<14;i++){
+                            b2+=json[i].recordNpv;
+                        }
+                        b1=(b1-b2)/b2*100;
+                        b1=b1.toFixed(2);
+
+                        var c1 = 0;
+                        for(var i=0;i<30;i++){
+                            c1+=json[i].recordNpv;
+                        }
+                        var c2=0;
+                        for(var i=30;i<60;i++){
+                            c2+=json[i].recordNpv;
+                        }
+                        c1=(c1-c2)/c2*100;
+                        c1=c1.toFixed(2);
+
+                        var d1 = 0;
+                        for(var i=0;i<90;i++){
+                            d1+=json[i].recordNpv;
+                        }
+                        var d2=0;
+                        for(var i=90;i<180;i++){
+                            d2+=json[i].recordNpv;
+                        }
+                        d1=(d1-d2)/d2*100;
+                        d1=d1.toFixed(2);
+
+                        $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+c1+"%"+"</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+d1+"%"+"</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+                    }
+                    if(json.length >=60 && json.length<180){
+                        var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+                        a=a.toFixed(2);
+
+                        var b1 = 0;
+                        for(var i=0;i<7;i++){
+                            b1+=json[i].recordNpv;
+                        }
+                        var b2=0;
+                        for(var i=7;i<14;i++){
+                            b2+=json[i].recordNpv;
+                        }
+                        b1=(b1-b2)/b2*100;
+                        b1=b1.toFixed(2);
+
+                        var c1 = 0;
+                        for(var i=0;i<30;i++){
+                            c1+=json[i].recordNpv;
+                        }
+                        var c2=0;
+                        for(var i=30;i<60;i++){
+                            c2+=json[i].recordNpv;
+                        }
+                        c1=(c1-c2)/c2*100;
+                        c1=c1.toFixed(2);
+                        $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+c1+"%"+"</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+                    }if(json.length >=14 && json.length<60){
+                        var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+                        a=a.toFixed(2).to;
+
+                        var b1 = 0;
+                        for(var i=0;i<7;i++){
+                            b1+=json[i].recordNpv;
+                        }
+                        var b2=0;
+                        for(var i=7;i<14;i++){
+                            b2+=json[i].recordNpv;
+                        }
+                        b1=(b1-b2)/b2*100;
+                        b1=b1.toFixed(2);
+                        $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+                    }
+                    if(json.length >=2 && json.length<7){
+                        var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+                        a=a.toFixed(2);
+                        $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+                    }if(json.length<2){
+                        $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+                    }
+                    if (option && typeof option === "object") {
+                        myChart.setOption(option, true);
+
+                    }
+                }});
+        });
+        $("#aaaa").load();
+
+    });
+</script>
+
+
+
+</body>
+
+</html>

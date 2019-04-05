@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.CompanypictureMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Companypicture" >
+    <id column="img_id" property="imgId" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="img_company" property="imgCompany" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    img_id, img_name, img_company
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from companypicture
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from companypicture
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Companypicture" >
+    insert into companypicture (img_id, img_name, img_company
+      )
+    values (#{imgId,jdbcType=INTEGER}, #{imgName,jdbcType=VARCHAR}, #{imgCompany,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Companypicture" >
+    insert into companypicture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imgId != null" >
+        img_id,
+      </if>
+      <if test="imgName != null" >
+        img_name,
+      </if>
+      <if test="imgCompany != null" >
+        img_company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imgId != null" >
+        #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="imgName != null" >
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgCompany != null" >
+        #{imgCompany,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Companypicture" >
+    update companypicture
+    <set >
+      <if test="imgName != null" >
+        img_name = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgCompany != null" >
+        img_company = #{imgCompany,jdbcType=INTEGER},
+      </if>
+    </set>
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Companypicture" >
+    update companypicture
+    set img_name = #{imgName,jdbcType=VARCHAR},
+      img_company = #{imgCompany,jdbcType=INTEGER}
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </update>
+</mapper>

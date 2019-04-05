@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.FunMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Fun" >
+    <id column="fun_id" property="funId" jdbcType="INTEGER" />
+    <result column="fun_name" property="funName" jdbcType="VARCHAR" />
+    <result column="fun_link" property="funLink" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fun_id, fun_name, fun_link
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fun
+    where fun_id = #{funId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fun
+    where fun_id = #{funId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Fun" >
+    insert into fun (fun_id, fun_name, fun_link
+      )
+    values (#{funId,jdbcType=INTEGER}, #{funName,jdbcType=VARCHAR}, #{funLink,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Fun" >
+    insert into fun
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="funId != null" >
+        fun_id,
+      </if>
+      <if test="funName != null" >
+        fun_name,
+      </if>
+      <if test="funLink != null" >
+        fun_link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="funId != null" >
+        #{funId,jdbcType=INTEGER},
+      </if>
+      <if test="funName != null" >
+        #{funName,jdbcType=VARCHAR},
+      </if>
+      <if test="funLink != null" >
+        #{funLink,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Fun" >
+    update fun
+    <set >
+      <if test="funName != null" >
+        fun_name = #{funName,jdbcType=VARCHAR},
+      </if>
+      <if test="funLink != null" >
+        fun_link = #{funLink,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fun_id = #{funId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Fun" >
+    update fun
+    set fun_name = #{funName,jdbcType=VARCHAR},
+      fun_link = #{funLink,jdbcType=VARCHAR}
+    where fun_id = #{funId,jdbcType=INTEGER}
+  </update>
+</mapper>

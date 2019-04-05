@@ -1,0 +1,485 @@
+/* Code tidied up by ScrapBook */
+a:hover { text-decoration: underline; }
+a.fund-more { color: rgb(61, 60, 60); cursor: pointer; text-decoration: none; }
+a.fund-more:hover, a.fund-more:focus { color: rgb(61, 60, 60); cursor: pointer; }
+a.fund-more:focus { cursor: pointer; outline-offset: -2px; }
+.searchWrapper { height: 78px; }
+.seachLoading { clear: both; display: none; height: 74px; left: 50%; line-height: 74px; position: absolute; text-align: center; top: 80px; width: 50px; }
+.seachLoading img { vertical-align: middle; }
+.recomDt { height: 30px; margin-bottom: 5px; }
+.recomDt span { display: inline-block; margin: 0px 10px; font-size: 15px; cursor: pointer; }
+.recomDt span.active { color: rgb(255, 128, 41); font-weight: bold; }
+.search { height: 30px; line-height: 30px; position: relative; }
+.search .searchInput { background-color: rgb(255, 255, 255); color: gray ! important; height: 30px; line-height: 30px; margin: 0px; text-indent: 8px; width: 185px; border: 1px solid rgb(238, 238, 238); }
+.search .searchImage { background: transparent url("search.png") no-repeat scroll 0% 0%; position: absolute; top: 7px; right: 5px; padding: 8px; cursor: pointer; }
+.my-fund { width: 110px; height: 30px; line-height: 30px; float: right; background: transparent url("select-heart.png") no-repeat scroll 0px 10px; padding-left: 18px; cursor: pointer; }
+.m-btn-table { display: inline-block; color: rgb(255, 255, 255); height: 28px; width: 80px; background: transparent url("button-yellow-small.png") no-repeat scroll 0px 0px; margin-right: 15px; cursor: pointer; padding-top: 3px; text-align: center; vertical-align: middle; line-height: 1.4285; }
+a.m-btn-table { text-decoration: none; }
+a.m-btn-table:hover, a.m-btn-table:focus { text-decoration: none; }
+.typeBtnBox { margin-left: 132px; width: 266px; }
+.typeBtnBox a { display: block; float: left; height: 77px; width: 80px; }
+.linkGroup { color: rgb(43, 43, 43); float: right; font-size: 16px; margin-right: 25px; padding-top: 5px; text-align: right; width: 240px; }
+.fullScreen { color: rgb(170, 170, 170); float: right; font-size: 16px; font-weight: normal; margin-right: 25px; padding-top: 5px; text-align: right; width: 90px; }
+.fullScreen em { cursor: pointer; }
+.fullScreen em:hover { font-weight: bold; }
+.fullScreen .active { color: rgb(255, 128, 41); cursor: default; font-weight: bold; }
+.fullScreen span { background: transparent url("spriteIcons.png") repeat scroll -8px -27px; cursor: pointer; display: inline-block; float: right; height: 20px; margin-left: 5px; }
+.filterSelect { padding-top: 5px; }
+.filterSelect dl { height: 30px; padding-left: 10px; padding-top: 0px; display: inline-block; margin-bottom: 0px; }
+.filterSelect dl dt { float: left; font-size: 14px; line-height: 25px; }
+.filterSelect dl dt span { display: inline-block; float: left; height: 25px; padding-left: 8px; width: 80px; }
+.filterSelect dl dt em { border-left: medium solid rgb(178, 157, 128); display: inline-block; float: left; line-height: 0; }
+.filterSelect dl dd { background-color: rgb(255, 255, 255); border: 1px solid rgb(225, 225, 225); border-radius: 4px; cursor: pointer; float: left; font-size: 14px; height: 25px; line-height: 25px; margin-left: 5px; margin-right: 10px; text-align: center; width: 80px; }
+.filterSelect dl.hot dt { background: transparent none repeat scroll 0% 0%; padding-left: 10px; width: 92px; }
+.filterSelect dl.hot dd { background: transparent none repeat scroll 0% 0%; border: medium none; width: 80px; }
+.filterSelect dl.hot dd.active { background-color: rgb(254, 217, 142); }
+.filterSelect dl dd.ddSelect { background: transparent none repeat scroll 0% 0%; border: medium none; cursor: default; display: inline-block; width: auto; margin-right: 10px; }
+.filterSelect dl dd.fundCompany { width: 230px; }
+.vague-search-input { width: 150px ! important; }
+.filterSelect dl dd.ddSelect select { font-size: 14px; height: 25px; }
+.filterSelect dl dd.width95 { width: 95px; }
+.filterSelect dl dd.active { background-color: rgb(254, 217, 142); }
+.openMore { background: transparent url("openMore.jpg") repeat scroll 0% 0%; cursor: pointer; font-size: 14px; height: 25px; line-height: 25px; margin: -1px auto 0px; text-indent: 58px; width: 154px; }
+.openMore span { color: rgb(255, 128, 41); cursor: pointer; }
+.openMore span:hover { color: rgb(255, 0, 0); cursor: pointer; }
+.searchResult { width: 100%; }
+.searchResult h1 { color: rgb(14, 94, 103); font-size: 16px; padding: 5px 10px 10px; }
+.searchResult .titIcon { background: transparent url("spriteIcons.png") repeat scroll -67px -1px; display: inline-block; float: left; height: 21px; width: 22px; }
+.resultList { width: 100%; }
+.resultList thead { color: rgb(123, 123, 123); font-size: 14px; margin: 0px; padding: 0px; }
+.resultList thead tr th { height: 40px; line-height: 22px; text-align: center; vertical-align: middle; z-index: 10; }
+.resultList tbody tr td { height: 60px; text-align: center; }
+.resultList thead tr th .sortIcon { background: transparent url("sort-arrow.png") no-repeat scroll center center; cursor: pointer; display: inline-block; margin-left: 3px; vertical-align: middle; width: 13px; }
+.resultList thead tr th .sortIcon.asc { background: transparent url("sort-arrow-down.png") no-repeat scroll center center; height: 12px; margin-bottom: 1px; }
+.resultList thead tr th .sortIcon.desc { background: transparent url("sort-arrow-up.png") no-repeat scroll center center; height: 12px; margin-bottom: 1px; }
+.resultList td { font-size: 14px; padding-left: 5px; text-align: center; }
+.resultList td .attentionIcon { background: transparent url("select-heart.png") no-repeat scroll left top; cursor: pointer; display: block; height: 20px; margin-left: 40px; width: 20px; }
+.resultList td .attentionIcon.cancelAtte { background: transparent url("unselect-heart.png") no-repeat scroll left top; cursor: pointer; }
+.resultList td.fundNameBox { text-align: left; padding-left: 50px; }
+.resultList td .fundName { color: rgb(0, 0, 0); display: inline-block; margin-right: 3px; line-height: 35px; }
+.resultList td .fundName a { color: rgb(0, 0, 0); font-weight: bold; text-decoration: none; }
+.resultList td .fundName:hover { color: rgb(6, 142, 122); text-decoration: underline; }
+.resultList span.downList { background: transparent url("spriteIcons.png") no-repeat scroll -205px -21px; cursor: pointer; float: right; height: 7px; margin-top: 8px; position: absolute; width: 21px; }
+.resultList td span.td-content-comment { color: rgb(204, 204, 204); display: block; font-size: 12px; }
+.resultList td.recommend { background: transparent url("hot.png") no-repeat scroll 0px 0px; }
+.resultList td .mixed { background: transparent url("spriteIcons.png") repeat scroll -7px -2px; cursor: default; display: inline-block; float: left; height: 22px; margin-left: 6px; margin-top: 11px; width: 22px; }
+.resultList td .stock { background: transparent url("spriteIcons.png") repeat scroll -66px -26px; cursor: default; display: inline-block; float: left; height: 22px; margin-left: 6px; margin-top: 11px; width: 22px; }
+.resultList td .bond { background: transparent url("spriteIcons.png") repeat scroll -123px -26px; cursor: default; display: inline-block; float: left; height: 22px; margin-left: 6px; margin-top: 11px; width: 22px; }
+.resultList td .currency { background: transparent url("spriteIcons.png") repeat scroll -95px -26px; cursor: default; display: inline-block; float: left; height: 22px; margin-left: 6px; margin-top: 11px; width: 22px; }
+.resultList td .financial { background: transparent url("spriteIcons.png") repeat scroll -35px -26px; cursor: default; display: inline-block; float: left; height: 22px; margin-left: 6px; margin-top: 11px; width: 22px; }
+.resultList td .fund-code-type { display: block; color: rgb(153, 153, 153); font-size: 12px; }
+.resultList td .benefitIcon { background: transparent url("chart.png") no-repeat scroll center center; cursor: pointer; display: inline-block; height: 20px; width: 20px; vertical-align: middle; }
+.resultList td .fast-sell { background: transparent url("fast.png") no-repeat scroll center center; cursor: pointer; display: inline-block; height: 20px; width: 20px; margin-left: 5px; vertical-align: middle; }
+.resultList .operate {  }
+.resultList .headerLine { background: rgb(44, 168, 158) none repeat scroll 0% 0%; color: rgb(255, 255, 255); font-size: 14px; font-weight: bold; line-height: 40px; text-align: center; }
+.resultList .currentLine { background-color: rgb(227, 240, 246) ! important; color: rgb(51, 51, 51); font-size: 12px; font-weight: bold; }
+.resultList .img1 { cursor: pointer; height: 14px; margin-right: 5px; width: 14px; }
+.resultList .img2 { cursor: pointer; height: 22px; margin-right: 5px; width: 19px; }
+.resultList2 { border-bottom: 1px solid rgb(217, 217, 217); margin-top: 20px; }
+.arrowMore { border-width: medium 4px 4px; border-style: solid dashed dashed; border-color: rgb(255, 169, 0) transparent transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; cursor: pointer; display: inline-block; line-height: 0; margin-left: 5px; }
+.optionBox { padding-left: 60px ! important; text-align: left ! important; }
+.optionBox a:hover { text-decoration: underline; }
+.options { color: rgb(255, 169, 0); display: inline-block; }
+.optionsList { background-color: rgb(253, 245, 226); border: 1px solid rgb(204, 204, 204); left: -20px; position: absolute; top: 0px; width: 100px; }
+.optionsList li { display: block; font-size: 14px; text-align: center; }
+.optionsList a { color: rgb(249, 153, 84); display: inline-block; line-height: 25px; padding: 5px 20px; }
+.optionsList a:hover { background-color: rgb(253, 206, 111); color: rgb(255, 255, 255); }
+.pageBox { display: none; font-size: 14px; margin: 0px auto; padding: 26px 0px; text-align: center; width: 100%; }
+.pageBox em { font-style: normal; }
+.pageBox ul { float: right; line-height: 22px; }
+.pageBox ul li { display: inline-block; line-height: 22px; margin: 0px 4px; }
+.pageUp, .pageNext { border: 0px solid rgb(210, 209, 209); cursor: pointer; height: 25px; line-height: 25px; margin: 1px 20px 0px; padding: 0px; }
+.inputPage { border: 1px solid rgb(210, 209, 209); border-radius: 5px; cursor: text; height: 20px ! important; line-height: 18px; margin: 1px 2px 0px; padding: 0px; text-align: center; width: 25px ! important; }
+.pageUp span { cursor: pointer; display: inline-block; line-height: 0; margin-left: 0px; margin-top: 4px; }
+.pageNext span { cursor: pointer; display: inline-block; line-height: 0; margin-left: 2px; margin-top: 4px; }
+.queryWrapper { font-size: 14px; margin: 0px auto; width: auto; }
+.queryCondition { height: 96px; padding: 10px; width: 100%; margin-left: 45px; }
+.queryCondition td { height: 40px; line-height: 40px; }
+.queryCondition td.queryName { color: rgb(50, 50, 50); font-size: 15px; padding-right: 5px; text-align: right; }
+.queryCondition .colum1 { width: 3%; }
+.queryCondition .colum2 { width: 5%; }
+.queryCondition .colum3 { width: 3%; }
+.queryCondition .colum4 { width: 45%; }
+.colum2 .selectric-wrapper { width: 142px; }
+.queryCondition input.queryInput { border: 1px solid rgb(204, 204, 204); color: rgb(50, 50, 50); height: 28px; line-height: 28px; text-align: center; width: 142px; }
+.queryCondition td.queryTime a { font-size: 14px; padding-right: 5px; }
+.queryCondition select.querySelect { border: 1px solid rgb(204, 204, 204); font-size: 14px; height: 28px; line-height: 28px; margin-top: 8px; width: 149px; }
+.queryCondition td #requestsearchButton { margin: 0px; }
+.queryCondition .searchBtn { width: 120px; height: 30px; line-height: 30px; background: transparent url("button-yellow-long.png") repeat scroll 0% 0%; border: medium none; color: rgb(255, 255, 255); display: inline-block; text-align: center; font-size: 14px; }
+.queryCondition td .operaBtn { padding-bottom: 20px; }
+table.resultList2 { border-bottom: 1px solid rgb(217, 217, 217); margin-top: 20px; }
+.buyFund { margin-left: 15px; width: 900px; }
+.buyFund h4.groupCode { margin-bottom: 5px; margin-left: 10px; margin-top: 5px; }
+.buyFund p.groupTip { color: black; font-weight: bold; margin-left: 10px; margin-top: 5px; }
+.buyFundTit { color: rgb(49, 186, 176); font-size: 22px; font-weight: bold; margin-left: 8px; }
+.buyFundTableDiv { text-align: left; width: 100%; }
+.buyMsg { color: rgb(61, 60, 60); font-size: 14px; margin-left: 10px; width: 100%; margin-bottom: 5px; }
+.buyMsg tbody td { line-height: 51px; text-align: left; }
+.buyMsg tfoot td { height: 30px; padding-top: 5px; }
+.buyMsg tbody td.left { text-align: right; padding-right: 20px; width: 42%; }
+.buyMsg tbody td.right { text-align: left; padding-left: 20px; width: 60%; }
+.buyMsg tbody td.right em { font-style: normal; }
+.buyMsg tbody td.right .selectric-wrapper { vertical-align: middle; }
+.buyMsg .subscribeName { width: 30%; }
+.buyMsg .fTr { border-right: 1px dashed rgb(216, 216, 216); padding-right: 30px; text-align: right; width: 50%; }
+.buyMsg .sTr { padding-left: 30px; width: 50%; }
+.buyMsg .tip { font-size: 12px; height: 30px; line-height: 30px; }
+.orangeText { color: rgb(235, 97, 0); font-size: 16px; font-weight: bold; }
+.number { font-size: 16px; }
+.inputText { border: 1px solid rgb(216, 216, 216); font-size: 14px; height: 32px; line-height: 32px ! important; margin-right: 5px; padding-bottom: 1px; padding-left: 5px; padding-top: 1px; width: 142px; }
+.resetBtn { background: transparent url("button-secondary.png") no-repeat scroll left center; border: medium none; color: rgb(255, 255, 255); height: 40px; line-height: 40px; text-align: center; width: 160px; }
+.electricTip { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(206, 215, 215); box-shadow: 2px 2px 3px rgb(228, 231, 231), -2px -2px 3px rgb(228, 231, 231); padding-bottom: 20px; position: absolute; width: 400px; z-index: 55; }
+.electricTip .content { margin-top: 30px; font-size: 16px; text-align: center; width: 100%; padding-left: 10px; padding-right: 10px; }
+.electricTip .operaBtn { width: auto; margin-bottom: 10px; }
+.buyFundSureAlert { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(206, 215, 215); box-shadow: 2px 2px 3px rgb(228, 231, 231), -2px -2px 3px rgb(228, 231, 231); padding-bottom: 20px; position: absolute; width: 600px; z-index: 55; }
+.buyFundSureAlert h2 { color: rgb(42, 161, 154); font-size: 20px; height: 40px; line-height: 40px; padding-left: 40px; }
+.buyFundSureAlert h2 a { background: transparent url("alertCloseBtn.jpg") no-repeat scroll 0% 0%; display: block; float: right; height: 31px; width: 60px; }
+.buyFundSureAlert h2 span { color: rgb(42, 161, 154); display: block; float: left; font-size: 16px; font-weight: bold; height: 31px; margin-left: 184px; width: 100px; }
+.buyFundSureAlert ul { margin: 0px auto; width: 520px; }
+.buyFundSureAlert ul li { border-bottom: 1px dashed rgb(205, 205, 205); color: rgb(49, 49, 49); font-size: 14px; height: 46px; line-height: 46px; }
+.buyFundSureAlert ul li label { display: inline-block; text-align: left; width: 138px; }
+.buyFundSureAlert ul li span { display: inline-block; margin-right: 14px; }
+.buyFundSureAlert ul li .text { background: rgb(235, 245, 246) none repeat scroll 0% 0%; border: 1px solid rgb(216, 216, 216); height: 32px; margin-right: 10px; padding-left: 10px; width: 160px; }
+.buyFundSureAlert ul li span.fontRed { color: rgb(255, 0, 0); display: none; }
+.buyFundSureAlert ul li span em { font-size: 18px; font-style: normal; }
+.buyFundSureAlert .operaBtn { margin-top: 16px; text-align: center; }
+.saleFundSureAlert { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(206, 215, 215); box-shadow: 2px 2px 3px rgb(228, 231, 231), -2px -2px 3px rgb(228, 231, 231); padding-bottom: 20px; position: absolute; width: 600px; z-index: 55; }
+.saleFundSureAlert h2 { color: rgb(42, 161, 154); font-size: 20px; height: 40px; line-height: 40px; padding-left: 40px; }
+.saleFundSureAlert h2 a { background: transparent url("alertCloseBtn.jpg") no-repeat scroll 0% 0%; display: block; float: right; height: 31px; width: 42px; }
+.saleFundSureAlert h2 span { color: rgb(42, 161, 154); display: block; float: left; font-size: 16px; font-weight: bold; height: 31px; margin-left: 184px; width: 100px; }
+.saleFundSureAlert .operaBtn { margin-left: 104px; margin-top: 16px; }
+.riskBuySureAlert { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(206, 215, 215); box-shadow: 2px 2px 3px rgb(228, 231, 231), -2px -2px 3px rgb(228, 231, 231); display: none; position: absolute; z-index: 55; }
+.riskTestAlert { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(206, 215, 215); box-shadow: 2px 2px 3px rgb(228, 231, 231), -2px -2px 3px rgb(228, 231, 231); display: none; height: 270px; position: absolute; width: 520px; z-index: 55; }
+.riskBuySureAlert h2 { color: rgb(42, 161, 154); font-size: 20px; height: 60px; line-height: 60px; padding-left: 40px; }
+.riskTestAlert h2 { color: rgb(42, 161, 154); font-size: 20px; height: 60px; line-height: 60px; padding-left: 40px; }
+.riskBuySureAlert h2 a { background: transparent url("alertCloseBtn.jpg") no-repeat scroll 0% 0%; display: block; float: right; height: 31px; width: 42px; margin-right: 10px; }
+.riskTestAlert h2 a { background: transparent url("alertCloseBtn.jpg") no-repeat scroll 0% 0%; display: block; float: right; height: 31px; width: 42px; margin-right: 10px; }
+.riskBuyCenter { font-size: 16px; margin: 30px auto 0px; height: 500px; }
+.risk-buy-center-test { font-size: 16px; margin: 30px auto 0px; text-align: center; }
+.riskTestAlert .operaBtn { margin-left: auto; margin-right: auto; margin-top: 45px; text-align: center; }
+.riskBuySureAlert .operaBtn { margin-left: auto; margin-right: auto; margin-top: 45px; text-align: center; }
+.sign { background: rgb(255, 255, 255) none repeat scroll 0% 0%; display: none; height: 360px; position: absolute; width: 620px; z-index: 55; }
+.hideDiv { background-color: Gray; display: none; left: 0px; opacity: 0.4; position: absolute; top: 0px; z-index: 50; }
+.redFont { color: rgb(255, 0, 0); }
+.errorMsg { color: rgb(255, 0, 0); font-weight: bold; margin-bottom: 5px; margin-top: 5px; text-align: center; }
+td.inputTextWidth { width: 142px; }
+input.aButton { background-color: rgb(255, 255, 255); border: 1px solid rgb(210, 209, 209); border-radius: 2px; color: rgb(57, 163, 161); height: 25px; line-height: 16px; margin: 0px; text-align: center; padding: 0px 5px; }
+select.fixedWidth { width: 150px; }
+.errorHolder { height: 400px; margin: 0px auto; position: absolute; top: 20%; width: 100%; }
+.errorHolder .mainDiv { color: rgb(97, 97, 97); margin: 0px auto; padding-bottom: 10px; padding-top: 10px; text-align: center; width: 600px; }
+.errorHolder .iconDiv { float: left; width: 200px; }
+.errorHolder .errorIcon { background: transparent url("error.png") no-repeat scroll 0% 0%; display: block; height: 170px; margin: 0px auto; width: 170px; }
+.errorHolder .errorMsg { color: rgb(97, 97, 97); float: left; margin: 0px auto; text-align: left; width: 400px; }
+.errorHolder .errorTitle { font-size: 20px; font-weight: bold; margin-left: 20px; padding-top: 10px; }
+.errorTitle span { color: rgb(45, 175, 167); }
+.commentMsg { margin-left: 20px; padding-top: 10px; }
+.commentMsg span { font-size: 14px; }
+.commentContent { font-size: 16px; padding-top: 10px; text-align: left; width: 400px; }
+.commentContent div { font-size: 16px; padding-top: 15px; text-align: left; width: 400px; }
+.commentContent a { color: rgb(45, 175, 167); text-decoration: none; }
+.commentContent p { line-height: 30px; margin-top: 5px; text-indent: 1em; }
+.commentContent ul { float: left; margin: 0px auto; text-align: center; }
+.commentContent ul li { float: left; list-style: outside none none; margin-right: 10px; }
+.commentContent ul li a { color: rgb(45, 175, 167); text-decoration: none; }
+#feeLink:link { color: rgb(255, 153, 84); text-decoration: underline; }
+#feeLink:visited { color: rgb(255, 153, 84); }
+#feeLink:active { color: rgb(255, 153, 84); }
+.operaBtn { margin: 24px auto 20px; width: 450px; text-align: center; }
+.operaBtn .cancelBtn { margin-left: 26px; }
+.operaBtn .searchBtn.undefault, .operaBtn .submitBtn.undefault { background: transparent url("button-secondary.png") no-repeat scroll left center; border: medium none; color: rgb(255, 255, 255); height: 40px; line-height: 40px; text-align: center; width: 160px; }
+a.autoAnswer { background: transparent url("autoansow.png") no-repeat scroll 0% 0%; color: rgb(118, 118, 118); font-size: 16px; height: 41px; line-height: 40px; padding: 8px 18px; text-decoration: none; vertical-align: middle; margin-left: 30px; }
+a.autoAnswer:hover { color: rgb(118, 118, 118); }
+.btnWrapper .closeBtn { margin: 0px; }
+.ownListWrapper { margin: 0px auto; width: auto; }
+.ownListWrapper .optionsList { width: 110px; }
+.ownListWrapper .resultList .operate {  }
+.ownListWrapper .resultList tr { height: 40px; line-height: 40px; }
+.tabMenuWra { font-size: 14px; margin-bottom: 15px; margin-top: 10px; position: relative; }
+.frLinkWra { position: absolute; right: 15px; top: 6px; z-index: 99; }
+.frLinkWra a, .frLinkWra a:hover, .frLinkWra a:visited { color: rgb(235, 97, 0); display: inline-block; margin-right: 15px; position: relative; }
+.frLinkWra a.wholeScreen span { background: transparent url("spriteIcons.png") no-repeat scroll -6px -28px; display: inline-block; height: 19px; left: 40px; position: absolute; top: 4px; width: 20px; }
+ul.tabList { border-bottom: 1px solid rgb(0, 195, 172); height: 40px; margin-bottom: 30px; }
+ul.tabList li { float: left; line-height: 36px; margin-bottom: -1px; text-align: center; }
+ul.tabList li a { color: rgb(0, 195, 172); display: block; height: 36px; width: 123px; text-decoration: none; }
+ul.tabList li a.nowLink { background: rgb(0, 195, 172) none repeat scroll 0% 0%; color: rgb(255, 255, 255); border: 1px solid transparent; border-radius: 4px 4px 0px 0px; display: inline-block; height: 38px; line-height: 38px; margin-right: 2px; text-align: center; width: 100px; }
+ul.tabList li a.redeemLink { background: rgb(0, 195, 172) none repeat scroll 0% 0%; color: rgb(255, 255, 255); border: 1px solid transparent; border-radius: 4px 4px 0px 0px; display: inline-block; height: 38px; line-height: 38px; margin-right: 2px; text-align: center; width: 120px; }
+ul.tabList li a.orangeText { color: rgb(235, 97, 0); }
+ul.buySelectDown { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(204, 204, 204); display: none; position: relative; width: 100px; }
+ul.buySelectDown li { cursor: pointer; height: 35px; line-height: 26px; padding-left: 10px; text-align: left; }
+ul.buySelectDown li a { color: rgb(255, 102, 0); display: block; font-size: 12px; width: 100%; }
+ul.buySelectDown li:hover { background-color: rgb(251, 244, 228); cursor: pointer; height: 35px; line-height: 26px; padding-left: 10px; text-align: left; }
+.tabContent { margin: 0px auto; width: auto; }
+.tabContent table td a, .tabContent table td a:hover, .tabContent table td a:visited {  }
+.tabContent .everyContent { display: none; }
+.tabContent .nowContent { display: block; }
+.tabContent h2 span { color: rgb(60, 60, 60); display: inline-block; font-size: 16px; margin-left: 20px; }
+.tabContent h2 span em { color: rgb(255, 0, 0); font-style: normal; }
+.tabContent table { border: 1px solid rgb(216, 216, 216); margin-bottom: 10px; width: 100%; }
+.tabContent table thead tr { font-size: 14px; height: 40px; font-weight: normal; }
+.tabContent table th { height: 20px; padding-left: 6px; text-align: left; }
+.tabContent table th span.sortIcon { background: transparent url("spriteIcons.png") no-repeat scroll -202px -2px; display: inline-block; height: 12px; margin-left: 2px; width: 12px; }
+.tabContent table td { font-size: 14px; height: 55px; line-height: 24px; padding-left: 6px; }
+.tabContent table td.relativeTd { position: relative; }
+.tabContent table td.relativeTd ul { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(204, 204, 204); position: absolute; width: 128px; }
+.tabContent table td.relativeTd ul li { height: 26px; line-height: 26px; padding-left: 10px; }
+.innerTabMenu { position: relative; }
+.innerTabMenu ul.innerTabList { bottom: -16px; position: absolute; right: 2px; }
+.innerTabMenu ul.innerTabList li { float: left; text-align: center; width: 80px; }
+.innerTabMenu #holdMore { color: rgb(0, 102, 102); cursor: pointer; display: block; font-size: 16px; height: 38px; width: 80px; }
+.innerTabMenu h2.title { font-size: 18px; }
+.innerTabCont h2.title { font-size: 18px; }
+.innerTabCont h2.title a { padding-top: 5px; }
+.nowContent h2.title { font-size: 18px; }
+.everyContent h2.title { font-size: 18px; }
+.table-head-gray thead tr th { background-color: rgb(243, 243, 243); }
+.innerTabMenu ul.innerTabList li a { color: rgb(255, 169, 0); display: block; height: 38px; width: 80px; }
+.innerTabMenu ul.innerTabList li a.nowInnerLink {  }
+.innerTabCont { width: auto; }
+.innerTabCont #ownFundDiv .resultList tbody tr { cursor: pointer; }
+.innerTabContNocur #ownFundDiv .resultList tbody tr { cursor: default; }
+.ownFundBox { height: 272px; }
+.littlePicWra { height: auto; margin-bottom: 10px; padding: 20px 10px 10px 12px; width: auto; }
+.littlePicWra a.buyLink { background: rgb(255, 169, 0) none repeat scroll 0% 0%; color: rgb(255, 255, 255); padding: 7px 11px; border-radius: 5px; margin-right: 15px; cursor: pointer; }
+.littlePicWra a span { background: transparent url("whitedDownIcon.png") no-repeat scroll 10px center; cursor: pointer; display: inline-block; float: right; height: 26px; margin-left: 24px; padding-left: 10px; position: absolute; width: 26px; }
+.subscribeSucWra { margin: 0px auto; width: 100%; }
+.subscribeSucWra h2 { color: rgb(95, 197, 191); font-size: 24px; height: 40px; line-height: 40px; }
+.subscribeBtnWra { padding-top: 20px; text-align: center; }
+.subscribeBtnWra .btnWrapper { padding-left: 200px; }
+.subscribeBtnWra .linkBtn { font-size: 14px; text-align: center; }
+.subscribeBtnWra .checkMyHold { margin-left: 50px; vertical-align: bottom; }
+.subscribeBtnWra .printBtn { margin-left: 50px; vertical-align: bottom; }
+.subscribeBtnWra .printBtn.closer { margin-left: 10px; vertical-align: bottom; }
+.btnWrapper a { display: inline-block; height: 33px; line-height: 33px; margin-left: 50px; text-align: center; width: 105px; }
+.subscribeSucTip { font-size: 20px; height: 180px; line-height: 90px; text-align: center; }
+.subscribeSucTip > span { display: block; }
+.subscribeBox { width: 100%; }
+.subscribeBox table { border: 1px solid rgb(216, 216, 216); color: rgb(0, 0, 0); font-size: 14px; width: 100%; }
+.subscribeBox table td { height: 32px; line-height: 32px; padding-left: 20px; }
+.subscribeBox table td.width220 { border-right: 1px solid rgb(216, 216, 216); padding-left: 80px; width: 200px; color: rgb(0, 195, 164); }
+.subscribeBox table td span { display: inline-block; margin-right: 20px; }
+@media print {
+  .subscribeSucTip { color: rgb(255, 128, 41); font-size: 20pt; height: 95pt; line-height: 95pt; text-align: center; }
+  .subscribeBox table { border: 1px solid rgb(216, 216, 216); color: rgb(0, 0, 0); font-size: 16pt; width: 100%; }
+  .subscribeBox table td { height: 32pt; line-height: 32pt; padding-left: 20px; }
+  .subscribeBox table td.width220 { border-right: 1px solid rgb(216, 216, 216); padding-left: 80px; width: 140px; }
+  .subscribeBox table td span { display: inline-block; margin-right: 20px; }
+}
+.subscribeAlertWra { background: rgb(255, 255, 255) none repeat scroll 0% 0%; height: 428px; position: absolute; width: 100%; }
+.subscribeAlertWra .closeAlertButton { margin-top: 10px; padding-right: 16px; position: relative; }
+.subscribeAlertWra .closeAlertButton span { display: block; float: left; font-size: 16px; height: 28px; margin-left: 254px; width: 100px; margin-top: 10px; }
+.subscribeAlertWra .closeAlertButton a { background: transparent url("alertCloseBtn.jpg") no-repeat scroll 0% 0%; display: block; float: right; height: 31px; width: 42px; }
+.subscribeAlertWra .subscribeList { margin: 0px auto; width: 100%; }
+.subscribeAlertWra .subscribeList li { float: left; padding-left: 18px; width: 210px; }
+.subscribeAlertWra .subscribeList li span { background: transparent url("liuChenStepNone.jpg") no-repeat scroll 0% 0%; color: rgb(142, 141, 141); display: block; font-size: 14px; height: 39px; line-height: 38px; padding-left: 14px; width: 160px; }
+.subscribeAlertWra .subscribeList li span a { color: rgb(142, 141, 141); cursor: pointer; }
+.subscribeAlertWra .subscribeList li span.step1 { background: transparent url("liuChenStepSucc.jpg") no-repeat scroll 0% 0%; color: rgb(244, 244, 244); }
+.subscribeAlertWra .subscribeList li span.step2 { background: transparent url("liuChenStepCurr.jpg") no-repeat scroll 0% 0%; color: rgb(244, 244, 244); }
+.subscribeAlertWra .subscribeList li span.stepDone { background: transparent url("liuChenStepSucc.jpg") no-repeat scroll 0% 0%; color: rgb(244, 244, 244); }
+.subscribeAlertWra .subscribeList li span.step2 a, .subscribeAlertWra .subscribeList li span.step1 a { color: rgb(244, 244, 244); }
+.subscribeAlertWra .subscribeList li p, .done { color: rgb(255, 114, 8); font-size: 14px; font-weight: bold; height: 23px; line-height: 23px; padding-left: 50px; }
+.subscribeAlertWra .agesBox { border: 1px solid rgb(165, 217, 220); box-shadow: 2px 2px 3px rgb(239, 239, 239), -2px -2px 3px rgb(239, 239, 239); height: 300px; margin: 14px auto 20px 10px; overflow-x: hidden; overflow-y: auto; position: relative; width: 94%; float: left; }
+.subscribeAlertWra .agesContent { color: rgb(49, 49, 49); font-size: 12px; left: 0px; padding: 0px 20px; position: absolute; top: 0px; width: 100%; word-break: break-all; word-wrap: break-word; }
+.subscribeAlertWra .agesContent h3, .subscribeAlertWra .agesContent h4 { color: rgb(49, 49, 49); font-size: 16px; line-height: 20px; text-align: center; }
+.subscribeAlertWra .agesContent p { margin-bottom: 10px; text-align: left; }
+.subscribeAlertWra .agesContent p em { display: inline-block; font-size: 14px; font-weight: bold; height: auto; width: 20px; }
+.subscribeAlertWra .agesContent p.boldFont { font-weight: bold; margin: 20px 0px; }
+.subscribeAlertWra form { font-size: 14px; margin: 0px auto; width: 98%; }
+.subscribeAlertWra form #PowerEnterFundDiv { display: inline-block; text-align: left; width: 248px ! important; }
+.subscribeAlertWra form p { margin-bottom: 10px; text-align: center; }
+.subscribeAlertWra form label { display: inline-block; text-align: right; }
+.subscribeAlertWra form .agreeCheck { border: medium none; margin-right: 10px; }
+.subscribeAlertWra .bindContent { margin: 0px auto; width: 100%; }
+.subscribeAlertWra .bindContent table { width: 100%; }
+.subscribeAlertWra .bindContent table tr { height: 46px; line-height: 46px; }
+.table-fund-bind td.left { width: 20%; }
+.table-fund-bind td.right { width: 80%; }
+.subscribeAlertWra form .text, .subscribeAlertWra form .pwd { display: inline-block; height: 28px; line-height: 28px; padding-left: 6px; width: 240px; }
+.subscribeAlertWra form select { width: 248px; }
+.subscribeAlertWra form .pwd { width: 120px; }
+.subscribeAlertWra .agesContent h2 { color: rgb(255, 102, 0); font-size: 20px; margin: 10px 0px; text-align: center; }
+.subscribeAlertWra .agesContent table { border-collapse: collapse; border-spacing: 0px; }
+.subscribeAlertWra .ageContent { color: rgb(61, 60, 60); font-size: 14px; width: 100%; }
+.subscribeAlertWra .ageBackBox { background: rgb(242, 242, 242) none repeat scroll 0% 0%; color: rgb(51, 51, 51); font-size: 12px; font-weight: bold; }
+.subscribeAlertWra .ageContent tbody td { border-bottom: 1px dashed rgb(219, 219, 219); font-size: 12px; }
+.subscribeAlertWra td.RadioMsg { text-align: center; width: 40px; }
+.subscribeAlertWra td.RadioMsg2 { text-align: center; width: 40px; }
+.subscribeAlertWra .BottomWrapperBox { margin: 0px auto; overflow: hidden; position: relative; text-align: center; width: 93%; }
+.subscribeAlertWra .BottomWrapperBox p { text-align: left; }
+.subscribeAlertWra .BottomWrapper { margin: 0px auto; }
+.subscribeAlertWra .Department { margin: 0px auto 10px; overflow: hidden; position: relative; width: 100%; }
+.subscribeAlertWra .Department p { color: rgb(102, 102, 102); font-size: 14px; margin-left: 28px; text-align: left ! important; }
+.holdDetail { background: rgb(255, 255, 255) none repeat scroll 0% 0%; display: none; position: absolute; width: 620px; z-index: 55; }
+.detailedJjWrapper { background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(231, 231, 231); box-shadow: 2px 2px 3px rgb(243, 243, 243), -2px -2px 3px rgb(243, 243, 243); height: auto; margin: 0px auto; padding-top: 20px; width: 620px; }
+.detailedJjWrapper .closeBtn-X { background: transparent url("alertCloseBtn.jpg") no-repeat scroll 0% 0%; display: block; float: right; height: 31px; position: relative; top: -20px; width: 42px; }
+.detailedFundCon { border: 1px solid rgb(216, 216, 216); margin: 0px auto 24px; width: 600px; }
+.detailedFundLink { float: left; height: 20px; line-height: 20px; margin-left: 70px; margin-top: 30px; }
+.detailedFundLink a { color: rgb(235, 97, 0); display: inline-block; font-size: 14px; margin-right: 8px; text-decoration: underline; }
+.detailedFundName { color: rgb(68, 117, 111); float: left; font-size: 16px; margin-top: 24px; padding-left: 18px; }
+.detailedFundName span { color: rgb(146, 188, 189); font-size: 20px; }
+.detailedFundInfo { padding: 12px 20px 10px; }
+.detailedFundInfo ul { width: 534px; }
+.detailedFundInfo ul li { border-bottom: 1px dashed rgb(216, 214, 214); color: rgb(0, 0, 0); font-size: 16px; height: 50px; line-height: 50px; }
+.detailedFundInfo ul li.lastLi { border-bottom: medium none; }
+.detailedFundInfo ul li span.width120 { display: inline-block; padding-left: 10px; width: 110px; }
+.detailedFundInfo ul li span.width190 { display: inline-block; width: 190px; }
+.detailedFundInfo ul li span.width110 { display: inline-block; width: 110px; color: rgb(0, 195, 164); }
+.detailedFundInfo ul li span.fontRed { font-weight: bold; }
+.moreHoldContainer { float: right; position: absolute; width: auto; z-index: 1000; }
+.moreHoldContainer li { background: rgb(238, 238, 238) none repeat scroll 0% 0%; border: 1px solid rgb(204, 204, 204); font-size: 14px; height: 31px; line-height: 31px; padding: 1px 5px; width: 100%; }
+.moreHoldContainer li a { color: rgb(51, 51, 51); line-height: 31px; width: 100%; }
+.moreHoldContainer li a:hover { background: rgb(0, 102, 102) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+.historyContent { margin: 0px auto; width: 910px; }
+.historyContent .moreLink { color: rgb(235, 97, 0); display: inline-block; float: right; font-size: 14px; line-height: 40px; }
+.historyContent .tabLink { float: left; }
+.historyContent .tabLink a { background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(70, 69, 69); display: inline-block; font-size: 16px; height: 40px; line-height: 38px; padding: 0px 18px; }
+.historyContent .tabLink a.activeLink { border-left: 1px solid rgb(229, 229, 229); border-right: 1px solid rgb(229, 229, 229); border-top: 5px solid rgb(77, 180, 185); height: 41px; margin-bottom: -1px; }
+.historyContent .historyTabCon { border: 1px solid rgb(229, 229, 229); padding-top: 5px; }
+.historyContent .historyTabCon table { font-size: 16px; width: 100%; }
+.historyTabCon table th { background: rgb(243, 245, 247) none repeat scroll 0% 0%; border-bottom: 1px dashed rgb(216, 214, 214); border-top: 1px dashed rgb(216, 214, 214); color: rgb(67, 117, 114); font-weight: normal; height: 38px; line-height: 38px; text-align: left; }
+.historyTabCon table td { height: 36px; line-height: 36px; }
+.historyTabCon table th.width140, .historyTabCon table td.width140 { padding-left: 46px; text-align: left; width: 140px; }
+.historyTabCon table td.width130 { width: 130px; }
+.historyTabCon table td.width150 { width: 150px; }
+.historyTabCon table td.width180 { width: 180px; }
+.Fund_account_management { border: 0px solid rgb(153, 153, 153); margin: 12px auto 0px; width: 100%; }
+.account { margin: 0px auto; width: 100%; }
+.account table { color: rgb(0, 0, 0); font-size: 14px; width: 100%; }
+.account table td { border-bottom: 1px dashed rgb(207, 205, 205); height: 75px; line-height: 35px; padding-left: 10px; }
+.account table td.width220 { color: rgb(0, 195, 164); width: 143px; }
+.account table td.width100 { width: 100px ! important; }
+.account table td span { color: rgb(57, 56, 56); display: inline-block; vertical-align: middle; }
+.account table td span.linkTo { color: rgb(255, 169, 0); cursor: pointer; display: block; float: left; height: 35px; margin-right: 10px; width: 40px; }
+.account table td a.linkTo { color: rgb(255, 169, 0); cursor: pointer; text-decoration: none; }
+.account table td span.linkTo:focus, .account table td span.linkTo:hover { color: rgb(250, 217, 101); }
+.Fund_group { width: 98%; }
+.group_Box { margin: 0px 14px; width: 98%; }
+.group_Box table td { font-size: 14px; height: 24px; padding-left: 6px; }
+.group_Box table td a, .group_Box table td a:hover, .group_Box table td a:visited { color: white; display: block; text-decoration: none; }
+.com_list { color: rgb(43, 114, 121); font-size: 16px; font-weight: bold; line-height: 40px; }
+.Fund_group .optionsList { background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); left: 6px; top: 33px; width: 95px; }
+.Fund_group .optionsList li { float: left; width: 100%; }
+.Fund_group .optionsList a { color: rgb(249, 153, 84); display: block; line-height: 20px; padding: 0px 5px; }
+.Fund_group .optionsList a:hover { background-color: rgb(251, 244, 228); color: rgb(249, 153, 84); display: block; line-height: 20px; padding: 0px 5px; }
+.Select_FundBuyTit { color: rgb(48, 186, 179); font-size: 22px; }
+.Select_FundMsg { color: rgb(61, 60, 60); font-size: 14px; width: 100%; }
+.Select_FundMsg tbody td { border-bottom: 1px dashed rgb(219, 219, 219); height: 50px; line-height: 44px; }
+.SelectButton_Btn { margin: 24px auto 10px; width: 444px; }
+.SelectButton_Btn .cancelBtn_select { margin-left: 26px; }
+.Select_secondTable { color: rgb(61, 60, 60); font-size: 14px; margin-bottom: 16px; margin-top: 16px; width: 100%; }
+.Select_secondTable tbody td { border: 1px solid rgb(204, 204, 204); font-size: 12px; height: 24px; line-height: 24px; padding-left: 20px; width: 69px; }
+.secondTable_width132 { width: 132px; }
+.secondTable_bg { background: rgb(239, 239, 239) none repeat scroll 0% 0%; color: rgb(51, 51, 51); font-size: 12px; font-weight: bold; }
+.select_color { color: rgb(255, 119, 18); }
+.select_color2 { color: rgb(96, 176, 32); }
+.warmTip { height: 30px; margin: 65px auto 0px; width: 816px; }
+.warmTip p { color: rgb(127, 127, 127); }
+.Fund_appointBox { margin-left: 10px; width: 816px; }
+.Fund_title { color: rgb(48, 186, 179); font-size: 22px; font-weight: bold; }
+.Fund_appoint_table { color: rgb(61, 60, 60); font-size: 14px; font-weight: bold; margin-left: 40px; width: 585px; }
+.Fund_appoint_table tbody td { height: 44px; line-height: 44px; padding-left: 12px; }
+.Fund_appoint_table .width195 { width: 115px; }
+.Fund_appoint_table .secondInput { border: 1px solid rgb(204, 204, 204); height: 30px; margin-left: 6px; margin-right: 6px; width: 90px; }
+.operaBtn_select { height: 50px; margin: 0px auto; width: 816px; }
+.funds_redeem_pop { display: block; position: absolute; width: 988px; z-index: 100; }
+.funds_redeem_bg_top { background: transparent url("fund_redeem_bg_top_32.png") no-repeat scroll center center; height: 10px; width: 998px; }
+.funds_redeem_bg_cont { background: transparent url("fund_redeem_bg_cont_32.png") repeat-y scroll center top; overflow: hidden; padding-bottom: 20px; width: 998px; }
+.funds_redeem_bg_btm { background: transparent url("fund_redeem_bg_btm_32.png") no-repeat scroll center center; height: 8px; width: 998px; }
+.funds_redeem_bg_cont h3 { color: rgb(48, 186, 179); font-weight: bold; font-size: 22px; margin: 26px 0px 16px 28px; }
+.funds_redeem_bg_cont h3 a { background: transparent url("alertCloseBtn.jpg") no-repeat scroll 0% 0%; display: inline-block; float: right; height: 31px; margin-right: 10px; width: 42px; }
+.funds_redeem_table_par { border: medium none; border-collapse: collapse; font-size: 14px; margin-left: 28px; width: 90%; }
+.funds_redeem_star { float: right; line-height: 40px; margin-right: 40px; margin-top: 4px; position: relative; width: 160px; }
+.funds_redeem_star li { background: transparent url("funds_redeem_table_star_32.png") no-repeat scroll center center; float: left; height: 14px; list-style: outside none none; margin-top: 14px; width: 14px; }
+.funds_redeem_star .funds_redeem_star_br { background: transparent url("funds_redeem_table_star_br_32.png") no-repeat scroll center center; }
+.funds_redeem_table_par td { border-bottom: 2px dotted rgb(204, 204, 204); height: 40px; line-height: 40px; padding-left: 10px; }
+.funds_redeem_table_chil td { border: medium none; }
+.funds_redeem_table_chil { border-collapse: collapse; border-left: 1px solid rgb(207, 207, 207); border-top: 1px solid rgb(207, 207, 207); margin: 8px 0px; width: 494px; }
+.funds_redeem_table_chil th { background: rgb(239, 239, 239) none repeat scroll 0% 0%; border-bottom: 1px solid rgb(207, 207, 207); border-right: 1px solid rgb(207, 207, 207); }
+.funds_redeem_table_chil td { border-bottom: 1px solid rgb(207, 207, 207); border-right: 1px solid rgb(207, 207, 207); text-align: center; }
+.funds_redeem_table_chil_th1 { height: 34px; width: 136px; }
+.funds_redeem_table_chil_th2 { width: 150px; }
+.funds_redeem_table_chil_th3 { width: 204px; }
+.funds_redeem_input_psw { background: rgb(235, 245, 246) none repeat scroll 0% 0%; border: 1px solid rgb(216, 216, 216); height: 28px; line-height: 28px; margin: 6px 0px; padding: 0px 4px; width: 146px; }
+.funds_redeem_btns { height: 40px; margin-bottom: 86px; margin-left: 304px; }
+.funds_redeem_close { background: transparent url("alertCloseBtn.jpg") no-repeat scroll center center; cursor: pointer; height: 31px; position: absolute; right: 0px; top: 4px; width: 42px; }
+.funds_revoke_box { position: absolute; width: 548px; z-index: 100; }
+.funds_revoke_bk_top { background: transparent url("fund_revoke_bk_top_32.png") no-repeat scroll center center; height: 10px; width: 100%; }
+.funds_revoke_bk_con { background: transparent url("fund_revoke_bk_cont_32.png") repeat-y scroll center top; overflow: hidden; padding-bottom: 20px; padding-top: 5px; width: 100%; }
+.funds_revoke_btm { background: transparent url("fund_revoke_bk_btm_32.png") no-repeat scroll center bottom; height: 10px; width: 100%; }
+.funds_revoke_bk_con h3 { color: rgb(42, 161, 154); cursor: default; font-weight: bold; font-size: 18px; margin: 20px 0px 30px 24px; }
+.funds_revoke_bk_con p { color: rgb(42, 161, 154); cursor: default; font-weight: bold; font-size: 14px; line-height: 24px; margin-bottom: 5px; margin-top: 5px; text-align: center; }
+.funds_revoke_cont { background: transparent url("success.png") no-repeat scroll left center; font-size: 16px; height: 100px; margin-bottom: 30px; margin-left: 210px; padding-left: 64px; width: 230px; }
+.funds_revoke_cont p { cursor: default; padding-top: 40px; text-align: left; margin-left: 30px; }
+.funds_revoke_btn { margin-bottom: 36px; text-align: center; }
+h2.moreLink { color: rgb(0, 102, 102); display: block; float: right; font-size: 14px; padding-right: 22px; }
+p.kindlyReminder { color: rgb(102, 102, 102); font-size: 12px; height: 30px; line-height: 30px; padding-left: 200px; }
+.loading { display: none; height: 60px; left: 50%; position: absolute; top: 40%; width: 130px; z-index: 70; }
+.loading2 { display: none; height: 60px; left: 50%; position: absolute; top: 200%; width: 130px; z-index: 70; }
+.loadingDiv { display: none; height: 60px; left: 50%; position: absolute; top: 40%; width: 130px; z-index: 70; }
+.selectContainer { margin: 15px auto 0px; width: 140px; }
+.fontRed { color: rgb(255, 0, 0); }
+.fontGreen { color: rgb(73, 182, 73); }
+.done { color: rgb(0, 152, 131); }
+.center { text-align: center ! important; }
+.control { background: transparent url("com_shenggou.png") no-repeat scroll right center; color: rgb(229, 125, 2); font-size: 12px; font-weight: bold; padding-right: 10px; text-align: center; }
+.revoke, .end, .bonus { cursor: pointer; }
+.destroyAcc, .editAddress, .delAddress, .setDefaultAddress { color: blue; cursor: pointer; }
+.destroyAcc:hover, .editAddress:hover, .delAddress:hover, .setDefaultAddress:hover { color: blue; cursor: pointer; text-decoration: underline; }
+.h200 { height: 200px ! important; }
+.h240 { height: 240px ! important; }
+.h290 { height: 290px ! important; }
+.width377 { padding-right: 60px; width: 400px; }
+.width900 { width: 900px; }
+.acceptSucImg { margin-right: 30px; margin-top: 10px; }
+.sImg1 { display: block; height: 25px; width: 30px; }
+.sImg2 { display: block; height: 15px; width: 48px; }
+.imgMng { background: transparent url("sign-success.png") no-repeat scroll 0% 0%; display: block; height: 25px; width: 30px; }
+.imgMngNot { background: transparent url("sign-not.png") no-repeat scroll 0% 0%; display: block; height: 25px; width: 30px; }
+.imgNoSet { background: transparent url("sign-outdate.png") no-repeat scroll 0% 0%; display: block; height: 25px; width: 30px; }
+.innerTabMenu .title { margin-right: 10px; }
+.popup_wrapper .title { font-size: 16px; display: block; text-align: center; }
+.m-gray { color: rgb(153, 153, 153); font-size: 14px; line-height: 24px; }
+.attention { background: transparent url("attention.png") no-repeat scroll 172px 12px; padding: 1px 8px; }
+.triangle-white { background: transparent url("triangle-white.png") no-repeat scroll 0px 7px; padding: 0px 4px; margin-left: 5px; }
+.m-gray em { color: red; font-style: normal; }
+.m-left { margin-right: 53px; }
+a:hover, a:focus { color: rgb(250, 217, 101); cursor: pointer; text-decoration: none; }
+.m-orange { color: rgb(255, 169, 0); }
+.add { background: transparent url("add.png") no-repeat scroll 1px 3px; padding: 9px 8px; display: inline-block; float: left; }
+.title-wrap { margin-top: 15px; margin-bottom: 0px; }
+.m-green { color: rgb(0, 195, 164) ! important; }
+@media print {
+  .subscribeBox table tr td.width220 { width: 200pt ! important; }
+  .subscribeSucTip { height: 160pt ! important; }
+}
+.sms-list-div { width: 100%; }
+.sms-set-div { width: 100%; }
+.sms-set-input.form-control { width: 70px; height: 25px; line-height: 25px; }
+.sms-set-table tbody td { height: 60px; }
+.sms-set-table tbody td.left { width: 30%; text-align: right; padding-right: 20px; }
+.sms-set-table tbody td.right { width: 65%; padding-left: 20px; text-align: left; }
+.sms-set-table tbody td.right > div { width: 100%; }
+.sms-set-table tbody td.right div.row-div { height: 30px; line-height: 30px; }
+.sms-set-table tbody td.right div.row-div input.form-control { height: 25px; line-height: 25px; padding: 0px 6px; width: 70px; }
+.sms-set-table tbody td.right div.tip { height: 30px; line-height: 30px; color: rgb(249, 153, 84); }
+.sms-set-table tbody td.right label { vertical-align: middle; }
+.font-bold { font-weight: bold; }
+.sms-prot { padding: 10px; }
+.sms-prot-head { font-weight: bold; font-size: 16px; text-align: center; margin-bottom: 20px; }
+.sms-prot-row { text-indent: 2em; }
+.sms-prot-row .hh { font-weight: bold; }
+.sms-prot-showBox { width: 600px; height: 430px; }
+.sms-prot-showBox .content { width: 580px; height: 350px; overflow-y: auto; margin-bottom: 10px; }
+.fundRiskBig {  }
+.customerRiskBig {  }
+.risk-message-title { text-align: center; }
+.risk-message-checkbox { text-align: center; margin-bottom: 10px; width: 650px; margin-left: -100px; }
+.risk-message-checkbox span { color: rgb(44, 168, 158); }
+.risk-result-fund { color: rgb(44, 168, 158); }
+.sign-cust-info { text-align: center; }
+.sign-cust-content { overflow-x: auto; height: 220px; width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 20px; border: 1px solid rgb(165, 217, 220); box-shadow: 2px 2px 3px rgb(239, 239, 239), -2px -2px 3px rgb(239, 239, 239); }
+.sign-cust-info-left { margin-right: 20px; text-align: right; display: inline-block; margin-top: 15px; margin-bottom: 15px; width: 140px; }
+.sign-cust-info-right { display: inline-block; width: 200px; text-align: left; vertical-align: middle; }
+.sign-cust-info-operator { margin-top: 10px; }
+.cust-info-talbe-title { font-weight: bold; text-align: right; }
+.table-cust-info tbody tr .cust-info-talbe-title { text-align: right; width: 48%; margin-right: 20px; }
+.table-cust-info tbody tr .cust-info-talbe-content { text-align: left; }

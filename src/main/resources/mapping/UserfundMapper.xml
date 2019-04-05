@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.UserfundMapper">
+    <resultMap id="BaseResultMap" type="com.bank.domain.Userfund">
+
+        <id column="userfund_id" jdbcType="INTEGER" property="userfundId"/>
+        <result column="userfund_user" jdbcType="INTEGER" property="userfundUser"/>
+        <result column="userfund_card" jdbcType="VARCHAR" property="userfundCard"/>
+        <result column="userfund_fund" jdbcType="INTEGER" property="userfundFund"/>
+        <result column="userfund_fundunit" jdbcType="DECIMAL" property="userfundFundunit"/>
+    </resultMap>
+
+    <resultMap type="com.bank.domain.Userfund" id="UserfundMap" extends="BaseResultMap">
+        <result column="user_id" jdbcType="INTEGER" property="userfundUserObj.userId"/>
+        <result column="user_password" jdbcType="VARCHAR" property="userfundUserObj.userPassword"/>
+        <result column="user_identity" jdbcType="VARCHAR" property="userfundUserObj.userIdentity"/>
+        <result column="user_phone" jdbcType="VARCHAR" property="userfundUserObj.userPhone"/>
+        <result column="user_address" jdbcType="VARCHAR" property="userfundUserObj.userAddress"/>
+        <result column="user_email" jdbcType="VARCHAR" property="userfundUserObj.userEmail"/>
+        <result column="user_investstate" jdbcType="INTEGER" property="userfundUserObj.userInveststate"/>
+        <result column="user_signstate" jdbcType="INTEGER" property="userfundUserObj.userSignstate"/>
+
+        <result column="fund_id" jdbcType="INTEGER" property="userfundIdObj.fundId"/>
+        <result column="fund_num" jdbcType="VARCHAR" property="userfundIdObj.fundNum"/>
+        <result column="fund_investstate" jdbcType="INTEGER" property="userfundIdObj.fundInveststate"/>
+        <result column="fund_name" jdbcType="VARCHAR" property="userfundIdObj.fundName"/>
+        <result column="fund_productstate" jdbcType="INTEGER" property="userfundIdObj.fundProductstate"/>
+        <result column="fund_manager" jdbcType="INTEGER" property="userfundIdObj.fundManager"/>
+        <result column="fund_company" jdbcType="INTEGER" property="userfundIdObj.fundCompany"/>
+        <result column="fund_minbuymoney" jdbcType="DECIMAL" property="userfundIdObj.fundMinbuymoney"/>
+        <result column="fund_minsalemoney" jdbcType="DECIMAL" property="userfundIdObj.fundMinsalemoney"/>
+        <result column="fund_buyratio" jdbcType="DECIMAL" property="userfundIdObj.fundBuyratio"/>
+        <result column="fund_saleratio" jdbcType="DECIMAL" property="userfundIdObj.fundSaleratio"/>
+        <result column="fund_salebegintime" jdbcType="TIMESTAMP" property="userfundIdObj.fundSalebegintime"/>
+        <result column="fund_workbegintime" jdbcType="TIMESTAMP" property="userfundIdObj.fundWorkbegintime"/>
+        <result column="fund_text" jdbcType="VARCHAR" property="userfundIdObj.fundText"/>
+        <result column="fund_npv" jdbcType="DECIMAL" property="userfundIdObj.fundNpv"/>
+        <result column="fund_checkstate" jdbcType="INTEGER" property="userfundIdObj.fundCheckstate"/>
+
+    </resultMap>
+
+    <select id="findAll" parameterType="java.lang.Integer" resultMap="UserfundMap">
+    SELECT *
+	FROM
+	userfund
+	INNER JOIN `user` ON userfund.userfund_user = `user`.user_id
+	INNER JOIN fund ON userfund.userfund_fund = fund.fund_id
+
+  </select>
+    <select id="findAllUserFund" parameterType="java.lang.Integer" resultMap="UserfundMap">
+
+    SELECT *
+	FROM
+	userfund
+	INNER JOIN `user` ON userfund.userfund_user = `user`.user_id
+	INNER JOIN fund ON userfund.userfund_fund = fund.fund_id
+    where userfund_user=#{userfundUser,jdbcType=INTEGER}
+  </select>
+    <select id="findAllByUserAndFund" parameterType="java.lang.Integer" resultMap="UserfundMap">
+
+    SELECT *
+	FROM
+	userfund
+	INNER JOIN `user` ON userfund.userfund_user = `user`.user_id
+	INNER JOIN fund ON userfund.userfund_fund = fund.fund_id
+	where userfund_user=#{userfundUser,jdbcType=INTEGER} and userfund_fund=#{userfundId,jdbcType=INTEGER}
+
+  </select>
+
+    <insert id="insert2" parameterType="com.bank.domain.Userfund">
+
+    insert into userfund (userfund_user, userfund_card,
+      userfund_fund, userfund_fundunit)
+    values (#{userfundUser,jdbcType=INTEGER}, #{userfundCard,jdbcType=VARCHAR},
+      #{userfundFund,jdbcType=INTEGER}, #{userfundFundunit,jdbcType=DECIMAL})
+  </insert>
+
+    <sql id="Base_Column_List">
+
+    userfund_id, userfund_user, userfund_card, userfund_fund, userfund_fundunit
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from userfund
+        where userfund_id = #{userfundId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    delete from userfund
+    where userfund_id = #{userfundId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.bank.domain.Userfund">
+
+    insert into userfund (userfund_id, userfund_user, userfund_card,
+    userfund_fund, userfund_fundunit)
+    values (#{userfundId,jdbcType=INTEGER}, #{userfundUser,jdbcType=INTEGER}, #{userfundCard,jdbcType=VARCHAR},
+    #{userfundFund,jdbcType=INTEGER}, #{userfundFundunit,jdbcType=DECIMAL})
+  </insert>
+    <insert id="insertSelective" parameterType="com.bank.domain.Userfund">
+
+        insert into userfund
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userfundId != null">
+                userfund_id,
+            </if>
+            <if test="userfundUser != null">
+                userfund_user,
+            </if>
+            <if test="userfundCard != null">
+                userfund_card,
+            </if>
+            <if test="userfundFund != null">
+                userfund_fund,
+            </if>
+            <if test="userfundFundunit != null">
+                userfund_fundunit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userfundId != null">
+                #{userfundId,jdbcType=INTEGER},
+            </if>
+            <if test="userfundUser != null">
+                #{userfundUser,jdbcType=INTEGER},
+            </if>
+            <if test="userfundCard != null">
+                #{userfundCard,jdbcType=VARCHAR},
+            </if>
+            <if test="userfundFund != null">
+                #{userfundFund,jdbcType=INTEGER},
+            </if>
+            <if test="userfundFundunit != null">
+                #{userfundFundunit,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Userfund">
+
+        update userfund
+        <set>
+            <if test="userfundUser != null">
+                userfund_user = #{userfundUser,jdbcType=INTEGER},
+            </if>
+            <if test="userfundCard != null">
+                userfund_card = #{userfundCard,jdbcType=VARCHAR},
+            </if>
+            <if test="userfundFund != null">
+                userfund_fund = #{userfundFund,jdbcType=INTEGER},
+            </if>
+            <if test="userfundFundunit != null">
+                userfund_fundunit = #{userfundFundunit,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where userfund_id = #{userfundId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bank.domain.Userfund">
+
+    update userfund
+    set userfund_user = #{userfundUser,jdbcType=INTEGER},
+    userfund_card = #{userfundCard,jdbcType=VARCHAR},
+    userfund_fund = #{userfundFund,jdbcType=INTEGER},
+    userfund_fundunit = #{userfundFundunit,jdbcType=DECIMAL}
+    where userfund_id = #{userfundId,jdbcType=INTEGER}
+  </update>
+</mapper>

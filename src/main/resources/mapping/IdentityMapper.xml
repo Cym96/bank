@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.IdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Identity" >
+    <id column="identity_number" property="identityNumber" jdbcType="VARCHAR" />
+    <result column="identity_name" property="identityName" jdbcType="VARCHAR" />
+    <result column="identity_sex" property="identitySex" jdbcType="VARCHAR" />
+    <result column="identity_birthday" property="identityBirthday" jdbcType="TIMESTAMP" />
+    <result column="identity_nationality" property="identityNationality" jdbcType="VARCHAR" />
+    <result column="identity_address" property="identityAddress" jdbcType="VARCHAR" />
+    <result column="identity_usefuldate" property="identityUsefuldate" jdbcType="TIMESTAMP" />
+    <result column="identity_issue" property="identityIssue" jdbcType="VARCHAR" />
+    <result column="identity_imgface" property="identityImgface" jdbcType="VARCHAR" />
+    <result column="identity_imgback" property="identityImgback" jdbcType="VARCHAR" />
+    <result column="identity_checkstate" property="identityCheckstate" jdbcType="INTEGER" />
+    <result column="identity_imgown" property="identityImgown" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    identity_number, identity_name, identity_sex, identity_birthday, identity_nationality, 
+    identity_address, identity_usefuldate, identity_issue, identity_imgface, identity_imgback, 
+    identity_checkstate, identity_imgown
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from identity
+    where identity_number = #{identityNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from identity
+    where identity_number = #{identityNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Identity" >
+    insert into identity (identity_number, identity_name, identity_sex, 
+      identity_birthday, identity_nationality, 
+      identity_address, identity_usefuldate, 
+      identity_issue, identity_imgface, identity_imgback, 
+      identity_checkstate, identity_imgown)
+    values (#{identityNumber,jdbcType=VARCHAR}, #{identityName,jdbcType=VARCHAR}, #{identitySex,jdbcType=VARCHAR}, 
+      #{identityBirthday,jdbcType=TIMESTAMP}, #{identityNationality,jdbcType=VARCHAR}, 
+      #{identityAddress,jdbcType=VARCHAR}, #{identityUsefuldate,jdbcType=TIMESTAMP}, 
+      #{identityIssue,jdbcType=VARCHAR}, #{identityImgface,jdbcType=VARCHAR}, #{identityImgback,jdbcType=VARCHAR}, 
+      #{identityCheckstate,jdbcType=INTEGER}, #{identityImgown,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Identity" >
+    insert into identity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="identityNumber != null" >
+        identity_number,
+      </if>
+      <if test="identityName != null" >
+        identity_name,
+      </if>
+      <if test="identitySex != null" >
+        identity_sex,
+      </if>
+      <if test="identityBirthday != null" >
+        identity_birthday,
+      </if>
+      <if test="identityNationality != null" >
+        identity_nationality,
+      </if>
+      <if test="identityAddress != null" >
+        identity_address,
+      </if>
+      <if test="identityUsefuldate != null" >
+        identity_usefuldate,
+      </if>
+      <if test="identityIssue != null" >
+        identity_issue,
+      </if>
+      <if test="identityImgface != null" >
+        identity_imgface,
+      </if>
+      <if test="identityImgback != null" >
+        identity_imgback,
+      </if>
+      <if test="identityCheckstate != null" >
+        identity_checkstate,
+      </if>
+      <if test="identityImgown != null" >
+        identity_imgown,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="identityNumber != null" >
+        #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="identityName != null" >
+        #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identitySex != null" >
+        #{identitySex,jdbcType=VARCHAR},
+      </if>
+      <if test="identityBirthday != null" >
+        #{identityBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identityNationality != null" >
+        #{identityNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="identityAddress != null" >
+        #{identityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="identityUsefuldate != null" >
+        #{identityUsefuldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identityIssue != null" >
+        #{identityIssue,jdbcType=VARCHAR},
+      </if>
+      <if test="identityImgface != null" >
+        #{identityImgface,jdbcType=VARCHAR},
+      </if>
+      <if test="identityImgback != null" >
+        #{identityImgback,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCheckstate != null" >
+        #{identityCheckstate,jdbcType=INTEGER},
+      </if>
+      <if test="identityImgown != null" >
+        #{identityImgown,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Identity" >
+    update identity
+    <set >
+      <if test="identityName != null" >
+        identity_name = #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identitySex != null" >
+        identity_sex = #{identitySex,jdbcType=VARCHAR},
+      </if>
+      <if test="identityBirthday != null" >
+        identity_birthday = #{identityBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identityNationality != null" >
+        identity_nationality = #{identityNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="identityAddress != null" >
+        identity_address = #{identityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="identityUsefuldate != null" >
+        identity_usefuldate = #{identityUsefuldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identityIssue != null" >
+        identity_issue = #{identityIssue,jdbcType=VARCHAR},
+      </if>
+      <if test="identityImgface != null" >
+        identity_imgface = #{identityImgface,jdbcType=VARCHAR},
+      </if>
+      <if test="identityImgback != null" >
+        identity_imgback = #{identityImgback,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCheckstate != null" >
+        identity_checkstate = #{identityCheckstate,jdbcType=INTEGER},
+      </if>
+      <if test="identityImgown != null" >
+        identity_imgown = #{identityImgown,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where identity_number = #{identityNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Identity" >
+    update identity
+    set identity_name = #{identityName,jdbcType=VARCHAR},
+      identity_sex = #{identitySex,jdbcType=VARCHAR},
+      identity_birthday = #{identityBirthday,jdbcType=TIMESTAMP},
+      identity_nationality = #{identityNationality,jdbcType=VARCHAR},
+      identity_address = #{identityAddress,jdbcType=VARCHAR},
+      identity_usefuldate = #{identityUsefuldate,jdbcType=TIMESTAMP},
+      identity_issue = #{identityIssue,jdbcType=VARCHAR},
+      identity_imgface = #{identityImgface,jdbcType=VARCHAR},
+      identity_imgback = #{identityImgback,jdbcType=VARCHAR},
+      identity_checkstate = #{identityCheckstate,jdbcType=INTEGER},
+      identity_imgown = #{identityImgown,jdbcType=VARCHAR}
+    where identity_number = #{identityNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

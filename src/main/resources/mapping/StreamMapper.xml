@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.StreamMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Stream" >
+    <id column="stream_id" property="streamId" jdbcType="INTEGER" />
+    <result column="stream_time" property="streamTime" jdbcType="TIMESTAMP" />
+    <result column="stream_money" property="streamMoney" jdbcType="DECIMAL" />
+    <result column="stream_restmoney" property="streamRestmoney" jdbcType="DECIMAL" />
+    <result column="stream_ownuser" property="streamOwnuser" jdbcType="INTEGER" />
+    <result column="stream_owncard" property="streamOwncard" jdbcType="VARCHAR" />
+    <result column="stream_ortheruser" property="streamOrtheruser" jdbcType="INTEGER" />
+    <result column="stream_orthercard" property="streamOrthercard" jdbcType="VARCHAR" />
+    <result column="stream_text" property="streamText" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stream_id, stream_time, stream_money, stream_restmoney, stream_ownuser, stream_owncard, 
+    stream_ortheruser, stream_orthercard, stream_text
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stream
+    where stream_id = #{streamId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stream
+    where stream_id = #{streamId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Stream" >
+    insert into stream (stream_id, stream_time, stream_money, 
+      stream_restmoney, stream_ownuser, stream_owncard, 
+      stream_ortheruser, stream_orthercard, stream_text
+      )
+    values (#{streamId,jdbcType=INTEGER}, #{streamTime,jdbcType=TIMESTAMP}, #{streamMoney,jdbcType=DECIMAL}, 
+      #{streamRestmoney,jdbcType=DECIMAL}, #{streamOwnuser,jdbcType=INTEGER}, #{streamOwncard,jdbcType=VARCHAR}, 
+      #{streamOrtheruser,jdbcType=INTEGER}, #{streamOrthercard,jdbcType=VARCHAR}, #{streamText,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Stream" >
+    insert into stream
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="streamId != null" >
+        stream_id,
+      </if>
+      <if test="streamTime != null" >
+        stream_time,
+      </if>
+      <if test="streamMoney != null" >
+        stream_money,
+      </if>
+      <if test="streamRestmoney != null" >
+        stream_restmoney,
+      </if>
+      <if test="streamOwnuser != null" >
+        stream_ownuser,
+      </if>
+      <if test="streamOwncard != null" >
+        stream_owncard,
+      </if>
+      <if test="streamOrtheruser != null" >
+        stream_ortheruser,
+      </if>
+      <if test="streamOrthercard != null" >
+        stream_orthercard,
+      </if>
+      <if test="streamText != null" >
+        stream_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="streamId != null" >
+        #{streamId,jdbcType=INTEGER},
+      </if>
+      <if test="streamTime != null" >
+        #{streamTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="streamMoney != null" >
+        #{streamMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="streamRestmoney != null" >
+        #{streamRestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="streamOwnuser != null" >
+        #{streamOwnuser,jdbcType=INTEGER},
+      </if>
+      <if test="streamOwncard != null" >
+        #{streamOwncard,jdbcType=VARCHAR},
+      </if>
+      <if test="streamOrtheruser != null" >
+        #{streamOrtheruser,jdbcType=INTEGER},
+      </if>
+      <if test="streamOrthercard != null" >
+        #{streamOrthercard,jdbcType=VARCHAR},
+      </if>
+      <if test="streamText != null" >
+        #{streamText,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Stream" >
+    update stream
+    <set >
+      <if test="streamTime != null" >
+        stream_time = #{streamTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="streamMoney != null" >
+        stream_money = #{streamMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="streamRestmoney != null" >
+        stream_restmoney = #{streamRestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="streamOwnuser != null" >
+        stream_ownuser = #{streamOwnuser,jdbcType=INTEGER},
+      </if>
+      <if test="streamOwncard != null" >
+        stream_owncard = #{streamOwncard,jdbcType=VARCHAR},
+      </if>
+      <if test="streamOrtheruser != null" >
+        stream_ortheruser = #{streamOrtheruser,jdbcType=INTEGER},
+      </if>
+      <if test="streamOrthercard != null" >
+        stream_orthercard = #{streamOrthercard,jdbcType=VARCHAR},
+      </if>
+      <if test="streamText != null" >
+        stream_text = #{streamText,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stream_id = #{streamId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Stream" >
+    update stream
+    set stream_time = #{streamTime,jdbcType=TIMESTAMP},
+      stream_money = #{streamMoney,jdbcType=DECIMAL},
+      stream_restmoney = #{streamRestmoney,jdbcType=DECIMAL},
+      stream_ownuser = #{streamOwnuser,jdbcType=INTEGER},
+      stream_owncard = #{streamOwncard,jdbcType=VARCHAR},
+      stream_ortheruser = #{streamOrtheruser,jdbcType=INTEGER},
+      stream_orthercard = #{streamOrthercard,jdbcType=VARCHAR},
+      stream_text = #{streamText,jdbcType=VARCHAR}
+    where stream_id = #{streamId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByStreamOwncard" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    select
+    *
+    from stream
+    where stream_owncard = #{cardNum,jdbcType=VARCHAR}
+  </select>
+</mapper>

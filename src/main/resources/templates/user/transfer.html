@@ -1,0 +1,417 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>单笔转账首页</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link type="text/css" rel="stylesheet" href="transfer_accounts.css" th:href="@{/user/user/main.css}">
+    <link type="text/css" rel="stylesheet" href="style.css" th:href="@{/user/user/style.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.qtip.css" th:href="@{/user/userlogin/jquery.qtip.css}">
+    <script src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+    <script src="placeholders.jquery.min.js" type="text/javascript" th:src="@{/user/findList/placeholders.jquery.m.js}"></script>
+    <script src="moment-with-locales.min.js" th:src="@{/user/user/moment-with-locales.min.js}"> </script>
+    <script src="pikaday.js" th:src="@{/user/user/pikaday.js}"> </script>
+    <script src="jquery.selectric.js" th:src="@{/user/findList/jquery.selectric.js}"> </script>
+    <script src="jquery.popupoverlay-1.7.11.js" th:src="@{/user/user/jquery.popupoverlay-1.7.11.js}"> </script>
+    <script src="jquery.qtip.min.js" th:src="@{/user/user/jquery.qtip.min.js}"> </script>
+    <script src="jquery.validate.min.js" th:src="@{/user/user/jquery.validate.min.js}"> </script>
+    <script src="messages_zh.js"> </script>
+    <script src="jTabs.js" th:src="@{/user/findList/jTabs.js}"> </script>
+</head>
+<script type="text/javascript">
+    $(function(){
+
+        $("#toAcctNo").blur(function(){
+            $.ajax({
+                type:"POST",
+                url:"<%=path%>/user/findcardNum",
+                data:{"cardNum":$(this).val()},
+                dataType:"json",
+                success:function(data){
+                    //var identity = eval("("+data+")")
+
+                    //alert(data.identityName);
+                    $("#toAcctNameKey").val(data.identityName);
+
+                }
+            });
+        });
+
+
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        $.ajax({
+
+            type:"POST",
+            url:"<%=path%>/user/findcardMoney",
+            data:{"cardNum":$("#fromAcctNo").val()},
+            dataType:"json",
+            success:function(data){
+
+                $("#balanceSpan").text(data.cardRestmoney);
+            }
+        });
+        $("#fromAcctNo").change(function(){
+
+            $.ajax({
+
+                type:"POST",
+                url:"<%=path%>/user/findcardMoney",
+                data:{"cardNum":$(this).val()},
+                dataType:"json",
+                success:function(data){
+                    $("#balanceSpan").text(data.cardRestmoney);
+
+                }
+            });
+        });
+
+
+    });
+</script>
+<body>
+<form id="mainForm" name="mainForm" action="${pageContext.request.contextPath}/user/transfer" method="post">
+    <input type="hidden" name="transfer" id="transfer" value="1"><!--transferPublic.js 1019-->
+    <div class="container">
+
+        <div class="tabs">
+            <ul class="tabs-head">
+                <li>
+                    <a href="" data-method="skip" data-toggle="tab" class="active">转账</a>
+                <li class="right">
+                    <span class="delay"></span>
+                    <a href="https://perbank.abchina.com/EbankSite/InnerTransferQryDelayTransListInitAct.do" class="dropdown-title">转账撤销</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="trn_backline">
+            <table class="table table-centre">
+                <tbody>
+                <tr>
+                    <td class="trn-firsttd">
+                        <label class="trn_mustData">*&nbsp;&nbsp;</label>付款账户&nbsp;&nbsp;</td>
+                    <td class="right trn-position">
+                        <select tabindex="0" id="fromAcctNo" name="fromAcctNo" class="form-control trn_fromAcctNo" style="width: 61%;">
+                            <c:forEach items="${requestScope.debitcardList }" var="debitcard">
+                                <option value="${debitcard.cardNum }">${debitcard.cardNum }</option>
+                            </c:forEach>
+                        </select>
+
+
+                        <div class="trn-balance">
+                            </span>&nbsp;&nbsp;&nbsp;&nbsp;可用金额：<span id="balanceSpan" class="orangeText"></span>元</td>
+        </div>
+        <script type="text/javascript">
+            $('#fromAcctNo').selectric();
+        </script>
+        </td>
+
+        </tr>
+
+        <tr>
+            <td class="trn-firsttd">
+                <label class="trn_mustData">*&nbsp;&nbsp;</label>转账金额&nbsp;&nbsp;</td>
+            <td class="right  trn-position">
+                <input id="transAmt" name="transAmt" placeholder="本行转账免费" class="form-control required trn-input">
+                <div class="trn-balance">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="moneyHow" class="orangeText" style="display: none;">您的余额已不足</span></td>
+    </div>
+    <div id="bigTransAmt" class="trn_bigAmt" style="position: absolute; left: auto; top: auto; margin-left: 10px;"></div>
+    </td>
+    </tr>
+    <script type="text/javascript">
+
+        $(function(){
+            $("#transferNext").attr("disabled", true);
+            $("#transAmt").blur(function(){
+                if(parseInt($("#transAmt").val()) > parseInt($("#balanceSpan").text())){
+                    $("#transferNext").attr("disabled", true);
+                    $("#moneyHow").show();
+                }
+                else if(parseInt($("#transAmt").val()) < parseInt($("#balanceSpan").text())){
+                    $("#transferNext").attr("disabled", false);
+                    $("#moneyHow").hide();
+                }else if($("#transAmt").val()==$("#transAmt").val().replace(/[^\d.]/g,'')){
+                    $("#transferNext").attr("disabled", true);
+                }
+            });
+        });
+    </script>
+
+    <tr>
+        <td class="trn-firsttd" style="position: relative;">
+            <label class="trn_mustData">*&nbsp;&nbsp;</label>转账方式&nbsp;&nbsp;
+            <div class="jia"></div>
+        </td>
+        <td class="right">
+            <div class="zz-div zz-backno1" id="ontimetrn" title="交易受理立即转出（需人工处理的除外）" typeId="1">实时转账</div>
+            <div class="zz-div zz-backno2" id="commntrn" title="交易受理2小时后转出" typeId="2">普通转账</div>
+            <div class="zz-div zz-backno2" id="nextdaytrn" title="交易受理24小时后转出" typeId="3">次日转账</div>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+
+    <div class="trn_headline"></div>
+    <table class="table table-centre">
+        <tbody>
+        <tr>
+            <td>
+                <label class="trn_mustData">*&nbsp;&nbsp;</label>收款方&nbsp;&nbsp;</td>
+            <td class="right">
+                <div class="right trn-position trn-positions m-div_label">
+                    <input id="toAcctNameKey" class="form-control trn_input_width required placeholderTrn" placeholder="请输入收款人姓名（例如：张三）" autocomplete="off">
+                    <div id="toAcctNameRst" class="trn_result" style="width: 61% ! important; display: none;"></div>
+
+                    <div id="m-pp" class="m-pecparimg" style="position: absolute; cursor: pointer;" title="选择收款方"></div>
+
+                    <div id="groupbox" class="m-groupingbox" style="position: absolute; top: 31px; left: 0px; display: none;">
+
+                        <ul>
+                            <li class="m-grouping">分组</li>
+                            <li class="m-character">收款方</li>
+                        </ul>
+                        <div class="m-bigtabbox">
+                            <ul class="m-groupgo">
+                                <li>
+                                    <a id="selfAcct" class="trn_mygroup">本人注册账户</a>
+                                </li>
+                                <li>
+                                    <a id="mobile" class="trn_mygroup">掌银收款方</a>
+                                </li>
+                                <li>
+                                    <a value="1001" title="临时客户组" id="group_0" class="trn_mygroup">临时客户组</a>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="trn_mustData">*&nbsp;&nbsp;</label>收款账户&nbsp;&nbsp;</td>
+            <td class="right">
+                <input id="toAcctNo" name="toAcctNo" class="form-control trn_input_width placeholderTrn" placeholder="请输入收款账号（例如：6228480000000000）" maxlength="30" required=""></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+    <div class="trn_headline" id="moreHeadLine" style=""></div>
+    <div class="trn_more">
+        <a id="moreInfo" href="#">
+            <span id="morecli">收起</span>
+            <div class="trn_moreiconless"></div>
+        </a>
+    </div>
+
+    <table class="table table-centre" id="moreInfoTable" style="">
+        <tbody>
+        <tr>
+            <td class="trn-firsttd">
+                <label class="trn_mustData"></label> &nbsp;&nbsp;短信通知&nbsp;&nbsp;
+            </td>
+            <td class="right">
+                <input id="toAcctMobile" name="phone" maxlength="11" class="form-control trn_input_width " placeholder="请输入手机号">
+            </td>
+        </tr>
+        <tr>
+            <td class="trn-firsttd">
+                <label class="trn_mustData">&nbsp;&nbsp;</label>附言&nbsp;&nbsp;</td>
+            <td class="right">
+                <input id="text" name="phoneText" maxlength="11" class="form-control trn_input_width " placeholder="请输入附言">
+                <script type="text/javascript">
+
+                </script>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row" style="margin-left: 45%; margin-top: 20px;" id="trnButton">
+        <input id="transferNext" class="btn btn-primary" value="确认转账" type="submit">
+
+    </div>
+
+    <!-- <div class="row" style="text-align: center; margin-top: 20px; display: none;" id="skipShow">
+        <input id="transferNextSkip" class="btn btn-primary" value="下一步" type="button">
+        <input id="goBack" class="btn btn-secondary" value="返回" type="button">
+    </div> -->
+
+    <div class="oder_i_bu" style="display: none;">
+        <div style="margin-left: 20px; margin-top: 20px; height: 45px; line-height: 23px;">
+            <span>实时转账：</span>
+            <span class="right">交易受理立即转出（需人工处理的除外）</span>
+        </div>
+        <div style="margin-left: 20px; margin-top: 15px;">
+            <span>普通转账：</span>
+            <span class="right">交易受理2小时后转出</span>
+        </div>
+        <div style="margin-left: 20px; margin-top: 15px;">
+            <span>次日转账：</span>
+            <span class="right">交易受理24小时后转出</span>
+        </div>
+    </div>
+
+    <div class="oder_i_net" style="display: none;">
+        <div style="margin: 20px 20px 0px; height: 45px; line-height: 23px;">
+            <span>如您无法确认收款账户开户网点，可以选择同一城市（或县域）内附近网点</span>
+        </div>
+    </div>
+
+    </div>
+    <div class="row" style="padding-left: 0px ! important;">
+        <div class="page-help">
+            <div class="title">温馨提示</div>
+            <div class="content">
+                <ul>
+                    <li>5万（节假日50万）及以下的跨行实时转账7*24小时处理；5万以上的跨行转账工作日（7:00-17:05）实时处理。</li>
+                    <li>大于5万的普通跨行转账工作日7:00-15:05受理、次日跨行转账工作日的7:00-17:05受理，实际转出如遇非工作时间则顺延至下个工作日。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+<script src="json2.js"></script>
+<script src="jAlert.js"></script>
+<script src="jError.js"></script>
+<script type="text/javascript">
+    $('#toAcctProvince').selectric();
+    $('#toAcctCity').selectric();
+    $('#toAcctNet').selectric();
+
+    //			      //单笔转账限额
+    //			      var onceTrnAmt = "1000000.00";
+    //
+    //			      //初始化时获取注册网点号
+    //			      var cRegisterBI = "065741";
+    //
+    //			      //超级网银系统状态
+    //			      superBnkStatus = "Y";
+    //
+    //			      //大小额系统是否关闭R
+    //			      var interTransOpenFlag = "";
+    //			      var errMsg = "";
+    //
+    //			     //跨行转账节假日时刻表
+    //			      var restDayJs = JSON.parse('[  {    "paramName": "20120429"  },  {    "paramName": "20121001"  },  {    "paramName": "20121002"  },  {    "paramName": "20121003"  },  {    "paramName": "20121004"  },  {    "paramName": "20121005"  },  {    "paramName": "20121006"  },  {    "paramName": "20121007"  },  {    "paramName": "20130101"  },  {    "paramName": "20130102"  },  {    "paramName": "20130103"  },  {    "paramName": "20130211"  },  {    "paramName": "20130212"  },  {    "paramName": "20130213"  },  {    "paramName": "20130214"  },  {    "paramName": "20130215"  },  {    "paramName": "20130404"  },  {    "paramName": "20130405"  },  {    "paramName": "20130429"  },  {    "paramName": "20130430"  },  {    "paramName": "20130501"  },  {    "paramName": "20130610"  },  {    "paramName": "20130611"  },  {    "paramName": "20130612"  },  {    "paramName": "20130919"  },  {    "paramName": "20130920"  },  {    "paramName": "20131001"  },  {    "paramName": "20131002"  },  {    "paramName": "20131003"  },  {    "paramName": "20131004"  },  {    "paramName": "20140101"  },  {    "paramName": "20140131"  },  {    "paramName": "20140203"  },  {    "paramName": "20140204"  },  {    "paramName": "20140205"  },  {    "paramName": "20140206"  },  {    "paramName": "20140407"  },  {    "paramName": "20140501"  },  {    "paramName": "20140502"  },  {    "paramName": "20140602"  },  {    "paramName": "20140908"  },  {    "paramName": "20141001"  },  {    "paramName": "20141002"  },  {    "paramName": "20141003"  },  {    "paramName": "20141006"  },  {    "paramName": "20141007"  },  {    "paramName": "20150101"  },  {    "paramName": "20150102"  },  {    "paramName": "20150218"  },  {    "paramName": "20150219"  },  {    "paramName": "20150220"  },  {    "paramName": "20150223"  },  {    "paramName": "20150224"  },  {    "paramName": "20150406"  },  {    "paramName": "20150501"  },  {    "paramName": "20150622"  },  {    "paramName": "20150903"  },  {    "paramName": "20150904"  },  {    "paramName": "20151001"  },  {    "paramName": "20151002"  },  {    "paramName": "20151005"  },  {    "paramName": "20151006"  },  {    "paramName": "20151007"  },  {    "paramName": "20160101"  },  {    "paramName": "20160207"  },  {    "paramName": "20160208"  },  {    "paramName": "20160209"  },  {    "paramName": "20160210"  },  {    "paramName": "20160211"  },  {    "paramName": "20160212"  },  {    "paramName": "20160213"  },  {    "paramName": "20160404"  },  {    "paramName": "20160502"  },  {    "paramName": "20160609"  },  {    "paramName": "20160610"  },  {    "paramName": "20160915"  },  {    "paramName": "20160916"  },  {    "paramName": "20161001"  },  {    "paramName": "20161002"  },  {    "paramName": "20161003"  },  {    "paramName": "20161004"  },  {    "paramName": "20161005"  },  {    "paramName": "20161006"  },  {    "paramName": "20161007"  },  {    "paramName": "20170102"  },  {    "paramName": "20170127"  },  {    "paramName": "20170130"  },  {    "paramName": "20170131"  },  {    "paramName": "20170201"  },  {    "paramName": "20170202"  },  {    "paramName": "20170403"  },  {    "paramName": "20170404"  },  {    "paramName": "20170501"  },  {    "paramName": "20170529"  },  {    "paramName": "20170530"  },  {    "paramName": "20171002"  },  {    "paramName": "20171003"  },  {    "paramName": "20171004"  },  {    "paramName": "20171005"  },  {    "paramName": "20171006"  },  {    "paramName": "20180101"  },  {    "paramName": "20180215"  },  {    "paramName": "20180216"  },  {    "paramName": "20180219"  },  {    "paramName": "20180220"  },  {    "paramName": "20180221"  },  {    "paramName": "20180405"  },  {    "paramName": "20180406"  },  {    "paramName": "20180430"  },  {    "paramName": "20180501"  },  {    "paramName": "20180618"  },  {    "paramName": "20180924"  },  {    "paramName": "20181001"  },  {    "paramName": "20181002"  },  {    "paramName": "20181003"  },  {    "paramName": "20181004"  },  {    "paramName": "20181005"  }]');
+    //			      //跨行转账特殊工作日时刻表(例如调休后周日正常上班)
+    //			      var workDayJs = JSON.parse('[  {    "paramName": "20111231"  },  {    "paramName": "20120428"  },  {    "paramName": "20120929"  },  {    "paramName": "20130105"  },  {    "paramName": "20130106"  },  {    "paramName": "20130216"  },  {    "paramName": "20130217"  },  {    "paramName": "20130407"  },  {    "paramName": "20130427"  },  {    "paramName": "20130428"  },  {    "paramName": "20130608"  },  {    "paramName": "20130609"  },  {    "paramName": "20130922"  },  {    "paramName": "20130929"  },  {    "paramName": "20131012"  },  {    "paramName": "20140126"  },  {    "paramName": "20140208"  },  {    "paramName": "20140504"  },  {    "paramName": "20140928"  },  {    "paramName": "20141011"  },  {    "paramName": "20150104"  },  {    "paramName": "20150215"  },  {    "paramName": "20150228"  },  {    "paramName": "20150906"  },  {    "paramName": "20151010"  },  {    "paramName": "20160206"  },  {    "paramName": "20160214"  },  {    "paramName": "20160612"  },  {    "paramName": "20160918"  },  {    "paramName": "20161008"  },  {    "paramName": "20161009"  },  {    "paramName": "20170122"  },  {    "paramName": "20170204"  },  {    "paramName": "20170401"  },  {    "paramName": "20170527"  },  {    "paramName": "20170930"  },  {    "paramName": "20171230"  },  {    "paramName": "20171231"  },  {    "paramName": "20180211"  },  {    "paramName": "20180224"  },  {    "paramName": "20180408"  },  {    "paramName": "20180428"  },  {    "paramName": "20180929"  },  {    "paramName": "20180930"  }]');
+    //			      //禁止跨行转账补录提交日时刻表
+    //			      var noLDDayJs = JSON.parse('[  {    "paramName": "20140130"  },  {    "paramName": "20140930"  },  {    "paramName": "20160930"  },  {    "paramName": "20170126"  },  {    "paramName": "20170930"  },  {    "paramName": "20180214"  },  {    "paramName": "20180930"  }]');
+    //			      var noLDStartTime = "120000";
+    //			      var noLDEndTime = "240000";
+    //			      //当前时间
+    //			      var currentDate = "20180521";
+    //			      var currTime = "113606";
+    //			      //是否为周末
+    //			      var weekendStartTime = "0030";
+    //			      var weekendEndTime = "2330";
+    //			      var isWeekend = "";
+    //			      //普通延迟转账截止时间
+    //			      var comTrnLimitTime = "150500";
+    //
+    //			      //转出账户列表
+    //			      var fromAccountJs = JSON.parse('[  {    "acctNo": "6228482208016583178",    "acctName": "王春英",    "acctType": "401",    "acctTypeName": "借记卡",    "currCode": "156",    "currName": "人民币",    "oofFlag": "0",    "oofName": "本币",    "branchNo": "31900",    "branchName": "辽宁分行",    "netId": "065859",    "provCode": "06",    "provName": "辽宁省(不含大连市)",    "areaCode": "21",    "areaName": "辽宁省(不含大连市)",    "cityName": "",    "bankCode": "03",    "bankName": "中国农业银行",    "alias": "583178",    "signType": "1",    "hiddenFlag": "0000000000",    "defaultAcctFlag": "0",    "registerBi": "065741",    "chanMsk": "1100000000",    "verify": "0",    "cardClass": "1"  },  {    "acctNo": "6228452208036782970",    "acctName": "王春英",    "acctType": "401",    "acctTypeName": "借记卡",    "currCode": "156",    "currName": "人民币",    "oofFlag": "0",    "oofName": "本币",    "branchNo": "31900",    "branchName": "辽宁分行",    "netId": "065722",    "provCode": "06",    "provName": "辽宁省(不含大连市)",    "areaCode": "21",    "areaName": "辽宁省(不含大连市)",    "cityName": "",    "bankCode": "03",    "bankName": "中国农业银行",    "alias": "782970",    "signType": "1",    "hiddenFlag": "0000000000",    "defaultAcctFlag": "0",    "registerBi": "065741",    "chanMsk": "1100000000",    "verify": "0",    "cardClass": "1"  }]');
+    //
+    //			      //收款方分组列表
+    //			      var groupListJs = JSON.parse('[  {    "RCG_GRPNO": "1001",    "RCG_GRPNME": "临时客户组"  }]');
+    //
+    //			      //收款方账户列表
+    //			      var toAccountJs = JSON.parse('[]');
+    //
+    //			      //所有银行列表 (194家)
+    //			      var openBankJs = JSON.parse('[  {    "paramName": "03",    "paramValue": "中国农业银行"  },  {    "paramName": "02",    "paramValue": "中国工商银行"  },  {    "paramName": "04",    "paramValue": "中国银行"  },  {    "paramName": "05",    "paramValue": "中国建设银行"  },  {    "paramName": "06",    "paramValue": "交通银行"  },  {    "paramName": "07",    "paramValue": "中国邮政储蓄银行"  },  {    "paramName": "08",    "paramValue": "浦东发展银行"  },  {    "paramName": "09",    "paramValue": "招商银行"  },  {    "paramName": "10",    "paramValue": "平安银行"  },  {    "paramName": "11",    "paramValue": "广发银行"  },  {    "paramName": "13",    "paramValue": "中国光大银行"  },  {    "paramName": "14",    "paramValue": "兴业银行"  },  {    "paramName": "15",    "paramValue": "中信银行"  },  {    "paramName": "16",    "paramValue": "华夏银行"  },  {    "paramName": "17",    "paramValue": "国家开发银行"  },  {    "paramName": "18",    "paramValue": "中国进出口银行"  },  {    "paramName": "19",    "paramValue": "中国农业发展银行"  },  {    "paramName": "20",    "paramValue": "中国民生银行"  },  {    "paramName": "22",    "paramValue": "中国信托投资公司"  },  {    "paramName": "25",    "paramValue": "财务公司"  },  {    "paramName": "27",    "paramValue": "厦门国际银行"  },  {    "paramName": "28",    "paramValue": "上海银行"  },  {    "paramName": "44",    "paramValue": "上海农村商业银行"  },  {    "paramName": "29",    "paramValue": "汇丰银行"  },  {    "paramName": "30",    "paramValue": "花旗银行"  },  {    "paramName": "31",    "paramValue": "渣打银行"  },  {    "paramName": "32",    "paramValue": "摩根大通银行"  },  {    "paramName": "69",    "paramValue": "大华银行"  },  {    "paramName": "34",    "paramValue": "东亚银行"  },  {    "paramName": "35",    "paramValue": "恒丰银行"  },  {    "paramName": "36",    "paramValue": "北京银行"  },  {    "paramName": "37",    "paramValue": "澳新银行"  },  {    "paramName": "38",    "paramValue": "德意志银行"  },  {    "paramName": "39",    "paramValue": "富邦华一银行"  },  {    "paramName": "40",    "paramValue": "国民银行"  },  {    "paramName": "41",    "paramValue": "瑞士银行"  },  {    "paramName": "90",    "paramValue": "银行间市场清算所"  },  {    "paramName": "95",    "paramValue": "徽商银行"  },  {    "paramName": "97",    "paramValue": "渤海银行"  },  {    "paramName": "98",    "paramValue": "浙商银行"  },  {    "paramName": "21",    "paramValue": "城市商业银行"  },  {    "paramName": "23",    "paramValue": "城市信用社"  },  {    "paramName": "26",    "paramValue": "农村商业银行"  },  {    "paramName": "12",    "paramValue": "农村信用社"  },  {    "paramName": "24",    "paramValue": "农村合作银行"  },  {    "paramName": "33",    "paramValue": "民营银行"  },  {    "paramName": "0D",    "paramValue": "国泰君安证券股份有限公司"  },  {    "paramName": "99",    "paramValue": "其他金融机构"  },  {    "paramName": "101",    "paramValue": "鞍山市商业银行"  },  {    "paramName": "100",    "paramValue": "安徽省农村信用联社"  },  {    "paramName": "102",    "paramValue": "包商银行"  },  {    "paramName": "103",    "paramValue": "北京农村商业银行"  },  {    "paramName": "104",    "paramValue": "北京顺义银座村镇银行"  },  {    "paramName": "105",    "paramValue": "沧州银行"  },  {    "paramName": "106",    "paramValue": "成都农商银行"  },  {    "paramName": "107",    "paramValue": "成都银行"  },  {    "paramName": "108",    "paramValue": "承德银行"  },  {    "paramName": "109",    "paramValue": "长安银行"  },  {    "paramName": "110",    "paramValue": "长沙银行"  },  {    "paramName": "111",    "paramValue": "重庆农村商业银行"  },  {    "paramName": "45",    "paramValue": "村镇银行"  },  {    "paramName": "114",    "paramValue": "重庆银行"  },  {    "paramName": "116",    "paramValue": "大连银行"  },  {    "paramName": "118",    "paramValue": "德州银行"  },  {    "paramName": "120",    "paramValue": "东莞银行"  },  {    "paramName": "122",    "paramValue": "东营银行"  },  {    "paramName": "128",    "paramValue": "富滇银行"  },  {    "paramName": "129",    "paramValue": "赣州银行"  },  {    "paramName": "136",    "paramValue": "广州银行"  },  {    "paramName": "139",    "paramValue": "桂林银行"  },  {    "paramName": "144",    "paramValue": "韩亚银行"  },  {    "paramName": "145",    "paramValue": "汉口银行"  },  {    "paramName": "146",    "paramValue": "杭州银行"  },  {    "paramName": "147",    "paramValue": "河北银行"  },  {    "paramName": "148",    "paramValue": "衡水银行"  },  {    "paramName": "151",    "paramValue": "湖北银行"  },  {    "paramName": "152",    "paramValue": "湖州银行"  },  {    "paramName": "155",    "paramValue": "吉林银行"  },  {    "paramName": "156",    "paramValue": "济宁银行"  },  {    "paramName": "157",    "paramValue": "嘉兴银行"  },  {    "paramName": "161",    "paramValue": "江苏银行"  },  {    "paramName": "165",    "paramValue": "江西银行"  },  {    "paramName": "167",    "paramValue": "金华银行"  },  {    "paramName": "168",    "paramValue": "锦州银行"  },  {    "paramName": "169",    "paramValue": "晋城银行"  },  {    "paramName": "170",    "paramValue": "晋商银行"  },  {    "paramName": "171",    "paramValue": "晋中银行"  },  {    "paramName": "172",    "paramValue": "九江银行"  },  {    "paramName": "173",    "paramValue": "昆仑银行"  },  {    "paramName": "175",    "paramValue": "莱商银行"  },  {    "paramName": "176",    "paramValue": "兰州银行"  },  {    "paramName": "177",    "paramValue": "廊坊银行"  },  {    "paramName": "178",    "paramValue": "临商银行"  },  {    "paramName": "179",    "paramValue": "柳州银行"  },  {    "paramName": "180",    "paramValue": "龙江银行"  },  {    "paramName": "181",    "paramValue": "洛阳银行"  },  {    "paramName": "184",    "paramValue": "南京银行"  },  {    "paramName": "187",    "paramValue": "宁波银行"  },  {    "paramName": "190",    "paramValue": "宁夏银行"  },  {    "paramName": "193",    "paramValue": "齐鲁银行"  },  {    "paramName": "194",    "paramValue": "齐商银行"  },  {    "paramName": "195",    "paramValue": "企业银行"  },  {    "paramName": "196",    "paramValue": "青岛银行"  },  {    "paramName": "197",    "paramValue": "青海银行"  },  {    "paramName": "199",    "paramValue": "泉州银行"  },  {    "paramName": "200",    "paramValue": "日照银行"  },  {    "paramName": "201",    "paramValue": "厦门银行"  },  {    "paramName": "204",    "paramValue": "上饶银行"  },  {    "paramName": "205",    "paramValue": "绍兴银行"  },  {    "paramName": "209",    "paramValue": "盛京银行"  },  {    "paramName": "211",    "paramValue": "苏州银行"  },  {    "paramName": "212",    "paramValue": "台州银行"  },  {    "paramName": "214",    "paramValue": "泰安银行"  },  {    "paramName": "216",    "paramValue": "天津银行"  },  {    "paramName": "218",    "paramValue": "潍坊银行"  },  {    "paramName": "219",    "paramValue": "温州银行"  },  {    "paramName": "220",    "paramValue": "乌海银行"  },  {    "paramName": "225",    "paramValue": "西安银行"  },  {    "paramName": "226",    "paramValue": "新韩银行"  },  {    "paramName": "227",    "paramValue": "邢台银行"  },  {    "paramName": "228",    "paramValue": "烟台银行"  },  {    "paramName": "229",    "paramValue": "营口银行"  },  {    "paramName": "230",    "paramValue": "友利银行"  },  {    "paramName": "233",    "paramValue": "枣庄银行"  },  {    "paramName": "242",    "paramValue": "郑州银行"  },  {    "paramName": "243",    "paramValue": "中原银行"  },  {    "paramName": "247",    "paramValue": "保定银行"  },  {    "paramName": "248",    "paramValue": "丹东银行"  },  {    "paramName": "250",    "paramValue": "辽阳银行"  },  {    "paramName": "251",    "paramValue": "海南银行"  },  {    "paramName": "252",    "paramValue": "遂宁银行"  },  {    "paramName": "254",    "paramValue": "贵州银行"  },  {    "paramName": "255",    "paramValue": "甘肃银行"  },  {    "paramName": "140",    "paramValue": "哈尔滨银行"  },  {    "paramName": "149",    "paramValue": "葫芦岛银行"  },  {    "paramName": "185",    "paramValue": "内蒙古银行"  },  {    "paramName": "192",    "paramValue": "平顶山银行"  },  {    "paramName": "235",    "paramValue": "张家口银行"  },  {    "paramName": "256",    "paramValue": "石嘴山银行"  },  {    "paramName": "47",    "paramValue": "中信百信银行"  },  {    "paramName": "113",    "paramValue": "重庆三峡银行"  },  {    "paramName": "117",    "paramValue": "长城华西银行"  },  {    "paramName": "123",    "paramValue": "鄂尔多斯银行"  },  {    "paramName": "125",    "paramValue": "福建海峡银行"  },  {    "paramName": "130",    "paramValue": "广东华兴银行"  },  {    "paramName": "131",    "paramValue": "广东南粤银行"  },  {    "paramName": "153",    "paramValue": "华融湘江银行"  },  {    "paramName": "166",    "paramValue": "焦作中旅银行"  },  {    "paramName": "183",    "paramValue": "四川天府银行"  },  {    "paramName": "186",    "paramValue": "宁波通商银行"  },  {    "paramName": "231",    "paramValue": "云南红塔银行"  },  {    "paramName": "244",    "paramValue": "珠海华润银行"  },  {    "paramName": "249",    "paramValue": "营口沿海银行"  },  {    "paramName": "277",    "paramValue": "上海华瑞银行"  },  {    "paramName": "278",    "paramValue": "浙江网商银行"  },  {    "paramName": "133",    "paramValue": "广西北部湾银行"  },  {    "paramName": "134",    "paramValue": "广西农村信用社"  },  {    "paramName": "137",    "paramValue": "贵阳市商业银行"  },  {    "paramName": "143",    "paramValue": "邯郸市商业银行"  },  {    "paramName": "182",    "paramValue": "绵阳市商业银行"  },  {    "paramName": "198",    "paramValue": "曲靖市商业银行"  },  {    "paramName": "217",    "paramValue": "威海市商业银行"  },  {    "paramName": "245",    "paramValue": "自贡市商业银行"  },  {    "paramName": "253",    "paramValue": "宜宾市商业银行"  },  {    "paramName": "119",    "paramValue": "东莞农村商业银行"  },  {    "paramName": "121",    "paramValue": "东营莱商村镇银行"  },  {    "paramName": "126",    "paramValue": "福建省农村信用社"  },  {    "paramName": "127",    "paramValue": "阜新银行结算中心"  },  {    "paramName": "132",    "paramValue": "广东省农村信用社"  },  {    "paramName": "135",    "paramValue": "广州农村商业银行"  },  {    "paramName": "138",    "paramValue": "贵州省农村信用社"  },  {    "paramName": "142",    "paramValue": "海南省农村信用社"  },  {    "paramName": "150",    "paramValue": "湖北省农村信用社"  },  {    "paramName": "162",    "paramValue": "江苏长江商业银行"  },  {    "paramName": "164",    "paramValue": "江西省农村信用社"  },  {    "paramName": "174",    "paramValue": "昆山农村商业银行"  },  {    "paramName": "191",    "paramValue": "攀枝花市商业银行"  },  {    "paramName": "202",    "paramValue": "山东省农村信用社"  },  {    "paramName": "203",    "paramValue": "陕西省农村信用社"  },  {    "paramName": "207",    "paramValue": "深圳农村商业银行"  },  {    "paramName": "208",    "paramValue": "深圳前海微众银行"  },  {    "paramName": "210",    "paramValue": "四川省农村信用社"  },  {    "paramName": "213",    "paramValue": "太仓农村商业银行"  },  {    "paramName": "215",    "paramValue": "天津农村商业银行"  },  {    "paramName": "222",    "paramValue": "无锡农村商业银行"  },  {    "paramName": "223",    "paramValue": "吴江农村商业银行"  },  {    "paramName": "224",    "paramValue": "武汉农村商业银行"  },  {    "paramName": "232",    "paramValue": "云南省农村信用社"  },  {    "paramName": "236",    "paramValue": "浙江稠州商业银行"  },  {    "paramName": "238",    "paramValue": "浙江民泰商业银行"  },  {    "paramName": "240",    "paramValue": "浙江省农村信用社"  },  {    "paramName": "241",    "paramValue": "浙江泰隆商业银行"  },  {    "paramName": "261",    "paramValue": "合浦国民村镇银行"  },  {    "paramName": "262",    "paramValue": "平果国民村镇银行"  },  {    "paramName": "266",    "paramValue": "东兴国民村镇银行"  },  {    "paramName": "270",    "paramValue": "北屯国民村镇银行"  },  {    "paramName": "271",    "paramValue": "昌吉国民村镇银行"  },  {    "paramName": "273",    "paramValue": "博乐国民村镇银行"  },  {    "paramName": "274",    "paramValue": "伊犁国民村镇银行"  },  {    "paramName": "275",    "paramValue": "奎屯国民村镇银行"  },  {    "paramName": "279",    "paramValue": "辽宁省农村信用社"  },  {    "paramName": "280",    "paramValue": "河南省农村信用社"  },  {    "paramName": "281",    "paramValue": "中德住房储蓄银行"  },  {    "paramName": "221",    "paramValue": "乌鲁木齐市商业银行"  },  {    "paramName": "234",    "paramValue": "张家港农村商业银行"  },  {    "paramName": "272",    "paramValue": "五家渠国民村镇银行"  },  {    "paramName": "276",    "paramValue": "石河子国民村镇银行"  },  {    "paramName": "112",    "paramValue": "重庆黔江银座村镇银行"  },  {    "paramName": "115",    "paramValue": "重庆渝北银座村镇银行"  },  {    "paramName": "124",    "paramValue": "佛山顺德农村商业银行"  },  {    "paramName": "141",    "paramValue": "海口联合农村商业银行"  },  {    "paramName": "158",    "paramValue": "江苏常熟农村商业银行"  },  {    "paramName": "159",    "paramValue": "江苏江阴农村商业银行"  },  {    "paramName": "163",    "paramValue": "江西赣州银座村镇银行"  },  {    "paramName": "188",    "paramValue": "宁波鄞州农村合作银行"  },  {    "paramName": "189",    "paramValue": "宁夏黄河农村商业银行"  },  {    "paramName": "206",    "paramValue": "深圳福田银座村镇银行"  },  {    "paramName": "237",    "paramValue": "浙江景宁银座村镇银行"  },  {    "paramName": "239",    "paramValue": "浙江三门银座村镇银行"  },  {    "paramName": "257",    "paramValue": "天津滨海农村商业银行"  },  {    "paramName": "258",    "paramValue": "江苏江南农村商业银行"  },  {    "paramName": "259",    "paramValue": "广西上林国民村镇银行"  },  {    "paramName": "260",    "paramValue": "广西银海国民村镇银行"  },  {    "paramName": "264",    "paramValue": "广西浦北国民村镇银行"  },  {    "paramName": "267",    "paramValue": "新疆绿洲国民村镇银行"  },  {    "paramName": "269",    "paramValue": "哈密红星国民村镇银行"  },  {    "paramName": "265",    "paramValue": "防城港防城国民村镇银行"  },  {    "paramName": "46",    "paramValue": "开泰银行（中国）有限公司"  },  {    "paramName": "268",    "paramValue": "克拉玛依金龙国民村镇银行"  },  {    "paramName": "263",    "paramValue": "广西钦州市钦南国民村镇银行"  },  {    "paramName": "160",    "paramValue": "江苏省农村信用社联合社(不对外)"  },  {    "paramName": "154",    "paramValue": "吉林省农村信用社（不办理转汇业务）"  }]');
+    //
+    //			      //16位客户号
+    //			      var custId = "1621105251332828";
+    //
+    //			      //客户所属省是否开通超级网银功能
+    //			      var custProvInSuperList = "Y";
+    //
+    //			      //客户姓名
+    //			      var custName = "王春英";
+    //
+    //			      //客户自己维护的转账用途
+    //			      var shortUseTypeJs = null;
+    //			      try{
+    //			          shortUseTypeJs = JSON.parse('[]');
+    //			      }
+    //			      catch (e) {
+    //			      }
+    //
+    //			      //省数据
+    //			      var provJs = null;
+    //
+    //			      //市数据
+    //			      var cityJs = null;
+    //
+    //			      //网点数据
+    //			      var netJs = null;
+    //
+    //			      //掌银分组数据
+    //			      var mobileAcctListJs = null;
+    //
+    //			      //小类银行名称，用于查询网点数据
+    //			      var keyBankName = null;
+    //
+    //			      //大类银行行号，用于查询网点数据
+    //			      var keyBankCode = null;
+    //
+    //			      //超级网银行号及大类(单个)
+    //			      var superBnkCodeAndTypeJs = null;
+    //
+    //			      //走超级网银
+    //			      var superBankPath = null;
+    //
+    //			      //走大小额
+    //			      var interBankPath = null;
+    //
+    //			      //走账户互转
+    //			      var selfTransferPath = null;
+    //
+    //			      //手工输入标识
+    //			      var drawFlag = null;
+    //
+    //			      //跳转到转账带入的Action
+    //			      var sourceAction = "";
+    //
+    //			      //跳转到转账带入的卡号
+    //			      var skipAcctNo = "";
+    //
+    //			      //跳转到转账带入的卡号
+    //			      var skipAmt = "";
+</script>
+<!--<script src="cardBalance.js"></script>-->
+<script type="text/javascript" src="public.js">
+</script>
+<!--<script src="dataHelper.js">
+</script>-->
+<script type="text/javascript" src="transferPublic.js">
+</script>
+
+<!--<script type="text/javascript" src="transferInit.js">
+</script>
+<script type="text/javascript" src="transferSubmit.js">
+</script>
+<script type="text/javascript" src="JudgeAccInfo.js">
+</script>-->
+
+</body>
+</body>
+
+</html>

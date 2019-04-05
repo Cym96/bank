@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>持有基金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link type="text/css" rel="stylesheet" href="fund.css" th:href="@{/user/findList/fund.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.jqplot.min.css" th:href="@{/user/findList/jquery.jqplot.min.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.qtip.css" th:href="@{/user/userlogin/jquery.qtip.css}">
+
+    <script type="text/javascript" src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+    <script type="text/javascript" src="writeObjectNew.js"> </script></head><body><div style="height: 0px;"><object id="versionObj" type="application/npABCSafeInputApp" style="width: 0px; height: 0px;" height="0px" width="0px"></object></div>
+    <script type="text/javascript" src="placeholders.jquery.min.js" th:src="@{/user/findList/placeholders.jquery.min.js}"> </script>
+    <script type="text/javascript" src="jquery.qtip.min.js" th:src="@{/user/user/jquery.qtip.min.js}"> </script>
+    <script type="text/javascript" src="excanvas.min.js" th:src="@{/user/findList/excanvas.min.js}"> </script>
+    <script type="text/javascript" src="jquery.flot.js" th:src="@{/user/findList/jquery.flot.js}"> </script>
+    <script type="text/javascript" src="jquery.jqplot.js" th:src="@{/user/findList/jquery.jqplot.js}"> </script>
+    <script type="text/javascript" src="jqplot.stockCursor.js" th:src="@{/user/findList/jqplot.stockCursor.js}"> </script>
+    <script type="text/javascript" src="chart.js" th:src="@{/user/findList/chart.js}"> </script>
+    <script type="text/javascript" src="fund_common.js" th:src="@{/user/findList/fund_common.js}"> </script>
+    <script type="text/javascript" src="selectWidget.js"> </script>
+    <script type="text/javascript" src="hiddenPopDiv.js" th:src="@{/user/findList/hiddenPopDiv.js}"> </script>
+    <script src="dataObject.js" th:href="@{/user/userlogin/dataObject.js}"></script>
+    <script src="fund_account.js" th:href="@{/user/userlogin/fund_account.js}"> </script>
+  
+  
+    <script type="text/javascript">
+      function refreshPage() {
+        document.formRefresh.submit();
+      }
+      //自动关闭div
+      function closeLoadingPage() {
+        closeBg("hideDiv", "sign");
+        refreshPage();
+      }
+      function goToError(rsCode, userErrorMsg) {
+        document.errGoForm.rsCode.value = rsCode;
+        document.errGoForm.submit();
+      }
+      function goToSuccess(acctId, acctOpenBankId) {
+      }
+    </script>
+    <div class="container">
+    <form name="formRefresh" action="https://perbank.abchina.com/EbankSite/FundHoldInitAct.do"></form>
+    <form name="errGoForm" action="https://perbank.abchina.com/EbankSite/FundErrorPageAct.do">
+      <input name="rsCode" type="hidden">
+      <input name="nextAction" value="FundHoldInitAct.do" type="hidden">
+    </form>
+
+    <form name="FundHold0456InitActForm" action="https://perbank.abchina.com/EbankSite/FundHold0456InitAct.do">
+      <input name="acctId" value="6228452208036782970" type="hidden">
+      <input name="acctOpenBankId" value="31900" type="hidden">
+    </form>
+    <form name="FundHold0457InitActForm" action="https://perbank.abchina.com/EbankSite/FundHold0457InitAct.do">
+      <input name="acctId" value="6228452208036782970" type="hidden">
+      <input name="acctOpenBankId" value="31900" type="hidden">
+    </form>
+    <div id="magContent" class="sign"></div>
+    <div class="moreHoldContainer" style="display: none;">
+      <ul>
+        <li><a href="javascript:FundHold0457InitActForm.submit();">集合计划产品持有</a></li>
+        <li><a href="javascript:FundHold0456InitActForm.submit();">专户理财产品持有</a></li>
+      </ul>
+    </div>
+
+    <div class="ownListWrapper">
+      <div class="tabMenuWra">
+        <ul class="tabList clearfix">
+          <li><a href="javascript: ;" class="nowLink">我的基金</a></li>
+          <li><a href="javascript: ;" id="tabAIF">我的定投</a></li>
+        </ul>
+        <div class="frLinkWra clearfix">
+          <a target="_blank" href="https://sns.abchina.com/FinancialPlanner">在线理财师</a>
+        </div>
+
+        <div class="tabContent">
+          <div class="nowContent">
+           <div class="innerTabMenu">
+              <h2 class="title">我持有的基金</h2>
+                <span class="m-gray title" id="t1Total">T-1市值总计&nbsp;&nbsp;&nbsp;<em id="TAccTotal" class="fontRed ">1.00</em></span>
+                <span id="chartPrompt" style="display: none;">单位净值或七日年化收益率</span>
+               <div class="right">
+                <ul class="innerTabList" id="innerTabList">
+                <li><a index="0" href="javascript: ;" class="nowInnerLink">列表</a></li>
+                <li><a index="1" href="javascript: ;">走势图</a></li>
+                <li><span id="holdMore">更多</span></li>
+              </ul>
+               </div>
+
+            </div>
+
+            <div class="innerTabCont" id="innerTabCont">
+              <div id="ownFundDiv"><table class="table-head-gray resultList" id=""><thead><tr><th style="background-color: rgb(239, 239, 239);">基金代码</th><th style="background-color: rgb(239, 239, 239);">基金名称</th><th style="background-color: rgb(239, 239, 239);">单位净值</th><th style="background-color: rgb(239, 239, 239);">持有份额</th><th style="background-color: rgb(239, 239, 239);">T-1日市值</th><th data-hasqtip="1" class="attention" style="width: 195px; background-color: rgb(239, 239, 239);">累计参与成本/退出收益</th><th style="background-color: rgb(239, 239, 239);"><span title="参考收益率=（T-1市值+退出收益-参与成本）/参与成本*100%，其中退出收益指通过赎回、转出及现金分红等形式累计实现的现金总额" style="border-bottom: 1px dotted rgb(6, 142, 122);">参考收益率</span></th><th style="display: none; background-color: rgb(239, 239, 239);">合约号</th><th style="display: none; background-color: rgb(239, 239, 239);">可用份额</th><th style="display: none; background-color: rgb(239, 239, 239);">待清算份额</th><th style="display: none; background-color: rgb(239, 239, 239);">冻结份额</th><th style="display: none; background-color: rgb(239, 239, 239);">分红方式</th><th style="display: none; background-color: rgb(239, 239, 239);">定赎回方式</th><th style="display: none; background-color: rgb(239, 239, 239);">基金类型</th><th style="display: none; background-color: rgb(239, 239, 239);">快速赎回类型</th><th style="display: none; background-color: rgb(239, 239, 239);">基金状态</th><th style="display: none; background-color: rgb(239, 239, 239);">合同建立时间</th><th style="width: 80px; background-color: rgb(239, 239, 239);">操作</th></tr></thead><tbody><tr style="background-color: rgb(255, 255, 255);" hasexdata="false"><td>000907</td><td>农银红利日结A</td><td>1.000000</td><td>1.00</td><td>1.00</td><td>1.00/0.00</td><td>0</td><td style="display: none;">06572240400002835</td><td style="display: none;">1.00</td><td style="display: none;">0.00</td><td style="display: none;">0.00</td><td style="display: none;">红利再投资</td><td style="display: none;">1</td><td style="display: none;">03</td><td style="display: none;">1</td><td style="display: none;">05</td><td style="display: none;">20180409</td><td><a param="fundCode=000907&amp;iFundName=农银红利日结A&amp;UseAmt=1.00&amp;acctId=6228452208036782970&amp;acctOpenBankId=31900&amp;iArNo=06572240400002835&amp;RiskType=01&amp;iTransToFundFlag=0&amp;provCode=06&amp;iOpenFastRedm=1&amp;phone=17604064764&amp;openChanlMsk=000000000000000000000000000000" ctr="Redemption,Exchange,Setting,TradeQuery,SmsInfo,Fastsale" href="https://perbank.abchina.com/EbankSite/FundRedeemInitAct.do?fundCode=000907&amp;iFundName=%E5%86%9C%E9%93%B6%E7%BA%A2%E5%88%A9%E6%97%A5%E7%BB%93A&amp;UseAmt=1.00&amp;acctId=6228452208036782970&amp;acctOpenBankId=31900&amp;iArNo=06572240400002835&amp;RiskType=01&amp;iTransToFundFlag=0&amp;provCode=06&amp;iOpenFastRedm=1&amp;phone=17604064764&amp;openChanlMsk=000000000000000000000000000000" class="operate m-btn-table">赎回<b class="downList triangle-white"></b></a></td></tr></tbody></table></div>
+              <div style="display: none;" class="littlePicWra"></div>
+              <div style="clear: both;"></div>
+              <div class="clearfix" style="float: none;">
+                <h2 class="title"><a href="https://perbank.abchina.com/EbankSite/FundQryInitAct.do" style="color: rgb(0, 102, 102); display: block; float: right; font-size: 16px; padding-right: 30px; text-decoration: none;">更多</a>我的委托</h2>
+                <div id="myConsignationBox"><table class="table-head-gray resultList" id=""><thead><tr><th>申请日期</th><th>流水号</th><th>基金代码</th><th>基金名称</th><th>申请金额</th><th>申请份额</th><th style="display: none;">流水状态代码</th><th>委托状态</th><th style="display: none;">交易名称</th><th>交易类型名称</th><th style="width: 80px;">操作</th></tr></thead></table><p style="text-align: center; font-size: 16px; font-family: &quot;Microsoft YaHei&quot;;">查询无记录。</p></div>
+              </div>
+              <div id="myGroupReqCont" class="clearfix" style="display: none; float: none;">
+                <h2 class="title">可撤单组合委托</h2>
+                <div id="myGroupReqBox"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="everyContent title-wrap">
+            <h2 class="title">我的定投</h2>
+            <div style="float: right;">
+                <a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="m-orange"><b class="add"></b>新增定投</a>
+            </div>
+            <div id="myFixInvest"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="page-foot" style="margin-top: 40px;">&nbsp;</div>
+
+        <div id="action" style="background-color: white; display: none; position: absolute; left: 891px; top: 231px; z-index: -1;">
+          <ul class="optionsList">
+            <li style="display: none;" name="Redeming"><a href="javascript:void(0);" data-baseurl="FundRedeemInitAct.do">赎回</a></li>
+            <li style="display: none;" name="Appointment"><a href="javascript:void(0);" data-baseurl="FundInvestSaleInitAct.do">预约赎回</a></li>
+            <li style="display: block;" name="Exchange"><a href="javascript:void(0);" data-baseurl="FundChangeFundInitAct.do">转换</a></li>
+            <li style="display: block;" name="Setting"><a href="javascript:void(0);" data-baseurl="FundBonusSetAct.do">分红设置</a></li>
+            <li style="display: block;" name="Redemption"><a href="javascript:void(0);" data-baseurl="FundScheduleRedeemInitAct.do">定赎</a></li>
+            <li style="display: none;" name="Buy"><a href="javascript:void(0);" data-baseurl="FundPURCSubscriptionInitAct.do">申购</a></li>
+            <li style="display: block;" name="TradeQuery"><a href="javascript:void(0);" data-baseurl="FundQryInitAct.do">交易查询</a></li>
+            <li style="display: block;" name="Fastsale"><a href="javascript:void(0);" data-baseurl="FundRapitRedeemInitAct.do">快速赎回</a></li>
+            
+            <li style="display: block;" name="SmsInfo"><a href="javascript:void(0);" data-baseurl="FundSmsTipInitAct.do">短信提醒</a></li>
+          </ul>
+        </div>
+
+
+        <div id="action1" style="background-color: white; display: none; position: absolute;">
+          <ul class="optionsList">
+            <li name="END"><a href="#" data-baseurl="FundCancelAIFAct.do">终止</a></li>
+            <li name="IntellDetail"><a href="#" data-baseurl="IntellDetailQryAct.do">详情</a></li>
+            <li name="AIFBuy"><a href="#" data-baseurl="FundBrowserInitAct.do">增加定投</a></li>
+            <li name="AIFModify"><a href="#" data-baseurl="FundAIFModifyInit2Act.do">定投维护</a></li>
+            <li name="AIFIntModify"><a href="#" data-baseurl="FundAIFModifyInitAct.do">定投维护</a></li>
+          </ul>
+        </div>
+
+
+        <span style="display: none;" class="loading"></span>
+        <div style="top: 348.5px; left: 431px; display: none;" id="loadingDiv" class="loadingDiv">
+                    <img src="loading_big.gif" alt="loading" height="66" width="66">
+                </div>
+        <div style="width: 1008px; height: 757px; display: none;" class="hideDiv">
+        </div>
+        <div id="holdDetail" class="holdDetail" style="display: none;"></div>
+      </div>
+      <form id="formRetract" name="formRetract" method="post" action="https://perbank.abchina.com/EbankSite/FundRetractAct.do">
+          <input name="abc_formId" value="2420" type="hidden">
+        <input name="acctId" value="6228452208036782970" type="hidden">
+        <input name="acctOpenBankId" value="31900" type="hidden">
+        <input name="plattype" type="hidden">
+        <input name="pwdField" type="hidden">
+        <input name="pwdFieldKeys" type="hidden">
+        <input id="iBltCode" name="iBltCode" type="hidden">
+      </form>
+
+      <form id="formBonusSet" name="formBonusSet">
+        <input name="abc_formId" value="2420" type="hidden">
+        <input name="iArNo" type="hidden">
+        <input name="plattype" type="hidden">
+        <input name="pwdField" type="hidden">
+        <input name="pwdFieldKeys" type="hidden">
+        <input name="sFlag" type="hidden">
+      </form>
+
+      <form id="formAIFCancel" name="formAIFCancel" action="https://perbank.abchina.com/EbankSite/FundAIFCancelAct.do">
+        <input name="abc_formId" value="2420" type="hidden">
+        <input name="acctId" value="6228452208036782970" type="hidden">
+        <input name="acctOpenBankId" value="31900" type="hidden">
+        <input name="plattype" type="hidden">
+        <input name="pwdField" type="hidden">
+        <input name="pwdFieldKeys" type="hidden">
+        <input name="iArNo" type="hidden">
+        <input name="iSubArNo" type="hidden">
+      </form>
+
+      <div class="funds_revoke_box" style="display: none;">
+        <div class="funds_revoke_bk_top"></div>
+        <div class="funds_revoke_bk_con">
+          <div id="revokeContent" style="display: none;">
+            <h3>撤单确认</h3>
+            <table class="funds_redeem_table_par" cellpadding="0" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td style="width: 30%;">基金代码</td>
+                  <td>
+                    <span style="float: left;">
+                      <div id="retradefundcode"></div>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>签约卡号</td>
+                  <td>6228452208036782970</td>
+                </tr>
+                <tr>
+                  <td>流水号</td>
+                  <td>
+                    <div id="retradeflowno"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>账户密码</td>
+                  <td>
+                    <div id="PowerEnterDiv0" style="display: inline; vertical-align: middle;">
+	                    <script>password.WriteMultiPassObject(0, 'E57387C6E42DDFD696172FBF1B578D57');</script><object id="powerpass_ie0" wmode="transparent" type="application/npABCSafeInputApp" style="z-index: inherit; vertical-align: middle; width: 150px; height: 32px;" onblur="password.EventBlur('powerpass_ie0','undefined')" height="32" width="150"><param name="width" value="150"><param name="height" value="32"><param name="maxLength" value="6"><param name="minLength" value="6"><param name="maskChar" value="*"><param name="backColor" value="#FFFFFF"><param name="textColor" value="#0000FF"><param name="borderColor" value="#cccccc"><param name="accepts" value="^[0-9]*$"><param name="caption" value="中国农业银行"><param name="captionColor" value="#87011f"><param name="captionFont" value="Microsoft YaHei"><param name="captionSize" value="0"><param name="captionBold" value="true"><param name="lang" value="zh_CN"><param name="languages" value="zh_CN"><param name="softKeyboard" value="true"><param name="softkbdType" value="1"><param name="promptText" value=" 请输入密码"><param name="wmode" value="transparent"><param name="textFont" value="weight:20 width:5 height:20 CharSet:0 OutputPrecision:0 ClipPrecision:0 OutputQuality:0 FontName:微软雅黑"><param name="randomText" value="E57387C6E42DDFD696172FBF1B578D57"></object><span id="powerpass_ie0Msg" class="pwdError"></span>
+	                </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <span id="errorContent" style="color: red; display: none; font-size: 14px; line-height: 14px; margin-bottom: -20px; margin-left: 28px; margin-top: 15px;"></span>
+
+            <div class="operaBtn">
+              <a id="subBtn" href="#" class="submitBtn btn btn-primary">确定</a>
+              <a id="subGroupBtn" href="#" class="submitBtn btn btn-primary" style="display: none;">确定</a>
+              <a id="closeBtn" href="#" class="btn btn-secondary" onclick=" closeBuyFundSureAlert('0') ">取消</a>
+            </div>
+          </div>
+          <div id="revokeResult" style="display: none;">
+            <h3>撤单结果</h3>
+            <div class="funds_revoke_cont">
+              <p>撤单成功</p>
+            </div>
+            <div class="funds_revoke_btn">
+              <a href="#" class="btn btn-primary">关闭</a>
+            </div>
+          </div>
+          <div id="endContent" style="display: none;">
+            <h3>终止确认</h3>
+            <table class="funds_redeem_table_par" cellpadding="0" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td class="funds_redeem_table_td" width="206">基金名称</td>
+                  <td class="funds_redeem_table_td2" nowrap="nowrap" width="174"><span id="aiffundshow"></span></td>
+                  <td width="554"></td>
+                </tr>
+                <tr>
+                  <td>签约卡号</td>
+                  <td>6228452208036782970</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><span id="aiftypeshow"></span></td>
+                  <td colspan="2"><span style="margin-right: 10px;" id="aifamtshow"></span></td>
+                </tr>
+                <tr>
+                  <td>账户密码</td>
+                  <td colspan="2">
+                    <div id="PowerEnterDiv1" style="display: inline; vertical-align: middle;">
+	                    <script>password.WriteMultiPassObject(1, 'E57387C6E42DDFD696172FBF1B578D57');</script><object id="powerpass_ie1" wmode="transparent" type="application/npABCSafeInputApp" style="z-index: inherit; vertical-align: middle; width: 150px; height: 32px;" onblur="password.EventBlur('powerpass_ie1','undefined')" height="32" width="150"><param name="width" value="150"><param name="height" value="32"><param name="maxLength" value="6"><param name="minLength" value="6"><param name="maskChar" value="*"><param name="backColor" value="#FFFFFF"><param name="textColor" value="#0000FF"><param name="borderColor" value="#cccccc"><param name="accepts" value="^[0-9]*$"><param name="caption" value="中国农业银行"><param name="captionColor" value="#87011f"><param name="captionFont" value="Microsoft YaHei"><param name="captionSize" value="0"><param name="captionBold" value="true"><param name="lang" value="zh_CN"><param name="languages" value="zh_CN"><param name="softKeyboard" value="true"><param name="softkbdType" value="1"><param name="promptText" value=" 请输入密码"><param name="wmode" value="transparent"><param name="textFont" value="weight:20 width:5 height:20 CharSet:0 OutputPrecision:0 ClipPrecision:0 OutputQuality:0 FontName:微软雅黑"><param name="randomText" value="E57387C6E42DDFD696172FBF1B578D57"></object><span id="powerpass_ie1Msg" class="pwdError"></span>
+	                </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="operaBtn">
+              <a id="subBtnEnd" href="#" class="submitBtn btn btn-primary">确定</a>
+              <a href="#" class="btn btn-secondary" onclick=" closeBuyFundSureAlert('1') ">取消</a>
+            </div>
+          </div>
+          <div id="endResult" style="display: none;">
+            <h3>终止结果</h3>
+            <div class="funds_revoke_cont">
+              <p style="text-align: left;">终止成功</p>
+            </div>
+            <div class="funds_revoke_btn">
+              <a href="#" class="btn btn-primary">关闭</a>
+            </div>
+          </div>
+          <div id="settingContent" style="display: none;">
+            <h3>分红设置</h3>
+            <table class="funds_redeem_table_par" cellpadding="0" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td colspan="2"><span id="settingdisplay0" style="display: inline;">
+                                    <input name="setting" value="0" id="againInvestment" type="radio">&nbsp;<label for="againInvestment">红利再投资</label> </span>&nbsp;&nbsp;&nbsp; <span id="settingdisplay1" style="display: inline;">
+                                                                                                                           <input name="setting" value="1" id="cashDividend" type="radio">&nbsp;<label for="cashDividend">现金分红</label></span></td>
+
+                </tr>
+                <tr>
+                  <td width="150">借记卡账户密码</td>
+                  <td>
+                    <div id="PowerEnterDiv2" style="display: inline; vertical-align: middle;">
+	                    <script>password.WriteMultiPassObject(2, 'E57387C6E42DDFD696172FBF1B578D57');</script><object id="powerpass_ie2" wmode="transparent" type="application/npABCSafeInputApp" style="z-index: inherit; vertical-align: middle; width: 150px; height: 32px;" onblur="password.EventBlur('powerpass_ie2','undefined')" height="32" width="150"><param name="width" value="150"><param name="height" value="32"><param name="maxLength" value="6"><param name="minLength" value="6"><param name="maskChar" value="*"><param name="backColor" value="#FFFFFF"><param name="textColor" value="#0000FF"><param name="borderColor" value="#cccccc"><param name="accepts" value="^[0-9]*$"><param name="caption" value="中国农业银行"><param name="captionColor" value="#87011f"><param name="captionFont" value="Microsoft YaHei"><param name="captionSize" value="0"><param name="captionBold" value="true"><param name="lang" value="zh_CN"><param name="languages" value="zh_CN"><param name="softKeyboard" value="true"><param name="softkbdType" value="1"><param name="promptText" value=" 请输入密码"><param name="wmode" value="transparent"><param name="textFont" value="weight:20 width:5 height:20 CharSet:0 OutputPrecision:0 ClipPrecision:0 OutputQuality:0 FontName:微软雅黑"><param name="randomText" value="E57387C6E42DDFD696172FBF1B578D57"></object><span id="powerpass_ie2Msg" class="pwdError"></span>
+	                </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="operaBtn">
+              <a id="subBtnSetting" href="#" class="submitBtn btn btn-primary">确定</a>
+              <a href="#" class="btn btn-secondary" onclick=" closeBuyFundSureAlert('2') ">取消</a>
+            </div>
+          </div>
+          <div id="settingResult" style="display: none;">
+            <h3>分红设置</h3>
+            <div class="funds_revoke_cont">
+              <p style="text-align: left;">分红设置成功</p>
+            </div>
+            <div class="funds_revoke_btn">
+              <a href="#" class="btn btn-primary" onclick=" closeBg('hideDiv', 'funds_revoke_box') ">关闭</a>
+            </div>
+          </div>
+          <div id="signResult" style="display: none;">
+            <p style="margin-top: 20px;">您已成功签约</p>
+            <p style="margin-bottom: 20px;">让您活期自己赚起来</p>
+            <div class="funds_revoke_btn">
+              <a id="viewMySignInfo" href="javascript:;" class="btn btn-primary" onclick=" closeBg('hideDiv', 'funds_revoke_box') ">查看签约信息</a>
+            </div>
+          </div>
+          <div id="cancelSignCertain" style="display: none;">
+            <p>您确定要解约吗？</p>
+            <p>解约后，收益会大打折扣哦！</p>
+            <p><span style="color: rgb(0, 0, 0);">账户密码&nbsp;</span><input class="funds_redeem_input_psw" type="password"><span style="color: red; display: none;" id="errorContent1" class="fontRed">密码输入错误</span></p>
+            <div class="operaBtn">
+              <a id="cancelSign" class="submitBtn btn btn-primary" href="#">解约</a>
+              <a href="#" class="btn btn-secondary" onclick=" closeBg('hideDiv', 'funds_revoke_box'); ">取消</a>
+            </div>
+          </div>
+        </div>
+        <div class="funds_revoke_btm"></div>
+      </div>
+    </div>
+    </div>
+  <script type="text/javascript">
+      var periodType = { '2': '每周', '3': '每月', '4': '每两周', '5': '每三周', '6': '每两月' };
+      var monthDay = { '01': '1日', '02': '2日', '03': '3日', '04': '4日', '05': '5日', '06': '6日', '07': '7日', '08': '8日', '09': '9日', '10': '10日', '11': '11日', '12': '12日', '13': '13日', '14': '14日', '15': '15日', '16': '16日', '17': '17日', '18': '18日', '19': '19日', '20': '20日', '21': '21日', '22': '22日', '23': '23日', '24': '24日', '25': '25日' };
+      var weekDay = { '01': '周一', '02': '周二', '03': '周三', '04': '周四', '05': '周五' };
+
+      var tableListConfigArg = {
+        tableConfigs: [{
+            //header : ["申请日期","申请金额","申请份额","交易名称","委托状态","操作"],
+            header: ["申请日期", "流水号", "基金代码", "基金名称", "申请金额", "申请份额", "流水状态代码", "委托状态", "交易名称", "交易类型名称", "操作"],
+            dataSource: [],
+            hiddenColumns: [6, 8],
+            params: "",
+            tableClsName: "table-head-gray resultList",
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', '80'],
+            parent: "#myConsignationBox",
+            sortable: "asc",
+                listener: function () {
+                    $('#myConsignationBox').find('tbody tr').each(function (i, n) {
+                var tds = $(n).find('td');
+                        tds.each(function (index, node) {
+                  var rowIndex = getRowIndex(node) - 1;
+                  var row = $('#myConsignationBox').find('tbody tr').eq(rowIndex);
+
+                  switch (index) {
+                  case tds.length - 1:
+                    var date = row.find('td').eq(0).html();
+                    var state = row.find('td').eq(6).html();
+                    var tradecode = row.find('td').eq(8).html();
+                    var fundcode = row.find('td').eq(2).html();
+                    var fundname = row.find('td').eq(3).html();
+                    var ibatcode = row.find('td').eq(1).html();
+                    if (checkRetray(state, tradecode)) {
+                      var v = node.innerHTML;
+                      node.innerHTML = "";
+                      var a = document.createElement('a');
+                      a.innerHTML = "撤单";
+                      a.href = "javascript:;";
+                        $(a).on('click', function () {
+                        document.getElementById("retradefundcode").innerHTML = fundcode + "   " + fundname;
+                        document.getElementById("retradeflowno").innerHTML = ibatcode;
+                        document.getElementById('powerpass_ie0').clear();
+
+                        $('#subBtn').show();
+                        $('#subGroupBtn').hide();
+                        $('#revokeContent').show();
+
+                        $('#revokeResult').hide();
+                        $('#endContent').hide();
+                        $('#endResult').hide();
+                        $('#settingContent').hide();
+                        $('#settingResult').hide();
+                        $('#signResult').hide();
+                        $('#cancelSignCertain').hide();
+                        $('.pwdError').html("");
+                        showBg("hideDiv", "funds_revoke_box",'1');
+                        $('#queryWrapper').hide();
+
+                        var bH = document.body.scrollHeight/2;
+                        $(window.parent).scrollTop(bH);
+                        document.formRetract.iBltCode.value = ibatcode;
+
+                      });
+                      a.className = "revoke m-btn-table";
+                      node.appendChild(a);
+                    }
+                    break;
+                  }
+                });
+              });
+            }
+          }, {
+            header: ["基金代码", "基金名称", "单位净值", "持有份额", "T-1日市值", "累计参与成本/退出收益", "<span title='参考收益率=（T-1市值+退出收益-参与成本）/参与成本*100%，其中退出收益指通过赎回、转出及现金分红等形式累计实现的现金总额' style='border-bottom:1px dotted #068e7a;'>参考收益率</span>", "合约号", "可用份额", "待清算份额", "冻结份额", "分红方式", "定赎回方式", "基金类型", "快速赎回类型", "基金状态","合同建立时间", "操作"],
+            dataSource: [],
+            hiddenColumns: [7, 8, 9, 10, 11, 12, 13, 14,15,16],
+            attentionColumns:[5],
+            params: "",
+            optionShowConfig: { actionId: "action", optionShowTriggerClasses: ["operate"] },
+            tableClsName: "table-head-gray resultList",
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', '195', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto','auto','auto','80'],
+            parent: "#ownFundDiv",
+            sortable: "asc",
+            listener: function () {
+              var holdAcc = 0, tAcc = 0;
+                    $('#ownFundDiv').find('tbody tr').each(function (i, n) {
+                var fundCode = "", fundName = "", useAmt = "", perVal = "", marketVal = "", useMoney = "", getPercent = "", holdAmt = "", AIFSale = "",contractBuildTime;
+                var liqAmt = "", blockedAmt = "", dividendTypeName = "", fastSale = "", fundstt = "";
+                var tds = $(n).find('td');
+                        tds.each(function (index, node) {
+                  var v = node.innerHTML;
+                  switch (index) {
+                  case 0:
+                    fundCode = v;
+                    break;
+                  case 1:
+                    fundName = v;
+                    break;
+                  case 4:
+                    tAcc = tAcc + parseFloat(v);
+                    break;
+                  case 8:
+                    useAmt = v;
+                    break;
+                  case 6:
+                    var iPctPftvlu = v;
+                    if (parseFloat(iPctPftvlu) > 1.00) {
+                      node.className = "fontRed";
+                      iPctPftvlu = parseFloat(iPctPftvlu) * 100 - 100;
+                      v = "+" + iPctPftvlu.toFixed(4) + "%";
+                    } else if (parseFloat(iPctPftvlu) == 1.00) {
+
+                      v = Math.round(parseFloat(iPctPftvlu) * 100 - 100);
+                    } else {
+                      node.className = "fontGreen";
+                      iPctPftvlu = 100 - parseFloat(iPctPftvlu) * 100;
+                      v = "-" + iPctPftvlu.toFixed(4) + "%";
+                    }
+                    node.innerHTML = v;
+                    break;
+                  case 7:
+                    iArNo = v;
+                    break;
+                  case 12:
+                    AIFSale = v;
+                    break;
+                  case 14:
+                    fastSale = v;
+                    break;
+                  case 15:
+                      fundstt = v;
+                      break;
+                  case 16:
+                      contractBuildTime = v;
+                      break;
+                  case tds.length - 1:
+                    var params = "";
+                    params = "fundCode=" + fundCode + "&iFundName=" + fundName + "&UseAmt=" + useAmt + "&acctId=" + "6228452208036782970" + "&acctOpenBankId=" + "31900" + "&iArNo=" + iArNo + "&RiskType=" + "01" + "&iTransToFundFlag=" + "0" + "&provCode=" + "06" + "&iOpenFastRedm=" + "1" + "&phone=17604064764" + "&openChanlMsk=000000000000000000000000000000";
+                    node.innerHTML = "";
+                    var span = document.createElement("b");
+                      span.className = "downList triangle-white";
+                    var a = document.createElement("a");
+                    a.className = "operate m-btn-table";
+
+                    var ctr = "";
+                    var ctrCon = "Exchange,Setting,TradeQuery,SmsInfo";
+                    if (v == "0") {
+                      a.href = "FundRedeemInitAct.do?" + params;
+                      a.innerHTML = "赎回";
+                    } else {
+                      a.href = "FundInvestSaleInitAct.do?" + params;
+                      a.innerHTML = "预约赎回";
+                    }
+                    if (AIFSale == "1") {
+                      ctr = "Redemption," + ctrCon;
+                    } else {
+                      ctr = ctrCon;
+                    }
+                    if (fundstt != "04" && fundstt != "05" && fundstt != "09") {
+                      ctr = ctr + ",Buy";
+                    }
+                    if (fastSale == "1") {
+                        ctr = ctr + ",Fastsale";
+                    }
+                    $(a).attr('ctr', ctr).attr("param", params);
+                    a.appendChild(span);
+                    node.appendChild(a);
+                    break;
+                  }
+
+                }); //end tds
+
+                //document.getElementById("holdAccTotal").innerHTML = holdAcc.toFixed(2);
+                document.getElementById("TAccTotal").innerHTML = tAcc.toFixed(2);
+                $(n).on('click', function (e) {
+                    if (e.target.tagName.toLowerCase() == "td" || e.target.tagName.toLowerCase() == "tr") {
+                    var tds = $(n).find('td');
+                        tds.each(function (index, node) {
+                      var v = node.innerHTML;
+                      switch (index) {
+                      case 0:
+                        fundCode = v;
+                        break;
+                      case 1:
+                        fundName = v;
+                        break;
+                      case 2:
+                        perVal = v;
+                        break;
+                      case 3:
+                        holdAmt = v;
+                        break;
+                      case 4:
+                        marketVal = v;
+                        break;
+                      case 5:
+                        useMoney = v;
+                        break;
+                      case 6:
+                        getPercent = v;
+                        break;
+                      case 8:
+                        useAmt = v;
+                        break;
+                      case 9:
+                        liqAmt = v;
+                        break;
+                      case 10:
+                        blockedAmt = v;
+                        break;
+                      case 11:
+                        dividendTypeName = v;
+                        break;
+                      }
+                    }); //end tds
+
+                    $.ajaxSetup({ cache: false });
+                    $('#holdDetail').load('FundHoldDetailAct.do?fundCode=' + fundCode + "&fundName=" + encodeURIComponent(fundName) + "&perVal=" + perVal + "&marketVal=" + marketVal + "&useAmt=" + useAmt + "&&useMoney=" + useMoney + "&getPercent=" + getPercent + "&holdAmt=" + holdAmt + "&liqAmt=" + liqAmt + "&blockedAmt=" + blockedAmt + "&dividendTypeName=" + encodeURIComponent(dividendTypeName)+ "&contractBuildTime=" + contractBuildTime, function () {
+                      var that = this;
+                      $(that).show();
+                      showBg('hideDiv', 'holdDetail',1);
+                                    $(that).find('#closeHoldDetail').on('click', function () {
+                        closeBg('hideDiv', 'holdDetail');
+                        $(that).html("").css("display", "none");
+                      });
+                    });
+                  }
+                });
+                    });
+              if ($('.attention').length > 0) {
+                $('.attention').qtip({
+                  content: {
+                    text: "累计参与成本指通过认购、申购、定投及转入等方式累计投资资金之和( 注: 2012年12月1日前的投资金额按此日持有基金的市值进行计算 )，退出收益指通过赎回、转出及现金分红等形式累积实现的现金总额"
+                  },
+                  style: 'qtip-common'
+                });
+              }
+            }
+          }, {
+              header: ["基金代码", "基金名称", "定投金额（元）", "定赎份额","", "定投日", "终止时间", "定投类型", "合约号", "子合约号", "", "", "", "", "", "", "操作"],
+            dataSource: [],
+            hiddenColumns: [4, 8, 9, 10, 11, 12, 13, 14,15],
+            optionShowConfig: { actionId: "action1", optionShowTriggerClasses: ["operate"] },
+            params: "",
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto','auto', '80'],
+            tableClsName: "table-head-gray resultList",
+            parent: "#myFixInvest",
+            sortable: "asc",
+                listener: function () {
+                    $('#myFixInvest').find('tbody tr').each(function (i, n) {
+                var fundCode = "", fundName = "", buyamt = "", salelot = "", arNo = "", subarNo = "", idtflg = "";
+                var iAipIdxTypCod = "", iAipParmCod = "", iAipPctDevnCod = "", iAipStdAmt = "", iAipLowtAmt = "", iAipHghAmt = "";
+                var buydate = "", enddate = "";
+                var buyPeriodType;
+                var tds = $(n).find('td');
+                        tds.each(function (index, node) {
+                  var v = node.innerHTML;
+                  switch (index) {
+                  case 0:
+                    fundCode = v;
+                    break;
+                  case 1:
+                    fundName = v;
+                    break;
+                  case 2:
+                    buyamt = v;
+                    break;
+                  case 3:
+                    salelot = v;
+                    break;
+                  case 4:
+                    buyPeriodType = v;
+                    break;
+                  case 5:
+                      buydate = v;
+                      var periodName = periodType[buyPeriodType];
+                      var dayName;
+                      if (buyPeriodType === '2' || buyPeriodType === '4' || buyPeriodType === '5') {
+                          dayName = weekDay[buydate];
+                      } else {
+                          dayName = monthDay[buydate];
+                      }
+                      node.innerHTML =periodName+' '+ dayName;
+                      break;
+                  case 6:
+                    enddate = v;
+                    break;
+                  case 7:
+                    idtflg = v;
+                    if (idtflg === "01") {
+                      node.innerHTML = "普通定申";
+                    } else if (idtflg === "02") {
+                      node.innerHTML = "普通定赎";
+                    } else if (idtflg === "03") {
+                      node.innerHTML = "智能定投";
+                    }
+                    break;
+                  case 8:
+                    arNo = v;
+                    break;
+                  case 9:
+                    subarNo = v;
+                    break;
+                  case 10:
+                    iAipIdxTypCod = v;
+                    break;
+                  case 11:
+                    iAipParmCod = v;
+                    break;
+                  case 12:
+                    iAipPctDevnCod = v;
+                    break;
+                  case 13:
+                    iAipStdAmt = v;
+                    break;
+                  case 14:
+                    iAipLowtAmt = v;
+                    break;
+                  case 15:
+                    iAipHghAmt = v;
+                    break;
+                  case tds.length - 1:
+                    var params = "";
+                    params = fundCode + "," + fundName + "," + buyamt + "," + salelot + "," + idtflg + "," + arNo + "," + subarNo + "," + buydate + "," + enddate + "," + buyPeriodType;
+                    var iAipparams = iAipIdxTypCod + "," + iAipParmCod + "," + iAipPctDevnCod + "," + iAipStdAmt + "," + iAipLowtAmt + "," + iAipHghAmt ;
+
+                    node.innerHTML = "";
+                      //var span = document.createElement("span");
+                      //span.className = "downList";
+                    var span = document.createElement("b");
+                    span.className = "downList triangle-white";
+                    var a = document.createElement("a");
+                    a.className = "operate revoke m-btn-table";
+                    a.href = "#";
+                    a.innerHTML = "终止";
+                    a.id = "aifrow";
+                    var ctr = "";
+                    if (idtflg != "03") {
+                      ctr = "AIFModify";
+                      params = "AIFparams=" + params + "&iRiskType=01";
+
+                    } else {
+                      ctr = "IntellDetail,AIFIntModify";
+                      params = "AIFparams=" + params + "&iAipparams=" + iAipparams+"&iRiskType=01";
+                    }
+
+                    $(a).attr('ctr', ctr).attr("param", params + "&acctId=" + "6228452208036782970" + "&acctOpenBankId=" + "31900" + "&fundCode=" + fundCode);
+                      $(a).on('click', function () {
+                          var actionNode = $('#action1' );
+                          actionNode.css("display", "none");
+                          actionNode.css("zIndex", -1);
+                      subCancelAIF(params);
+                                    });
+                    a.appendChild(span);
+                    node.appendChild(a);
+                    break;
+                  }
+                });
+              });
+            }
+          }, {
+            header: ["申请日期", "流水号", "基金代码", "基金名称", "申请金额", "流水状态代码", "委托状态", "交易名称", "交易类型名称", "操作"],
+            dataSource: [],
+            hiddenColumns: [5, 7],
+            params: "",
+            tableClsName: "resultList",
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto','80'],
+            parent: "#myGroupReqBox",
+            sortable: "asc",
+                listener: function () {
+                    $('#myGroupReqBox').find('tbody tr').each(function (i, n) {
+                var tds = $(n).find('td');
+                        tds.each(function (index, node) {
+                  var rowIndex = getRowIndex(node) - 1;
+                  var row = $('#myGroupReqBox').find('tbody tr').eq(rowIndex);
+                  switch (index) {
+                  case tds.length - 1:
+                    var date = row.find('td').eq(0).html();
+                    var state = row.find('td').eq(6).html();
+                    var tradecode = row.find('td').eq(8).html();
+                    var fundcode = row.find('td').eq(2).html();
+                    var fundname = row.find('td').eq(3).html();
+                    var ibatcode = row.find('td').eq(1).html();
+                    var v = node.innerHTML;
+                    node.innerHTML = "";
+                    var a = document.createElement('a');
+                    a.innerHTML = "撤单";
+                    a.href = "javascript:;";
+
+                                    $(a).on('click', function () {
+                      document.getElementById("retradefundcode").innerHTML = fundcode + "   " + fundname;
+                      document.getElementById("retradeflowno").innerHTML = ibatcode;
+                      document.getElementById('powerpass_ie0').clear();
+                      $('#subBtn').hide();
+                      $('#subGroupBtn').show();
+                      $('#revokeContent').show();
+                      $('#revokeResult').hide();
+                      $('#endContent').hide();
+                      $('#endResult').hide();
+                      $('#settingContent').hide();
+                      $('#settingResult').hide();
+                      $('#signResult').hide();
+                      $('#cancelSignCertain').hide();
+                      showBg("hideDiv", "funds_revoke_box",'1');
+                      $('#queryWrapper').hide();
+                      var bH = document.body.scrollHeight / 2;
+                      $(window.parent).scrollTop(bH);
+                      document.formRetract.iBltCode.value = ibatcode;
+
+                    });
+                    a.className = "revoke m-btn-table";
+                    node.appendChild(a);
+                    break;
+                  }
+                });
+              });
+            }
+          }
+        ]
+      };
+      var tabListConfigArgs = {
+        tabConfigs: [{
+          tabMenu: ".tabList",
+          tabContent: ".tabContent",
+          curClass: "nowLink"
+        }]
+      };
+
+      var dialogListConfigArg = {
+        dialogConfigs: [{
+            triggerEle: ".revoke",
+            dialogHolder: ".funds_revoke_box",
+            errorMsgHolder: "#errorContent",
+            errorMsgStr: "",
+            submitId: "subBtn",
+            closeIds: ["closeIcon", "closeBtn"],
+                valid: function () {
+              var _this = this;
+              if (!password.DealWithPwdFund("formRetract", 'powerpass_ie0', "636604156233610252")) {
+                  document.getElementById("powerpass_ie0").focus();
+                  return false;
+              }
+                $.post("FundRetractNewAct.do", { acctOpenBankId: "31900", acctId: "6228452208036782970", iBltCode: formRetract.iBltCode.value, pwdField: formRetract.pwdField.value, pwdFieldKeys: formRetract.pwdFieldKeys.value, plattype: formRetract.plattype.value, abc_formId: formRetract.abc_formId.value }, function (data) {
+                var aa = eval('(' + data + ')');
+                if (aa.rsCode == "0000") {
+                  $('#revokeContent').hide();
+                  $('#revokeResult').show();
+                } else {
+                  goToError(aa.rsCode, "");
+                }
+              });
+            }
+          },
+          {
+            triggerEle: "#closeBtnCancelSign",
+            dialogHolder: ".funds_revoke_box",
+            errorMsgHolder: "#errorContent1",
+            errorMsgStr: "密码输入错误",
+            submitId: "cancelSign",
+            closeIds: ["closeIcon", "closeBtn"]
+          },
+          {
+            dialogHolder: ".funds_revoke_box",
+            errorMsgHolder: "#errorContentEnd",
+            errorMsgStr: "",
+            submitId: "subBtnEnd",
+            closeIds: ["closeIcon", "closeBtn"],
+              valid: function () {
+              var _this = this;
+              if (!password.DealWithPwdFund("formAIFCancel", 'powerpass_ie1', "636604156233610252")) {
+                  document.getElementById("powerpass_ie1").focus();
+                  return false;
+              }
+              var param = $("#formAIFCancel").serialize();
+                  $.post($("#formAIFCancel").attr("action"), param, function (data) {
+                var aa = eval('(' + data + ')');
+                if (aa.rsCode == "0000") {
+                  $('#endContent').hide();
+                  $('#endResult').show();
+                } else {
+                  goToError(aa.rsCode, "");
+                }
+              });
+            }
+          },
+          {
+            triggerEle: ".bonus",
+            dialogHolder: ".funds_revoke_box",
+            errorMsgHolder: "#errorContentSetting",
+            errorMsgStr: "",
+            submitId: "subBtnSetting",
+            closeIds: ["closeIcon", "closeBtn"],
+              valid: function () {
+              var _this = this;
+              if (!password.DealWithPwdFund("formBonusSet", 'powerpass_ie2', "636604156233610252")) {
+                  document.getElementById("powerpass_ie2").focus();
+                  return false;
+              }
+              for (var i = 0; i < document.getElementsByName("setting").length; i++) {
+                if (document.getElementsByName("setting")[i].checked == true) {
+                  document.formBonusSet.sFlag.value = document.getElementsByName("setting")[i].value;
+                }
+              }
+              $.post("FundBonusSetAct.do", { acctOpenBankId: "31900", acctId: "6228452208036782970", pwdField: formBonusSet.pwdField.value, pwdFieldKeys: formBonusSet.pwdFieldKeys.value, iArNo: formBonusSet.iArNo.value, sFlag: document.formBonusSet.sFlag.value, plattype: document.formBonusSet.plattype.value, abc_formId: document.formBonusSet.abc_formId.value }, function (data) {
+                var aa = eval('(' + data + ')');
+                if (aa.rsCode == "0000") {
+                  $('#settingContent').hide();
+                  $('#settingResult').show();
+                  document.getElementById('powerpass_ie2').clear();
+                  document.getElementById('powerpass_ie2Msg').innerHTML='';
+                } else {
+                  goToError(aa.rsCode, "");
+                }
+              });
+            }
+          }
+        ]
+      };
+    </script>
+    <script type="text/javascript" src="autoTable.js" th:src="@{/user/user/autoTable.js}"> </script>
+    <script type="text/javascript" src="tab.js"> </script>
+    <script type="text/javascript" src="dialog.js" th:src="@{/user/user/dialog.js}"> </script>
+    <script src="jquery.selectric.js" th:src="@{/user/findList/jquery.selectric.js}"> </script>
+      <script src="config.js" th:src="@{/user/findList/config.js}"></script>
+    <script>
+//      $('#holdMore').on('click', function () {
+//          var left = $(this).offset().left - $(this).width() / 2;
+//          left = left - 10;
+//      var top = $(this).offset().top + $(this).height();
+//      $('.moreHoldContainer').css({ top: top, left: left }).show().fadeIn();
+//    });
+//      $('.moreHoldContainer').on('mouseleave', function () {
+//      $(this).fadeOut().css({ top: 0, left: 0 }).hide();
+//      });
+//    // 终止
+//    function subCancelAIF(param) {
+//      param = param.replace("AIFparams=", "");
+//      var rowdatas = param.split(",");
+//      //document.getElementById('powerpass_ie2').clear();
+//      $('#aiffundshow').html(rowdatas[0] + "  " + rowdatas[1]);
+//      var aiftype = rowdatas[4];
+//      if (aiftype == "02") {
+//        $('#aiftypeshow').html("普通定赎");
+//        $('#aifamtshow').html(rowdatas[3] + "份");
+//      } else if (aiftype == "01") {
+//        $('#aiftypeshow').html("普通定投");
+//        $('#aifamtshow').html(rowdatas[2] + "元");
+//      } else if (aiftype == "03") {
+//        $('#aiftypeshow').html("智能定投");
+//        $('#aifamtshow').html(rowdatas[2] + "元");
+//      }
+//      document.formAIFCancel.iArNo.value = rowdatas[5];
+//      document.formAIFCancel.iSubArNo.value = rowdatas[6];
+//      $('#revokeContent').hide();
+//      $('#revokeResult').hide();
+//      $('#endContent').show();
+//      $('#endResult').hide();
+//      $('#settingContent').hide();
+//      $('#settingResult').hide();
+//      $('#signResult').hide();
+//      $('#cancelSignCertain').hide();
+//      showBg("hideDiv", "funds_revoke_box",'1');
+//    }
+//
+//    //分红设置
+//    function subSetprofit(param) {
+//      document.getElementById('powerpass_ie2').clear();
+//      document.getElementById('powerpass_ie2Msg').innerHTML = '';
+//      var key = "iArNo";
+//      var temp = "";
+//      var src = param;
+//      if (src && src != "") {
+//        temp = (src.match(new RegExp("(?:\\?|&)" + key + "=(.*?)(?=&|$)")) || ['', null])[1];
+//      }
+//      formBonusSet.iArNo.value = temp;
+//
+//      key = "fundCode";
+//      var funCode = "";
+//      if (src && src != "") {
+//        funCode = (src.match(new RegExp(key + "=(.*?)(?=&|$)")) || ['', null])[1];
+//      }
+//
+//      document.getElementById("settingdisplay0").style.display = "";
+//      document.getElementById("settingdisplay1").style.display = "";
+//      document.getElementsByName("setting")[0].checked = true;
+//          $.post("FundBonusQryAct.do", { acctOpenBankId: "31900", iProductIDOut: funCode, sDateAcc: "20180427" }, function (data) {
+//
+//        var aa = eval('(' + data + ')');
+//        if (aa.rsCode == "0000") {
+//
+//          if (aa.data.length == 1) {
+//            var bonway = aa.data[0][1];
+//            if (bonway == "0") {
+//              document.getElementsByName("setting")[0].checked = true;
+//              document.getElementById("settingdisplay1").style.display = "none";
+//            } else {
+//              document.getElementsByName("setting")[1].checked = true;
+//              document.getElementById("settingdisplay0").style.display = "none";
+//            }
+//
+//          }
+//        }
+//          });
+//      $('#signResult').hide();
+//      $('#revokeContent').hide();
+//      $('#revokeResult').hide();
+//      $('#endContent').hide();
+//      $('#settingContent').show();
+//      $('#settingResult').hide();
+//      $('#endResult').hide();
+//      $('#cancelSignCertain').hide();
+//      showBg("hideDiv", "funds_revoke_box",'1');
+//    }
+//      $(function () {
+//      // 获取我持有的数据
+//      $('.littlePicWra').css('display', 'none');
+//    });
+//
+//    function tabInnerFun(idBtn, idCon) {
+//      var aInnerList = $(idBtn).find("a");
+//      var aInnerCon = $(idCon).children();
+//      for (var i = 0; i < aInnerList.length; i++) {
+//        if ($(aInnerList[i]).attr('id') == 'holdMore') {
+//          continue;
+//        }
+//        $(aInnerList[i]).attr('index', i);
+//              $(aInnerList[i]).on('click', function () {
+//          for (var j = 0; j < aInnerList.length; j++) {
+//            $(aInnerList[j]).removeClass();
+//            $(aInnerCon[j]).hide();
+//          }
+//          $(this).addClass('nowInnerLink');
+//          $('#totalIn').show();
+//          $('#t1Total').show();
+//          $('#chartPrompt').hide();
+//          $(aInnerCon[$(this).attr("index")]).show();
+//          if ($(aInnerCon[$(this).attr("index")]).attr('class') == "littlePicWra") {
+//            $('#totalIn').hide();
+//            $('#t1Total').hide();
+//            $('#chartPrompt').show();
+//            if ($('.littlePicWra').children().length < 1) {
+//              var cols = $('#ownFundDiv tbody tr');
+//              var opTds = $('#ownFundDiv tbody tr').find('td:last');
+//              var codTds = $('#ownFundDiv tbody tr').find('td:first');
+//              var colsCount = cols.length > 2 ? 3 : cols.length;
+//              for (var i = 0; i < cols.length; i++) {
+//                  (function (index) {
+//                                  var id = index == 0 ? 'chartFundDetail' : 'chartFundDetail' + index;
+//                                  var container = document.createElement("div");
+//                                  container.style.paddingTop = "3px";
+//                                  container.style.textAlign = "center";
+//                                  container.style.marginLeft = colsCount * 3 + "px";
+//                                  container.style.height = "218px";
+//                                  container.id = "container" + id;
+//                                  var width = (90 / colsCount) + "%";
+//                                  $(container).css("width", width).css("float", "left");
+//                                  var chartContainer = document.createElement("div");
+//                                  chartContainer.style.border = "1px solid gray";
+//                                  chartContainer.style.width = "80%";
+//                                  chartContainer.style.height = "172px";
+//                                  chartContainer.style.marginLeft = "auto";
+//                                  chartContainer.style.marginRight = "auto";
+//                                  chartContainer.id = id;
+//                                  $(chartContainer).html("<img src='/EbankSite/NetBank/static/img/loading_big.gif' style='margin-top:50px;'/>");
+//                                  container.appendChild(chartContainer);
+//                                  $('.littlePicWra').append($(container));
+//                                  $.post('GetFundHighLowInfoAct.do', { fundCode: codTds[index].innerHTML }, function (resData) {
+//                    if (resData == null) return;
+//                    resData = $.parseJSON(resData);
+//                    var ctr = $(opTds[index]).find('a:first').attr('ctr');
+//                    var code = codTds[index].innerHTML;
+//                    if (resData.Data == null || resData.Data.Table == undefined || resData.Data.Table.length == 0) {
+//                      $(chartContainer).html('<p style="margin-top:80px;">暂无此基金走势图。</p>');
+//                    }
+//                    var dataRow = $('#ownFundDiv tbody tr:eq(' + index + ')');
+//                    var result = [];
+//                    var linkA = dataRow.find('td:last a');
+//                    var href = linkA.attr('href');
+//                    result.push('<a class="buyLink" href="' + href + '">' + linkA.text() + '</a>');
+//
+////                      $(container).append("<div class='selectContainer' style='position:relative;margin-left: auto;margin-right:auto; background:#fff;z-index:100;'><a href='FundPURCSubscriptionInitAct.do?fundCode="
+////                        + code + "' class='buyLink'>购买</a>"
+////                        + result.join('') + "</div>");
+//                    $("#container" + id).append("<div class='selectContainer' ><a href='"
+//                                     + href + "' class='buyLink'>赎回</a></div>");
+//                    $('.selectContainer').on('mouseover', function () {
+//                        $(this).find('ul').show();
+//                    }).on('mouseleave', function () {
+//                        $(this).find('ul').hide();
+//                    });
+//                    if (resData.Data == null || resData.Data.Table == undefined) {
+//                      return;
+//                    } else if (resData.Data.Table.length == 0) {
+//                      return;
+//                    } else {
+//                      var name = cols.eq(index).find('td').eq(1).html();
+//
+//                      var tempFundType = cols.eq(index).find('td').eq(13).html();
+//                      var isNetValue = "03" !== tempFundType ? true : false;
+//                        $("#" + id).html("");
+//                      showFundChart(id, name, resData.Data.Table, isNetValue);
+//                    }
+//                  });
+//                })(i);
+//              }
+//            }
+//          }
+//        });
+//      }
+//    }
+//    //初始化表格
+//      $().ready(function () {
+//          $(function () {
+//              if ("0" == "2") {
+//                  if ($('body').height() < 550)
+//                  { $('body').height(550); }
+//
+//          $('#magContent').html("");
+//          $('#magContent').load('FundRiskPaperAct.do?acctId=' + "6228452208036782970" + "&&acctOpenBankId=" + "31900" + "&&selectpaper=FPAndFund&&buttonFlag=1&&nextAction=FundHoldInitAct.do&&nextDataPos=" + encodeURI(encodeURI('投资/基金/我的基金')) + '&r=' + Math.random(), function () {
+//                    showTestPage();
+//            showBg("hideDiv", "sign");
+//          });
+//        } //end if 0
+//
+//        if ("1" == "2") {
+//          $('#magContent').html("");
+//                  $('#magContent').load('FundBindCardInitAct.do?acctId=' + "6228452208036782970" + "&&acctOpenBankId=" + "31900" + "&&custName=" + "王春英", function () {
+//            showBindPage();
+//
+//            showBg("hideDiv", "sign");
+//          });
+//
+//
+//        } //end if 1
+//
+//        if ("2" == "2") {
+//          showBg("hideDiv", "loadingDiv");
+//          $.post("FundHoldQryAct.do", { acctOpenBankId: "31900", acctId: "6228452208036782970",iArQrySts:"00" }, function (datalist) {
+//            var aa = eval('(' + datalist + ')');
+//
+//            if (aa.rsCode == "0000") {
+//              tableListConfigArg.tableConfigs[1].dataSource = { data: aa.data };
+//              var obj = $.extend(true, {}, tableObj);
+//              $.extend(obj, tableListConfigArg.tableConfigs[1]);
+//              initTable(obj);
+//            } else {
+//              document.errGoForm.rsCode.value = aa.rsCode;
+//              document.errGoForm.submit();
+//            }
+//              $.post("FundDealedQryAct.do", { acctOpenBankId: "31900", acctId: "6228452208036782970", iQryRge: "1", dStrDate: "20180407", dEndDate: "20180427" }, function (datalist1) {
+//              var aa1 = eval('(' + datalist1 + ')');
+//
+//              if (aa1.rsCode == "0000") {
+//                tableListConfigArg.tableConfigs[0].dataSource = { data: aa1.data };
+//                var obj1 = $.extend(true, {}, tableObj);
+//                $.extend(obj1, tableListConfigArg.tableConfigs[0]);
+//                initTable(obj1);
+//                closeBg("hideDiv", "loadingDiv");
+//              } else {
+//                goToError(aa1.rsCode, "");
+//              }
+//            });
+//              $.post("FundGroupReqQryAct.do", { acctOpenBankId: "31900", acctId: "6228452208036782970", iQryRge: "2" }, function (datalist2) {
+//              var aa2 = eval('(' + datalist2 + ')');
+//
+//              if (aa2.rsCode == "0000") {
+//                if (aa2.data.length == 0) {
+//                  $('#myGroupReqCont').hide();
+//                } else {
+//                  $('#myGroupReqCont').show();
+//                  tableListConfigArg.tableConfigs[3].dataSource = { data: aa2.data };
+//                  var obj2 = $.extend(true, {}, tableObj);
+//                  $.extend(obj2, tableListConfigArg.tableConfigs[3]);
+//                  initTable(obj2);
+//                }
+//              } else {
+//                goToError(aa2.rsCode, "");
+//              }
+//              });
+//
+//          });
+//        } //end  if 2
+//          });
+//    });
+//    tabInnerFun("#innerTabList", "#innerTabCont");
+//
+//    // 定投 tab
+//      $(function () {
+//
+//          $('#tabAIF').click(function () {
+//        showBg("hideDiv", "loadingDiv");
+//          $.post("FundAIFListAct.do", { acctOpenBankId: "31900", acctId: "6228452208036782970" }, function (datalist) {
+//
+//
+//          var aa = eval('(' + datalist + ')');
+//          if (aa.rsCode == "0000") {
+//            tableListConfigArg.tableConfigs[2].dataSource = { data: aa.data };
+//            var obj = $.extend(true, {}, tableObj);
+//            $.extend(obj, tableListConfigArg.tableConfigs[2]);
+//            initTable(obj);
+//            closeBg("hideDiv", "loadingDiv");
+//          } else {
+//            goToError(aa.rsCode, "");
+//          }
+//        });
+//      });
+//    });
+//
+//
+//      $('#subGroupBtn').click(function () {
+//          if (  !password.DealWithPwdFund("formRetract", 'powerpass_ie0', "636604156233610252"))
+//          {
+//            var powerobj = document.getElementById("powerpass_ie0");
+//            powerobj.focus();
+//            return false;
+//          }
+//
+//          var param = $("#formRetract").serialize();
+//              $.post("FundGroupRetractNewAct.do", param, function (data) {
+//
+//            var aa = eval('(' + data + ')');
+//
+//            if (aa.rsCode == "0000") {
+//              $('#revokeContent').hide();
+//              $('#revokeResult').show();
+//            } else {
+//
+//              goToError(aa.rsCode, "");
+//            }
+//          });
+//    });
+//      function closeBuyFundSureAlert(index) {
+//          $('.pwdError').html("");
+//          var id = "powerpass_ie"+index
+//          document.getElementById(id).clear();
+//          closeBg('hideDiv', 'funds_revoke_box');
+//      }
+    </script>
+  
+
+
+
+</body>
+</html>

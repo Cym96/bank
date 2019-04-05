@@ -1,0 +1,41 @@
+/* Code tidied up by ScrapBook */
+html, body, h1, h2, h3, h4, h5, h6, div, p, dl, dt, dd, ul, ol, li, form, fieldset, legend, button, input, textarea, select, option, table, tr, th, td, hr, pre, sup, address, cite, dfn, em, var, blockquote { margin: 0px; padding: 0px; }
+html { min-height: 100%; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; }
+body { font: 12px "宋体","微软雅黑",Arial,Tahoma,Helvetica,STHeiti,"Hiragino Sans GB"; color: rgb(54, 54, 54); background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+ul, ol { list-style: outside none none; }
+button, input, select, textarea { outline: 0px none; }
+button, input, select { vertical-align: middle; }
+img { border: 0px none; vertical-align: middle; }
+a { text-decoration: none; color: rgb(54, 54, 54); outline: 0px none; cursor: pointer; }
+a:hover, a:active { text-decoration: underline; color: rgb(0, 102, 102); outline: 0px none; }
+a:link, a:visited { text-decoration: none; outline: 0px none; color: rgb(0, 102, 102); }
+.fn-clear::after { content: "."; display: block; clear: both; visibility: hidden; }
+.fn-clear {  }
+.top { width: 100%; background: rgb(255, 255, 255) none repeat scroll 0% 0%; height: 31px; border-bottom: 1px solid rgb(211, 212, 211); }
+.top-wrap { width: 992px; margin: 0px auto; font-family: "Microsoft Yahei"; line-height: 31px; }
+.top-left { float: left; display: inline; margin-left: 5px; }
+.top-left li { float: left; line-height: 31px; margin-right: 20px; display: inline; }
+.top-right { width: auto; height: 31px; float: right; margin-right: 10px; position: relative; }
+.top-right li { display: inline; float: left; width: auto; margin-left: 20px; position: relative; }
+.top-right li a { color: rgb(0, 0, 0); }
+.top-right li a:hover { color: rgb(0, 102, 102); text-decoration: underline; }
+.logo-header { width: 992px; height: 80px; margin: 0px auto; position: relative; }
+.logo { background: transparent url("logo.png") no-repeat scroll 0% 0%; width: 225px; height: 62px; position: absolute; top: 13px; left: 16px; }
+.search-txt { position: absolute; right: 83px; top: 25px; width: 139px; height: 20px; padding: 5px 10px; color: rgb(196, 196, 196); font: 400 12px "Microsoft Yahei"; background: transparent url("searchTxt.jpg") no-repeat scroll 0% 0%; border: medium none; }
+.search-btn { position: absolute; right: 10px; top: 25px; width: 73px; height: 30px; border: medium none; color: rgb(255, 255, 255); text-indent: 20px; cursor: pointer; font: 400 12px/30px "Microsoft Yahei"; background: transparent url("searchBtn.jpg") no-repeat scroll 0% 0%; }
+.footer-content { width: 100%; height: 92px; margin-top: 15px; background: rgb(255, 255, 255) url("footer_bg.png") repeat-x scroll 0% 0%; }
+.footer { width: 992px; height: 92px; overflow: hidden; color: rgb(88, 88, 88); position: relative; margin: 0px auto; }
+.footer-nav { width: 100%; height: 60px; }
+.footer-nav li { float: left; color: rgb(65, 65, 65); padding: 0px 20px; background: transparent url("footer_line.jpg") no-repeat scroll right center; font: 400 12px/60px "微软雅黑"; }
+.footer-nav li.bgNone { background: transparent none repeat scroll 0% 0%; }
+.footer-nav li a { color: rgb(65, 65, 65); }
+.footer_sel { width: 190px; height: 22px; line-height: 22px; color: rgb(175, 175, 175); border: 1px solid rgb(214, 214, 214); }
+.footer-copyright { width: 394px; margin: 0px auto; }
+.footer-copyright li { float: left; display: inline; color: rgb(65, 65, 65); padding: 0px 20px; font-family: "微软雅黑"; background: transparent url("footer_line.jpg") no-repeat scroll right center; }
+.footer-copyright li a { color: rgb(65, 65, 65); }
+.footer-copyright li.bgNone { background: transparent none repeat scroll 0% 0%; }
+.footer-location { display: inline-block; background: transparent url("footer_location.gif") no-repeat scroll left center; padding-left: 25px; margin-left: -6px; }
+.footer-ext { position: absolute; right: 10px; top: 10px; }
+.footer-ext a { display: block; }
+.footer-logo { width: 108px; height: 40px; background: transparent url("szfw.gif") no-repeat scroll 0% 0%; }
+.footer-select { position: absolute; top: 19px; right: 150px; }

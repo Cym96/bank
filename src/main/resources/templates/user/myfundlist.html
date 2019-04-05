@@ -1,0 +1,586 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>持有基金</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+    <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+    <link type="text/css" rel="stylesheet" href="fund.css" th:href="@{/user/findList/fund.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.jqplot.min.css" th:href="@{/user/findList/jquery.jqplot.min.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">
+    <link type="text/css" rel="stylesheet" href="jquery.qtip.css" th:href="@{/user/userlogin/jquery.qtip.css}">
+    <script type="text/javascript" src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}">
+
+    </script>
+    <script type="text/javascript" src="writeObjectNew.js" th:href="@{/user/userlogin/writeObjectNew.js}">
+
+    </script>
+
+</head>
+
+<body>
+<div style="height: 0px;">
+    <object id="versionObj" type="application/npABCSafeInputApp"
+            style="width: 0px; height: 0px;" height="0px" width="0px"></object>
+</div>
+<script type="text/javascript" src="placeholders.jquery.min.js" th:src="@{/user/findList/placeholders.jquery.min.js}">
+
+</script>
+<script type="text/javascript" src="jquery.qtip.min.js" th:src="@{/user/user/jquery.qtip.min.js}">
+
+</script>
+<script type="text/javascript" src="excanvas.min.js" th:src="@{/user/findList/excanvas.min.js}">
+
+</script>
+<script type="text/javascript" src="jquery.flot.js" th:src="@{/user/findList/jquery.flot.js}">
+
+</script>
+<script type="text/javascript" src="jquery.jqplot.js" th:src="@{/user/findList/jquery.jqplot.js}">
+
+</script>
+<script type="text/javascript" src="jqplot.stockCursor.js" th:src="@{/user/findList/jqplot.stockCursor.js}">
+
+</script>
+<script type="text/javascript" src="chart.js" th:src="@{/user/findList/chart.js}">
+
+</script>
+<script type="text/javascript" src="fund_common.js" th:src="@{/user/findList/fund_common.js}">
+
+</script>
+<script type="text/javascript" src="selectWidget.js">
+
+</script>
+<script type="text/javascript" src="hiddenPopDiv.js" th:src="@{/user/findList/hiddenPopDiv.js}">
+
+</script>
+<script src="dataObject.js" th:href="@{/user/userlogin/dataObject.js}"></script>
+<script src="fund_account.js" th:href="@{/user/userlogin/fund_account.js}">
+
+</script>
+
+<script type="text/javascript">
+    //			function refreshPage() {
+    //				document.formRefresh.submit();
+    //			}
+    //			//自动关闭div
+    //			function closeLoadingPage() {
+    //				closeBg("hideDiv", "sign");
+    //				refreshPage();
+    //			}
+    //
+    //			function goToError(rsCode, userErrorMsg) {
+    //				document.errGoForm.rsCode.value = rsCode;
+    //				document.errGoForm.submit();
+    //			}
+    //
+    //			function goToSuccess(acctId, acctOpenBankId) {}
+</script>
+<div class="container">
+    <form name="formRefresh"
+          action="https://perbank.abchina.com/EbankSite/FundHoldInitAct.do"></form>
+    <form name="errGoForm"
+          action="https://perbank.abchina.com/EbankSite/FundErrorPageAct.do">
+        <input name="rsCode" type="hidden"> <input name="nextAction"
+                                                   value="FundHoldInitAct.do" type="hidden">
+    </form>
+
+    <form name="FundHold0456InitActForm"
+          action="https://perbank.abchina.com/EbankSite/FundHold0456InitAct.do">
+        <input name="acctId" value="6228452208036782970" type="hidden">
+        <input name="acctOpenBankId" value="31900" type="hidden">
+    </form>
+    <form name="FundHold0457InitActForm"
+          action="https://perbank.abchina.com/EbankSite/FundHold0457InitAct.do">
+        <input name="acctId" value="6228452208036782970" type="hidden">
+        <input name="acctOpenBankId" value="31900" type="hidden">
+    </form>
+    <div id="magContent" class="sign"></div>
+    <div class="moreHoldContainer" style="display: none;">
+        <ul>
+            <li><a href="javascript:FundHold0457InitActForm.submit();">集合计划产品持有</a>
+            </li>
+            <li><a href="javascript:FundHold0456InitActForm.submit();">专户理财产品持有</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ownListWrapper">
+        <div class="tabMenuWra">
+            <div class="tabContent">
+                <div class="nowContent">
+                    <div class="innerTabMenu">
+                        <h2 class="title">我持有的基金</h2>
+                    </div>
+
+                    <div class="innerTabCont" id="innerTabCont">
+                        <div id="ownFundDiv">
+                            <table class="table-head-gray resultList" id="resultList">
+                                <thead>
+                                <tr>
+                                    <th style="background-color: rgb(239, 239, 239);">基金代码</th>
+                                    <th style="background-color: rgb(239, 239, 239);">基金名称</th>
+                                    <th style="background-color: rgb(239, 239, 239);">单位净值</th>
+                                    <th style="background-color: rgb(239, 239, 239);">持有份额</th>
+                                    <th style="background-color: rgb(239, 239, 239);">T-1日市值</th>
+                                    <th data-hasqtip="1" class="attention"
+                                        style="width: 195px; background-color: rgb(239, 239, 239);">累计参与成本</th>
+                                    <th style="background-color: rgb(239, 239, 239);"><span
+                                            title="参考收益率=（T-1市值-参与成本）/参与成本，其中退出收益指通过赎回、转出及现金分红等形式累计实现的现金总额"
+                                            style="border-bottom: 1px dotted rgb(6, 142, 122);">参考收益率</span></th>
+                                    <th
+                                            style="width: 80px; background-color: rgb(239, 239, 239);">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${requestScope.userfundlist}" var="userfund">
+                                    <tr style="background-color: rgb(255, 255, 255);"
+                                        hasexdata="false">
+                                        <td> ${userfund.userfundIdObj.fundNum }</td>
+                                        <td> ${userfund.userfundIdObj.fundName}</td>
+                                        <td> ${userfund.userfundIdObj.fundNpv }</td>
+                                        <td> ${userfund.userfundFundunit }</td>
+                                        <td>
+                                            <fmt:formatNumber pattern=".##">
+                                                ${userfund.userfundFundunit * userfund.userfundIdObj.fundNpv }
+                                            </fmt:formatNumber></td>
+                                        <td>${userfund.userOrderMoney}</td>
+                                        <td><fmt:formatNumber pattern="###.####"
+                                                              value="${userfund.partCostRate}"/>
+                                        </td>
+                                        <td>
+                                            <a param="" ctr="" href="${pageContext.request.contextPath}/user/showWorkList?userFundId=${userfund.userfundId }" class="operate m-btn-table">请求服务</a>
+                                            <a param="" ctr="" href="${pageContext.request.contextPath}/user/buysale/UserLoadSaleFund?fundId=${userfund.userfundIdObj.fundId }" class="operate m-btn-table">赎回</a></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="display: none;" class="littlePicWra"></div>
+                        <div style="clear: both;"></div>
+
+                        <div id="myGroupReqCont" class="clearfix"
+                             style="display: none; float: none;">
+                            <h2 class="title">可撤单组合委托</h2>
+                            <div id="myGroupReqBox"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="everyContent title-wrap">
+                    <h2 class="title">我的定投</h2>
+                    <div style="float: right;">
+                        <a
+                                href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do"
+                                class="m-orange"><b class="add"></b>新增定投</a>
+                    </div>
+                    <div id="myFixInvest"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="page-foot" style="margin-top: 40px;">&nbsp;</div>
+
+            <div id="action"
+                 style="background-color: white; display: none; position: absolute; left: 891px; top: 231px; z-index: -1;">
+                <ul class="optionsList">
+                    <li style="display: none;" name="Redeming"><a
+                            href="javascript:void(0);" data-baseurl="FundRedeemInitAct.do">赎回</a>
+                    </li>
+                    <li style="display: none;" name="Appointment"><a
+                            href="javascript:void(0);"
+                            data-baseurl="FundInvestSaleInitAct.do">预约赎回</a></li>
+                    <li style="display: block;" name="Exchange"><a
+                            href="javascript:void(0);"
+                            data-baseurl="FundChangeFundInitAct.do">转换</a></li>
+                    <li style="display: block;" name="Setting"><a
+                            href="javascript:void(0);" data-baseurl="FundBonusSetAct.do">分红设置</a>
+                    </li>
+                    <li style="display: block;" name="Redemption"><a
+                            href="javascript:void(0);"
+                            data-baseurl="FundScheduleRedeemInitAct.do">定赎</a></li>
+                    <li style="display: none;" name="Buy"><a
+                            href="javascript:void(0);"
+                            data-baseurl="FundPURCSubscriptionInitAct.do">申购</a></li>
+                    <li style="display: block;" name="TradeQuery"><a
+                            href="javascript:void(0);" data-baseurl="FundQryInitAct.do">交易查询</a>
+                    </li>
+                    <li style="display: block;" name="Fastsale"><a
+                            href="javascript:void(0);"
+                            data-baseurl="FundRapitRedeemInitAct.do">快速赎回</a></li>
+
+                    <li style="display: block;" name="SmsInfo"><a
+                            href="javascript:void(0);" data-baseurl="FundSmsTipInitAct.do">短信提醒</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="action1"
+                 style="background-color: white; display: none; position: absolute;">
+                <ul class="optionsList">
+                    <li name="END"><a href="#" data-baseurl="FundCancelAIFAct.do">终止</a>
+                    </li>
+                    <li name="IntellDetail"><a href="#"
+                                               data-baseurl="IntellDetailQryAct.do">详情</a></li>
+                    <li name="AIFBuy"><a href="#"
+                                         data-baseurl="FundBrowserInitAct.do">增加定投</a></li>
+                    <li name="AIFModify"><a href="#"
+                                            data-baseurl="FundAIFModifyInit2Act.do">定投维护</a></li>
+                    <li name="AIFIntModify"><a href="#"
+                                               data-baseurl="FundAIFModifyInitAct.do">定投维护</a></li>
+                </ul>
+            </div>
+
+            <span style="display: none;" class="loading"></span>
+            <div style="top: 348.5px; left: 431px; display: none;"
+                 id="loadingDiv" class="loadingDiv">
+                <img src="loading_big.gif" alt="loading" height="66" width="66">
+            </div>
+            <div style="width: 1008px; height: 757px; display: none;"
+                 class="hideDiv"></div>
+            <div id="holdDetail" class="holdDetail" style="display: none;"></div>
+        </div>
+        <form id="formRetract" name="formRetract" method="post"
+              action="https://perbank.abchina.com/EbankSite/FundRetractAct.do">
+            <input name="abc_formId" value="2420" type="hidden"> <input
+                name="acctId" value="6228452208036782970" type="hidden"> <input
+                name="acctOpenBankId" value="31900" type="hidden"> <input
+                name="plattype" type="hidden"> <input name="pwdField"
+                                                      type="hidden"> <input name="pwdFieldKeys" type="hidden">
+            <input id="iBltCode" name="iBltCode" type="hidden">
+        </form>
+
+        <form id="formBonusSet" name="formBonusSet">
+            <input name="abc_formId" value="2420" type="hidden"> <input
+                name="iArNo" type="hidden"> <input name="plattype"
+                                                   type="hidden"> <input name="pwdField" type="hidden">
+            <input name="pwdFieldKeys" type="hidden"> <input
+                name="sFlag" type="hidden">
+        </form>
+
+        <form id="formAIFCancel" name="formAIFCancel"
+              action="https://perbank.abchina.com/EbankSite/FundAIFCancelAct.do">
+            <input name="abc_formId" value="2420" type="hidden"> <input
+                name="acctId" value="6228452208036782970" type="hidden"> <input
+                name="acctOpenBankId" value="31900" type="hidden"> <input
+                name="plattype" type="hidden"> <input name="pwdField"
+                                                      type="hidden"> <input name="pwdFieldKeys" type="hidden">
+            <input name="iArNo" type="hidden"> <input name="iSubArNo"
+                                                      type="hidden">
+        </form>
+
+        <div class="funds_revoke_box" style="display: none;">
+            <div class="funds_revoke_bk_top"></div>
+            <div class="funds_revoke_bk_con">
+                <div id="revokeContent" style="display: none;">
+                    <h3>撤单确认</h3>
+                    <table class="funds_redeem_table_par" cellpadding="0"
+                           cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td style="width: 30%;">基金代码</td>
+                            <td><span style="float: left;">
+											<div id="retradefundcode"></div>
+									</span></td>
+                        </tr>
+                        <tr>
+                            <td>签约卡号</td>
+                            <td>6228452208036782970</td>
+                        </tr>
+                        <tr>
+                            <td>流水号</td>
+                            <td>
+                                <div id="retradeflowno"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>账户密码</td>
+                            <td>
+                                <div id="PowerEnterDiv0"
+                                     style="display: inline; vertical-align: middle;">
+                                    <script>
+                                        password
+                                            .WriteMultiPassObject(
+                                                0,
+                                                'E57387C6E42DDFD696172FBF1B578D57');
+                                    </script>
+                                    <object id="powerpass_ie0" wmode="transparent"
+                                            type="application/npABCSafeInputApp"
+                                            style="z-index: inherit; vertical-align: middle; width: 150px; height: 32px;"
+                                            onblur="password.EventBlur('powerpass_ie0','undefined')"
+                                            height="32" width="150">
+                                        <param name="width" value="150">
+                                        <param name="height" value="32">
+                                        <param name="maxLength" value="6">
+                                        <param name="minLength" value="6">
+                                        <param name="maskChar" value="*">
+                                        <param name="backColor" value="#FFFFFF">
+                                        <param name="textColor" value="#0000FF">
+                                        <param name="borderColor" value="#cccccc">
+                                        <param name="accepts" value="^[0-9]*$">
+                                        <param name="caption" value="中国农业银行">
+                                        <param name="captionColor" value="#87011f">
+                                        <param name="captionFont" value="Microsoft YaHei">
+                                        <param name="captionSize" value="0">
+                                        <param name="captionBold" value="true">
+                                        <param name="lang" value="zh_CN">
+                                        <param name="languages" value="zh_CN">
+                                        <param name="softKeyboard" value="true">
+                                        <param name="softkbdType" value="1">
+                                        <param name="promptText" value=" 请输入密码">
+                                        <param name="wmode" value="transparent">
+                                        <param name="textFont"
+                                               value="weight:20 width:5 height:20 CharSet:0 OutputPrecision:0 ClipPrecision:0 OutputQuality:0 FontName:微软雅黑">
+                                        <param name="randomText"
+                                               value="E57387C6E42DDFD696172FBF1B578D57">
+                                    </object>
+                                    <span id="powerpass_ie0Msg" class="pwdError"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span id="errorContent"
+                          style="color: red; display: none; font-size: 14px; line-height: 14px; margin-bottom: -20px; margin-left: 28px; margin-top: 15px;"></span>
+
+                    <div class="operaBtn">
+                        <a id="subBtn" href="#" class="submitBtn btn btn-primary">确定</a>
+                        <a id="subGroupBtn" href="#" class="submitBtn btn btn-primary"
+                           style="display: none;">确定</a> <a id="closeBtn" href="#"
+                                                            class="btn btn-secondary" onclick=" closeBuyFundSureAlert('0') ">取消</a>
+                    </div>
+                </div>
+                <div id="revokeResult" style="display: none;">
+                    <h3>撤单结果</h3>
+                    <div class="funds_revoke_cont">
+                        <p>撤单成功</p>
+                    </div>
+                    <div class="funds_revoke_btn">
+                        <a href="#" class="btn btn-primary">关闭</a>
+                    </div>
+                </div>
+                <div id="endContent" style="display: none;">
+                    <h3>终止确认</h3>
+                    <table class="funds_redeem_table_par" cellpadding="0"
+                           cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td class="funds_redeem_table_td" width="206">基金名称</td>
+                            <td class="funds_redeem_table_td2" nowrap="nowrap" width="174"><span
+                                    id="aiffundshow"></span></td>
+                            <td width="554"></td>
+                        </tr>
+                        <tr>
+                            <td>签约卡号</td>
+                            <td>6228452208036782970</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span id="aiftypeshow"></span></td>
+                            <td colspan="2"><span style="margin-right: 10px;"
+                                                  id="aifamtshow"></span></td>
+                        </tr>
+                        <tr>
+                            <td>账户密码</td>
+                            <td colspan="2">
+                                <div id="PowerEnterDiv1"
+                                     style="display: inline; vertical-align: middle;">
+                                    <script>
+                                        password
+                                            .WriteMultiPassObject(
+                                                1,
+                                                'E57387C6E42DDFD696172FBF1B578D57');
+                                    </script>
+                                    <object id="powerpass_ie1" wmode="transparent"
+                                            type="application/npABCSafeInputApp"
+                                            style="z-index: inherit; vertical-align: middle; width: 150px; height: 32px;"
+                                            onblur="password.EventBlur('powerpass_ie1','undefined')"
+                                            height="32" width="150">
+                                        <param name="width" value="150">
+                                        <param name="height" value="32">
+                                        <param name="maxLength" value="6">
+                                        <param name="minLength" value="6">
+                                        <param name="maskChar" value="*">
+                                        <param name="backColor" value="#FFFFFF">
+                                        <param name="textColor" value="#0000FF">
+                                        <param name="borderColor" value="#cccccc">
+                                        <param name="accepts" value="^[0-9]*$">
+                                        <param name="caption" value="中国农业银行">
+                                        <param name="captionColor" value="#87011f">
+                                        <param name="captionFont" value="Microsoft YaHei">
+                                        <param name="captionSize" value="0">
+                                        <param name="captionBold" value="true">
+                                        <param name="lang" value="zh_CN">
+                                        <param name="languages" value="zh_CN">
+                                        <param name="softKeyboard" value="true">
+                                        <param name="softkbdType" value="1">
+                                        <param name="promptText" value=" 请输入密码">
+                                        <param name="wmode" value="transparent">
+                                        <param name="textFont"
+                                               value="weight:20 width:5 height:20 CharSet:0 OutputPrecision:0 ClipPrecision:0 OutputQuality:0 FontName:微软雅黑">
+                                        <param name="randomText"
+                                               value="E57387C6E42DDFD696172FBF1B578D57">
+                                    </object>
+                                    <span id="powerpass_ie1Msg" class="pwdError"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="operaBtn">
+                        <a id="subBtnEnd" href="#" class="submitBtn btn btn-primary">确定</a>
+                        <a href="#" class="btn btn-secondary"
+                           onclick=" closeBuyFundSureAlert('1') ">取消</a>
+                    </div>
+                </div>
+                <div id="endResult" style="display: none;">
+                    <h3>终止结果</h3>
+                    <div class="funds_revoke_cont">
+                        <p style="text-align: left;">终止成功</p>
+                    </div>
+                    <div class="funds_revoke_btn">
+                        <a href="#" class="btn btn-primary">关闭</a>
+                    </div>
+                </div>
+                <div id="settingContent" style="display: none;">
+                    <h3>分红设置</h3>
+                    <table class="funds_redeem_table_par" cellpadding="0"
+                           cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><span id="settingdisplay0"
+                                                  style="display: inline;"> <input name="setting"
+                                                                                   value="0" id="againInvestment" type="radio">&nbsp;<label
+                                    for="againInvestment">红利再投资</label>
+									</span>&nbsp;&nbsp;&nbsp; <span id="settingdisplay1"
+                                                                    style="display: inline;"> <input name="setting"
+                                                                                                     value="1" id="cashDividend" type="radio">&nbsp;<label
+                                    for="cashDividend">现金分红</label></span></td>
+
+                        </tr>
+                        <tr>
+                            <td width="150">借记卡账户密码</td>
+                            <td>
+                                <div id="PowerEnterDiv2"
+                                     style="display: inline; vertical-align: middle;">
+                                    <script>
+                                        password
+                                            .WriteMultiPassObject(
+                                                2,
+                                                'E57387C6E42DDFD696172FBF1B578D57');
+                                    </script>
+                                    <object id="powerpass_ie2" wmode="transparent"
+                                            type="application/npABCSafeInputApp"
+                                            style="z-index: inherit; vertical-align: middle; width: 150px; height: 32px;"
+                                            onblur="password.EventBlur('powerpass_ie2','undefined')"
+                                            height="32" width="150">
+                                        <param name="width" value="150">
+                                        <param name="height" value="32">
+                                        <param name="maxLength" value="6">
+                                        <param name="minLength" value="6">
+                                        <param name="maskChar" value="*">
+                                        <param name="backColor" value="#FFFFFF">
+                                        <param name="textColor" value="#0000FF">
+                                        <param name="borderColor" value="#cccccc">
+                                        <param name="accepts" value="^[0-9]*$">
+                                        <param name="caption" value="中国农业银行">
+                                        <param name="captionColor" value="#87011f">
+                                        <param name="captionFont" value="Microsoft YaHei">
+                                        <param name="captionSize" value="0">
+                                        <param name="captionBold" value="true">
+                                        <param name="lang" value="zh_CN">
+                                        <param name="languages" value="zh_CN">
+                                        <param name="softKeyboard" value="true">
+                                        <param name="softkbdType" value="1">
+                                        <param name="promptText" value=" 请输入密码">
+                                        <param name="wmode" value="transparent">
+                                        <param name="textFont"
+                                               value="weight:20 width:5 height:20 CharSet:0 OutputPrecision:0 ClipPrecision:0 OutputQuality:0 FontName:微软雅黑">
+                                        <param name="randomText"
+                                               value="E57387C6E42DDFD696172FBF1B578D57">
+                                    </object>
+                                    <span id="powerpass_ie2Msg" class="pwdError"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="operaBtn">
+                        <a id="subBtnSetting" href="#" class="submitBtn btn btn-primary">确定</a>
+                        <a href="#" class="btn btn-secondary"
+                           onclick=" closeBuyFundSureAlert('2') ">取消</a>
+                    </div>
+                </div>
+                <div id="settingResult" style="display: none;">
+                    <h3>分红设置</h3>
+                    <div class="funds_revoke_cont">
+                        <p style="text-align: left;">分红设置成功</p>
+                    </div>
+                    <div class="funds_revoke_btn">
+                        <a href="#" class="btn btn-primary"
+                           onclick=" closeBg('hideDiv', 'funds_revoke_box') ">关闭</a>
+                    </div>
+                </div>
+                <div id="signResult" style="display: none;">
+                    <p style="margin-top: 20px;">您已成功签约</p>
+                    <p style="margin-bottom: 20px;">让您活期自己赚起来</p>
+                    <div class="funds_revoke_btn">
+                        <a id="viewMySignInfo" href="javascript:;"
+                           class="btn btn-primary"
+                           onclick=" closeBg('hideDiv', 'funds_revoke_box') ">查看签约信息</a>
+                    </div>
+                </div>
+                <div id="cancelSignCertain" style="display: none;">
+                    <p>您确定要解约吗？</p>
+                    <p>解约后，收益会大打折扣哦！</p>
+                    <p>
+                        <span style="color: rgb(0, 0, 0);">账户密码&nbsp;</span><input
+                            class="funds_redeem_input_psw" type="password"><span
+                            style="color: red; display: none;" id="errorContent1"
+                            class="fontRed">密码输入错误</span>
+                    </p>
+                    <div class="operaBtn">
+                        <a id="cancelSign" class="submitBtn btn btn-primary" href="#">解约</a>
+                        <a href="#" class="btn btn-secondary"
+                           onclick=" closeBg('hideDiv', 'funds_revoke_box'); ">取消</a>
+                    </div>
+                </div>
+            </div>
+            <div class="funds_revoke_btm"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="autoTable.js" th:src="@{/user/user/autoTable.js}">
+
+</script>
+<script type="text/javascript" src="tab.js">
+
+</script>
+<script type="text/javascript" src="dialog.js" th:src="@{/user/user/dialog.js}">
+
+</script>
+<script src="jquery.selectric.js" th:src="@{/user/findList/jquery.selectric.js}">
+
+</script>
+<script src="config.js" th:src="@{/user/findList/config.js}"></script>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        odd = {
+            "background" : "#FFF"
+        };//奇数样式
+        even = {
+            "background" : "rgb(245,245,245)"
+        };//偶数样式
+        odd_even("#resultList", odd, even);
+    });
+    function odd_even(id, odd, even) {
+        $(id).find("tr").each(function(index, element) {
+            if (index % 2 == 1)
+                $(this).css(odd);
+            else
+                $(this).css(even);
+        });
+    }
+</script>
+</html>

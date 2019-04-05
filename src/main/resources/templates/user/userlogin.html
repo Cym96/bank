@@ -1,0 +1,382 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>中国农业银行个人网银登录入口</title>
+	<meta name="description" content="中国农业银行，个人网银，用户名登录，证书登录">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="favicon.ico" th:href="@{/user/userlogin/favicon.ico}">
+	<link rel="apple-touch-icon" href="https://perbank.abchina.com/EbankSite/apple-touch-icon.png">
+	<link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
+	<link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
+	<link rel="stylesheet" href="login.css" th:href="@{/user/userlogin/login.css}">
+	<link rel="stylesheet" href="jquery.qtip.css" th:href="@{/user/userlogin/jquery.qtip.css}">
+	<script src="writeObjectNew.js" th:href="@{/user/userlogin/writeObjectNew.js}">
+	</script>
+</head>
+<body onload="$.checkCsp();">
+<div style="height: 0px;"><object id="versionObj" type="application/npABCSafeInputApp" style="width: 0px; height: 0px;" height="0px" width="0px"></object></div>
+
+
+
+<div class="g-box">
+	<div id="g-mask" class="g-mask hidden">
+		<div style="left: 759.15px;" id="m-pointer" class="m-pointer"></div>
+		<div style="left: 519.15px;" id="m-kbsize" class="m-kbsize"></div>
+		<div style="left: 529.15px;" id="m-iknow" class="m-iknow"></div>
+	</div>
+	<div class="g-top"></div>
+	<div class="g-search">
+		<div class="m-cearchcenter">
+			<ul class="m-language">
+
+				<li>
+					<a href="http://www.abchina.com/">网站首页</a>
+				</li>
+				<li class="m-line"></li>
+				<li>
+					<a href="http://app.abchina.com/branch/">网点查询</a>
+				</li>
+			</ul>
+			<div class="m-crux">
+				<form action="http://query.abchina.com/search/cn.jsp" method="post" target="_self" id="searchForm">
+					<input class="m-txt" name="keyword" id="" value="" placeholder="搜索关键词" type="text">
+					<input class="m-btn" name="SearchBtn" id="" value="&nbsp;" onclick=" searchForm.submit(); " type="button">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="g-logo">
+		<div class="g-logo-center">
+			<div class="m-logo">
+				<a href="http://www.abchina.com/">
+					<img src="logo.png" alt="农业银行" th:src="@{/user/userlogin/logo.png}" width="198">
+				</a>
+			</div>
+			<div class="m-logo-line"></div>
+			<p class="m-logo-p">个人网上银行</p>
+		</div>
+	</div>
+	<div class="m-land">
+		<div class="m-land-center">
+			<div class="m-login-dialog m-userName-logon" id="commonLogin" style="height: 350px;">
+				<div class="m-uesrland">
+					<div class="m-login-link"></div>
+					<div class="m-login-link">
+						<a class="m-login-userNameLink m-login-linked" id="kBaobtn">用户登录</a>
+					</div>
+					<div class="m-login-link"></div>
+				</div>
+				<div class="m-login-split"></div>
+
+
+				<div id="userNameLogin">
+					<form class="m-uesrform" id="userNameForm" name="userNameForm" action="${pageContext.request.contextPath}/login/login" method="post">
+						<div class="m-uesrtxtbox" id="userDiv">
+							<div class="m-uesrtxtimg"></div>
+							<input class="m-uesrtxt" placeholder="用户名/身份证号/手机号" id="username" name="username" title="只能由英文字母、数字、汉字或下划线“_”组成" style="ime-mode: inactive;" autocomplete="off" type="text">
+						</div>
+						<div class="m-uesrpassbox">
+							<div id="PowerEnterDiv_userName" style="display: inline; margin-left: 10px;">
+								<input class="m-uesrtxt" placeholder="请输入密码" id="password" name="password" title="只能由英文字母、数字、汉字或下划线“_”组成" style="ime-mode: inactive; width: 200px; margin-left: 15px;" autocomplete="off" type="password">
+							</div>
+						</div>
+						<div class="pwdError" id="powerpass_ie_dyn_Msg" style="height: 20px;"></div>
+						<div id="m-verification-code" class="m-verification-code">
+							<input class="m-codetxt" placeholder="验证码" id="user_input_verifyCode" name="user_input_verifyCode" maxlength="4" autocomplete="off" style="ime-mode: disabled;" type="text">
+							<span class="code_img">
+								    <img src="${pageContext.request.contextPath }/login/getVerifyCode" width="70" height="33" id="verifyCodeImage">
+								</span> <span>
+								 <a id="changeVerifImageRegister" onclick="javascript:changeImage();">换一张</a>
+								</span>
+
+							<script type="text/javascript">
+                                function genTimestamp() {
+                                    var time = new Date();
+                                    return time.getTime();
+                                }
+                                function changeImage() {
+                                    $('#verifyCodeImage').attr(
+                                        'src',
+                                        '${pageContext.request.contextPath }/login/getVerifyCode?timestamp='
+                                        + genTimestamp());
+                                }
+
+							</script>
+							<!-- chen --> </div>
+
+						<input class="m-uersbtn" id="logo" value="登  录" type="submit" >
+						<div class="logon-error" style="display: none;" title=""></div>
+
+						<input name="EntranceType" value="Common" type="hidden">
+						<input name="abc_formId" value="1383" type="hidden">
+						<input id="picCode" name="picCode" type="hidden">
+						<input name="MachineCode" value="" type="hidden">
+						<input name="MachineInfo" value="" type="hidden">
+						<input name="token" value="" type="hidden">
+						<input name="plattype" type="hidden">
+						<input name="pwdField" type="hidden">
+						<input name="pwdFieldKeys" type="hidden">
+					</form>
+
+					<ul class="m-uesrforget">
+
+					</ul>
+					<img style="display: none;" class="mobile-scan-intro" src="mobile-scan-intro.png">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="g-end">
+		<div class="m-end" id="footer">
+			<ul class="m-endnav">
+				<li class="m-endnavli">
+					<a href="https://www.95599.cn/cn/PublicPlate/documents/200911/t20091130_16583.htm" target="_blank">网站声明</a>
+				</li>
+				<li class="m-endline"></li>
+				<li class="m-endnavli">
+					<a href="https://www.95599.cn/cn/PublicPlate/WebLink/websitemap/" target="_blank">网站地图</a>
+				</li>
+				<li class="m-endline"></li>
+				<li class="m-endnavli">
+					<a href="https://www.95599.cn/cn/AboutABC/ContactUs/" target="_blank">联系我们</a>
+				</li>
+				<li class="m-endline"></li>
+				<li class="m-endnavli">
+					<a href="https://www.95599.cn/cn/EBanking/CustomerServiceCenter/CustomerServiceCenter/default.htm">客服热线：<span>95599</span></a>
+				</li>
+			</ul>
+
+			<ul class="m-copyright">
+				<li>中国农业银行版权所有</li>
+				<li class="m-overline"></li>
+				<li>
+					<a href="https://www.miibeian.gov.cn/" target="_blank">京ICP备05049539</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    //页面加载刷新图片验证码
+    $("#vCode").click();
+
+    //生成图片验证码
+    function changeValidateCode(obj) {
+        //获取当前的时间作为参数，无具体意义
+        var timenow = new Date().getTime();
+        //每次请求需要一个不同的参数，否则可能会返回同样的验证码
+        //这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
+        obj.src = "userLogin/show?d=" + timenow;
+        //  obj.src = "creatImgCode.action?d=" + timenow;
+    }
+
+
+
+</script>
+<script src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+<script src="placeholders.jquery.min.js" th:src="@{/user/findList/placeholders.jquery.min.js}">
+</script>
+<script src="jquery.validate.min.js">
+</script>
+<script src="messages_zh.js">
+</script>
+<script src="json2.js">
+</script>
+<script src="browerHelper.js">
+</script>
+<script src="jstorage.min.js">
+</script>
+<script src="dataHelper.js" th:href="@{/user/userlogin/dataHelper.js}">
+</script>
+<script src="imageCodeVerify.js">
+</script>
+<script src="preRepeSubmit.js">
+</script>
+<script src="config.js" th:src="@{/user/findList/config.js}">
+</script>
+<script src="jquery.qtip.min.js">
+</script>
+<script src="qrcode.js">
+</script>
+<script>
+    function resizeWindow() {
+        //userNamebtn  kBaobtn
+        var target = '#userNamebtn';
+        if($('userNamebtn').hasClass('hidden')) {
+            target = '#kBaobtn';
+        }
+        var left;
+        try {
+            left = $(target).offset().left;
+            if(left < 400) {
+                var element = $(target).get(0);
+                var x = 0;
+                while(element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
+                    x += element.offsetLeft;
+                    element = element.offsetParent;
+                }
+                left = x;
+            }
+        } catch(e) {
+            left = 900;
+        }
+        $('#m-iknow').css('left', left - 370);
+        $('#m-pointer').css('left', left - 140);
+        $('#m-kbsize').css('left', left - 380);
+    }
+
+    $(function() {
+        if(qr.qrcodeOpen !== '0') {
+            $('#loginChange').removeClass('hidden');
+            $('.mobile-scan-intro').removeClass('hidden');
+            $('.scan-helper').on('mouseover', function() {
+                $('.m-mobile-scan').css('display', 'block').animate({
+                    'right': '32px'
+                }, 200, 'linear');
+            }).on('mouseout', function() {
+                $('.m-mobile-scan').animate({
+                    'right': '-200px'
+                }, 200, 'linear', function() {
+                    $(this).css('display', 'none');
+                });
+            });
+            var scanIntroTimer = setTimeout(function() {
+                $('.mobile-scan-intro').fadeOut();
+            }, 10000);
+        }
+        var loginMacType = '';
+        if(loginMacType === '0') {
+            $('#favoriteTip').removeClass('hidden');
+            $('#favoriteTip a.tipClose').on('click', function() {
+                $('#favoriteTip').addClass("hide");
+            });
+        }
+        $(document).bind('contextmenu', function(event) {
+            if(event.preventDefault) event.preventDefault();
+            else event.returnValue = false;
+        });
+        resizeWindow();
+        $(window).resize(function() {
+            resizeWindow();
+        });
+
+
+
+
+        var isFirst = 'false';
+        if(isFirst !== "true") {
+            $('#vCode').attr('src', '${pageContext.request.contextPath }/userLogin/show?r=' + $.random());
+            $('#m-verification-code').removeClass('hide');
+            $('.m-userName-logon').css('top', '10px');
+        }
+        $('#vCode').click(function() {
+            $('#vCode').attr('src', '${pageContext.request.contextPath }/userLogin/show?r=' + $.random());
+        });
+
+        $('#code').checkPicCode({
+            infoShow: "imgError",
+            target: "picCode"
+        });
+        var validator = $('#userNameForm').validate({
+            rules: {
+                username: {
+                    required: true,
+                    stringCheck: true,
+                    lengthRange: [1, 60],
+                    looseValidId18: true
+                },
+                code: {
+                    required: false
+                }
+            },
+            messages: {
+                username: {
+                    required: "请输入用户名",
+                    stringCheck: "用户名包含不合法字符",
+                    lengthRange: "用户名长度不合法",
+                    looseValidId18: "请输入正确的18位身份证号"
+                }
+            },
+            onfocusout: function(e) {
+                $(e).valid();
+            },
+            onsubmit: false,
+            errorClass: 'error-block',
+            invalidHandler: function(form) {
+                $('#logo').preRepeSubmit("recover");
+            }
+        });
+
+        $('#code').keydown(function(e) {
+            if(e.keyCode === 13 && $('#code').checkPicCode('isPassed') === 'true') {
+                $('#logo')[0].click();
+            }
+        });
+        $('#logo').preRepeSubmit({
+            "beingText": "正在登录...",
+            "recoverText": "登  录"
+        });
+        $('#logo').click(function() {
+
+            $('#userNameForm').submit();
+        });
+
+        $.directLogon = function() {
+            document.getElementById("m-kbbtn").innerHTML = "正在登录...";
+            setTimeout(function() {
+                try {
+                    var macInfo = password.GetMachineCode('powerpass_ie', '636603694732621820');
+                    $('#logonForm input[name="MachineCode"]').val(macInfo.machineCode);
+                    $('#logonForm input[name="MachineInfo"]').val(macInfo.machineInfo);
+                    $('#logonForm input[name="plattype"]').val(password.GetOsType);
+                } catch(e) {}
+                $("#logonForm").submit();
+            }, 10);
+        }
+
+        $.logon = function() {
+            document.getElementById("m-kbbtn").innerHTML = "正在登录...";
+            setTimeout(function() {
+                try {
+                    var macInfo = password.GetMachineCode('powerpass_ie', '636603694732621820');
+                    $('#logonForm input[name="MachineCode"]').val(macInfo.machineCode);
+                    $('#logonForm input[name="MachineInfo"]').val(macInfo.machineInfo);
+                    $('#logonForm input[name="plattype"]').val(password.GetOsType);
+                } catch(e) {}
+                if(!password.VerifyCSPPin()) {
+                    document.getElementById("m-kbbtn").innerHTML = "登&nbsp;&nbsp;录";
+                    return false;
+                }
+                $("#logonForm").submit();
+            }, 10);
+        };
+        $('#m-kbbtn').on('click', $.logon);
+
+        var haveChanged = false;
+        $.checkCsp = function() {
+            password.GetCSPListLogin(function() {
+                function change() {
+                    if(!haveChanged) {
+                        haveChanged = true;
+                        $("#kBaoLogin").removeClass("hidden");
+                        $("#userNameLogin").addClass("hidden");
+                        $("#userNamebtn").addClass("m-login-linked");
+                        $('.m-login-linked-split').animate({
+                            'margin-left': '154px'
+                        }, 200);
+                        $("#kBaobtn").removeClass("m-login-linked");
+                    }
+                }
+                return change;
+            }());
+            setTimeout($.checkCsp, 3000, null);
+        };
+
+    });
+</script>
+</body>
+</html>

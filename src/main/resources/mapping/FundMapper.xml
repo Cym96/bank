@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.FundMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Fund" >
+    <id column="fund_id" property="fundId" jdbcType="INTEGER" />
+    <result column="fund_num" property="fundNum" jdbcType="VARCHAR" />
+    <result column="fund_investstate" property="fundInveststate" jdbcType="INTEGER" />
+    <result column="fund_name" property="fundName" jdbcType="VARCHAR" />
+    <result column="fund_productstate" property="fundProductstate" jdbcType="INTEGER" />
+    <result column="fund_manager" property="fundManager" jdbcType="INTEGER" />
+    <result column="fund_company" property="fundCompany" jdbcType="INTEGER" />
+    <result column="fund_minbuymoney" property="fundMinbuymoney" jdbcType="DECIMAL" />
+    <result column="fund_minsalemoney" property="fundMinsalemoney" jdbcType="DECIMAL" />
+    <result column="fund_buyratio" property="fundBuyratio" jdbcType="DECIMAL" />
+    <result column="fund_saleratio" property="fundSaleratio" jdbcType="DECIMAL" />
+    <result column="fund_salebegintime" property="fundSalebegintime" jdbcType="TIMESTAMP" />
+    <result column="fund_workbegintime" property="fundWorkbegintime" jdbcType="TIMESTAMP" />
+    <result column="fund_text" property="fundText" jdbcType="VARCHAR" />
+    <result column="fund_npv" property="fundNpv" jdbcType="DECIMAL" />
+    <result column="fund_checkstate" property="fundCheckstate" jdbcType="INTEGER" />
+  </resultMap>
+  <!-- chen start -->
+  <resultMap type="com.bank.domain.Fund" id="FundMap" extends="BaseResultMap">
+
+    <result property="userInveststateObj.stateId" column="inv_id" jdbcType="INTEGER"  />
+    <result property="userInveststateObj.stateName" column="inv_name" jdbcType="VARCHAR"  />
+    <result  property="userInveststateObj.stateLevel"  column="inv_lev" jdbcType="VARCHAR"/>
+
+    <result  property="userProductstateObj.stateId"  column="pro_id" jdbcType="INTEGER"/>
+    <result  property="userProductstateObj.stateName" column="pro_name" jdbcType="VARCHAR" />
+
+    <result column="company_id" jdbcType="INTEGER" property="userCompanyObj.companyId" />
+    <result column="company_buildtime" jdbcType="TIMESTAMP" property="userCompanyObj.companyBuildtime" />
+    <result column="company_signmoney" jdbcType="DECIMAL" property="userCompanyObj.companySignmoney" />
+    <result column="company_name" jdbcType="VARCHAR" property="userCompanyObj.companyName" />
+    <result column="company_legalperson" jdbcType="VARCHAR" property="userCompanyObj.companyLegalperson" />
+    <result column="company_lineperson" jdbcType="VARCHAR" property="userCompanyObj.companyLineperson" />
+    <result column="company_website" jdbcType="VARCHAR" property="userCompanyObj.companyWebsite" />
+    <result column="company_phone" jdbcType="VARCHAR" property="userCompanyObj.companyPhone" />
+    <result column="company_introduce" jdbcType="VARCHAR" property="userCompanyObj.companyIntroduce" />
+    <result column="company_address" jdbcType="VARCHAR" property="userCompanyObj.companyAddress" />
+    <result column="company_checkstate" jdbcType="INTEGER" property="userCompanyObj.companyCheckstate" />
+
+  </resultMap>
+
+  <select id="findByName" parameterType="java.lang.String"
+          resultMap="BaseResultMap">
+    select * from fund where fund_name=#{fundName}
+  </select>
+
+  <select id="countAll" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+    select count(*) as count
+    from
+    fund
+    INNER JOIN company ON fund.fund_company = company.company_id
+    INNER JOIN investstate ON fund.fund_investstate = investstate.state_id
+    INNER JOIN productstate ON fund.fund_productstate = productstate.state_id
+  </select>
+
+  <select id="findAll" parameterType="java.lang.Integer" resultMap="FundMap">
+
+    SELECT
+    fund.fund_id,
+    fund.fund_num,
+    fund.fund_investstate,
+    fund.fund_name,
+    fund.fund_productstate,
+    fund.fund_manager,
+    fund.fund_company,
+    fund.fund_minbuymoney,
+    fund.fund_minsalemoney,
+    fund.fund_buyratio,
+    fund.fund_saleratio,
+    fund.fund_salebegintime,
+    fund.fund_workbegintime,
+    fund.fund_text,
+    fund.fund_npv,
+    fund.fund_checkstate,
+    company.company_id,
+    company.company_buildtime,
+    company.company_signmoney,
+    company.company_name,
+    company.company_legalperson,
+    company.company_lineperson,
+    company.company_website,
+    company.company_phone,
+    company.company_introduce,
+    company.company_address,
+    company.company_checkstate,
+    investstate.state_id as inv_id,
+    investstate.state_name  as inv_name,
+    investstate.state_level  as inv_lev,
+    productstate.state_id as pro_id,
+    productstate.state_name as pro_name
+    FROM
+    fund
+    INNER JOIN company ON fund.fund_company = company.company_id
+    INNER JOIN investstate ON fund.fund_investstate = investstate.state_id
+    INNER JOIN productstate ON fund.fund_productstate = productstate.state_id
+
+
+  </select>
+  <select id="findAllByPage" parameterType="java.lang.Integer" resultMap="FundMap">
+
+    SELECT
+    fund.fund_id,
+    fund.fund_num,
+    fund.fund_investstate,
+    fund.fund_name,
+    fund.fund_productstate,
+    fund.fund_manager,
+    fund.fund_company,
+    fund.fund_minbuymoney,
+    fund.fund_minsalemoney,
+    fund.fund_buyratio,
+    fund.fund_saleratio,
+    fund.fund_salebegintime,
+    fund.fund_workbegintime,
+    fund.fund_text,
+    fund.fund_npv,
+    fund.fund_checkstate,
+    company.company_id,
+    company.company_buildtime,
+    company.company_signmoney,
+    company.company_name,
+    company.company_legalperson,
+    company.company_lineperson,
+    company.company_website,
+    company.company_phone,
+    company.company_introduce,
+    company.company_address,
+    company.company_checkstate,
+    investstate.state_id as inv_id,
+    investstate.state_name  as inv_name,
+    investstate.state_level  as inv_lev,
+    productstate.state_id as pro_id,
+    productstate.state_name as pro_name
+    FROM
+    fund
+    INNER JOIN company ON fund.fund_company = company.company_id
+    INNER JOIN investstate ON fund.fund_investstate = investstate.state_id
+    INNER JOIN productstate ON fund.fund_productstate = productstate.state_id
+    limit #{startPage,jdbcType=INTEGER},#{endPage,jdbcType=INTEGER}
+
+
+  </select>
+
+  <select id="findBymangerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from fund where fund_manager = #{id}
+  </select>
+  <select id="findById" parameterType="java.lang.Integer" resultMap="FundMap">
+
+    SELECT
+    fund.fund_id,
+    fund.fund_num,
+    fund.fund_investstate,
+    fund.fund_name,
+    fund.fund_productstate,
+    fund.fund_manager,
+    fund.fund_company,
+    fund.fund_minbuymoney,
+    fund.fund_minsalemoney,
+    fund.fund_buyratio,
+    fund.fund_saleratio,
+    fund.fund_salebegintime,
+    fund.fund_workbegintime,
+    fund.fund_text,
+    fund.fund_npv,
+    fund.fund_checkstate,
+    company.company_id,
+    company.company_buildtime,
+    company.company_signmoney,
+    company.company_name,
+    company.company_legalperson,
+    company.company_lineperson,
+    company.company_website,
+    company.company_phone,
+    company.company_introduce,
+    company.company_address,
+    company.company_checkstate,
+    investstate.state_id as inv_id,
+    investstate.state_name  as inv_name,
+    investstate.state_level  as inv_lev,
+    productstate.state_name as pro_name,
+    productstate.state_id as pro_id
+    FROM
+    fund
+    INNER JOIN company ON fund.fund_company = company.company_id
+    INNER JOIN investstate ON fund.fund_investstate = investstate.state_id
+    INNER JOIN productstate ON fund.fund_productstate = productstate.state_id
+    where fund_id = #{fundId,jdbcType=INTEGER}
+
+  </select>
+
+  <!-- chen end -->
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Sun May 20 17:07:54 CST 2018.
+    -->
+    fund_id, fund_num, fund_investstate, fund_name, fund_productstate, fund_manager,
+    fund_company, fund_minbuymoney, fund_minsalemoney, fund_buyratio, fund_saleratio,
+    fund_salebegintime, fund_workbegintime, fund_text, fund_npv, fund_checkstate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Sun May 20 17:07:54 CST 2018.
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from fund
+    where fund_id = #{fundId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Sun May 20 17:07:54 CST 2018.
+    -->
+    delete from fund
+    where fund_id = #{fundId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Fund">
+    insert into fund (fund_id, fund_num, fund_investstate,
+    fund_name, fund_productstate, fund_manager,
+    fund_company, fund_minbuymoney, fund_minsalemoney,
+    fund_buyratio, fund_saleratio, fund_salebegintime,
+    fund_workbegintime, fund_text, fund_npv,
+    fund_checkstate)
+    values (#{fundId,jdbcType=INTEGER}, #{fundNum,jdbcType=VARCHAR}, #{fundInveststate,jdbcType=INTEGER},
+    #{fundName,jdbcType=VARCHAR}, #{fundProductstate,jdbcType=INTEGER}, #{fundManager,jdbcType=INTEGER},
+    #{fundCompany,jdbcType=INTEGER}, #{fundMinbuymoney,jdbcType=DECIMAL}, #{fundMinsalemoney,jdbcType=DECIMAL},
+    #{fundBuyratio,jdbcType=DECIMAL}, #{fundSaleratio,jdbcType=DECIMAL}, #{fundSalebegintime,jdbcType=TIMESTAMP},
+    #{fundWorkbegintime,jdbcType=TIMESTAMP}, #{fundText,jdbcType=VARCHAR}, #{fundNpv,jdbcType=DECIMAL},
+    #{fundCheckstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Fund">
+
+    insert into fund
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fundId != null">
+        fund_id,
+      </if>
+      <if test="fundNum != null">
+        fund_num,
+      </if>
+      <if test="fundInveststate != null">
+        fund_investstate,
+      </if>
+      <if test="fundName != null">
+        fund_name,
+      </if>
+      <if test="fundProductstate != null">
+        fund_productstate,
+      </if>
+      <if test="fundManager != null">
+        fund_manager,
+      </if>
+      <if test="fundCompany != null">
+        fund_company,
+      </if>
+      <if test="fundMinbuymoney != null">
+        fund_minbuymoney,
+      </if>
+      <if test="fundMinsalemoney != null">
+        fund_minsalemoney,
+      </if>
+      <if test="fundBuyratio != null">
+        fund_buyratio,
+      </if>
+      <if test="fundSaleratio != null">
+        fund_saleratio,
+      </if>
+      <if test="fundSalebegintime != null">
+        fund_salebegintime,
+      </if>
+      <if test="fundWorkbegintime != null">
+        fund_workbegintime,
+      </if>
+      <if test="fundText != null">
+        fund_text,
+      </if>
+      <if test="fundNpv != null">
+        fund_npv,
+      </if>
+      <if test="fundCheckstate != null">
+        fund_checkstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fundId != null">
+        #{fundId,jdbcType=INTEGER},
+      </if>
+      <if test="fundNum != null">
+        #{fundNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fundInveststate != null">
+        #{fundInveststate,jdbcType=INTEGER},
+      </if>
+      <if test="fundName != null">
+        #{fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="fundProductstate != null">
+        #{fundProductstate,jdbcType=INTEGER},
+      </if>
+      <if test="fundManager != null">
+        #{fundManager,jdbcType=INTEGER},
+      </if>
+      <if test="fundCompany != null">
+        #{fundCompany,jdbcType=INTEGER},
+      </if>
+      <if test="fundMinbuymoney != null">
+        #{fundMinbuymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fundMinsalemoney != null">
+        #{fundMinsalemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fundBuyratio != null">
+        #{fundBuyratio,jdbcType=DECIMAL},
+      </if>
+      <if test="fundSaleratio != null">
+        #{fundSaleratio,jdbcType=DECIMAL},
+      </if>
+      <if test="fundSalebegintime != null">
+        #{fundSalebegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundWorkbegintime != null">
+        #{fundWorkbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundText != null">
+        #{fundText,jdbcType=VARCHAR},
+      </if>
+      <if test="fundNpv != null">
+        #{fundNpv,jdbcType=DECIMAL},
+      </if>
+      <if test="fundCheckstate != null">
+        #{fundCheckstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Fund">
+
+    update fund
+    <set>
+      <if test="fundNum != null">
+        fund_num = #{fundNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fundInveststate != null">
+        fund_investstate = #{fundInveststate,jdbcType=INTEGER},
+      </if>
+      <if test="fundName != null">
+        fund_name = #{fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="fundProductstate != null">
+        fund_productstate = #{fundProductstate,jdbcType=INTEGER},
+      </if>
+      <if test="fundManager != null">
+        fund_manager = #{fundManager,jdbcType=INTEGER},
+      </if>
+      <if test="fundCompany != null">
+        fund_company = #{fundCompany,jdbcType=INTEGER},
+      </if>
+      <if test="fundMinbuymoney != null">
+        fund_minbuymoney = #{fundMinbuymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fundMinsalemoney != null">
+        fund_minsalemoney = #{fundMinsalemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fundBuyratio != null">
+        fund_buyratio = #{fundBuyratio,jdbcType=DECIMAL},
+      </if>
+      <if test="fundSaleratio != null">
+        fund_saleratio = #{fundSaleratio,jdbcType=DECIMAL},
+      </if>
+      <if test="fundSalebegintime != null">
+        fund_salebegintime = #{fundSalebegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundWorkbegintime != null">
+        fund_workbegintime = #{fundWorkbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundText != null">
+        fund_text = #{fundText,jdbcType=VARCHAR},
+      </if>
+      <if test="fundNpv != null">
+        fund_npv = #{fundNpv,jdbcType=DECIMAL},
+      </if>
+      <if test="fundCheckstate != null">
+        fund_checkstate = #{fundCheckstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fund_id = #{fundId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Fund">
+
+    update fund
+    set fund_num = #{fundNum,jdbcType=VARCHAR},
+    fund_investstate = #{fundInveststate,jdbcType=INTEGER},
+    fund_name = #{fundName,jdbcType=VARCHAR},
+    fund_productstate = #{fundProductstate,jdbcType=INTEGER},
+    fund_manager = #{fundManager,jdbcType=INTEGER},
+    fund_company = #{fundCompany,jdbcType=INTEGER},
+    fund_minbuymoney = #{fundMinbuymoney,jdbcType=DECIMAL},
+    fund_minsalemoney = #{fundMinsalemoney,jdbcType=DECIMAL},
+    fund_buyratio = #{fundBuyratio,jdbcType=DECIMAL},
+    fund_saleratio = #{fundSaleratio,jdbcType=DECIMAL},
+    fund_salebegintime = #{fundSalebegintime,jdbcType=TIMESTAMP},
+    fund_workbegintime = #{fundWorkbegintime,jdbcType=TIMESTAMP},
+    fund_text = #{fundText,jdbcType=VARCHAR},
+    fund_npv = #{fundNpv,jdbcType=DECIMAL},
+    fund_checkstate = #{fundCheckstate,jdbcType=INTEGER}
+    where fund_id = #{fundId,jdbcType=INTEGER}
+  </update>
+</mapper>

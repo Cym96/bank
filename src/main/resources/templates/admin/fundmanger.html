@@ -1,0 +1,279 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>基金产品管理</title>
+<link href="assets/plugins/pace-master/themes/blue/pace-theme-flash.css" th:href="@{/admin/assets/plugins/pace-master/themes/blue/pace-theme-flash.css}" rel="stylesheet"/>
+        <link href="assets/plugins/uniform/css/default.css" rel="stylesheet" th:href="@{/admin/assets/plugins/uniform/css/default.css}"/>
+        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/admin/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+        <link href="assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/fontawesome/css/font-awesome.css}"/>
+        <link href="assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/line-icons/simple-line-icons.css}"/>
+        <link href="assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" th:href="@{/admin/assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css}" rel="stylesheet" type="text/css"/>
+        <link href="assets/plugins/waves/waves.min.css" th:href="@{/admin/assets/plugins/waves/waves.min.css}" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/switchery/switchery.min.css}"/>
+    <link href="assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/3d-bold-navigation/css/style.css}"/>
+
+    <link href="assets/plugins/slidepushmenus/css/component.css" th:href="@{/admin/assets/plugins/slidepushmenus/css/component.css}" rel="stylesheet" type="text/css"/>
+     
+        <!-- Theme Styles -->
+    <link href="assets/css/layers.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/css/layers.min.css}"/>
+    <link href="assets/css/layers/dark-layer.css" th:href="@{/admin/assets/css/layers/dark-layer.css}" class="theme-color" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/css/custom.css}"/>
+
+    <script src="assets/plugins/3d-bold-navigation/js/modernizr.js" th:href="@{/admin/assets/plugins/3d-bold-navigation/js/modernizr.js}"></script>
+    <script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js" th:href="@{/admin/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js}"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+ <body class="compact-menu">
+        <div class="overlay"></div>
+      <!--  <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1">
+            <h3><span class="pull-left">Chat</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i class="icon-close"></i></a></h3>
+            <div class="slimscroll">
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Michael Lewis<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>John Doe<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Emma Green<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Michael Lewis<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>John Doe<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Emma Green<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Nice to meet you</small></span></a>
+            </div>
+		</nav>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><span class="pull-left">Michael Lewis</span> <a href="javascript:void(0);" class="pull-right" id="closeRight2"><i class="fa fa-angle-right"></i></a></h3>
+            <div class="slimscroll chat">
+                <div class="chat-item chat-item-left">
+                    <div class="chat-image">
+                        <img src="assets/images/avatar2.png" alt="">
+                    </div>
+                    <div class="chat-message">
+                        Duis aute irure dolor?
+                    </div>
+                </div>
+                <div class="chat-item chat-item-right">
+                    <div class="chat-message">
+                        Lorem ipsum dolor sit amet, dapibus quis, laoreet et.
+                    </div>
+                </div>
+                <div class="chat-item chat-item-left">
+                    <div class="chat-image">
+                        <img src="assets/images/avatar2.png" alt="">
+                    </div>
+                    <div class="chat-message">
+                        Ut ullamcorper, ligula.
+                    </div>
+                </div>
+                <div class="chat-item chat-item-right">
+                    <div class="chat-message">
+                        In hac habitasse platea dict umst. ligula eu tempor eu id tincidunt.
+                    </div>
+                </div>
+                <div class="chat-item chat-item-left">
+                    <div class="chat-image">
+                        <img src="assets/images/avatar2.png" alt="">
+                    </div>
+                    <div class="chat-message">
+                        Curabitur pretium?
+                    </div>
+                </div>
+                <div class="chat-item chat-item-right">
+                    <div class="chat-message">
+                        Etiam tempor. Ut tempor! ull amcorper.
+                    </div>
+                </div>
+            </div>
+            <div class="chat-write">
+                <form class="form-horizontal" action="javascript:void(0);">
+                    <input type="text" class="form-control" placeholder="Say something">
+                </form>
+            </div>
+		</nav>-->
+      <!--  <form class="search-form" action="#" method="GET">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default close-search" type="button"><i class="icon-close"></i></button>
+                </span>
+            </div>&lt;!&ndash; Input Group &ndash;&gt;
+        </form>--><!-- Search Form -->
+        <main class="page-content content-wrap">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="sidebar-pusher">
+                        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="logo-box" style="width: 200px;">
+                        <a href="index.html" class="logo-text"><span>网上银行后台管理系统</span></a>
+                    </div><!-- Logo Box -->
+                    <div class="search-button">
+                        <a href="javascript:void(0);" class="show-search"><i class="icon-magnifier"></i></a>
+                    </div>
+                    <div class="topmenu-outer">
+                        
+                    </div>
+                </div>
+            </div><!-- Navbar -->
+            <div class="page-sidebar sidebar">
+                <div class="page-sidebar-inner slimscroll">
+                    <ul class="menu accordion-menu">
+                        <li><a href="${pageContext.request.contextPath}/index" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>主页</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/bankcard/cardCheckShow" class="waves-effect waves-button"><span class="menu-icon icon-credit-card"></span><p>银行卡审核</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/companyfindAll" class="waves-effect waves-button"><span class="menu-icon icon-link"></span><p>公司申请审核</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/showrole" class="waves-effect waves-button"><span class="menu-icon icon-user-follow"></span><p>公司员工添加</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/tosave" class="waves-effect waves-button"><span class="menu-icon icon-list"></span><p>基金产品添加</p></a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/admin/findbymangerid" class="waves-effect waves-button"><span class="menu-icon icon-notebook"></span><p>产品信息管理</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/worklist/showWorklistList" class="waves-effect waves-button"><span class="menu-icon icon-earphones-alt"></span><p>客户服务单管理</p></a></li>
+                    </ul>
+                </div><!-- Page Sidebar Inner -->
+            </div><!-- Page Sidebar -->
+            <div class="page-inner">
+                <div class="page-title">
+                   <h3 class="breadcrumb-header">基金产品</h3>
+                    <div class="page-breadcrumb">
+                        <ol class="breadcrumb breadcrumb-with-header">
+                            <li><a href="index.html"></a></li>
+                            <li><a href="#"></a></li>
+                            <li class="active">基金产品</li>
+                        </ol>
+                    </div>
+                </div>
+                <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+
+                                    <h4 class="panel-title"></h4>
+
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>产品代码</th>
+                                                    <th>产品名称</th>
+                                                    <th>最低赎回份额</th>
+                                                    <th>最低申购份额</th>
+                                                    <th>预售起始时间</th>
+                                                    <th>工作结束时间</th>
+                                                    <th>更改状态</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+<form action="${/admin/updatecompany" th:action="@{/admin/updatecompany}" method="post">
+
+    <tr th:each="fund : ${listFundsByAdmin}">
+        <input type="hidden" name="companyId" value="${fund.fundCompany}" th:name="companyId" th:value="${fund.fundCompany}"/>
+        <th scope="row" th:text="${fund.fundNum }">${fund.fund_Num }</th>
+        <td th:text="${fund.fundName }">${fund.fund_Name }</td>
+        <td th:text="${fund.fundMinsalemoney }">${fund.fundMinsalemoney }</td>
+        <td th:text="${fund.fundMinsalemoney}">${fund.fundMinsalemoney }</td>
+        <td th:text="${#dates.format(fund.fundSalebegintime, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#dates.format(fund.fundWorkbegintime, 'yyyy-MM-dd')}"></td>
+
+        <td>
+          <!--<button type="button" class="btn btn-danger btn-rounded" id="state" value="1" th:text="${fund.}"></button>-->
+         <!--   <select
+                    name="fundProductstate" id="fundProductstate"  >
+                <option th:each="checkstates:${session.checkstates}"
+                        th:value="${checkstates.state_Id}" th:text="${checkstates.state_Name}"></option>
+
+            </select>-->
+            <a th:href ="@{/admin/toupdate(fundId=${fund.fundId})}">
+                <button type="button" class="btn btn-info btn-rounded" >更改</button></a>
+
+
+        </td>
+
+    </tr>
+</form>
+                                           <!--  <c:forEach items="${requestScope.fundList }" var="fund" varStatus="num">
+                                              <form action="${pageContext.request.contextPath }/admin/updatecompany" method="post">
+                                              <input type="hidden" name="companyId" value="${company.companyId }"/>
+                                                <tr>
+                                                
+                                                 <th scope="row">${fund.fundNum }</th>
+                                                 <td>${fund.fundName }</td>
+                                                 
+                                                   <%&#45;&#45;  <td> ${company.time}</td> &#45;&#45;%>
+                                                    <td>${fund.fundMinsalemoney }</td>
+                                                   
+                                                    <td><fmt:formatDate value="${fund.fundSalebegintime }"/></td>
+                                                    <td><fmt:formatDate value="${fund.fundWorkbegintime }"/></td>
+                                                   
+                                                    <td>  
+                                                  <%&#45;&#45;    <button type="button" class="btn btn-danger btn-rounded" id="state" value="1">${company.checkstate.stateName}</button> &#45;&#45;%>
+                                                   
+                                                   <a href="${pageContext.request.contextPath }/admin/toupdate?fundId=${fund.fundId}"><button type="button" class="btn btn-info btn-rounded" >更改</button></a>
+                                                    
+            
+                                                     </td>
+                                                 </tr>
+                                                </c:forEach>
+                                              </form> -->
+                                              
+                                                   
+                                                
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                
+                       
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+                <div class="page-footer">
+                    <p class="no-s">Made with <i class="fa fa-heart"></i> by lizards</p>
+                </div>
+            </div><!-- Page Inner -->
+        </main><!-- Page Content -->
+        <nav class="cd-nav-container" id="cd-nav">
+            <header>
+                <h3>LAYERS</h3>
+            </header>
+            <div class="col-md-6 demo-block demo-selected demo-active">
+                <p>Dark<br>Design</p>
+            </div>
+            <div class="col-md-6 demo-block">
+                <a href="../admin2/index.html"><p>Light<br>Design</p></a>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Horizontal<br>(Coming)</p>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Material<br>(Coming)</p>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Coming<br>Soon</p>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Coming<br>Soon</p>
+            </div>
+        </nav>
+        <div class="cd-overlay"></div>
+        <!-- Javascripts -->
+        <script src="assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+        <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="assets/plugins/pace-master/pace.min.js"></script>
+        <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/plugins/switchery/switchery.min.js"></script>
+        <script src="assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+        <script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
+        <script src="assets/plugins/waves/waves.min.js"></script>
+        <script src="assets/plugins/3d-bold-navigation/js/main.js"></script>
+        <script src="assets/js/layers.min.js"></script>
+        
+</body>
+</html>

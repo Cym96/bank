@@ -1,0 +1,347 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta name="description" content="Admin Dashboard Template" />
+        <meta name="keywords" content="admin,dashboard" />
+        <meta name="author" content="Lalassu" />
+        
+        <!-- Styles -->
+        <link href="assets/plugins/pace-master/themes/blue/pace-theme-flash.css" th:href="@{/admin/assets/plugins/pace-master/themes/blue/pace-theme-flash.css}" rel="stylesheet"/>
+        <link href="assets/plugins/uniform/css/default.css" rel="stylesheet" th:href="@{/admin/assets/plugins/uniform/css/default.css}"/>
+        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/bootstrap/css/bootstrap.min.css}"/>
+        <link href="assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/fontawesome/css/font-awesome.css}"/>
+        <link href="assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/line-icons/simple-line-icons.css}"/>
+        <link href="assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css}"/>
+        <link href="assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/waves/waves.min.css}"/>
+        <link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/switchery/switchery.min.css}"/>
+        <link href="assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/3d-bold-navigation/css/style.css}"/>
+        <link href="assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/slidepushmenus/css/component.css}"/>
+        <link href="assets/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/fullcalendar/fullcalendar.min.css}"/>
+        
+        <!-- Theme Styles -->
+        <link href="assets/css/layers.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/css/layers.min.css}"/>
+        <link href="assets/css/layers/dark-layer.css" th:href="@{/admin/assets/css/layers/dark-layer.css}" class="theme-color" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/custom.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/css/custom.css}"/>
+        
+        <script src="assets/plugins/3d-bold-navigation/js/modernizr.js" th:href="@{/admin/assets/plugins/3d-bold-navigation/js/modernizr.js}"></script>
+        <script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js" th:href="@{/admin/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js}"></script>
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="compact-menu">
+        <div class="overlay"></div>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1">
+            <h3><span class="pull-left">Chat</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i class="icon-close"></i></a></h3>
+            <div class="slimscroll">
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Michael Lewis<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>John Doe<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Emma Green<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Michael Lewis<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>John Doe<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Emma Green<small>Nice to meet you</small></span></a>
+                <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Nice to meet you</small></span></a>
+            </div>
+		</nav>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><span class="pull-left">Michael Lewis</span> <a href="javascript:void(0);" class="pull-right" id="closeRight2"><i class="fa fa-angle-right"></i></a></h3>
+            <div class="slimscroll chat">
+                <div class="chat-item chat-item-left">
+                    <div class="chat-image">
+                        <img src="assets/images/avatar2.png" alt="">
+                    </div>
+                    <div class="chat-message">
+                        Duis aute irure dolor?
+                    </div>
+                </div>
+                <div class="chat-item chat-item-right">
+                    <div class="chat-message">
+                        Lorem ipsum dolor sit amet, dapibus quis, laoreet et.
+                    </div>
+                </div>
+                <div class="chat-item chat-item-left">
+                    <div class="chat-image">
+                        <img src="assets/images/avatar2.png" alt="">
+                    </div>
+                    <div class="chat-message">
+                        Ut ullamcorper, ligula.
+                    </div>
+                </div>
+                <div class="chat-item chat-item-right">
+                    <div class="chat-message">
+                        In hac habitasse platea dict umst. ligula eu tempor eu id tincidunt.
+                    </div>
+                </div>
+                <div class="chat-item chat-item-left">
+                    <div class="chat-image">
+                        <img src="assets/images/avatar2.png" alt="">
+                    </div>
+                    <div class="chat-message">
+                        Curabitur pretium?
+                    </div>
+                </div>
+                <div class="chat-item chat-item-right">
+                    <div class="chat-message">
+                        Etiam tempor. Ut tempor! ull amcorper.
+                    </div>
+                </div>
+            </div>
+            <div class="chat-write">
+                <form class="form-horizontal" action="javascript:void(0);">
+                    <input type="text" class="form-control" placeholder="Say something">
+                </form>
+            </div>
+		</nav>
+        <form class="search-form" action="#" method="GET">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default close-search" type="button"><i class="icon-close"></i></button>
+                </span>
+            </div><!-- Input Group -->
+        </form><!-- Search Form -->
+        <main class="page-content content-wrap">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="sidebar-pusher">
+                        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="logo-box" style="width: 200px;">
+                        <a href="index.html" class="logo-text"><span>网上银行后台管理系统</span></a>
+                    </div><!-- Logo Box -->
+                    <div class="search-button">
+                        <a href="javascript:void(0);" class="show-search"><i class="icon-magnifier"></i></a>
+                    </div>
+                    <div class="topmenu-outer">
+                        
+                    </div>
+                </div>
+            </div><!-- Navbar -->
+            <div class="page-sidebar sidebar">
+                <div class="page-sidebar-inner slimscroll">
+                    <ul class="menu accordion-menu">
+                        <li><a href="${pageContext.request.contextPath}/index" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>主页</p></a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/admin/bankcard/cardCheckShow" class="waves-effect waves-button"><span class="menu-icon icon-credit-card"></span><p>银行卡审核</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/companyfindAll" class="waves-effect waves-button"><span class="menu-icon icon-link"></span><p>公司申请审核</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/showrole" class="waves-effect waves-button"><span class="menu-icon icon-user-follow"></span><p>公司员工添加</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/tosave" class="waves-effect waves-button"><span class="menu-icon icon-list"></span><p>基金产品添加</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/findbymangerid" class="waves-effect waves-button"><span class="menu-icon icon-notebook"></span><p>产品信息管理</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/worklist/showWorklistList" class="waves-effect waves-button"><span class="menu-icon icon-earphones-alt"></span><p>客户服务单管理</p></a></li>
+                    </ul>
+                </div><!-- Page Sidebar Inner -->
+            </div><!-- Page Sidebar -->
+            <div class="page-inner">
+                <div class="page-title">
+                    <h3 class="breadcrumb-header">借记卡申请审核</h3>
+                    <div class="page-breadcrumb">
+                        <ol class="breadcrumb breadcrumb-with-header">
+                            <li class="active"></li>
+                        </ol>
+                    </div>
+                </div>
+                <div id="main-wrapper">
+                	<form action="${pageContext.request.contextPath}/admin/bankcard/UserIdentitySave" method="post">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="panel panel-white">
+                                <img  id="canvas"  style="width: 100%; height: auto; display: none" /> 
+                            </div>
+                        </div>
+                    </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-md-6">
+                        	<div class="row">
+                        	<img  id="faceimg" style="width: 100%; height: auto;" />
+                        	</div>
+                        	<div class="row">
+                            <div class="form-group col-md-6">
+                               <label for="exampleInputHolder">姓名</label>
+                               <input type="text" class="form-control" name="name" id="name">
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-3">
+                               <label for="exampleInputHolder">性别</label>
+                               <input type="text" class="form-control" name="sex" id="sex">
+                            </div>
+                            <div class="form-group col-md-3">
+                               <label for="exampleInputHolder">民族</label>
+                               <input type="text" class="form-control" name="nationality" id="nationality" >
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-8">
+                               <label for="exampleInputHolder">出生日期</label>
+                               <input type="text" class="form-control" name="birth" id="birth" >
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-12">
+                               <label for="exampleInputHolder">住址</label>
+                               <input type="text" class="form-control" name="address" id="address">
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-12">
+                               <label for="exampleInputHolder">身份证号</label>
+                               <input type="text" class="form-control" name="num" id="num">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        	<div class="row">
+                        		<img id="backimg" style="width: 100%; height: auto;" />
+                        	</div>
+                        	<div class="row">
+                            <div class="form-group col-md-12">
+                               <label for="exampleInputHolder">签发机关</label>
+                               <input type="text" class="form-control" name="issue" id="issue">
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-12">
+                               <label for="exampleInputHolder">有效期</label>
+                               <input type="text" class="form-control" name="end_date" id="end_date">
+                            </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12" style="text-align: center;">
+                               <button type="submit">审核通过</button>
+                            </div>
+                            </div>
+                    </div><!-- Row -->
+                    </form>
+                </div><!-- Main Wrapper -->
+                <div class="page-footer">
+                    <p class="no-s">Made with <i class="fa fa-heart"></i> by lizards</p>
+                </div>
+            </div><!-- Page Inner -->
+        </main><!-- Page Content -->
+        <nav class="cd-nav-container" id="cd-nav">
+            <header>
+                <h3>LAYERS</h3>
+            </header>
+            <div class="col-md-6 demo-block demo-selected demo-active">
+                <p>Dark<br>Design</p>
+            </div>
+            <div class="col-md-6 demo-block">
+                <a href="../admin2/index.html"><p>Light<br>Design</p></a>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Horizontal<br>(Coming)</p>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Material<br>(Coming)</p>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Coming<br>Soon</p>
+            </div>
+            <div class="col-md-6 demo-block demo-coming-soon">
+                <p>Coming<br>Soon</p>
+            </div>
+        </nav>
+        <div class="cd-overlay"></div>
+	
+
+        <!-- Javascripts -->
+        <script src="assets/plugins/jquery/jquery-3.1.0.min.js" th:src="@{/admin/assets/plugins/jquery/jquery-3.1.0.min.js}"></script>
+        <script src="assets/plugins/jquery-ui/jquery-ui.min.js" th:src="@{/admin/assets/plugins/jquery-ui/jquery-ui.min.js}"></script>
+        <script src="assets/plugins/pace-master/pace.min.js" th:src="@{/admin/assets/plugins/pace-master/pace.min.js}"></script>
+        <script src="assets/plugins/jquery-blockui/jquery.blockui.js" th:src="@{/admin/assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js" th:src="@{/admin/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" th:src="@{/admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+        <script src="assets/plugins/switchery/switchery.min.js" th:src="@{/admin/assets/plugins/switchery/switchery.min.js}"></script>
+        <script src="assets/plugins/uniform/js/jquery.uniform.standalone.js" th:src="@{/admin/assets/plugins/uniform/js/jquery.uniform.standalone.js}"></script>
+        <script src="assets/plugins/offcanvasmenueffects/js/classie.js" th:src="@{/admin/assets/plugins/offcanvasmenueffects/js/classie.js}"></script>
+        <script src="assets/plugins/waves/waves.min.js"  th:src="@{/admin/assets/plugins/waves/waves.min.js}"></script>
+        <script src="assets/plugins/3d-bold-navigation/js/main.js" th:src="@{/admin/assets/plugins/3d-bold-navigation/js/main.js}"></script>
+        <script src="assets/plugins/fullcalendar/lib/moment.min.js" th:src="@{/admin/assets/plugins/fullcalendar/lib/moment.min.js}"></script>
+        <script src="assets/plugins/fullcalendar/fullcalendar.min.js" th:src="@{/admin/assets/plugins/fullcalendar/fullcalendar.min.js}"></script>
+        <script src="assets/js/layers.min.js" th:src="@{/admin/assets/js/layers.min.js}"></script>
+        <script src="assets/js/pages/calendar.js" th:src="@{/admin/assets/js/pages/calendar.js}"></script>
+        <script type="text/javascript">
+        var timer;
+        var port = 13081;
+        $(function () {
+            var host = '127.0.0.1';
+            var url = 'ws://' + host + ':' + port + '/';
+            var w = new WebSocket(url);
+            var w2 = null;
+            w.onmessage = function (e) {
+            	port = e.data;
+            	url = 'ws://' + host + ':' + port + '/';
+                
+               // alert(port);
+                w2 = new WebSocket(url);
+                w2.onmessage = function (e2) {
+                	$("#canvas").attr("src", e2.data);
+                }
+                $.ajax({
+                	type:"POST",
+    				url:"${pageContext.request.contextPath}/admin/bankcard/PortUpload",
+    				data:{"port":port},
+    				success:function(data){
+    					//alert(port+"发送至服务器");
+    				}
+                });
+                timer = window.setInterval(update,1000);
+                w.close();
+            }
+            
+        });
+        function update(){
+        	$.ajax({
+				type:"POST",
+				url:"${pageContext.request.contextPath}/admin/bankcard/cardCheckUpdate",
+				
+				dataType:"json",
+				success:function(data){
+					var state = 0;
+					if(data.faceimg!=null){
+						state++
+						$("#faceimg").attr("src", data.faceimg);
+					}
+					if(data.backimg!=null){
+						state++
+						$("#backimg").attr("src", data.backimg);
+					}
+					if(data.facejson!=null){
+						state++
+						var faceobj = eval("("+data.facejson+")");
+						$("#name").val(faceobj.name);
+						$("#sex").val(faceobj.sex);
+						$("#nationality").val(faceobj.nationality);
+						$("#birth").val(faceobj.birth);
+						$("#address").val(faceobj.address);
+						$("#num").val(faceobj.num);
+					}
+					if(data.backjson!=null){
+						state++
+						var backobj = eval("("+data.backjson+")");
+						$("#issue").val(backobj.issue);
+						$("#end_date").val(backobj.end_date);
+					}
+					if(state==4){
+						window.clearInterval(timer);
+						$("#canvas").show();
+					}
+				}			
+			});
+        }
+    </script>
+        
+    </body>
+
+</html>

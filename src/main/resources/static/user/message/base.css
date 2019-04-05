@@ -1,0 +1,20 @@
+/* Code tidied up by ScrapBook */
+body { margin: 0px; padding: 0px; }
+div { margin: 0px; padding: 0px; }
+ul { margin: 0px; padding: 0px; }
+li { margin: 0px; padding: 0px; }
+form { margin: 0px; padding: 0px; }
+input { margin: 0px; padding: 0px; }
+th { margin: 0px; padding: 0px; }
+td { margin: 0px; padding: 0px; }
+div, dl, dt, dd, ul, ol, li, p { overflow: hidden; word-wrap: break-word; list-style: outside none none; }
+img { border: 0px none currentcolor; }
+table { border-collapse: collapse; border-spacing: 0px; }
+body { font: 12px 宋体,Arial,Helvetica,sans-serif; background-color: rgb(236, 237, 236); height: 100%; text-align: left; color: rgb(54, 54, 54); }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus { text-decoration: underline; }
+a { font-size: 12px; color: rgb(54, 54, 54); }
+a:hover { color: rgb(0, 102, 102); }
+a:focus { color: rgb(0, 102, 102); }
+select { border: 1px solid rgb(204, 204, 204); }

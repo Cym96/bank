@@ -1,0 +1,22 @@
+/* Code tidied up by ScrapBook */
+.qtip { box-shadow: none; direction: ltr; display: none; font-size: 10.5px; left: -28000px; line-height: 12px; max-width: 280px; min-width: 50px; padding: 0px; position: absolute; top: -28000px; }
+.qtip-content { overflow: hidden; padding: 5px 9px; position: relative; text-align: left; word-wrap: break-word; }
+.qtip-titlebar { border-width: 0px 0px 1px; font-weight: bold; overflow: hidden; padding: 5px 35px 5px 10px; position: relative; }
+.qtip-titlebar + .qtip-content { border-top-width: 0px ! important; }
+.qtip-close { border: 1px solid transparent; cursor: pointer; outline: medium none; position: absolute; right: -9px; top: -9px; z-index: 11; }
+.qtip-titlebar .qtip-close { margin-top: -9px; right: 4px; top: 50%; }
+* html .qtip-titlebar .qtip-close { top: 16px; }
+.qtip-titlebar .ui-icon, .qtip-icon .ui-icon { direction: ltr; display: block; text-indent: -1000em; }
+.qtip-icon, .qtip-icon .ui-icon { border-radius: 3px; text-decoration: none; }
+.qtip-icon .ui-icon { background: transparent none no-repeat scroll -100em -100em; color: inherit; font: bold 10px/14px Tahoma,sans-serif; height: 14px; text-align: center; text-indent: 0px; width: 18px; }
+.qtip-focus {  }
+.qtip-hover {  }
+.qtip-default { background-color: rgb(248, 248, 248); border: 1px solid rgb(248, 248, 248); border-radius: 5px; color: rgb(85, 85, 85); }
+.qtip-default .qtip-titlebar { background-color: rgb(255, 239, 147); }
+.qtip-default .qtip-icon { background: white none repeat scroll 0% 0%; border-color: rgb(204, 204, 204); color: rgb(119, 119, 119); }
+.qtip-default .qtip-titlebar .qtip-close { border-color: rgb(170, 170, 170); color: rgb(17, 17, 17); }
+.qtip-common { color: rgb(128, 128, 128); background-color: white; border: 1px solid rgb(170, 170, 170); }
+.qtip-common .qtip-titlebar { background-color: rgb(254, 254, 254); }
+.qtip-common .qtip-icon { background: rgb(241, 241, 241) none repeat scroll 0% 0%; border-color: rgb(204, 204, 204); color: rgb(119, 119, 119); }
+.qtip-common .qtip-titlebar .qtip-close { border-color: rgb(170, 170, 170); color: rgb(17, 17, 17); }
+.qtipmodal-ie6fix { position: absolute ! important; }

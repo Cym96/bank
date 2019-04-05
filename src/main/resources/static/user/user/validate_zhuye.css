@@ -1,0 +1,9 @@
+/* Code tidied up by ScrapBook */
+.zhanghu ul { width: 100%; margin: 0px auto; padding-top: 50px; }
+.zhanghu ul li span { display: inline-block; width: 180px; height: 40px; text-align: center; line-height: 40px; }
+.zhanghu ul .li_1 { background: rgb(248, 248, 248) none repeat scroll 0% 0%; }
+.zhanghu ul .li_2 { position: relative; line-height: 30px; }
+.zhanghu_a { width: 290px; position: absolute; right: 0px; top: 4px; }
+.zhanghu_a a { margin-left: 30px; text-decoration: underline; color: rgb(255, 169, 0); }
+.banner { height: 222px; margin: 30px auto 0px; }
+.banner div { width: 437px; height: 134px; }

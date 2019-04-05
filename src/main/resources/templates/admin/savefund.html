@@ -1,0 +1,371 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>维护基金产品</title>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta charset="UTF-8">
+<meta name="description" content="Admin Dashboard Template" />
+<meta name="keywords" content="admin,dashboard" />
+<meta name="author" content="Lalassu" />
+
+<!-- Styles -->
+<link href="assets/plugins/pace-master/themes/blue/pace-theme-flash.css" th:href="@{/admin/assets/plugins/pace-master/themes/blue/pace-theme-flash.css}"
+	rel="stylesheet" />
+<link href="assets/plugins/uniform/css/default.css" rel="stylesheet" th:href="@{/admin/assets/plugins/uniform/css/default.css}" />
+<link href="assets/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/admin/assets/plugins/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+<link href="assets/plugins/fontawesome/css/font-awesome.css" th:href="@{/admin/assets/plugins/fontawesome/css/font-awesome.css}"
+	rel="stylesheet" type="text/css" />
+<link href="assets/plugins/line-icons/simple-line-icons.css" th:href="@{/admin/assets/plugins/line-icons/simple-line-icons.css}"
+	rel="stylesheet" type="text/css" />
+<link href="assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" th:href="@{/admin/assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css}"
+	rel="stylesheet" type="text/css" />
+<link href="assets/plugins/waves/waves.min.css" rel="stylesheet" th:href="@{/admin/assets/plugins/waves/waves.min.css}"
+	type="text/css" />
+	<link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/switchery/switchery.min.css}"/>
+	<link href="assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/plugins/3d-bold-navigation/css/style.css}"/>
+
+	<link href="assets/plugins/slidepushmenus/css/component.css" th:href="@{/admin/assets/plugins/slidepushmenus/css/component.css}"
+	rel="stylesheet" type="text/css" />
+<link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css"
+	rel="stylesheet" type="text/css" />
+<!-- Theme Styles -->
+	<link href="assets/css/layers.min.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/css/layers.min.css}"/>
+	<link href="assets/css/layers/dark-layer.css" th:href="@{/admin/assets/css/layers/dark-layer.css}" class="theme-color" rel="stylesheet" type="text/css"/>
+	<link href="assets/css/custom.css" rel="stylesheet" type="text/css" th:href="@{/admin/assets/css/custom.css}"/>
+
+	<script src="assets/plugins/3d-bold-navigation/js/modernizr.js" th:href="@{/admin/assets/plugins/3d-bold-navigation/js/modernizr.js}"></script>
+	<script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js" th:href="@{/admin/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js}"></script>
+
+
+	<link
+	href="assets/plugins/x-editable/bootstrap3-editable/css/bootstrap-editable.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="assets/plugins/x-editable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css"
+	rel="stylesheet" type="text/css">
+<link href="assets/plugins/x-editable/inputs-ext/address/address.css"
+	rel="stylesheet" type="text/css">
+<link href="assets/plugins/select2-3.4.8/select2.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" type="text/css">
+<!-- Styles -->
+<link href="assets/plugins/summernote-master/summernote.css" th:href="@{assets/plugins/summernote-master/summernote.css}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css"
+	rel="stylesheet" type="text/css" />
+<link href="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"
+	rel="stylesheet" type="text/css" />
+	<script src="js/jquery.e-calendar.js"></script>
+</head>
+<body class="compact-menu">
+        <div class="overlay"></div>
+
+        <form class="search-form" action="#" method="GET">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default close-search" type="button"><i class="icon-close"></i></button>
+                </span>
+            </div><!-- Input Group -->
+        </form><!-- Search Form -->
+        <main class="page-content content-wrap">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="sidebar-pusher">
+                        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="logo-box" style="width: 200px;">
+                        <a href="index.html" class="logo-text"><span>网上银行后台管理系统</span></a>
+                    </div><!-- Logo Box -->
+                    <div class="search-button">
+                        <a href="javascript:void(0);" class="show-search"><i class="icon-magnifier"></i></a>
+                    </div>
+                    <div class="topmenu-outer">
+                        
+                    </div>
+                </div>
+            </div><!-- Navbar -->
+            <div class="page-sidebar sidebar">
+                <div class="page-sidebar-inner slimscroll">
+                    <ul class="menu accordion-menu">
+                        <li><a href="${pageContext.request.contextPath}/index" class="waves-effect waves-button"><span class="menu-icon icon-home"></span><p>主页</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/bankcard/cardCheckShow" class="waves-effect waves-button"><span class="menu-icon icon-credit-card"></span><p>银行卡审核</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/companyfindAll" class="waves-effect waves-button"><span class="menu-icon icon-link"></span><p>公司申请审核</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/showrole" class="waves-effect waves-button"><span class="menu-icon icon-user-follow"></span><p>公司员工添加</p></a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/admin/tosave" class="waves-effect waves-button"><span class="menu-icon icon-list"></span><p>基金产品添加</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/findbymangerid" class="waves-effect waves-button"><span class="menu-icon icon-notebook"></span><p>产品信息管理</p></a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/worklist/showWorklistList" class="waves-effect waves-button"><span class="menu-icon icon-earphones-alt"></span><p>客户服务单管理</p></a></li>
+                    </ul>
+                </div><!-- Page Sidebar Inner -->
+            </div><!-- Page Sidebar -->
+	<!-- Page Sidebar -->
+	<div class="page-inner">
+		<div class="page-title">
+			<h3 class="breadcrumb-header">添加基金产品</h3>
+			<div class="page-breadcrumb">
+				<ol class="breadcrumb breadcrumb-with-header">
+					<li><a href="index.html">Home</a></li>
+					<!-- <li><a href="#">Forms</a></li> -->
+					<li class="active">添加基金产品</li>
+				</ol>
+			</div>
+		</div>
+		<div id="main-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-white">
+						<div class="panel-body">
+							<div id="rootwizard">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#tab1"
+										data-toggle="tab"><i class="fa fa-user m-r-xs icon-wallet"></i>基金产品信息</a></li>
+								</ul>
+								<div class="progress progress-sm m-t-sm">
+									<div class="progress-bar progress-bar-info" role="progressbar"
+										aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+										style="width: 0%"></div>
+								</div>
+<form id="savefundForm" name="savefundForm" method="post" th:action="@{/admin/save}">
+<div class="tab-content">
+	<div class="tab-pane active fade in" id="tab1">
+		<div class="row m-b-lg">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12">
+<div class="form-group col-md-3">
+	<label for="fundName">基金名称</label>
+	<input type="text" class="form-control  col-md-3" name="fundName" th:name="fundName"
+		   id="fundName" placeholder="基金名称">
+</div>
+<div class="form-group  col-md-3">
+	<label for="fundNum">产品代码</label>
+	<input type="text" class="form-control col-md-3" name="fundNum" th:name="fundNum" id="fundNum" placeholder="产品代码">
+</div>
+	<div class="form-group  col-md-3">
+		<label for="fundProductstate">基金产品类型</label>
+		<select class="form-group col-md-3" style="width: 235px; height: 35px; border-color: rgb(220, 225, 228); border-radius: 3px"
+			name="fundProductstate" th:name="fundProductstate" id="fundProductstate">
+			<option>请选择基金产品类型</option>
+			<option th:each="productstate:${productstateList}" th:value="${productstate.stateId}" th:text="${productstate.stateName}"></option>
+
+		</select>
+
+	</div>
+	<div class="form-group  col-md-3">
+		<label for="fundInveststate">基金投资类型</label>
+		<select  class="form-group col-md-3" style="width: 235px; height: 35px; border-color: rgb(220, 225, 228); border-radius: 3px" name="fundInveststate" th:name="fundInveststate" id="fundInveststate">
+			<option>请选择基金类型</option>
+			<option th:each="investstate:${investstateList}" th:value="${investstate.stateId}" th:text="${investstate.stateName}"></option>
+		</select>
+	</div>
+
+
+	</div>
+	<div class="col-md-12">
+<div class="form-group  col-md-4">
+		<label for="fundManager">基金经理</label>
+		<select class="form-group col-md-3" style="width: 350px; height: 37px; border-color: rgb(220, 225, 228); border-radius: 3px"
+			name="fundManager" th:name="fundManager"  id="fundManager">
+			<option>请选择基金经理</option>
+			<option th:each="admin:${adminList}" th:value="${admin.adminId}" th:text="${admin.adminRelname}"></option>
+		</select>
+
+	</div>
+
+<div class="form-group  col-md-3">
+<label for="fundMinbuymoney">最低申购</label>
+	<input type="text" class="form-control col-md-3" name="fundMinbuymoney" th:name="fundMinbuymoney" id="fundMinbuymoney" placeholder="最低申购">
+</div>
+<div class="form-group  col-md-3">
+<label for="fundBuyratio">申购费率</label>
+	<input type="text" class="form-control col-md-3" name="fundBuyratio" id="fundBuyratio" th:name="fundBuyratio" placeholder="申购费率">
+</div>
+<div class="form-group  col-md-3">
+<label for="fundMinsalemoney">最低赎回份额</label>
+	<input type="text" class="form-control col-md-3" name="fundMinsalemoney" id="fundMinsalemoney" th:name="fundMinsalemoney" placeholder="最低赎回份额">
+</div>
+<div class="form-group  col-md-3">
+<label for="fundSaleratio">赎回费率</label>
+	<input type="text" class="form-control col-md-3" name="fundSaleratio" id="fundSaleratio" th:name="fundSaleratio" placeholder="赎回费率">
+</div>
+</div>
+<div class="col-md-12">
+
+
+
+<div class="form-group  col-md-3">
+<label for="fundSalebegintime">售卖起始时间</label>
+	<input class="form-control date-picker col-md-3" name="fundSalebegintime" th:name="fundSalebegintime" id="fundSalebegintime" placeholder="预售起始时间">
+</div>
+
+<div class="form-group  col-md-3">
+	<label for="fundWorkbegintime">售卖结束时间</label>
+	<input class="form-control date-picker col-md-3"  name="fundWorkbegintime" th:name="fundWorkbegintime" id="fundWorkbegintime" placeholder="结束时间">
+</div>
+
+<!--<div class="form-group  col-md-3">-->
+<!--<label for="fundWorkbegintime">结束时间</label>-->
+	<!--<input class="form-control date-picker col-md-3"-->
+		   <!--name="fundWorkbegintime" th:name="fundWorkbegintime" id="fundWorkbegintime" placeholder="结束时间">-->
+<!--</div>-->
+<!--<div class="form-group  col-md-3">-->
+<!--<label for="fundNpv">当前净值</label>-->
+	<!--<input type="text" class="form-control col-md-3" name="fundNpv" id="fundNpv" placeholder="当前净值">-->
+<!--</div>-->
+													<!--		<div class="form-group  col-md-3">
+
+																<label for="fundManager">基金经理</label> <select
+																	name="fundManager" id="fundManager"
+																	class="form-group col-md-3"
+																	style="width: 235px; height: 35px; border-color: rgb(220, 225, 228); border-radius: 3px">
+																	<c:forEach items="${adminList}" var="admin">
+																		<option value="${admin.adminId}">${admin.adminName}</option>
+
+																	</c:forEach>
+																</select>
+
+															</div>-->
+														</div>
+														<div class="col-md-12">
+															
+															
+														</div>
+
+
+
+
+<div class="form-group col-md-12">
+	<label for="fundText">基金介绍</label>
+	 <div>
+	 <textarea placeholder="基金介绍" class="note-codable col-md-12 form-control"
+			  th:name="fundText" name="fundText" id="fundText" th:inline="text"></textarea>
+	 </div>
+</div>
+
+													</div>
+													<!-- 1 -->
+												</div>
+												<!-- 2 -->
+											</div>
+											<!-- 3 -->
+											<ul class="pager ">
+												<li class="previous"><a
+													href="javascript:document.savefundForm.submit();"
+													class="btn btn-dufault">保存基金</a></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Row -->
+		</div>
+		<!-- Main Wrapper -->
+		<div class="page-footer">
+			<p class="no-s">
+				Made with <i class="fa fa-heart"></i> by lizards
+			</p>
+		</div>
+	</div>
+	<!-- Page Inner --> </main>
+	<!-- Page Content -->
+	<nav class="cd-nav-container" id="cd-nav"> <header>
+	<h3>LAYERS</h3>
+	</header>
+	<div class="col-md-6 demo-block demo-selected demo-active">
+		<p>
+			Dark<br>Design
+		</p>
+	</div>
+	<div class="col-md-6 demo-block">
+		<a href="../admin2/index.html"><p>
+				Light<br>Design
+			</p></a>
+	</div>
+	<div class="col-md-6 demo-block demo-coming-soon">
+		<p>
+			Horizontal<br>(Coming)
+		</p>
+	</div>
+	<div class="col-md-6 demo-block demo-coming-soon">
+		<p>
+			Material<br>(Coming)
+		</p>
+	</div>
+	<div class="col-md-6 demo-block demo-coming-soon">
+		<p>
+			Coming<br>Soon
+		</p>
+	</div>
+	<div class="col-md-6 demo-block demo-coming-soon">
+		<p>
+			Coming<br>Soon
+		</p>
+	</div>
+	</nav>
+	<div class="cd-overlay"></div>
+
+
+	<!-- Javascripts -->
+	<script src="assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+	<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script src="assets/plugins/pace-master/pace.min.js"></script>
+	<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/plugins/switchery/switchery.min.js"></script>
+	<script src="assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+	<script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
+	<script src="assets/plugins/waves/waves.min.js"></script>
+	<script src="assets/plugins/3d-bold-navigation/js/main.js"></script>
+	<script
+		src="assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+	<script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="assets/js/layers.min.js"></script>
+	<script src="assets/js/pages/form-savefund.js"></script>
+
+	<!-- Javascripts -->
+	<script src="assets/plugins/jquery-mockjax-master/jquery.mockjax.js"></script>
+	<script src="assets/plugins/moment/moment.js"></script>
+	<script
+		src="assets/plugins/x-editable/bootstrap3-editable/js/bootstrap-editable.js"></script>
+	<script
+		src="assets/plugins/x-editable/inputs-ext/typeaheadjs/lib/typeahead.js"></script>
+	<script
+		src="assets/plugins/x-editable/inputs-ext/typeaheadjs/typeaheadjs.js"></script>
+	<script src="assets/plugins/x-editable/inputs-ext/address/address.js"></script>
+	<script src="assets/plugins/select2-3.4.8/select2.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="assets/js/layers.min.js"></script>
+	<script src="assets/js/pages/form-x-editable.js"></script>
+	<!-- Javascripts -->
+	<script src="assets/plugins/summernote-master/summernote.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script
+		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+	<script
+		src="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+	<script src="assets/js/layers.min.js"></script>
+	<script src="assets/js/pages/form-elements.js"></script>
+
+</body>
+</html>

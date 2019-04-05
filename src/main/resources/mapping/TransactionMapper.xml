@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.TransactionMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Transaction" >
+    <id column="transaction_id" property="transactionId" jdbcType="INTEGER" />
+    <result column="transaction_dotime" property="transactionDotime" jdbcType="TIMESTAMP" />
+    <result column="transaction_card" property="transactionCard" jdbcType="VARCHAR" />
+    <result column="transaction_money" property="transactionMoney" jdbcType="DECIMAL" />
+    <result column="transaction_dostate" property="transactionDostate" jdbcType="INTEGER" />
+    <result column="transaction_business" property="transactionBusiness" jdbcType="INTEGER" />
+    <result column="transaction_message" property="transactionMessage" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    transaction_id, transaction_dotime, transaction_card, transaction_money, transaction_dostate, 
+    transaction_business, transaction_message
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from transaction
+    where transaction_id = #{transactionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from transaction
+    where transaction_id = #{transactionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Transaction" >
+    insert into transaction (transaction_id, transaction_dotime, 
+      transaction_card, transaction_money, transaction_dostate, 
+      transaction_business, transaction_message
+      )
+    values (#{transactionId,jdbcType=INTEGER}, #{transactionDotime,jdbcType=TIMESTAMP}, 
+      #{transactionCard,jdbcType=VARCHAR}, #{transactionMoney,jdbcType=DECIMAL}, #{transactionDostate,jdbcType=INTEGER}, 
+      #{transactionBusiness,jdbcType=INTEGER}, #{transactionMessage,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Transaction" >
+    insert into transaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transactionId != null" >
+        transaction_id,
+      </if>
+      <if test="transactionDotime != null" >
+        transaction_dotime,
+      </if>
+      <if test="transactionCard != null" >
+        transaction_card,
+      </if>
+      <if test="transactionMoney != null" >
+        transaction_money,
+      </if>
+      <if test="transactionDostate != null" >
+        transaction_dostate,
+      </if>
+      <if test="transactionBusiness != null" >
+        transaction_business,
+      </if>
+      <if test="transactionMessage != null" >
+        transaction_message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=INTEGER},
+      </if>
+      <if test="transactionDotime != null" >
+        #{transactionDotime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transactionCard != null" >
+        #{transactionCard,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionMoney != null" >
+        #{transactionMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="transactionDostate != null" >
+        #{transactionDostate,jdbcType=INTEGER},
+      </if>
+      <if test="transactionBusiness != null" >
+        #{transactionBusiness,jdbcType=INTEGER},
+      </if>
+      <if test="transactionMessage != null" >
+        #{transactionMessage,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Transaction" >
+    update transaction
+    <set >
+      <if test="transactionDotime != null" >
+        transaction_dotime = #{transactionDotime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transactionCard != null" >
+        transaction_card = #{transactionCard,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionMoney != null" >
+        transaction_money = #{transactionMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="transactionDostate != null" >
+        transaction_dostate = #{transactionDostate,jdbcType=INTEGER},
+      </if>
+      <if test="transactionBusiness != null" >
+        transaction_business = #{transactionBusiness,jdbcType=INTEGER},
+      </if>
+      <if test="transactionMessage != null" >
+        transaction_message = #{transactionMessage,jdbcType=INTEGER},
+      </if>
+    </set>
+    where transaction_id = #{transactionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Transaction" >
+    update transaction
+    set transaction_dotime = #{transactionDotime,jdbcType=TIMESTAMP},
+      transaction_card = #{transactionCard,jdbcType=VARCHAR},
+      transaction_money = #{transactionMoney,jdbcType=DECIMAL},
+      transaction_dostate = #{transactionDostate,jdbcType=INTEGER},
+      transaction_business = #{transactionBusiness,jdbcType=INTEGER},
+      transaction_message = #{transactionMessage,jdbcType=INTEGER}
+    where transaction_id = #{transactionId,jdbcType=INTEGER}
+  </update>
+</mapper>

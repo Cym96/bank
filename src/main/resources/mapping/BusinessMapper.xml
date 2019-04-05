@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.BusinessMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Business" >
+    <id column="business_id" property="businessId" jdbcType="INTEGER" />
+    <result column="business_time" property="businessTime" jdbcType="TIMESTAMP" />
+    <result column="business_money" property="businessMoney" jdbcType="DECIMAL" />
+    <result column="business_owncard" property="businessOwncard" jdbcType="VARCHAR" />
+    <result column="business_orthercard" property="businessOrthercard" jdbcType="VARCHAR" />
+    <result column="business_text" property="businessText" jdbcType="VARCHAR" />
+    <result column="business_dostate" property="businessDostate" jdbcType="INTEGER" />
+    <result column="business_checkstate" property="businessCheckstate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    business_id, business_time, business_money, business_owncard, business_orthercard, 
+    business_text, business_dostate, business_checkstate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from business
+    where business_id = #{businessId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from business
+    where business_id = #{businessId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Business" >
+    insert into business (business_id, business_time, business_money, 
+      business_owncard, business_orthercard, business_text, 
+      business_dostate, business_checkstate)
+    values (#{businessId,jdbcType=INTEGER}, #{businessTime,jdbcType=TIMESTAMP}, #{businessMoney,jdbcType=DECIMAL}, 
+      #{businessOwncard,jdbcType=VARCHAR}, #{businessOrthercard,jdbcType=VARCHAR}, #{businessText,jdbcType=VARCHAR}, 
+      #{businessDostate,jdbcType=INTEGER}, #{businessCheckstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Business" >
+    insert into business
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="businessId != null" >
+        business_id,
+      </if>
+      <if test="businessTime != null" >
+        business_time,
+      </if>
+      <if test="businessMoney != null" >
+        business_money,
+      </if>
+      <if test="businessOwncard != null" >
+        business_owncard,
+      </if>
+      <if test="businessOrthercard != null" >
+        business_orthercard,
+      </if>
+      <if test="businessText != null" >
+        business_text,
+      </if>
+      <if test="businessDostate != null" >
+        business_dostate,
+      </if>
+      <if test="businessCheckstate != null" >
+        business_checkstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="businessId != null" >
+        #{businessId,jdbcType=INTEGER},
+      </if>
+      <if test="businessTime != null" >
+        #{businessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessMoney != null" >
+        #{businessMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="businessOwncard != null" >
+        #{businessOwncard,jdbcType=VARCHAR},
+      </if>
+      <if test="businessOrthercard != null" >
+        #{businessOrthercard,jdbcType=VARCHAR},
+      </if>
+      <if test="businessText != null" >
+        #{businessText,jdbcType=VARCHAR},
+      </if>
+      <if test="businessDostate != null" >
+        #{businessDostate,jdbcType=INTEGER},
+      </if>
+      <if test="businessCheckstate != null" >
+        #{businessCheckstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Business" >
+    update business
+    <set >
+      <if test="businessTime != null" >
+        business_time = #{businessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessMoney != null" >
+        business_money = #{businessMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="businessOwncard != null" >
+        business_owncard = #{businessOwncard,jdbcType=VARCHAR},
+      </if>
+      <if test="businessOrthercard != null" >
+        business_orthercard = #{businessOrthercard,jdbcType=VARCHAR},
+      </if>
+      <if test="businessText != null" >
+        business_text = #{businessText,jdbcType=VARCHAR},
+      </if>
+      <if test="businessDostate != null" >
+        business_dostate = #{businessDostate,jdbcType=INTEGER},
+      </if>
+      <if test="businessCheckstate != null" >
+        business_checkstate = #{businessCheckstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where business_id = #{businessId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Business" >
+    update business
+    set business_time = #{businessTime,jdbcType=TIMESTAMP},
+      business_money = #{businessMoney,jdbcType=DECIMAL},
+      business_owncard = #{businessOwncard,jdbcType=VARCHAR},
+      business_orthercard = #{businessOrthercard,jdbcType=VARCHAR},
+      business_text = #{businessText,jdbcType=VARCHAR},
+      business_dostate = #{businessDostate,jdbcType=INTEGER},
+      business_checkstate = #{businessCheckstate,jdbcType=INTEGER}
+    where business_id = #{businessId,jdbcType=INTEGER}
+  </update>
+</mapper>

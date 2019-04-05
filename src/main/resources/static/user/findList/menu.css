@@ -1,0 +1,31 @@
+/* Code tidied up by ScrapBook */
+.navbar-brand { float: left; padding: 10px 15px; font-size: 18px; line-height: 20px; height: 50px; }
+.navbar-brand:hover, .navbar-brand:focus { text-decoration: none; }
+.navbar-brand > img { display: block; }
+.navBox { height: 60px; width: 900px; font-size: 16px; line-height: 35px; overflow: hidden; position: absolute; left: 230px; z-index: 20; }
+.navBoxUl { list-style-type: none; margin-top: 15px; margin-bottom: 0px; z-index: 30; }
+.navBoxUl li { float: left; padding: 0px 25px; text-align: center; height: 35px; box-sizing: border-box; }
+.navBoxUl li.last-child { padding: 0px 12px; }
+.navBoxUl li a { text-decoration: none; color: rgb(0, 0, 0); }
+.navBoxUl li.lactive { border-width: 2px 1px medium; border-style: solid solid none; border-color: rgb(51, 220, 208) rgb(51, 220, 208) -moz-use-text-color; background-color: rgb(255, 255, 255); }
+.navBoxUl li a.lactive { color: rgb(51, 220, 208); font-weight: bold; }
+.sndMenuContainer { z-index: 10; width: 850px; height: 250px; position: absolute; top: 48px; left: 280px; background-color: rgb(255, 255, 255); font-size: 16px; line-height: 40px; display: none; border: 1px solid rgb(51, 220, 208); }
+.sndMenuUl { list-style-type: none; display: inline-block; position: absolute; margin-top: 20px; width: 100%; }
+.sndMenuUl li { float: left; text-align: center; margin-left: 30px; }
+.sndMenuUl li a { text-decoration: none; color: rgb(97, 78, 60); }
+.sndMenuUl li a:hover { font-weight: bold; }
+.sndMenuUl li img { height: 5px; margin-left: 2px; vertical-align: middle; }
+.sndMenuContainer .trdUl { list-style-type: none; padding: 0px; }
+.sndMenuContainer .trdUl li { font-size: 14px; float: none; text-align: left; line-height: 30px; }
+.trdMenuContainer { font-size: 14px; line-height: 30px; position: absolute; z-index: 15; }
+.trdMenuUl { list-style-type: none; border: 1px solid rgb(242, 242, 242); }
+.trdMenuUl li { height: 30px; line-height: 30px; border-bottom: 1px solid rgb(242, 242, 242); text-align: center; padding: 0px 20px; }
+.trdMenuUl li:last-child { border-bottom: medium none; }
+.trdMenuUl li:hover { cursor: pointer; background-color: rgb(242, 242, 242); }
+.trdMenuUl li a { text-decoration: none; color: rgb(97, 78, 60); }
+@media screen and (min-width: 40em) {
+  .nav-collapse li { float: left; margin-left: 35px; text-align: center; height: 35px; }
+}
+@media screen and (min-width: 40em) {
+  .nav-collapse a { margin: 0px; padding: 1em; float: left; text-align: center; border-bottom: 0px none; border-right: 1px solid white; }
+}

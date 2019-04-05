@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.CreditcardMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Creditcard" >
+    <id column="card_num" property="cardNum" jdbcType="VARCHAR" />
+    <result column="card_lendmoney" property="cardLendmoney" jdbcType="DECIMAL" />
+    <result column="card_maxmoney" property="cardMaxmoney" jdbcType="DECIMAL" />
+    <result column="card_user" property="cardUser" jdbcType="INTEGER" />
+    <result column="card_returntime" property="cardReturntime" jdbcType="TIMESTAMP" />
+    <result column="card_state" property="cardState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    card_num, card_lendmoney, card_maxmoney, card_user, card_returntime, card_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from creditcard
+    where card_num = #{cardNum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from creditcard
+    where card_num = #{cardNum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Creditcard" >
+    insert into creditcard (card_num, card_lendmoney, card_maxmoney, 
+      card_user, card_returntime, card_state
+      )
+    values (#{cardNum,jdbcType=VARCHAR}, #{cardLendmoney,jdbcType=DECIMAL}, #{cardMaxmoney,jdbcType=DECIMAL}, 
+      #{cardUser,jdbcType=INTEGER}, #{cardReturntime,jdbcType=TIMESTAMP}, #{cardState,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Creditcard" >
+    insert into creditcard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cardNum != null" >
+        card_num,
+      </if>
+      <if test="cardLendmoney != null" >
+        card_lendmoney,
+      </if>
+      <if test="cardMaxmoney != null" >
+        card_maxmoney,
+      </if>
+      <if test="cardUser != null" >
+        card_user,
+      </if>
+      <if test="cardReturntime != null" >
+        card_returntime,
+      </if>
+      <if test="cardState != null" >
+        card_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cardNum != null" >
+        #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardLendmoney != null" >
+        #{cardLendmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cardMaxmoney != null" >
+        #{cardMaxmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cardUser != null" >
+        #{cardUser,jdbcType=INTEGER},
+      </if>
+      <if test="cardReturntime != null" >
+        #{cardReturntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardState != null" >
+        #{cardState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Creditcard" >
+    update creditcard
+    <set >
+      <if test="cardLendmoney != null" >
+        card_lendmoney = #{cardLendmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cardMaxmoney != null" >
+        card_maxmoney = #{cardMaxmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cardUser != null" >
+        card_user = #{cardUser,jdbcType=INTEGER},
+      </if>
+      <if test="cardReturntime != null" >
+        card_returntime = #{cardReturntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardState != null" >
+        card_state = #{cardState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where card_num = #{cardNum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Creditcard" >
+    update creditcard
+    set card_lendmoney = #{cardLendmoney,jdbcType=DECIMAL},
+      card_maxmoney = #{cardMaxmoney,jdbcType=DECIMAL},
+      card_user = #{cardUser,jdbcType=INTEGER},
+      card_returntime = #{cardReturntime,jdbcType=TIMESTAMP},
+      card_state = #{cardState,jdbcType=INTEGER}
+    where card_num = #{cardNum,jdbcType=VARCHAR}
+  </update>
+</mapper>

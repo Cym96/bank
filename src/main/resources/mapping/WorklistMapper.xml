@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.WorklistMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Worklist" >
+    <id column="wordlist_id" property="wordlistId" jdbcType="INTEGER" />
+    <result column="wordlist_num" property="wordlistNum" jdbcType="INTEGER" />
+    <result column="worklist_text" property="worklistText" jdbcType="VARCHAR" />
+    <result column="worklist_time" property="worklistTime" jdbcType="TIMESTAMP" />
+    <result column="worklist_state" property="worklistState" jdbcType="INTEGER" />
+    <result column="worklist_fund" property="worklistFund" jdbcType="INTEGER" />
+    <result column="wordlist_user" property="wordlistUser" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wordlist_id, wordlist_num, worklist_text, worklist_time, worklist_state, worklist_fund, 
+    wordlist_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from worklist
+    where wordlist_id = #{wordlistId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from worklist
+    where wordlist_id = #{wordlistId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Worklist" >
+    insert into worklist (wordlist_id, wordlist_num, worklist_text, 
+      worklist_time, worklist_state, worklist_fund, 
+      wordlist_user)
+    values (#{wordlistId,jdbcType=INTEGER}, #{wordlistNum,jdbcType=INTEGER}, #{worklistText,jdbcType=VARCHAR}, 
+      #{worklistTime,jdbcType=TIMESTAMP}, #{worklistState,jdbcType=INTEGER}, #{worklistFund,jdbcType=INTEGER}, 
+      #{wordlistUser,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Worklist" >
+    insert into worklist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wordlistId != null" >
+        wordlist_id,
+      </if>
+      <if test="wordlistNum != null" >
+        wordlist_num,
+      </if>
+      <if test="worklistText != null" >
+        worklist_text,
+      </if>
+      <if test="worklistTime != null" >
+        worklist_time,
+      </if>
+      <if test="worklistState != null" >
+        worklist_state,
+      </if>
+      <if test="worklistFund != null" >
+        worklist_fund,
+      </if>
+      <if test="wordlistUser != null" >
+        wordlist_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wordlistId != null" >
+        #{wordlistId,jdbcType=INTEGER},
+      </if>
+      <if test="wordlistNum != null" >
+        #{wordlistNum,jdbcType=INTEGER},
+      </if>
+      <if test="worklistText != null" >
+        #{worklistText,jdbcType=VARCHAR},
+      </if>
+      <if test="worklistTime != null" >
+        #{worklistTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="worklistState != null" >
+        #{worklistState,jdbcType=INTEGER},
+      </if>
+      <if test="worklistFund != null" >
+        #{worklistFund,jdbcType=INTEGER},
+      </if>
+      <if test="wordlistUser != null" >
+        #{wordlistUser,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Worklist" >
+    update worklist
+    <set >
+      <if test="wordlistNum != null" >
+        wordlist_num = #{wordlistNum,jdbcType=INTEGER},
+      </if>
+      <if test="worklistText != null" >
+        worklist_text = #{worklistText,jdbcType=VARCHAR},
+      </if>
+      <if test="worklistTime != null" >
+        worklist_time = #{worklistTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="worklistState != null" >
+        worklist_state = #{worklistState,jdbcType=INTEGER},
+      </if>
+      <if test="worklistFund != null" >
+        worklist_fund = #{worklistFund,jdbcType=INTEGER},
+      </if>
+      <if test="wordlistUser != null" >
+        wordlist_user = #{wordlistUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    where wordlist_id = #{wordlistId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Worklist" >
+    update worklist
+    set wordlist_num = #{wordlistNum,jdbcType=INTEGER},
+      worklist_text = #{worklistText,jdbcType=VARCHAR},
+      worklist_time = #{worklistTime,jdbcType=TIMESTAMP},
+      worklist_state = #{worklistState,jdbcType=INTEGER},
+      worklist_fund = #{worklistFund,jdbcType=INTEGER},
+      wordlist_user = #{wordlistUser,jdbcType=INTEGER}
+    where wordlist_id = #{wordlistId,jdbcType=INTEGER}
+  </update>
+</mapper>

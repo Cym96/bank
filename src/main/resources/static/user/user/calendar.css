@@ -1,0 +1,90 @@
+/* Code tidied up by ScrapBook */
+div.zabuto_calendar { position: relative; margin: 0px; padding: 0px; }
+div.zabuto_calendar .table { width: 435px; margin: 0px; padding: 0px; float: left; background: transparent none repeat scroll 0% 0%; border-radius: 15px; overflow: visible; }
+div.zabuto_calendar .table th, div.zabuto_calendar .table td { padding: 4px 2px; text-align: center; }
+div.zabuto_calendar .table tr th, div.zabuto_calendar .table tr td {  }
+div.zabuto_calendar .table tr.calendar-month-header th { background-color: rgb(250, 250, 250); }
+div.zabuto_calendar .table tr.calendar-month-header th span { cursor: pointer; display: inline-block; padding: 3px; font-size: 20px; line-height: 60px; }
+div.zabuto_calendar .table tr.calendar-dow-header th { background-color: rgb(240, 240, 240); font-size: 16px; color: rgb(92, 189, 175); padding-top: 8px; padding-bottom: 8px; }
+div.zabuto_calendar .table tr.calendar-month-header th { padding-top: 0px; padding-bottom: 0px; }
+div.zabuto_calendar .table-bordered tr.calendar-month-header th { border-left: 0px none; border-right: 0px none; }
+div.zabuto_calendar .table-bordered tr.calendar-month-header th:first-child { border-left: 1px solid rgb(221, 221, 221); }
+.calendar-month-header { border-style: none; }
+div.zabuto_calendar div.calendar-month-navigation { width: 70px; cursor: pointer; margin: 0px; padding: 0px; }
+div.zabuto_calendar tr.calendar-dow-header th, div.zabuto_calendar tr.calendar-dow td { width: 14%; }
+.calendar-dow { border-style: none; }
+div.zabuto_calendar .table tr td { padding: 10px 0px; margin: 0px; }
+div.zabuto_calendar .table tr td.event div.day, div.zabuto_calendar ul.legend li.event { background-color: rgb(255, 240, 195); }
+div.zabuto_calendar .table tr td.dow-clickable, div.zabuto_calendar .table tr td.event-clickable { cursor: pointer; }
+.dow-clickable div { border-radius: 50%; width: 30px; height: 30px; text-align: center; line-height: 30px; }
+div.zabuto_calendar .badge-today, div.zabuto_calendar div.legend span.badge-today { background-color: rgb(53, 126, 189); color: rgb(255, 255, 255); text-shadow: none; }
+div.zabuto_calendar .badge-event, div.zabuto_calendar div.legend span.badge-event { background-color: rgb(255, 155, 8); color: rgb(255, 255, 255); text-shadow: none; }
+div.zabuto_calendar .badge-event { font-size: 0.95em; padding-left: 8px; padding-right: 8px; padding-bottom: 4px; }
+div.zabuto_calendar div.legend { margin-top: 0px; text-align: right; background: rgb(250, 250, 250) none repeat scroll 0% 0%; width: 50%; float: left; height: 225px; }
+div.zabuto_calendar div.legend span { color: rgb(153, 153, 153); font-size: 10px; font-weight: normal; }
+div.zabuto_calendar div.legend span.legend-text::after, div.zabuto_calendar div.legend span.legend-block::after, div.zabuto_calendar div.legend span.legend-list::after, div.zabuto_calendar div.legend span.legend-spacer::after { content: " "; }
+div.zabuto_calendar div.legend span.legend-spacer { padding-left: 25px; }
+div.zabuto_calendar ul.legend > span { padding-left: 2px; }
+div.zabuto_calendar ul.legend { display: inline-block; list-style: outside none none; margin: 0px; padding: 0px; }
+div.zabuto_calendar ul.legend li { display: inline-block; height: 11px; width: 11px; margin-left: 5px; }
+div.zabuto_calendar ul.legend div.zabuto_calendar ul.legend li:first-child { margin-left: 7px; }
+div.zabuto_calendar ul.legend li:last-child { margin-right: 5px; }
+div.zabuto_calendar div.legend span.badge { font-size: 0.9em; border-radius: 5px; padding: 2px 5px 3px; }
+div.eventlist { margin-top: 0px; text-align: center; float: left; width: 435px; height: 390px ! important; border-left: 2px solid rgb(92, 189, 175); }
+.eventtitle { width: 431px; padding: 8px 3px 3px; border-bottom: 1px solid rgb(221, 221, 221); }
+.addEvent { float: right; cursor: pointer; width: 70px; line-height: 42px; margin-right: 5px; font-size: 14px; text-align: right; color: rgb(255, 169, 0); background: transparent url("add.png") no-repeat scroll 15px center; }
+.eventcontent { overflow-y: auto; overflow-x: hidden; width: 100%; }
+.editEvent { height: 66px; margin-left: 5px; margin-right: 5px; line-height: 66px; text-decoration: underline; color: rgb(255, 169, 0); }
+.calendartoday { background: rgb(92, 189, 175) none repeat scroll 0% 0%; margin-left: 22%; }
+.itemclick div { background: transparent none repeat scroll 0% 0%; line-height: 29px; border: 1px solid rgb(252, 2, 2); }
+.addEventBtn { float: right; margin-left: 10px; padding: 8px 33px; background-color: rgb(255, 169, 0); background-image: none; border-radius: 4px; height: auto; line-height: normal; width: auto; }
+.c-event-item { padding-left: 10px; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid rgb(221, 221, 221); }
+.c-new-event { padding-top: 5px; padding-bottom: 5px; border-bottom: 1px solid white; }
+.eventFlag { color: red; }
+.event-line { width: 1px; height: 30px; background: black none repeat scroll 0% 0%; margin-left: 10px; }
+.event-imgcontent-first { margin-bottom: 2px; margin-top: 10px; }
+.event-imgcontent-common { margin-bottom: 2px; margin-top: 2px; }
+.event-img { float: left; margin-right: 20px; }
+.addevent-ul { text-align: left; }
+.addevent-li { list-style-type: none; }
+.day { margin-left: 22%; font-size: 16px; }
+.event-dot { background: red none repeat scroll 0% 0%; width: 5px; height: 5px; margin-left: 43%; margin-top: 2px; }
+.eventLink { float: right; }
+.c-event-add {  }
+.lable-select { width: 98px; text-indent: 20px; margin-right: 12px; }
+#calendar { width: 890px; height: 406px; border-radius: 15px; margin-bottom: 230px; }
+.lable-select:nth-child(2) { text-indent: 32px; }
+.font-size { margin: 0px ! important; padding: 0px ! important; font-size: 18px ! important; font-weight: normal ! important; }
+.font-size-first { padding-right: 25px ! important; }
+.title { height: 66px; line-height: 66px; width: 100%; display: table; }
+.title .left { width: 65%; display: inline-block; }
+.title .right { width: 35%; display: inline-block; }
+.Date { height: 66px; margin-right: 18px; line-height: 66px; }
+.DescriPtion { display: inline-block; width: 165px; line-height: 22px; vertical-align: middle; }
+.titleLately { float: left; background: transparent none repeat scroll 0% 0%; font-size: 14px; }
+.cAddEventDiv { background: transparent none repeat scroll 0% 0%; cursor: default; }
+label { display: inline-block; margin-bottom: 5px; max-width: 100%; width: 137px; height: 40px; line-height: 40px; text-align: right; margin-right: 45px; }
+.addClassDate { text-align: left; }
+.cSelect { width: 174px; height: 31px; text-indent: 10px; }
+.secondary { margin-left: 50px; background-color: rgb(232, 232, 232); }
+.cLiBtn { padding-top: 40px; height: 40px; text-align: center; }
+.cLiBtn a { float: none; }
+.Addout { position: absolute; top: -4px; right: 30px; width: 15px; height: 15px; background: transparent url("close.png") no-repeat scroll center center; }
+.selectContent .selectric-wrapper { display: inline-block; vertical-align: middle; margin-right: 10px; }
+.selectContent .font-size { vertical-align: middle; }
+.addEventSelectContent { display: inline-block; }
+.addEventSelectContent .selectric-wrapper { display: inline-block; vertical-align: middle; margin-right: 10px; width: 174px; }
+.m-right-bold { font-weight: bold; }
+@media (max-width: 979px) {
+  div.zabuto_calendar .table th, div.zabuto_calendar .table td { padding: 2px 1px; }
+}
+@media screen	 {
+  .selectContent .selectric-wrapper { float: left; margin-top: 15px; }
+  .selectric-year { margin-left: 25px; }
+  .font-size { float: left; }
+  .addEventSelectContent { float: left; }
+  label { float: left; }
+  .addevent-ul {  }
+  .c-event-item .title .left { float: left; }
+  .c-event-item .title .right { float: left; }
+}

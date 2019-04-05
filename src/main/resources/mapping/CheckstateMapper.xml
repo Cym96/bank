@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.CheckstateMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.domain.Checkstate" >
+    <id column="state_id" property="stateId" jdbcType="INTEGER" />
+    <result column="state_name" property="stateName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    state_id, state_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from checkstate
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from checkstate
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Checkstate" >
+    insert into checkstate (state_id, state_name)
+    values (#{stateId,jdbcType=INTEGER}, #{stateName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Checkstate" >
+    insert into checkstate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stateId != null" >
+        state_id,
+      </if>
+      <if test="stateName != null" >
+        state_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stateId != null" >
+        #{stateId,jdbcType=INTEGER},
+      </if>
+      <if test="stateName != null" >
+        #{stateName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Checkstate" >
+    update checkstate
+    <set >
+      <if test="stateName != null" >
+        state_name = #{stateName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Checkstate" >
+    update checkstate
+    set state_name = #{stateName,jdbcType=VARCHAR}
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </update>
+
+  <select  id="findAll" resultMap="BaseResultMap" >
+
+    select *  from  checkstate
+
+  </select>
+</mapper>

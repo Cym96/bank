@@ -1,0 +1,139 @@
+/* Code tidied up by ScrapBook */
+.logon-error { width: 100%; height: 22px; font-size: 14px; color: red; text-align: center; }
+.pwdErrorx { width: 335px; color: rgb(255, 169, 0); margin-left: 0px; }
+.pwdError {  }
+.g-mask { position: absolute; top: 0px; margin: 0px auto; width: 100%; height: 1000px; background: rgb(0, 0, 0) none repeat scroll 0% 0%; opacity: 0.4; z-index: 999; }
+.m-guide { position: absolute; top: 360px; width: 186px; height: 80px; background: transparent url("integration.png") repeat scroll -538px -42px; }
+.g-box { width: 100%; height: auto; min-width: 992px; }
+.g-top { width: 100%; height: 3px; background: rgb(59, 189, 169) none repeat scroll 0% 0%; }
+.g-search { width: 100%; height: 30px; background: rgb(247, 247, 247) none repeat scroll 0% 0%; }
+.m-cearchcenter { position: relative; width: 992px; height: 30px; margin: 0px auto; }
+.m-language { position: absolute; right: 168px; top: 9px; width: 120px; height: 12px; text-decoration: none; }
+.m-language a, .m-language a:hover, .m-language a:focus { color: rgb(89, 89, 89); text-decoration: none; }
+.m-line { width: 1px; height: 12px; margin: 0px 8px; border-left: 1px solid rgb(1, 1, 1); }
+.m-language li { float: left; font-size: 12px; line-height: 12px; }
+.m-crux { position: absolute; right: 0px; top: 1px; overflow: hidden; width: 140px; height: 23px; border: 1px solid rgb(232, 232, 232); border-radius: 3px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.m-txt { border: 0px none; padding-left: 8px; width: 104px; height: 23px; float: left; line-height: 22px; font-size: 12px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.m-btn { border: 0px none; width: 28px; height: 23px; float: right; background: rgb(255, 255, 255) url("search.png") no-repeat scroll center center; }
+.g-logo { width: 100%; height: 81px; }
+.g-logo-center { position: relative; width: 992px; height: 81px; margin: 0px auto; }
+.m-logo { position: absolute; left: 0px; top: 20px; width: 198px; height: 40px; }
+.m-logo-line { position: absolute; left: 221px; top: 27px; width: 1px; height: 28px; border-right: 1px solid rgb(183, 183, 183); }
+.m-logo-p { position: absolute; left: 240px; top: 0px; height: 81px; font-size: 19px; line-height: 81px; color: rgb(89, 89, 89); }
+.m-land { width: 100%; height: 420px; background: transparent url("banner.png") no-repeat scroll center center; }
+.m-land-center { position: relative; margin: 0px auto; width: 992px; height: 420px; }
+.m-pointer { position: absolute; right: 334px; top: 435px; width: 150px; height: 61px; background: transparent url("integration.png") repeat scroll -883px -11px; z-index: 1000000; }
+.m-kbsize { position: absolute; right: 500px; top: 410px; width: 186px; height: 80px; background: transparent url("integration.png") repeat scroll -464px -1px; z-index: 1000000; }
+.m-iknow { position: absolute; right: 520px; top: 500px; width: 160px; height: 40px; z-index: 1000000; background: transparent url("integration.png") repeat scroll -282px -21px; }
+.m-uesrpointer { position: absolute; top: 435px; right: 250px; width: 150px; height: 61px; background: transparent url("integration.png") repeat scroll -883px -11px; z-index: 1000000; }
+.m-uesrsize { position: absolute; right: 400px; top: 470px; width: 186px; height: 80px; background: transparent url("integration.png") repeat scroll -660px -1px; z-index: 1000000; }
+.m-uesriknow { position: absolute; right: 420px; top: 560px; width: 160px; height: 40px; z-index: 1000000; background: transparent url("integration.png") repeat scroll -282px -21px; }
+.m-login-dialog { position: absolute; right: 0px; top: 50px; width: 312px; background: rgb(243, 244, 249) none repeat scroll 0% 0%; }
+.m-login-dialog .m-kbform a { text-decoration: none; }
+.m-userName-logon { right: 0px; top: 40px; }
+.m-prompt { margin-top: 23px; margin-left: 26px; width: 286px; height: 39px; line-height: 39px; font-size: 20px; }
+.m-prompt p { float: left; }
+.m-promptimg { margin-right: 17px; width: 23px; height: 29px; float: left; background: transparent url("integration.png") repeat scroll -375px -157px; }
+.m-Kbinsert { margin-top: 40px; height: 32px; vertical-align: middle; line-height: 32px; }
+.m-Kbinsert p { margin-left: 9px; font-size: 14px; line-height: 20px; color: rgb(173, 173, 173); float: left; }
+.m-Kbinsert-first { margin-top: 20px; margin-bottom: 20px; vertical-align: middle; line-height: 38px; text-align: center; }
+.m-Kbinsert-first p { line-height: 30px; color: rgb(173, 173, 173); text-align: center; }
+.m-uesrland { margin-top: 15px; margin-left: 24px; width: 288px; height: 30px; opacity: 0.8; }
+.m-Kbinsertimg { width: 57px; height: 20px; float: left; margin-left: 24px; background: transparent url("integration.png") repeat scroll -648px -280px; }
+.m-Kbinsertimg-have { width: 57px; height: 20px; float: left; margin-left: 24px; background: transparent url("haveinsertK.png") no-repeat scroll center center; }
+.m-Kbinsertimg-first { width: 90px; height: 20px; display: inline-block; margin-left: 24px; background: transparent url("integration.png") repeat scroll -648px -280px; }
+.m-Kbinsertimg-first-have { width: 90px; height: 20px; display: inline-block; margin-left: 24px; background: transparent url("haveinsertK.png") no-repeat scroll center center; }
+.m-uesrlandimg { width: 31px; height: 29px; float: left; background: transparent url("integration.png") repeat scroll -321px -157px; }
+.m-uesrland p { margin-left: 9px; font-size: 20px; line-height: 39px; color: rgb(0, 0, 0); float: left; }
+.m-kbform { position: relative; margin: 20px 0px 0px 24px; width: 264px; }
+.m-uesrform { position: relative; margin: 18px 0px 0px 24px; width: 264px; min-height: 170px; }
+.m-uesrtxtbox { width: 262px; height: 38px; border: 1px solid rgb(204, 204, 204); background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.m-uesrtxtimg { margin: 8px 6px 0px; width: 20px; height: 20px; float: left; background: transparent url("integration.png") repeat scroll -118px -161px; }
+.m-uesrtxt { float: left; width: 224px; height: 36px; line-height: 36px; border: 0px none; display: inline-block; white-space: nowrap; }
+.m-uesrpassbox { position: relative; margin-top: 23px; width: 262px; height: 38px; padding-left: 18px; background: rgb(255, 255, 255) url("lock.png") no-repeat scroll 0px 0px; border: 1px solid rgb(204, 204, 204); }
+.m-uesrpassimg { display: inline-block; margin: 8px 6px 0px; width: 18px; height: 20px; border: 0px none; }
+.m-uesrpass { width: 225px; height: 36px; float: left; line-height: 38px; color: rgb(51, 51, 51); border: 0px none; }
+.m-uesrforget { margin-top: 16px; margin-bottom: 30px; margin-left: 24px; height: 14px; position: relative; display: inline-block; }
+.m-uesrforget li { float: left; line-height: 14px; }
+.m-uesrforget li a { color: rgb(0, 0, 255); }
+.m-uesrforgetline { margin: 0px 12px; width: 1px; height: 14px; border-left: 1px solid rgb(0, 0, 255); }
+.m-uesrrightcorner { position: absolute; right: 0px; bottom: 0px; display: block; width: 70px; height: 70px; z-index: 1000000; overflow: hidden; margin-bottom: 30px; }
+.m-qrcode-bg { background: transparent url("Error404_001.htm") no-repeat scroll 0% 0%; }
+.m-user-bg { background: transparent url("Error404.htm") no-repeat scroll 0% 0%; }
+.m-corner { position: absolute; left: -70px; top: 0px; }
+.m-kbborder { position: relative; width: 262px; height: 38px; border: 1px solid rgb(204, 204, 204); background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.m-kblock { margin: 9px 7px 0px 10px; float: left; width: 18px; height: 20px; background: transparent url("integration.png") repeat scroll -48px -161px; }
+.m-kbborder input { width: 225px; height: 36px; display: block; line-height: 38px; color: rgb(204, 204, 204); border: 0px none; float: left; }
+.m-kberror { position: relative; display: none; padding-left: 34px; margin: 20px 0px 28px; width: 228px; height: 28px; line-height: 28px; border: 1px solid rgb(204, 204, 204); color: rgb(153, 153, 153); background: rgb(237, 243, 251) none repeat scroll 0% 0%; }
+.m-uesrerror { position: relative; display: none; padding-left: 34px; margin: 20px 0px 40px; width: 228px; height: 28px; line-height: 28px; border: 1px solid rgb(204, 204, 204); color: rgb(153, 153, 153); background: rgb(237, 243, 251) none repeat scroll 0% 0%; }
+.m-kberrorimg { position: absolute; left: 12px; top: 7px; width: 14px; height: 14px; background: transparent url("integration.png") repeat scroll -240px -204px; }
+.m-kbkeyboard { position: absolute; right: 11px; top: 9px; width: 30px; height: 20px; background: transparent url("integration.png") repeat scroll -435px -161px; }
+.m-kbbtn { display: block; overflow: hidden; margin-top: 30px; text-align: center; line-height: 40px; width: 264px; height: 40px; color: rgb(255, 255, 255); background-color: rgb(0, 211, 196); font-size: 20px; }
+.m-uersbtn { display: block; margin-top: 10px; width: 264px; color: rgb(255, 255, 255); text-align: center; line-height: 40px; height: 40px; background-color: rgb(0, 211, 196); text-decoration: none; font-size: 20px; border: 0px none; }
+.m-kba { display: inline-block; margin: 16px 0px 30px 24px; width: 60px; color: blue; font-size: 14px; }
+.m-rightcorner { position: absolute; bottom: 0px; right: 0px; display: block; width: 70px; height: 70px; background: transparent url("rightcorner.png") no-repeat scroll 0% 0%; z-index: 9999; }
+.m-verification-code { margin: 0px 0px 20px; width: 260px; height: 40px; }
+.m-codetxt { padding-left: 35px; width: 124px; height: 38px; background: rgb(255, 255, 255) url("code.jpg") no-repeat scroll 9px 9px; border: 1px solid rgb(204, 204, 204); line-height: 38px; font-size: 14px; margin-right: 10px; vertical-align: middle; }
+.m-code { width: 78px; height: 30px; float: left; line-height: 30px; color: rgb(102, 102, 102); text-align: center; border: 1px solid rgb(204, 204, 204); background: rgb(255, 255, 255) none repeat scroll 0% 0%; margin-top: 4px; }
+.m-change { display: block; float: right; margin-top: 16px; width: 37px; height: 12px; font-size: 12px; line-height: 12px; color: rgb(0, 0, 255); }
+.m-codeimg { display: none; margin-top: 10px; width: 20px; height: 20px; float: right; background: transparent url("integration.png") repeat scroll -340px -201px; }
+.m-codeimg img { display: none; }
+.m-servicecentre { width: 100%; height: 265px; border-bottom: 1px solid rgb(232, 232, 232); }
+.m-servicecentre-center { position: relative; width: 992px; height: 265px; margin: 0px auto; }
+.m-servicecentre-title { position: relative; width: 100%; height: 100px; }
+.m-leftspot { position: absolute; left: 141px; top: 60px; width: 287px; height: 7px; background: transparent url("leftspot.jpg") no-repeat scroll 0% 0%; }
+.m-rightspot { position: absolute; left: 560px; top: 60px; width: 287px; height: 7px; background: transparent url("rightspot.jpg") no-repeat scroll 0% 0%; z-index: 1; }
+.m-core { position: absolute; left: 447px; top: 45px; font-size: 24px; }
+.m-important-link { position: relative; width: 100%; }
+.m-important-link dl {  }
+.m-important-link dt, .m-important-link dd { width: 90px; margin: 0px auto; text-align: center; }
+.m-important-link dd a { text-decoration: none; }
+.m-certificate-download { display: inline-block; position: relative; width: 19%; text-align: center; height: 98px; }
+.m-certificate-download dt a { display: block; width: 64px; height: 64px; background: transparent url("integration.png") repeat scroll -18px -261px; margin: 0px auto; }
+.m-certificate-download dd a { display: block; margin-top: 20px; height: 14px; line-height: 14px; font-size: 14px; text-align: center; color: rgb(51, 51, 51); }
+.m-kbfirst-landing { display: inline-block; position: relative; width: 20%; text-align: center; height: 98px; }
+.m-kbfirst-landing dt a { display: block; margin: 0px auto; width: 64px; height: 64px; background: transparent url("integration.png") repeat scroll -121px -261px; }
+.m-kbfirst-landing dd a { display: block; margin-top: 20px; height: 14px; line-height: 14px; font-size: 14px; text-align: center; color: rgb(51, 51, 51); }
+.m-klfirst-landing { display: inline-block; position: relative; width: 19%; text-align: center; height: 98px; }
+.m-klfirst-landing dt a { display: block; margin: 0px auto; width: 64px; height: 64px; background: transparent url("integration.png") repeat scroll -223px -261px; }
+.m-klfirst-landing dd a { display: block; margin-top: 20px; height: 14px; line-height: 14px; font-size: 14px; text-align: center; color: rgb(51, 51, 51); }
+.m-demonstration { display: inline-block; position: relative; width: 16%; text-align: center; height: 98px; }
+.m-demonstration dt a { display: block; margin: 0px auto; width: 64px; height: 64px; background: transparent url("integration.png") repeat scroll -326px -261px; }
+.m-demonstration dd a { display: block; margin-top: 20px; height: 14px; line-height: 14px; font-size: 14px; text-align: center; color: rgb(51, 51, 51); }
+.m-toopen { display: inline-block; position: relative; width: 19%; text-align: center; height: 98px; }
+.m-toopen dt a { display: block; margin: 0px auto; width: 64px; height: 64px; background: transparent url("integration.png") repeat scroll -428px -261px; }
+.m-toopen dd a { display: block; margin-top: 20px; height: 14px; line-height: 14px; font-size: 14px; text-align: center; color: rgb(51, 51, 51); }
+.m-problem { display: inline-block; position: relative; width: 19%; text-align: center; height: 98px; }
+.m-problem dt a { display: block; margin: 0px auto; width: 64px; height: 64px; background: transparent url("integration.png") repeat scroll -531px -261px; }
+.m-problem dd a { display: block; margin-top: 20px; height: 14px; line-height: 14px; font-size: 14px; text-align: center; color: rgb(51, 51, 51); }
+.g-end { width: 100%; height: 50px; }
+.m-end { position: relative; margin: 30px auto 0px; width: 992px; height: 100%; text-align: center; }
+.m-endnav { position: relative; margin: 0px auto; display: block; width: 400px; overflow: hidden; }
+.m-endnav a { text-decoration: none; }
+.m-endnav a, .m-endnav a:hover, .m-endnav a:focus { color: rgb(89, 89, 89); text-decoration: none; }
+.m-endnav li { float: left; font-size: 12px; line-height: 12px; }
+.m-endline { margin: 0px 22px; width: 1px; height: 13px; border-left: 1px solid rgb(51, 51, 51); }
+.m-endnavli span { color: rgb(245, 167, 49); }
+.m-sincerity { position: absolute; right: 138px; top: 0px; width: 92px; height: 32px; background: transparent url("integration.png") repeat scroll -836px -480px; }
+.m-copyright { position: relative; margin: 15px auto 0px; width: 240px; display: block; overflow: hidden; }
+.m-copyright li { font-size: 12px; float: left; line-height: 12px; }
+.m-copyright li a { text-decoration: none; }
+.m-overline { margin: 0px 8px; width: 1px; height: 12px; border-left: 1px solid rgb(102, 102, 102); }
+.m-uesrland .m-login-link { display: inline-block; text-align: center; font-size: 16px; margin: 0px 30px; vertical-align: super; }
+.m-uesrland .m-login-linked { font-weight: bold; color: rgb(0, 0, 0) ! important; }
+.m-login-linked-split { height: 1px; width: 131px; border-bottom: 3px solid rgb(0, 211, 196); margin: 0px 24px; }
+.m-uesrland .m-login-userNameLink, .m-uesrland .m-login-kbaoLink { color: rgb(89, 89, 89); }
+.m-login-split { height: 1px; width: 262px; border-bottom: 1px solid rgb(221, 221, 221); margin: 0px 24px; }
+.m-login-qrtitle { color: rgb(0, 0, 0); font-size: 16px; padding: 20px 20px 20px 30px; text-align: left; }
+.m-login-qrhelp-split { color: rgb(255, 169, 0); margin: 0px 10px; }
+.m-login-qrborder { position: relative; padding: 10px 0px 30px; }
+.m-login-qrmask { position: absolute; top: 10px; right: 81px; bottom: 30px; left: 81px; box-sizing: content-box; opacity: 0.9; background: transparent radial-gradient(ellipse farthest-corner at center center , rgba(255, 255, 255, 0.9) 0px, rgba(255, 255, 255, 0.9) 100%) repeat scroll 0% 0%; }
+.m-login-qrmask-info { position: absolute; top: 40px; right: 81px; bottom: 30px; left: 81px; box-sizing: content-box; text-align: center; vertical-align: middle; }
+.m-qrcode-helper { position: relative; height: 30px; margin: -10px 0px 10px 85px; }
+.m-qrcode-helpimg { float: left; margin-right: 14px; }
+.m-qrcode-helptext { float: left; line-height: 1.1em; text-align: center; color: rgb(89, 89, 89); }
+.m-mobile-scan { position: absolute; right: -200px; bottom: 73px; display: none; }
+.mobile-scan-intro { position: absolute; right: 70px; bottom: 5px; }
+.loginTip { position: absolute; top: 0px; z-index: 10; text-align: center; background: rgb(255, 202, 69) none repeat scroll 0% 0%; color: rgb(0, 0, 0); width: 100%; padding: 0.3em 0px; }
+.loginTip a { color: rgb(0, 0, 0); }
+.loginTip a.tipClose { position: absolute; right: 1em; }

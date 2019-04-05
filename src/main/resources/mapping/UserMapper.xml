@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.bank.domain.User">
+
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword"/>
+        <result column="user_identity" jdbcType="VARCHAR" property="userIdentity"/>
+        <result column="user_phone" jdbcType="VARCHAR" property="userPhone"/>
+        <result column="user_address" jdbcType="VARCHAR" property="userAddress"/>
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail"/>
+        <result column="user_investstate" jdbcType="INTEGER" property="userInveststate"/>
+        <result column="user_signstate" jdbcType="INTEGER" property="userSignstate"/>
+    </resultMap>
+    <resultMap id="MiddleResultMap" type="com.bank.domain.User" extends="BaseResultMap">
+        <id column="identity_number" jdbcType="VARCHAR" property="userIdentityObj.identityNumber"/>
+        <result column="identity_name" jdbcType="VARCHAR" property="userIdentityObj.identityName"/>
+        <result column="identity_sex" jdbcType="VARCHAR" property="userIdentityObj.identitySex"/>
+        <result column="identity_birthday" jdbcType="TIMESTAMP" property="userIdentityObj.identityBirthday"/>
+        <result column="identity_nationality" jdbcType="VARCHAR" property="userIdentityObj.identityNationality"/>
+        <result column="identity_address" jdbcType="VARCHAR" property="userIdentityObj.identityAddress"/>
+        <result column="identity_usefuldate" jdbcType="TIMESTAMP" property="userIdentityObj.identityUsefuldate"/>
+        <result column="identity_issue" jdbcType="VARCHAR" property="userIdentityObj.identityIssue"/>
+        <result column="identity_imgface" jdbcType="VARCHAR" property="userIdentityObj.identityImgface"/>
+        <result column="identity_imgback" jdbcType="VARCHAR" property="userIdentityObj.identityImgback"/>
+        <result column="identity_checkstate" jdbcType="INTEGER" property="userIdentityObj.identityCheckstate"/>
+        <result column="identity_imgown" jdbcType="VARCHAR" property="userIdentityObj.identityImgown"/>
+    </resultMap>
+
+    <resultMap type="com.bank.domain.User" id="UserMap" extends="BaseResultMap">
+        <collection property="orderObjList" javaType="java.util.ArrayList" ofType="com.bank.domain.Order">
+            <id column="order_id" jdbcType="INTEGER" property="orderId"/>
+            <result column="order_user" jdbcType="INTEGER" property="orderUser"/>
+            <result column="order_fund" jdbcType="INTEGER" property="orderFund"/>
+            <result column="order_state" jdbcType="INTEGER" property="orderState"/>
+            <result column="order_money" jdbcType="DECIMAL" property="orderMoney"/>
+            <result column="order_reduceratio" jdbcType="DECIMAL" property="orderReduceratio"/>
+            <result column="order_reducemoney" jdbcType="DECIMAL" property="orderReducemoney"/>
+            <result column="order_npv" jdbcType="DECIMAL" property="orderNpv"/>
+            <result column="order_fundunit" jdbcType="DECIMAL" property="orderFundunit"/>
+            <result column="order_time" jdbcType="TIMESTAMP" property="orderTime"/>
+            <result column="order_card" jdbcType="VARCHAR" property="orderCard"/>
+        </collection>
+
+        <collection property="UserfundObjList" javaType="java.util.ArrayList" ofType="com.bank.domain.Userfund">
+            <id column="userfund_id" jdbcType="INTEGER" property="userfundId"/>
+            <result column="userfund_user" jdbcType="INTEGER" property="userfundUser"/>
+            <result column="userfund_card" jdbcType="VARCHAR" property="userfundCard"/>
+            <result column="userfund_fund" jdbcType="INTEGER" property="userfundFund"/>
+            <result column="userfund_fundunit" jdbcType="DECIMAL" property="userfundFundunit"/>
+        </collection>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+
+    user_id, user_password, user_identity, user_phone, user_address, user_email, user_investstate,
+    user_signstate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByIdentity" parameterType="java.lang.String" resultMap="MiddleResultMap">
+  select * from user left join identity on user_identity = identity_number where user_identity=#{id}
+  </select>
+
+    <select id="findByUserEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_email = #{userEmail,jdbcType=VARCHAR}
+    </select>
+    <select id="findByUserPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_phone = #{userPhone,jdbcType=VARCHAR}
+    </select>
+    <select id="findByUserIdentity" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_identity = #{userIdentity,jdbcType=VARCHAR}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.bank.domain.User">
+
+    insert into user (user_id, user_password, user_identity,
+    user_phone, user_address, user_email,
+    user_investstate, user_signstate)
+    values (#{userId,jdbcType=INTEGER}, #{userPassword,jdbcType=VARCHAR}, #{userIdentity,jdbcType=VARCHAR},
+    #{userPhone,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
+    #{userInveststate,jdbcType=INTEGER}, #{userSignstate,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.bank.domain.User" useGeneratedKeys="true" keyProperty="userId">
+
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userPassword != null">
+                user_password,
+            </if>
+            <if test="userIdentity != null">
+                user_identity,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userAddress != null">
+                user_address,
+            </if>
+            <if test="userEmail != null">
+                user_email,
+            </if>
+            <if test="userInveststate != null">
+                user_investstate,
+            </if>
+            <if test="userSignstate != null">
+                user_signstate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userIdentity != null">
+                #{userIdentity,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userInveststate != null">
+                #{userInveststate,jdbcType=INTEGER},
+            </if>
+            <if test="userSignstate != null">
+                #{userSignstate,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.User">
+
+        update user
+        <set>
+            <if test="userPassword != null">
+                user_password = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userIdentity != null">
+                user_identity = #{userIdentity,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                user_phone = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                user_address = #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                user_email = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userInveststate != null">
+                user_investstate = #{userInveststate,jdbcType=INTEGER},
+            </if>
+            <if test="userSignstate != null">
+                user_signstate = #{userSignstate,jdbcType=INTEGER},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bank.domain.User">
+
+    update user
+    set user_password = #{userPassword,jdbcType=VARCHAR},
+    user_identity = #{userIdentity,jdbcType=VARCHAR},
+    user_phone = #{userPhone,jdbcType=VARCHAR},
+    user_address = #{userAddress,jdbcType=VARCHAR},
+    user_email = #{userEmail,jdbcType=VARCHAR},
+    user_investstate = #{userInveststate,jdbcType=INTEGER},
+    user_signstate = #{userSignstate,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

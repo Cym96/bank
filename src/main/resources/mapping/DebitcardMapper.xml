@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.mapper.DebitcardMapper">
+    <resultMap id="BaseResultMap" type="com.bank.domain.Debitcard">
+
+        <id column="card_num" jdbcType="VARCHAR" property="cardNum"/>
+        <result column="card_type" jdbcType="INTEGER" property="cardType"/>
+        <result column="card_ordername" jdbcType="VARCHAR" property="cardOrdername"/>
+        <result column="card_restmoney" jdbcType="DECIMAL" property="cardRestmoney"/>
+        <result column="card_user" jdbcType="INTEGER" property="cardUser"/>
+        <result column="card_state" jdbcType="INTEGER" property="cardState"/>
+        <result column="card_password" jdbcType="VARCHAR" property="cardPassword"/>
+    </resultMap>
+    <update id="undateDebitcardMoney" parameterType="com.bank.domain.Debitcard">
+    update debitcard
+    set  card_restmoney = #{cardRestmoney,jdbcType=DECIMAL}
+    where card_num = #{cardNum,jdbcType=VARCHAR}
+  </update>
+
+    <sql id="Base_Column_List">
+
+        card_num, card_type, card_ordername, card_restmoney, card_user, card_state, card_password
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from debitcard
+        where card_num = #{cardNum,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+  select * from debitcard where card_user=#{id}
+  </select>
+    <select id="selectNewDebitcard" resultMap="BaseResultMap">
+    select * from debitcard where card_state = 0
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+    delete from debitcard
+    where card_num = #{cardNum,jdbcType=VARCHAR}
+  </delete>
+
+
+    <insert id="insert" parameterType="com.bank.domain.Debitcard">
+
+    insert into debitcard (card_num, card_type, card_ordername,
+    card_restmoney, card_user, card_state, card_password
+    )
+    values (#{cardNum,jdbcType=VARCHAR}, #{cardType,jdbcType=INTEGER}, #{cardOrdername,jdbcType=VARCHAR},
+    #{cardRestmoney,jdbcType=DECIMAL}, #{cardUser,jdbcType=INTEGER}, #{cardState,jdbcType=INTEGER}, #{cardPassword,jdbcType=VARCHAR}
+    )
+  </insert>
+    <insert id="insertSelective" parameterType="com.bank.domain.Debitcard">
+
+        insert into debitcard
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cardNum != null">
+                card_num,
+            </if>
+            <if test="cardType != null">
+                card_type,
+            </if>
+            <if test="cardOrdername != null">
+                card_ordername,
+            </if>
+            <if test="cardRestmoney != null">
+                card_restmoney,
+            </if>
+            <if test="cardUser != null">
+                card_user,
+            </if>
+            <if test="cardState != null">
+                card_state,
+            </if>
+            <if test="cardPassword != null">
+                card_password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cardNum != null">
+                #{cardNum,jdbcType=VARCHAR},
+            </if>
+            <if test="cardType != null">
+                #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="cardOrdername != null">
+                #{cardOrdername,jdbcType=VARCHAR},
+            </if>
+            <if test="cardRestmoney != null">
+                #{cardRestmoney,jdbcType=DECIMAL},
+            </if>
+            <if test="cardUser != null">
+                #{cardUser,jdbcType=INTEGER},
+            </if>
+            <if test="cardState != null">
+                #{cardState,jdbcType=INTEGER},
+            </if>
+            <if test="cardPassword != null">
+                #{cardPassword,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Debitcard">
+
+        update debitcard
+        <set>
+            <if test="cardType != null">
+                card_type = #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="cardOrdername != null">
+                card_ordername = #{cardOrdername,jdbcType=VARCHAR},
+            </if>
+            <if test="cardRestmoney != null">
+                card_restmoney = #{cardRestmoney,jdbcType=DECIMAL},
+            </if>
+            <if test="cardUser != null">
+                card_user = #{cardUser,jdbcType=INTEGER},
+            </if>
+            <if test="cardState != null">
+                card_state = #{cardState,jdbcType=INTEGER},
+            </if>
+            <if test="cardPassword != null">
+                card_password = #{cardPassword,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where card_num = #{cardNum,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bank.domain.Debitcard">
+
+    update debitcard
+    set card_type = #{cardType,jdbcType=INTEGER},
+    card_ordername = #{cardOrdername,jdbcType=VARCHAR},
+    card_restmoney = #{cardRestmoney,jdbcType=DECIMAL},
+    card_user = #{cardUser,jdbcType=INTEGER},
+    card_state = #{cardState,jdbcType=INTEGER},
+    card_password = #{cardPassword,jdbcType=VARCHAR}
+    where card_num = #{cardNum,jdbcType=VARCHAR}
+  </update>
+</mapper>

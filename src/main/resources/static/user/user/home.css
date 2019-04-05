@@ -1,0 +1,136 @@
+/* Code tidied up by ScrapBook */
+.ie-padding-0 {  }
+.wrap { width: 100%; overflow: hidden; }
+.gray { color: rgb(102, 102, 102); }
+.head { border-top: 3px solid rgb(106, 191, 186); height: 37px; line-height: 32px; background: rgb(249, 249, 249) none repeat scroll 0% 0%; min-width: 992px; }
+.head .enhance { color: rgb(92, 189, 175); font-weight: bold; }
+.head a { color: rgb(0, 0, 0); cursor: pointer; text-decoration: none; }
+.head a:hover, .head a:focus { color: rgb(250, 217, 101); cursor: pointer; text-decoration: none; }
+.head .pull-left .m-split { margin: 0px 20px; }
+.head .pull-left .font { position: relative; }
+.head .pull-left .font-icon { position: absolute; top: -13px; }
+.head .pull-right > div { float: left; }
+.head .pull-right .head-search-wrap { width: 226px; position: relative; height: 32px; z-index: 5; }
+.head .pull-right .head-search-wrap input { position: absolute; width: 226px; height: 22px; line-height: 22px; border-radius: 5px; font-size: 12px; padding-left: 5px; top: 5px; border: 1px solid rgb(160, 160, 160); }
+.head .pull-right .head-search-wrap .search-concern { width: 226px; padding: 5px 0px; border-width: medium 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(102, 102, 102) rgb(102, 102, 102); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; position: absolute; top: 24px; left: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; z-index: 99; }
+.head .pull-right .head-search-wrap .search-concern ul { width: 226px; padding: 0px; margin: 0px; max-height: 80px; overflow-y: auto; overflow-x: hidden; }
+.head .pull-right .head-search-wrap .search-concern ul li { height: 20px; line-height: 20px; font-size: 12px; padding: 0px; margin: 0px; cursor: default; }
+.head .pull-right .head-search-wrap .search-concern ul li:hover { background: rgb(153, 153, 153) none repeat scroll 0% 0%; }
+.head .pull-right .head-search-wrap .m-search-btn { position: absolute; background: transparent url("search.png") no-repeat scroll 0% 0%; padding: 8px; top: 9px; right: 5px; cursor: pointer; }
+.head .pull-right .m-mine { height: 32px; line-height: 32px; margin-left: 25px; }
+.head .pull-right .m-mine .mine-icon { background: transparent url("mine.png") no-repeat scroll center center; padding: 4px 12px; cursor: pointer; }
+.head .pull-right .m-online-service { height: 32px; line-height: 32px; margin-left: 25px; }
+.head .pull-right .m-online-service .service-icon { cursor: pointer; background: transparent url("kefu.png") no-repeat scroll center center; padding: 4px 12px; }
+.head .pull-right .m-messages { height: 32px; line-height: 32px; position: relative; margin-left: 25px; z-index: 9; }
+.head .pull-right .m-messages .messages-icon { background: transparent url("xinfeng.png") no-repeat scroll center center; padding: 3px 15px; cursor: pointer; }
+.head .pull-right .m-messages .yuan-icon { background: transparent url("yuan.png") no-repeat scroll 0% 0%; padding: 9px; position: absolute; top: 1px; left: 12px; cursor: pointer; }
+.head .pull-right .m-messages .messages-num { position: absolute; width: 14px; height: 14px; font-size: 10px; line-height: 14px; text-align: center; font-weight: bold; color: rgb(255, 255, 255); top: 2px; left: 13px; cursor: pointer; }
+.head .pull-right .m-messages .messages-box { position: absolute; width: 750px; height: 162px; border: 1px solid rgb(102, 102, 102); background: rgb(255, 255, 255) none repeat scroll 0% 0%; z-index: 30; right: -95px; top: 32px; padding-left: 16px; color: rgb(107, 107, 107); }
+.head .pull-right .m-messages .messages-box h3 { font-size: 14px; font-weight: normal; margin-top: 10px; margin-bottom: 0px; }
+.head .pull-right .m-messages .messages-box .content { overflow-y: scroll; height: 105px; }
+.head .pull-right .m-messages .messages-box ul { overflow: hidden; }
+.head .pull-right .m-messages .messages-box li { width: 685px; height: 25px; cursor: pointer; float: left; }
+.head .pull-right .m-messages .messages-box li.red { color: rgb(254, 38, 38); }
+.head .pull-right .m-messages .messages-box li.red:hover { border: medium none; }
+.head .pull-right .m-messages .messages-box .btn { margin-top: 5px; margin-left: 100px; background: rgb(255, 169, 0) none repeat scroll 0% 0%; padding: 0px 8px; color: rgb(255, 255, 255); }
+.head .pull-right .m-quit { height: 32px; cursor: pointer; line-height: 32px; margin-left: 25px; }
+.head .pull-right .m-quit .quit-icon { background: transparent url("tuichu.png") no-repeat scroll center center; padding: 3px 12px; }
+.m-nav-wrap { margin-top: 15px; height: 55px; }
+.logo { height: 55px; float: left; }
+.logo img { border: 0px none; }
+.nav { height: 55px; float: left; z-index: 1; }
+.nav > ul { width: 730px; height: 55px; margin-left: 60px; list-style: outside none none; }
+.nav > ul > li { width: 75px; height: 55px; text-align: center; line-height: 60px; font-size: 18px; float: left; cursor: pointer; }
+.nav > ul > li:hover { color: rgb(0, 152, 130); }
+.nav > ul > .last { text-align: right; width: 54px; }
+.nav > ul > li.active { color: rgb(0, 152, 130); }
+.nav > ul .index.active span { padding: 7px; border-bottom: 3px solid rgb(0, 152, 130); }
+.nav .sec-menu { position: relative; z-index: 2; }
+.nav .sec-menu .triangle { position: absolute; background: transparent url("jiao.png") no-repeat scroll center center; top: 40px; left: 22px; z-index: 20; width: 28px; height: 20px; }
+.nav .sec-list { font-size: 14px; color: rgb(51, 51, 51); width: 500px; height: 30px; position: relative; text-align: center; margin-top: -5px; z-index: 3; list-style: outside none none; }
+.nav .sec-list > li { float: left; width: 125px; height: 26px; line-height: 26px; margin: 6px 0px; }
+.nav .sec-list > li .triangle-white { background: transparent url("sabja.png") no-repeat scroll 0px 6px; padding: 0px 6px; margin-left: 6px; }
+.nav .sec-list .active { background: rgb(0, 195, 164) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+.nav .sec-list .active .triangle-white { background: transparent url("sabja-white.png") no-repeat scroll 0px 6px; padding: 0px 6px; margin-left: 6px; }
+.third-list { position: relative; z-index: 10; color: rgb(51, 51, 51); padding-top: 2px; width: 125px; overflow: hidden; }
+.third-list > li { background: rgb(242, 254, 254) none repeat scroll 0% 0%; width: 100%; float: left; line-height: 37px; padding: 0px 5px; }
+.third-list > li > span { display: inline-block; width: 100%; border-bottom: 1px solid rgb(240, 240, 240); }
+.third-list > li:hover { background: rgb(208, 240, 240) none repeat scroll 0% 0%; }
+.menu-wrap { min-width: 992px; height: 37px; line-height: 37px; background: rgb(231, 247, 245) none repeat scroll 0% 0%; }
+.menu-wrap span { color: rgb(153, 153, 153); }
+.location-wrap .location { width: 100%; font-size: 14px; height: 55px; line-height: 55px; color: rgb(85, 85, 85); }
+.location-wrap .location a:focus, .location-wrap .location a:hover {  }
+.location span { cursor: default; }
+.location .location-now { border-left: 2px solid rgb(0, 211, 196); padding-left: 5px; }
+.foot { width: 100%; min-width: 992px; background: rgb(106, 191, 186) none repeat scroll 0% 0%; height: 33px; line-height: 33px; visibility: hidden; }
+.fixed-list { width: 52px; position: fixed; top: 50%; margin-top: -88px; left: 50%; margin-left: 510px; }
+.fixed-list .fixed-box { width: 52px; height: 52px; background: rgb(92, 189, 175) none repeat scroll 0% 0%; cursor: pointer; }
+.fixed-no-manager { width: 220px; height: 40px; position: absolute; top: 66px; left: -207px; }
+.fixed-no-text { width: 194px; height: 40px; background: rgb(255, 255, 255) url("rectangle-small.png") no-repeat scroll 0px 100%; float: left; line-height: 40px; text-align: center; }
+.fixed-no-icon { height: 40px; float: left; position: relative; }
+.fixed-no-icon img { position: absolute; top: 13px; left: -2px; }
+.fixed-qrcode { width: 220px; height: 40px; position: absolute; top: 10px; left: -207px; }
+.fixed-list .wechat { margin-bottom: 1px; background: transparent url("rightone.png") no-repeat scroll 0% 0%; }
+.fixed-list .people { margin-bottom: 1px; background: transparent url("righttwo.png") no-repeat scroll 0% 0%; }
+.fixed-list .gotop { background: transparent url("rightthree.png") no-repeat scroll 0% 0%; display: none; }
+.m-marginr-60 { margin-right: 60px; }
+.close { width: 15px; height: 15px; position: absolute; top: 5px; right: 5px; background: transparent url("close.png") no-repeat scroll 0% 0%; cursor: pointer; }
+#popup-wechat { background: rgb(255, 255, 255) url("erwm.png") no-repeat scroll center center; }
+.popupBox .content { width: 320px; font-size: 16px; margin: 0px auto; }
+.popupBox .buttons { margin-top: 30px; }
+.popupBox .title { border: medium none; font-size: 16px; }
+.navPos { height: 40px; margin: 10px 0px 0px; line-height: 40px; background-color: rgb(249, 249, 249); color: rgb(128, 128, 128); display: none; }
+.navPos label { font-weight: normal; }
+.container-mine { position: relative; z-index: 40; }
+.box-mine { display: none; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(187, 187, 187); position: absolute; width: 180px; }
+.my-items ul { text-align: center; }
+.my-items ul li { padding-left: 30px; text-align: left; margin: 10px 30px; }
+.my-prize { background: transparent url("my-prize.png") no-repeat scroll left center; }
+.my-integral { background: transparent url("my-integral.png") no-repeat scroll left center; }
+.my-coupon { background: transparent url("my-coupon.png") no-repeat scroll left center; }
+.my-info { background: transparent url("my-info.png") no-repeat scroll left center; }
+.my-record { background: transparent url("my-record.png") no-repeat scroll left center; }
+.opRecord { background: transparent url("opRecord.png") no-repeat scroll left center / auto 20px; }
+.envelope_box { position: absolute; right: 0px; top: 25px; width: 200px; height: 250px; border: 1px solid rgb(212, 213, 214); background-color: rgb(255, 255, 255); display: none; z-index: 30; }
+.envelope-collapse { position: relative; z-index: 40; }
+.popbox, .popbox-mine { display: inline-block; }
+.en-read { display: inline-block; width: 10px; height: 10px; border-radius: 50%; position: absolute; right: 67px; top: 3px; background-color: red; }
+.box { display: none; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 1px solid rgb(187, 187, 187); position: absolute; width: 500px; height: 260px; }
+.box a.close, .box-mine a.close { color: red; font-size: 12px; font-family: arial; text-decoration: underline; }
+.arrow { width: 0px; height: 0px; border-left: 11px solid transparent; border-right: 11px solid transparent; border-bottom: 11px solid rgb(255, 255, 255); position: absolute; left: 1px; top: -10px; z-index: 1001; }
+.arrow-border { width: 0px; height: 0px; border-left: 11px solid transparent; border-right: 11px solid transparent; border-bottom: 11px solid rgb(187, 187, 187); position: absolute; top: -12px; z-index: 1000; }
+.en-container { width: 100%; height: 100%; }
+.en-top { position: absolute; top: 5px; left: 5px; right: 5px; height: 35px; overflow: hidden; border: 1px solid rgb(204, 204, 204); }
+.en-top ul { list-style-type: none; padding: 0px; }
+.en-top ul li { float: left; width: 50%; text-align: center; cursor: pointer; line-height: 35px; }
+.en-top ul li.active { background-color: rgb(0, 195, 172); color: rgb(255, 255, 255); }
+.en-center { position: absolute; top: 35px; bottom: 30px; left: 0px; right: 0px; color: rgb(107, 107, 107); }
+.en-center ul { list-style-type: none; padding: 10px 20px; }
+.en-center ul li { font-size: 14px; line-height: 30px; }
+.en-center ul li .one-title { display: inline-block; width: 80%; }
+.en-center ul li a.unRead { color: rgb(255, 0, 0); cursor: pointer; text-decoration: none; }
+.en-center ul li a.unRead:hover, .en-center ul li a.unRead:focus { color: rgb(250, 217, 101); cursor: pointer; text-decoration: none; }
+.en-bottom { position: absolute; bottom: 0px; left: 0px; right: 0px; height: 30px; }
+.en-bottom a { position: absolute; right: 10px; font-size: 14px; line-height: 30px; color: rgb(250, 217, 101); }
+.en-bottom a:hover, .en-bottom a:focus { color: rgb(255, 169, 0); cursor: pointer; text-decoration: none; }
+#slide-list { position: fixed; width: 147px; height: 365px; margin-top: -183px; top: 50%; left: -85px; border-radius: 0px 8px 8px 0px; overflow: hidden; background: rgb(222, 222, 222) none repeat scroll 0% 0%; }
+#slide-list li { width: 147px; height: 60px; background: rgb(246, 246, 246) none repeat scroll 0% 0%; cursor: pointer; margin-bottom: 1px; }
+#slide-list li a { display: inline-block; width: 100%; height: 100%; }
+#slide-list li:hover { background: rgb(221, 221, 221) none repeat scroll 0% 0%; }
+#slide-list li.last { margin-bottom: 0px; }
+#slide-list span { color: rgb(51, 51, 51); float: left; width: 75px; margin-top: 20px; margin-right: 18px; text-align: right; }
+#slide-list img { border: medium none; outline: medium none; float: left; margin-top: 10px; }
+#slide-list .btn-add { margin-top: 20px; margin-left: 10px; }
+.manager-mask { position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; width: 100%; height: 100% ! important; background: transparent url("bg.png") repeat scroll 0% 0%; z-index: 40; }
+.manager-box { position: fixed; top: 50%; left: 50%; width: 1000px; height: 630px; margin-left: -500px; margin-top: -315px; z-index: 50; background-color: rgb(255, 255, 255); }
+.manager-box .manager-frm { border: 0px none; padding: 0px; margin: 0px; }
+.manager-box .manager-close { position: relative; height: 30px; }
+.manager-box .manager-close a { position: absolute; right: 10px; top: 5px; }
+.protocol-box .buttons { margin-top: 10px; width: 100%; text-align: center; }
+.protocol-box { display: none; height: 430px; width: 750px; padding: 0px 60px; }
+.protocol-box .content { height: 340px; width: 100%; overflow-y: auto; color: rgb(58, 58, 58); font-size: 14px; }
+.protocol-box p { text-indent: 2em; line-height: 1.5; margin: 0px 0px 5px; }
+.protocol-box .list-protocol { margin-left: -5px; }
+.protocol-box .agree-protocol { margin: 20px 120px; }
+.aml-alert { width: 500px; }
+.aml-alert .content { width: 420px; }

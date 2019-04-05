@@ -1,0 +1,55 @@
+<!doctype html >
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta name="Keywords" content="基金，优选基金，农银汇理基金，新发基金，基金池，主题基金，基金申购，基金认购，基金定投，基金净值">
+    <meta name="Description"
+          content="农行基金频道为用户24小时提供全面及时的基金资讯信息，涵盖市场要闻、专家视点、基金净值、基金涨幅、基金走势、基金排名、基金数据、基金评级等信息，提供了按基金类型、基金回报、基金公司的产品筛选功能，并且有专业的线上理财师实时为用户提供咨询服务。">
+    <meta name="WT.cg_abc" content="理财e站;基金;基金公司">
+    <title>基金公司_理财e站_中国农业银行</title>
+    <link href="base.css" rel="stylesheet" th:href="@{/user/companymsg/base.css}">
+    <link href="jqui.css" rel="stylesheet" th:href="@{/user/companymsg/jqui.css}">
+    <link href="styles.css" rel="stylesheet" th:href="@{/user/companymsg/styles.css}">
+    <link href="irezNew.css" rel="stylesheet" th:href="@{/user/companymsg/irezNew.css}">
+    <script src="about:blank"></script>
+    <script src="about:blank" type="text/javascript" charset="utf-8"></script>
+    <script src="about:blank" type="text/javascript" charset="utf-8"></script>
+    <script src="about:blank" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="innerBanner detailTitle"><span th:text="${compan.companyName}">南方基金管理有限公司</span></div>
+    <div class="con962">
+        <div class="companyTop">
+            <ul>
+                <li>成立日期：</li>
+                <li th:text="${#dates.format(compan.companyBuildtime, 'yyyy-MM-dd')}"> </li>
+                <li>注册资金：</li>
+                <li th:text="${compan.companySignmoney} + '元'"></li>
+                <!--<li>合作基金数量：${requestScope.sum}</li>-->
+                <li>法人代表：</li>
+                <li th:text="${compan.companyLegalperson}"></li>
+                <li> 联系人：</li>
+                <li th:text="${compan.companyLineperson}"></li>
+                <li>公司网站：</li>
+                <li style="width: 460px;" th:text="${compan.companyWebsite}"> </li>
+                <li>电话号码：</li>
+                <li style="width: 460px;" th:text="${compan.companyPhone}"> </li>
+            </ul>
+        </div>
+        <div class="companyTag">公司简介:</div>
+        <div class="conDetail" style="padding-top: 10px; text-indent: 24px;">
+            <p th:text="${compan.companyIntroduce}"></p>
+        </div>
+        <div class="companyTag">办公地址:</div>
+        <div class="conDetail" style="padding-top: 10px; text-indent: 24px;" th:text="${compan.companyAddress}">
+
+            <p></p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
