@@ -62,8 +62,10 @@ public class UserFundController {
         Integer pageSize = 8;
         List<Fund> fund = new ArrayList<>();
         Integer startPage1 = startPage * pageSize;
-        Integer endPage = (startPage1 * pageSize) - pageSize;
-        fund = fundService.findAll(startPage1, endPage);
+        Integer endPage = (startPage * pageSize) - pageSize;
+        fund = fundService.findAll(endPage, startPage1);
+        logger.info("=====startPage1========================" + startPage1);
+        logger.info("=============================endPage=====" + endPage);
 
         //查询到的记录数
         Integer fundCount = this.fundService.findFundCount();

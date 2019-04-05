@@ -139,7 +139,7 @@
     fund
     INNER JOIN company ON fund.fund_company = company.company_id
     INNER JOIN investstate ON fund.fund_investstate = investstate.state_id
-    INNER JOIN productstate ON fund.fund_productstate = productstate.state_id
+    INNER JOIN productstate ON fund.fund_productstate = productstate.state_id order by fund_id
     limit #{startPage,jdbcType=INTEGER},#{endPage,jdbcType=INTEGER}
 
 

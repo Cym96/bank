@@ -150,16 +150,16 @@
                         <div style="display: block;" id="pageBox"
                              class="pageBox clearfix">
                             <ul>
-                                <li currpage="0" class="pageUp"><span>
-							 <a th:href="javascript:lastpage();">上一页</a></span></li>
+          <li currpage="0" class="pageUp"><button onclick="lastpage()">上一页</button>
+            <!--<span>  <a th:href="@{javascript:lastpage();}">上一页</a></span>--></li>
                                 <li>第
-                                    <input id="pagenum" class="startPage" th:name="startPage" type="text" th:value="${startPage}"  style="width: 40px"> /
+                                    <input th:id="pagenum" class="startPage" th:name="startPage" type="text" th:value="${startPage}"  style="width: 40px"> /
                                     <em id="pageTotalCount" style="margin: 0px 2px;" th:text="${findFundCount}"></em> 页&nbsp;
                                     <input type="hidden" th:name="startPage" value=""/>
-                                    <input id="btnGoPage" class="aButton" value="Go" type="submit">
+                                    <!--<input id="btnGoPage" class="aButton" value="Go" type="submit">-->
                                 </li>
-                                <li maxpage="175" currpage="0" class="pageNext"><span>
-							 <a th:href="javascript:nextpage();">下一页</a></span></li>
+                                <li maxpage="175" currpage="0" class="pageNext">
+                                   <span> <a th:onclick="|nextpage()|">下一页</a></span></li>
                             </ul>
                         </div>
                         <!--翻页end-->
@@ -168,6 +168,30 @@
                     </div>
 
                 </form>
+                <script th:inline ="javascript"  type="text/javascript" >
+                        function nextpage(){
+                        console.info(123);
+                        var page = $("#pagenum").val();
+                        if(page<${findFundCount}){
+                            page++;
+                        }
+                        else{
+                            page = ${findFundCount};
+                        }
+                        $("#pagenum").val(page);
+                        document.searchform.submit();
+                    }
+                    function lastpage(){
+                        var page = $("#pagenum").val();
+                        if(page>1){
+                            page--;
+                        }else{
+                            page=1;
+                        }
+                        $("#pagenum").val(page);
+                        document.searchform.submit();
+                    }
+                </script>
 
             </div>
         </div>
@@ -199,7 +223,7 @@
 <script src="config.js" th:src="@{/user/findList/config.js}">
 </script>
 
-<script type="text/javascript" th:inline="javascript">
+<script th:inline ="javascript"  type="text/javascript" >
     $(document).ready(function(){
         odd= {"background":"#FFF"};//奇数样式
         even={"background":"rgb(245,245,245)"};//偶数样式
@@ -217,27 +241,7 @@
         $("#pagenum").val(1);
         document.searchform.submit();
     }
-    function nextpage(){
-        var page = $("#pagenum").val();
-        if(page<${findFundCount}){
-            page++;
-        }
-        else{
-            page = ${findFundCount};
-        }
-        $("#pagenum").val(page);
-        document.searchform.submit();
-    }
-    function lastpage(){
-        var page = $("#pagenum").val();
-        if(page>1){
-            page--;
-        }else{
-            page=1;
-        }
-        $("#pagenum").val(page);
-        document.searchform.submit();
-    }
+
 </script>
 <script type="text/javascript" src="fundBrowserPage.js" th:href="@{/user/findList/fundBrowserPage.js}">
 </script>
