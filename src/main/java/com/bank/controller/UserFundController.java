@@ -50,7 +50,7 @@ public class UserFundController {
      * @return
      */
     @RequestMapping("/findAll")
-    public String findAllFund(HttpServletRequest request) {
+    public String findAllFund(HttpServletRequest request,org.springframework.ui.Model model) {
         // 默认第一页
         Integer startPage;
         if (request.getParameter("startPage") == null) {
@@ -79,9 +79,9 @@ public class UserFundController {
         logger.info("=====fund.size()======" + fund.size());
         logger.info("======findFundCount=====" + findFundCount);
         logger.info("====startPage=======" + startPage);
-        request.setAttribute("fund", fund);
-        request.setAttribute("findFundCount", findFundCount);
-        request.setAttribute("startPage", startPage);
+        model.addAttribute("fund", fund);
+        model.addAttribute("findFundCount", findFundCount);
+        model.addAttribute("startPage", startPage);
 
         return "user/fundlist";
     }

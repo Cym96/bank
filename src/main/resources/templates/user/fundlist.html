@@ -58,13 +58,13 @@
                                     <!--</div>-->
 
                                 <!--</dd>-->
-                                <dt><span>基金名称</span><em></em></dt>
-                                <dd class="ddSelect">
-                                    <div class="search">
-                                        <input id="searchInput" th:name="fundSearchVO.fundName" class="searchInput" placeholder="基金代码/基金名称" type="text">
-                                        <a id="searchButton" class="searchImage" href="javascript:void(0);"></a>
-                                    </div>
-                                </dd>
+                                <!--<dt><span>基金名称</span><em></em></dt>-->
+                                <!--<dd class="ddSelect">-->
+                                    <!--<div class="search">-->
+                                        <!--<input id="searchInput" th:name="fundSearchVO.fundName" class="searchInput" placeholder="基金代码/基金名称" type="text">-->
+                                        <!--<a id="searchButton" class="searchImage" href="javascript:void(0);"></a>-->
+                                    <!--</div>-->
+                                <!--</dd>-->
 
                             </dl>
 
@@ -83,9 +83,9 @@
                                 <table id="resultList" class="resultList">
                                     <thead>
                                     <tr>
-                                        <th style="width: 80px; background-color: rgb(239, 239, 239);">
-                                            <span>关注</span>
-                                        </th>
+                                        <!--<th style="width: 80px; background-color: rgb(239, 239, 239);">-->
+                                            <!--<span>关注</span>-->
+                                        <!--</th>-->
                                         <th style="display: none; background-color: rgb(239, 239, 239);">
                                             <span>基金代码</span></th>
                                         <th style="width: 220px; background-color: rgb(239, 239, 239);"><span>产品信息</span></th>
@@ -100,9 +100,9 @@
                                     <!--<c:forEach items="${requestScope.fund}" var="fund">-->
 
                                         <tr th:each="fund : ${fund}">
-                                            <td>
-                                                <a class="attentionIcon Atte"></a>
-                                            </td>
+                                            <!--<td>-->
+                                                <!--<a class="attentionIcon Atte"></a>-->
+                                            <!--</td>-->
                                             <td style="display: none;" th:text="${fund.fundId}" th:name="fund.fundId"></td>
                                             <td class="fundNameBox">
 													<span class="fundName">
@@ -150,33 +150,32 @@
                         <div style="display: block;" id="pageBox"
                              class="pageBox clearfix">
                             <ul>
-          <li currpage="0" class="pageUp"><button onclick="lastpage()">上一页</button>
-            <!--<span>  <a th:href="@{javascript:lastpage();}">上一页</a></span>--></li>
+          <li currpage="0" class="pageUp"> <span> <a href="JavaScript:lastpage();">上一页</a></span>
+          </li>
                                 <li>第
                                     <input th:id="pagenum" class="startPage" th:name="startPage" type="text" th:value="${startPage}"  style="width: 40px"> /
-                                    <em id="pageTotalCount" style="margin: 0px 2px;" th:text="${findFundCount}"></em> 页&nbsp;
+                                    <em id="pageTotalCount" style="margin: 0px 2px;" th:name = "findFundCount" th:text="${findFundCount}"></em> 页&nbsp;
                                     <input type="hidden" th:name="startPage" value=""/>
                                     <!--<input id="btnGoPage" class="aButton" value="Go" type="submit">-->
                                 </li>
                                 <li maxpage="175" currpage="0" class="pageNext">
-                                   <span> <a th:onclick="|nextpage()|">下一页</a></span></li>
+                                   <span> <a href="JavaScript:nextpage();">下一页</a></span></li>
                             </ul>
                         </div>
                         <!--翻页end-->
-
                         <div id="hideDiv" class="hideDiv"></div>
                     </div>
-
                 </form>
                 <script th:inline ="javascript"  type="text/javascript" >
                         function nextpage(){
-                        console.info(123);
+                       console.info(123);
+                       console.info([[${findFundCount}]]);
                         var page = $("#pagenum").val();
-                        if(page<${findFundCount}){
+                        if(page<[[${findFundCount}]]){
                             page++;
                         }
                         else{
-                            page = ${findFundCount};
+                            page = [[${findFundCount}]];
                         }
                         $("#pagenum").val(page);
                         document.searchform.submit();
@@ -223,26 +222,26 @@
 <script src="config.js" th:src="@{/user/findList/config.js}">
 </script>
 
-<script th:inline ="javascript"  type="text/javascript" >
-    $(document).ready(function(){
-        odd= {"background":"#FFF"};//奇数样式
-        even={"background":"rgb(245,245,245)"};//偶数样式
-        odd_even("#resultList",odd,even);
-    });
-    function odd_even(id,odd,even){
-        $(id).find("tr").each(function(index,element){
-            if(index%2==1)
-                $(this).css(odd);
-            else
-                $(this).css(even);
-        });
-    }
-    function search(){
-        $("#pagenum").val(1);
-        document.searchform.submit();
-    }
+<!--<script th:inline ="javascript"  type="text/javascript" >-->
+    <!--$(document).ready(function(){-->
+        <!--odd= {"background":"#FFF"};//奇数样式-->
+        <!--even={"background":"rgb(245,245,245)"};//偶数样式-->
+        <!--odd_even("#resultList",odd,even);-->
+    <!--});-->
+    <!--function odd_even(id,odd,even){-->
+        <!--$(id).find("tr").each(function(index,element){-->
+            <!--if(index%2==1)-->
+                <!--$(this).css(odd);-->
+            <!--else-->
+                <!--$(this).css(even);-->
+        <!--});-->
+    <!--}-->
+    <!--function search(){-->
+        <!--$("#pagenum").val(1);-->
+        <!--document.searchform.submit();-->
+    <!--}-->
 
-</script>
+<!--</script>-->
 <script type="text/javascript" src="fundBrowserPage.js" th:href="@{/user/findList/fundBrowserPage.js}">
 </script>
 
