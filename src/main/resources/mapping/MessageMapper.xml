@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.bank.domain.Message">
+
+    <id column="message_id" jdbcType="INTEGER" property="messageId" />
+    <result column="message_text" jdbcType="VARCHAR" property="messageText" />
+    <result column="message_phone" jdbcType="VARCHAR" property="messagePhone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+
+    message_id, message_text, message_phone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    delete from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.domain.Message">
+
+    insert into message (message_id, message_text, message_phone
+      )
+    values (#{messageId,jdbcType=INTEGER}, #{messageText,jdbcType=VARCHAR}, #{messagePhone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.domain.Message" useGeneratedKeys="true" keyProperty="messageId">
+
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="messageText != null">
+        message_text,
+      </if>
+      <if test="messagePhone != null">
+        message_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="messageText != null">
+        #{messageText,jdbcType=VARCHAR},
+      </if>
+      <if test="messagePhone != null">
+        #{messagePhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.domain.Message">
+
+    update message
+    <set>
+      <if test="messageText != null">
+        message_text = #{messageText,jdbcType=VARCHAR},
+      </if>
+      <if test="messagePhone != null">
+        message_phone = #{messagePhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.domain.Message">
+
+    update message
+    set message_text = #{messageText,jdbcType=VARCHAR},
+      message_phone = #{messagePhone,jdbcType=VARCHAR}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

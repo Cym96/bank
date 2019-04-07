@@ -64,8 +64,6 @@ public class UserFundController {
         Integer startPage1 = startPage * pageSize;
         Integer endPage = (startPage * pageSize) - pageSize;
         fund = fundService.findAll(endPage, startPage1);
-        logger.info("=====startPage1========================" + startPage1);
-        logger.info("=============================endPage=====" + endPage);
 
         //查询到的记录数
         Integer fundCount = this.fundService.findFundCount();
@@ -76,9 +74,6 @@ public class UserFundController {
         } else {
             findFundCount = fundCount / pageSize + 1;
         }
-        logger.info("=====fund.size()======" + fund.size());
-        logger.info("======findFundCount=====" + findFundCount);
-        logger.info("====startPage=======" + startPage);
         model.addAttribute("fund", fund);
         model.addAttribute("findFundCount", findFundCount);
         model.addAttribute("startPage", startPage);
@@ -91,7 +86,6 @@ public class UserFundController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         List<Userfund> userfundlist = this.userfundService.findByUser(user.getUserId());
-        System.out.println(userfundlist + "-------------------------");
         if (userfundlist != null) {
             //查询用户的某个基金的订单
             for (Userfund userfund : userfundlist) {
@@ -137,7 +131,7 @@ public class UserFundController {
      * @return
      */
     @RequestMapping("/showOneFund")
-    public String showOneFund(HttpServletRequest request, HttpSession session) {
+    public String showOneFund(HttpServletRequest request, HttpSession session,org.springframework.ui.Model model) {
         Integer fundId = Integer.parseInt(request.getParameter("fundId"));
         Fund fund = this.fundService.findById(fundId);
         request.setAttribute("fund", fund);
@@ -149,10 +143,7 @@ public class UserFundController {
         user.setUserId(1);
         //获取用户的所有借记卡
         List<Debitcard> debitcardList = this.userService.findUserDebitcard(user.getUserId());
-        request.setAttribute("debitcardList", debitcardList);
-        for (Debitcard debitcard : debitcardList) {
-            System.out.println(debitcard.getCardRestmoney());
-        }
+        model.addAttribute("debitcardList", debitcardList);
         return "user/fundbuy";
     }
 

@@ -10,12 +10,20 @@
     <result column="transaction_business" property="transactionBusiness" jdbcType="INTEGER" />
     <result column="transaction_message" property="transactionMessage" jdbcType="INTEGER" />
   </resultMap>
+
   <sql id="Base_Column_List" >
-    transaction_id, transaction_dotime, transaction_card, transaction_money, transaction_dostate, 
+    transaction_id, transaction_dotime, transaction_card, transaction_money, transaction_dostate,
     transaction_business, transaction_message
   </sql>
+  <select id="selectTransactionByDate" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT *
+    FROM
+    `transaction`
+    INNER JOIN business ON `transaction`.transaction_business = business.business_id
+    where transaction_dotime  &lt; now() and transaction_dostate = 0
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from transaction
     where transaction_id = #{transactionId,jdbcType=INTEGER}
@@ -25,12 +33,12 @@
     where transaction_id = #{transactionId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bank.domain.Transaction" >
-    insert into transaction (transaction_id, transaction_dotime, 
-      transaction_card, transaction_money, transaction_dostate, 
+    insert into transaction (transaction_id, transaction_dotime,
+      transaction_card, transaction_money, transaction_dostate,
       transaction_business, transaction_message
       )
-    values (#{transactionId,jdbcType=INTEGER}, #{transactionDotime,jdbcType=TIMESTAMP}, 
-      #{transactionCard,jdbcType=VARCHAR}, #{transactionMoney,jdbcType=DECIMAL}, #{transactionDostate,jdbcType=INTEGER}, 
+    values (#{transactionId,jdbcType=INTEGER}, #{transactionDotime,jdbcType=TIMESTAMP},
+      #{transactionCard,jdbcType=VARCHAR}, #{transactionMoney,jdbcType=DECIMAL}, #{transactionDostate,jdbcType=INTEGER},
       #{transactionBusiness,jdbcType=INTEGER}, #{transactionMessage,jdbcType=INTEGER}
       )
   </insert>

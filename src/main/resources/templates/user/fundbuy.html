@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
     <link rel="stylesheet" href="fund.css" th:href="@{/user/findList/fund.css}">
     <link rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">
-    <script type="text/javascript" src="writeObjectNew.js" th:href="@{/user/userlogin/writeObjectNew.js}">
+    <script type="text/javascript" src="writeObjectNew.js" th:src="@{/user/userlogin/writeObjectNew.js}">
     </script>
-    <script src="jquery-1.12.0.min.js" th:href="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+    <script src="jquery-1.12.0.min.js" th:src="@{/user/findList/jquery-1.12.0.min.js}"> </script>
 </head>
 
 <body>
@@ -31,48 +31,38 @@
                     <tbody>
                     <tr>
                         <td class="subscribeName left">基金名称</td>
-                        <td class="right"><!--${requestScope.fund.fundNum }-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.fund.fundName }</td>
+                        <td class="right" th:text="${fund.fundName}" th:value="${fund.fundNum}"><!--${requestScope.fund.fundNum }-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.fund.fundName }</td>
                     </tr>
                     <tr>
                         <td class="left">基金类型</td>
-                     <td class="right">
-
-                        <!--    <c:choose>
-                                <c:when test="${requestScope.fund.userProductstateObj.stateName eq '债券型'}">${requestScope.fund.userProductstateObj.stateName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中低风险等级</c:when>
-                                <c:when test="${requestScope.fund.userProductstateObj.stateName eq '股票型'}">${requestScope.fund.userProductstateObj.stateName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高风险</c:when>
-                                <c:when test="${requestScope.fund.userProductstateObj.stateName eq '货币型'}">${requestScope.fund.userProductstateObj.stateName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;低风险</c:when>
-                                <c:when test="${requestScope.fund.userProductstateObj.stateName eq '保本型'}">${requestScope.fund.userProductstateObj.stateName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;很低风险</c:when>
-
-                                <c:otherwise>
-                                    ${requestScope.fund.userProductstateObj.stateName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 中高风险
-                                </c:otherwise>
-                            </c:choose>-->
+                     <td class="right" th:switch="${fund.userProductstateObj.stateName}">
+                         <p th:case ="债券型" th:text="中低风险等级"></p>
+                         <p th:case ="股票型" th:text="高风险"></p>
+                         <p th:case ="货币型" th:text="低风险"></p>
+                         <p th:case ="保本型" th:text="很低风险"></p>
+                         <p th:case ="混合型" th:text="中高风险"></p>
                         </td>
-
-
                     </tr>
-                    <tr>
+                    <tr  >
                         <td class="left">签约卡号</td>
-                   <td class="right"><span id="acctIdSpan" class="number">
-										<select tabindex="0" id="fromAcctNo" name="fromAcctNo" class="form-control trn_fromAcctNo" style="width: 61%;">
-										<c:forEach items="${requestScope.debitcardList }" var="debitcard">
-										   <option value="${debitcard.cardNum }">${debitcard.cardNum }</option>
-										</c:forEach>
-									    </select>
-									</span>&nbsp;&nbsp;&nbsp;&nbsp;可用金额：<span id="balanceSpan" class="orangeText"></span>元</td>
-                  </tr>
-
-
-
-
-                    <tr>
-                        <td class="left" style="padding-right: 3px;">申购金额&nbsp;<span title="手续费用包含在此金额内"><img src="attention.png" height="14" width="14"></span></td>
-                        <td class="right"><input class="form-control" id="trnAmtInput" name="trnAmt" value="" placeholder="首次最低${requestScope.fund.fundMinbuymoney}元" title="首次最低${requestScope.fund.fundMinbuymoney}元" type="text">&nbsp;元&nbsp;&nbsp;<span id="errorTipSpan" class="redFont"><img src="check_error.png" height="14" width="14">&nbsp;金额必需输入！</span></td>
+                   <td class="right">
+                       <span id="acctIdSpan" class="number">
+						<select  tabindex="0" th:id="fromAcctNo" th:name="fromAcctNo" class="form-control trn_fromAcctNo" style="width: 61%;">
+                        <option  th:each = "debitcard : ${debitcardList}" th:value="${debitcard.cardNum}" th:text="${debitcard.cardNum }" th:name="debitcard.cardNum"></option>
+						</select>
+                        </span>&nbsp;&nbsp;&nbsp;&nbsp;可用金额：<span th:id="balanceSpan" class="orangeText"></span>元</td>
                     </tr>
-                  <!--  <tr>
-                        <td class="left">大写金额 </td>
-                        <td id="bigFromAcctAmt" class="right" class="orangeText"></td>
-                    </tr>-->
+                    <tr>
+                        <td class="left" style="padding-right: 3px;">申购金额&nbsp;<span title="手续费用包含在此金额内"><img th:src="@{/user/findList/attention.png}" height="14" width="14"></span></td>
+                        <td class="right"><input class="form-control" th:id="trnAmtInput" th:name="trnAmt" value=""
+                                                 th:placeholder="'最低申购金额'+${fund.fundMinbuymoney}+'元'"
+                                                type="text">&nbsp;元&nbsp;&nbsp;<span id="errorTipSpan" class="redFont">
+                            <img th:src="@{/user/findList/check_error.png}" height="14" width="14">&nbsp;金额必需输入！</span></td>
+                    </tr>
+                  <!--<tr>-->
+                        <!--<td class="left">大写金额 </td>-->
+                        <!--<td th:id="bigFromAcctAmt" class="right" class="orangeText"></td>-->
+                    <!--</tr>-->
                     </tbody>
                     <tbody style="display: none;">
                     <tr>
@@ -82,38 +72,18 @@
                         <td class="right"></td>
                     </tr>
                     <tr id="mmDiv" class="hidden">
-                        <td class="left" style="padding-right: 3px;">营销人员(选填)&nbsp;<span title="请输入营销人员手机号码或者身份证号"><img src="attention.png" height="14" width="14"></span></td>
+                        <td class="left" style="padding-right: 3px;">营销人员(选填)&nbsp;<span title="请输入营销人员手机号码或者身份证号"><img  th:src="@{/user/findList/attention.png}"  height="14" width="14"></span></td>
                         <td class="right"><input class="form-control" id="marketManager" name="marketManager" placeholder="请输入营销人员手机号码或者身份证号" maxlength="18" type="text">&nbsp;&nbsp;<span id="marketManagerSpan" class="redFont"></span></td>
                     </tr>
                     </tbody>
                 </table>
-                <input style="display: none;" type="text">
-                <input name="abc_formId" value="4886" type="hidden">
-                <input id="fundCode" name="fundCode" value="202109" type="hidden">
-                <input id="fundName" name="fundName" value="南方润元纯债Ｂ" type="hidden">
-                <input id="TACode" name="TACode" value="001" type="hidden">
-                <input id="fundTypeName" name="fundTypeName" value="债券型" type="hidden">
-                <input id="fundRiskLevel" name="fundRiskLevel" value="02" type="hidden">
-                <input id="fundRiskLevelName" name="fundRiskLevelName" value="中低风险" type="hidden">
-                <input id="FundDevidendMode" name="FundDevidendMode" value="1" type="hidden">
-                <input id="custRiskLevel" name="custRiskLevel" value="01" type="hidden">
-                <input id="custRiskLevelName" name="custRiskLevelName" value="保守型" type="hidden">
-                <input id="acctId1" name="acctId" value="6228452208036782970" type="hidden">
-                <input name="acctType" value="401" type="hidden">
-                <input id="acctOpenBankId1" name="acctOpenBankId" value="31900" type="hidden">
-                <input id="isTradeTime" name="isTradeTime" value="1" type="hidden">
-                <input name="plattype" type="hidden">
-                <input name="pwdField" type="hidden">
-                <input name="pwdFieldKeys" type="hidden">
-                <div class="text-center m-orange">尊敬的用户，您好，经系统评测您适合购买的基金类型为【保守型】 您适合购买【低风险】类型的基金。</div>
-                <div class="text-center m-orange">如影响您风险承受能力的因素发生变化，在购买产品之前，请重新进行风险承受能力评估。</div>
                 <div class="btn-group">
                     <a href="javascript:js_method()" id="submitBtn" class="submitBtn btn btn-primary">提交</a>
                     <a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="cancelBtn btn btn-secondary ">取消</a>
                 </div>
             </div>
         </form>
-        <script type="text/javascript">
+        <script th:inline ="javascript" type="text/javascript">
             function js_method(){
                 $("#purcForm").submit();
             }
@@ -182,123 +152,111 @@
             </div>
 
         </div>
-        <div class="operaBtn">
-            <div class="risk-message-checkbox">
-                <input id="riskMessageBigCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险不匹配警示函》《投资者确认书》《风险提示书》</span>的提示和内容
-            </div>
-            <a id="fundRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'fundRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>
-            <a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>
-        </div>
+        <!--<div class="operaBtn">-->
+            <!--<div class="risk-message-checkbox">-->
+                <!--<input id="riskMessageBigCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险不匹配警示函》《投资者确认书》《风险提示书》</span>的提示和内容-->
+            <!--</div>-->
+            <!--<a id="fundRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'fundRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>-->
+            <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
+        <!--</div>-->
     </div>
     <div id="customerRiskBig" class="customerRiskBig riskBuySureAlert" style="display: none;">
 
-        <div class="riskBuyCenter">
+        <!--<div class="riskBuyCenter">-->
 
-            <div class="content">
-                <div class="account" style="height: 500px; width: 850px; overflow-y: auto; overflow-x: hidden;">
-                    <table class="show">
-                        <tbody>
-                        <tr>
-                            <td>
-                                <h3 class="risk-message-title">投资者风险匹配告知书</h3>
-                                <p></p>
-                                <p>尊敬的投资者：</p>
-                                <p></p>
-                                <p>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您/贵机构的投资者基本信息，依据相关法律、法规的规定，我行将您认定为普通投资者。结合您/贵机构填写的《风险承受能力评估问卷》以及其它相关信息，我行对您的风险承受能力进行了综合评估，现得到评估结果如下：<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您/贵机构的风险承受能力为：【保守型】，依据我行的投资者与产品、服务风险等级匹配规则，您/贵机构的风险承受能力等级与您要购买的基金产品的风险等级相匹配。
-                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我行在此郑重提醒，我行向您/贵机构销售的产品或提供的服务将以您的风险承受能力等级和投资品种、期限为基础，若您/贵机构提供的信息发生任何重大变化，您/贵机构应当及时更新。我行建议您/贵机构审慎评判自身风险承受能力、结合自身投资行为，认真选择投资品种、期限，并做出审慎的投资判断。
-                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如同意我行评估结果，请确认以示同意。
-                                </p>
-                                <p></p>
-                                <p></p>
-                                <h3 class="risk-message-title">投资者确认函</h3>
-                                <p></p>
-                                <p>尊敬的投资者：</p>
-                                <p></p>
-                                <p>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构已仔细阅读贵行的《投资者风险匹配告知书》，已充分知晓并理解贵行对本人/本机构的风险承受能力评估及产品、服务风险等级匹配结果。本人/本机构对该《投资者风险匹配告知书》内容没有异议，愿意遵守法律、法规及贵行有关规定，通过贵行购买产品或者服务。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构承诺，将及时如实地向贵行告知本人/本机构的重大信息变更。
-                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本确认函系本人/本机构独立、自主、真实的意思表示。
-                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特此确认。
-                                </p>
-                                <p></p>
-                                <h3 class="risk-message-title">风险提示书</h3>
-                                <p>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开放式基金是一种投资型产品，不是储蓄存款、不是银行理财产品。基金在投资运作过程中可能面临各种风险，既包括市场风险，也包括基金自身的管理风险等。基金管理人不保证本基金一定盈利，也不保证最低收益，您的本金可能出现亏损。我行仅为基金代理销售机构，对基金管理人的行为不承担法律责任，对您的投资本金和收益不承担保证或兜底责任。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您须使用自有资金购买我行代销的基金产品，您已清楚知晓并理解将要购买的产品的详细情况与风险，本次投资是您独立自主做出的决定，投资的盈亏将由您自己承担。
-                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您在我行提交交易申请，须由基金管理人确认是否交易成功。产品业绩等信息可通过我行柜面、网上银行、手机银行、自助终端或基金管理人官网等渠道进行查询。如果您有任何意见和建议，可拨打我行客服电话95599或向当地网点咨询。
-                                    <br>
-                                </p>
-                                <p></p>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <!--<div class="content">-->
+                <!--<div class="account" style="height: 500px; width: 850px; overflow-y: auto; overflow-x: hidden;">-->
+                    <!--<table class="show">-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td>-->
+                                <!--<h3 class="risk-message-title">投资者风险匹配告知书</h3>-->
+                                <!--<p></p>-->
+                                <!--<p>尊敬的投资者：</p>-->
+                                <!--<p></p>-->
+                                <!--<p>-->
+                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您/贵机构的投资者基本信息，依据相关法律、法规的规定，我行将您认定为普通投资者。结合您/贵机构填写的《风险承受能力评估问卷》以及其它相关信息，我行对您的风险承受能力进行了综合评估，现得到评估结果如下：<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您/贵机构的风险承受能力为：【保守型】，依据我行的投资者与产品、服务风险等级匹配规则，您/贵机构的风险承受能力等级与您要购买的基金产品的风险等级相匹配。-->
+                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我行在此郑重提醒，我行向您/贵机构销售的产品或提供的服务将以您的风险承受能力等级和投资品种、期限为基础，若您/贵机构提供的信息发生任何重大变化，您/贵机构应当及时更新。我行建议您/贵机构审慎评判自身风险承受能力、结合自身投资行为，认真选择投资品种、期限，并做出审慎的投资判断。-->
+                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如同意我行评估结果，请确认以示同意。-->
+                                <!--</p>-->
+                                <!--<p></p>-->
+                                <!--<p></p>-->
+                                <!--<h3 class="risk-message-title">投资者确认函</h3>-->
+                                <!--<p></p>-->
+                                <!--<p>尊敬的投资者：</p>-->
+                                <!--<p></p>-->
+                                <!--<p>-->
+                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构已仔细阅读贵行的《投资者风险匹配告知书》，已充分知晓并理解贵行对本人/本机构的风险承受能力评估及产品、服务风险等级匹配结果。本人/本机构对该《投资者风险匹配告知书》内容没有异议，愿意遵守法律、法规及贵行有关规定，通过贵行购买产品或者服务。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构承诺，将及时如实地向贵行告知本人/本机构的重大信息变更。-->
+                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本确认函系本人/本机构独立、自主、真实的意思表示。-->
+                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特此确认。-->
+                                <!--</p>-->
+                                <!--<p></p>-->
+                                <!--<h3 class="risk-message-title">风险提示书</h3>-->
+                                <!--<p>-->
+                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开放式基金是一种投资型产品，不是储蓄存款、不是银行理财产品。基金在投资运作过程中可能面临各种风险，既包括市场风险，也包括基金自身的管理风险等。基金管理人不保证本基金一定盈利，也不保证最低收益，您的本金可能出现亏损。我行仅为基金代理销售机构，对基金管理人的行为不承担法律责任，对您的投资本金和收益不承担保证或兜底责任。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您须使用自有资金购买我行代销的基金产品，您已清楚知晓并理解将要购买的产品的详细情况与风险，本次投资是您独立自主做出的决定，投资的盈亏将由您自己承担。-->
+                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您在我行提交交易申请，须由基金管理人确认是否交易成功。产品业绩等信息可通过我行柜面、网上银行、手机银行、自助终端或基金管理人官网等渠道进行查询。如果您有任何意见和建议，可拨打我行客服电话95599或向当地网点咨询。-->
+                                    <!--<br>-->
+                                <!--</p>-->
+                                <!--<p></p>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
 
-        <div class="operaBtn">
-            <div class="risk-message-checkbox">
-                <input id="riskMessageEquleCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险匹配告知书》《投资者确认函》《风险提示书》</span>的提示和内容
-            </div>
-            <a id="customerRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'customerRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>
-            <a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>
-        </div>
+        <!--<div class="operaBtn">-->
+            <!--<div class="risk-message-checkbox">-->
+                <!--<input id="riskMessageEquleCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险匹配告知书》《投资者确认函》《风险提示书》</span>的提示和内容-->
+            <!--</div>-->
+            <!--<a id="customerRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'customerRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>-->
+            <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
+        <!--</div>-->
     </div>
-    <div class="riskTestAlert" style="display: none;">
-        <h2><a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="close"></a>风险提示</h2>
-        <div class="risk-buy-center-test">
-            你所购买的基金超过您的风险承受能力，请前往网点<br>销售专区购买。点击确认重新测评，否则请点击取消。
-        </div>
-        <div class="operaBtn">
-            <a href="###" class="submitBtn btn btn-primary" id="riskTest">确认</a>
-            <a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>
-        </div>
-    </div>
-    <div class="buyFundSureAlert" style="display: none;">
-        <h2><a id="closeIcon" href="#" class="close" onclick="closeBuyFundSureAlert() "></a>申购确认</h2>
-        <div id="buyFundDialog">
-            <ul>
-                <li><label>基金名称</label><span>${requestScope.buyFund.fundCode }</span><span>${requestScope.buyFund.fundName }</span></li>
-                <li><label>分红方式</label><span>现金分红</span></li>
-                <li><label>签约卡号</label><span id="acctIdSpan1">0000000000000000000</span></li>
-                <li><label>申购金额 </label><span><em id="confirmAmt"></em>&nbsp;元</span></li>
-                <!--<li><label>账户密码</label>
-                    <div id="PowerEnterDivOrg" style="display: inline; vertical-align: middle;">
-                        <script>
-                            password.WritePassObject('345F0FA2051436C06988DBDA36FCFDC4');
-                        </script><object id="powerpass_ie" wmode="transparent" type="application/npABCSafeInputApp" style="z-index: inherit; vertical-align: middle; width: 150px; height: 32px;" onblur="password.EventBlur('powerpass_ie','undefined')" height="32" width="150"><param name="width" value="150"><param name="height" value="32"><param name="maxLength" value="6"><param name="minLength" value="6"><param name="maskChar" value="*"><param name="backColor" value="#FFFFFF"><param name="textColor" value="#0000FF"><param name="borderColor" value="#cccccc"><param name="accepts" value="^[0-9]*$"><param name="caption" value="中国农业银行"><param name="captionColor" value="#87011f"><param name="captionFont" value="Microsoft YaHei"><param name="captionSize" value="0"><param name="captionBold" value="true"><param name="lang" value="zh_CN"><param name="languages" value="zh_CN"><param name="softKeyboard" value="true"><param name="softkbdType" value="1"><param name="promptText" value=" 请输入密码"><param name="wmode" value="transparent"><param name="textFont" value="weight:20 width:5 height:20 CharSet:0 OutputPrecision:0 ClipPrecision:0 OutputQuality:0 FontName:微软雅黑"><param name="randomText" value="345F0FA2051436C06988DBDA36FCFDC4"></object><span id="powerpass_ieMsg" class="pwdError"></span>
-                    </div>&nbsp;&nbsp;<span id="Err_Info" class="fontRed">密码输入错误</span></li>-->
-            </ul>
-            <div id="errorMsg" class="errorMsg"></div>
-            <div class="operaBtn">
-                <a id="subBtn" href="###" class="submitBtn btn btn-primary">申购</a>
-                <a id="closeBtn" href="###" class="btn btn-secondary" onclick=" closeBuyFundSureAlert() ">取消</a>
-            </div>
-        </div>
-        <div id="TBuyFundDialog" style="display: none;">
-            <br>
-            <div style="font-size: 16px; text-align: center; width: 100%;">当前非交易时间，是否进行预约交易？预约申请将于下一开放时段提交至基金公司。</div>
-            <div id="errorMsg1" class="errorMsg"></div>
-            <br>
-            <div class="operaBtn">
-                <a id="subBtn1" href="###" class="submitBtn btn btn-primary">预约申购</a>
-                <a href="###" class="btn btn-secondary m-left" onclick=" closeBg('hideDiv', 'buyFundSureAlert'); ">取消</a>
-            </div>
-        </div>
-    </div>
-    <div class="electricTip" style="display: none;">
-        <br>
-        <div class="content">
-            您尾号为2970的账户已签约基金业务，仅可使用该账户办理，暂不支持电子账户重复签约。
-        </div>
-        <br>
-        <div class="operaBtn">
-            <a id="electricButton" href="###" class="submitBtn btn btn-primary">确&nbsp;&nbsp;定</a>
-        </div>
-    </div>
+    <!--<div class="riskTestAlert" style="display: none;">-->
+        <!--<h2><a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="close"></a>风险提示</h2>-->
+        <!--<div class="risk-buy-center-test">-->
+            <!--你所购买的基金超过您的风险承受能力，请前往网点<br>销售专区购买。点击确认重新测评，否则请点击取消。-->
+        <!--</div>-->
+        <!--<div class="operaBtn">-->
+            <!--<a href="###" class="submitBtn btn btn-primary" id="riskTest">确认</a>-->
+            <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
     <div id="magContent" class="sign"></div>
 </div>
+<script th:inline ="javascript"  type="text/javascript">
+
+		$(function(){
+		console.log(123);
+			$.ajax({
+				type:"POST",
+				url:"/user/findcardMoney",
+				data:{"cardNum":$("#fromAcctNo").val()},
+				dataType:"json",
+				success:function(data){
+					 $("#balanceSpan").text(data.cardRestmoney);
+				}
+			});
+			$("#fromAcctNo").change(function(){
+				$.ajax({
+					type:"POST",
+					url:"/user/findcardMoney",
+					data:{"cardNum":$(this).val()},
+					dataType:"json",
+					success:function(data){
+						 $("#balanceSpan").text(data.cardRestmoney);
+
+					}
+				});
+			});
+		});
+		</script>
+
 <script src="jquery-1.12.0.min.js">
 </script>
 <script src="placeholders.jquery.min.js" th:src="@{/user/findList/placeholders.jquery.min.js}">
@@ -320,9 +278,7 @@
 <script src="fund_account.js" th:href="@{/user/userlogin/fund_account.js}">
 </script>
 <script src="config.js" th:src="@{/user/findList/config.js}"></script>
-<script type="text/javascript">
-
-
+<script th:inline ="javascript" type="text/javascript">
     var timeOut = 5;
     var constTimeOut = 5;
     $('#riskMessageBigCheckBox').on('click', function() {
@@ -514,8 +470,8 @@
             }
 
             var isFirstTime = "1";
-            var reqAddAmt = ${requestScope.fund.fundMinbuymoney};
-            var lstReqAmt = ${requestScope.fund.fundMinbuymoney};
+            var reqAddAmt = [[${fund.fundMinbuymoney}]];
+            var lstReqAmt = [[${fund.fundMinbuymoney}]];
             var step = "0.01";
 
             if(isFirstTime == "1") {
@@ -602,8 +558,8 @@
                 $("#errorTipSpan").text("");
             }
             var isFirstTime = "1";
-            var reqAddAmt =${requestScope.fund.fundMinbuymoney};
-            var lstReqAmt =${requestScope.fund.fundMinbuymoney};
+            var reqAddAmt =[[${fund.fundMinbuymoney}]];
+            var lstReqAmt =[[${fund.fundMinbuymoney}]];
             var step = "0.01";
 
             if(isFirstTime == "1") {
@@ -778,37 +734,7 @@
 </script>
 
 
-<script type="text/javascript">
-    $(function(){
-        $.ajax({
 
-            type:"POST",
-            url:"<%=path%>/user/findcardMoney",
-            data:{"cardNum":$("#fromAcctNo").val()},
-            dataType:"json",
-            success:function(data){
-
-                $("#balanceSpan").text(data.cardRestmoney);
-            }
-        });
-        $("#fromAcctNo").change(function(){
-
-            $.ajax({
-
-                type:"POST",
-                url:"<%=path%>/user/findcardMoney",
-                data:{"cardNum":$(this).val()},
-                dataType:"json",
-                success:function(data){
-                    $("#balanceSpan").text(data.cardRestmoney);
-
-                }
-            });
-        });
-
-
-    });
-</script>
 
 </body>
 
