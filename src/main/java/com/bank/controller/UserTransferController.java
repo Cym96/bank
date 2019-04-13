@@ -116,28 +116,15 @@ public class UserTransferController {
 		return debitcard;
 	}
 	@RequestMapping("findUserDebitcard")
-	public String findUserDebitcard(HttpServletRequest request,HttpSession session){
+	public String findUserDebitcard(org.springframework.ui.Model model,HttpSession session){
 		//获取在线用户
-		User user = (User) session.getAttribute("user");
+//		User user = (User) session.getAttribute("user");
+		User user = new User();
+		user.setUserId(1);
 		//获取用户的所有借记卡
 		List<Debitcard> debitcardList = this.userService.findUserDebitcard(user.getUserId());
-		request.setAttribute("debitcardList", debitcardList);
+		model.addAttribute("debitcardList", debitcardList);
+		logger.error("" + debitcardList);
 		return "user/transfer";
-	}
-
-	public UserTransferService getUserTransferService() {
-		return userTransferService;
-	}
-
-	public void setUserTransferService(UserTransferService userTransferService) {
-		this.userTransferService = userTransferService;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
 	}
 }
