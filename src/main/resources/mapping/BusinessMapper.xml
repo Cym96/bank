@@ -33,7 +33,7 @@
       #{businessOwncard,jdbcType=VARCHAR}, #{businessOrthercard,jdbcType=VARCHAR}, #{businessText,jdbcType=VARCHAR}, 
       #{businessDostate,jdbcType=INTEGER}, #{businessCheckstate,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.bank.domain.Business" >
+  <insert id="insertSelective" keyProperty="businessId" useGeneratedKeys="true" parameterType="com.bank.domain.Business"  >
     insert into business
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="businessId != null" >

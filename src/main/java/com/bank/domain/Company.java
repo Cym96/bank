@@ -10,9 +10,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-//@Data
-@Getter
-@Setter
+@Data
 public class Company implements Serializable {
     private String time;
 

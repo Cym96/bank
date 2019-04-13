@@ -84,8 +84,11 @@ public class UserFundController {
     @RequestMapping("/showUserAllFund")
     public String showUserAllFund(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+//        User user = (User) session.getAttribute("user");
+        User user = new User();
+        user.setUserId(1);
         List<Userfund> userfundlist = this.userfundService.findByUser(user.getUserId());
+
         if (userfundlist != null) {
             //查询用户的某个基金的订单
             for (Userfund userfund : userfundlist) {
@@ -145,6 +148,11 @@ public class UserFundController {
         List<Debitcard> debitcardList = this.userService.findUserDebitcard(user.getUserId());
         model.addAttribute("debitcardList", debitcardList);
         return "user/fundbuy";
+    }
+    @RequestMapping("/aa")
+    public String aa(){
+        return "user/index";
+
     }
 
 }

@@ -134,26 +134,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${requestScope.userfundlist}" var="userfund">
-                                    <tr style="background-color: rgb(255, 255, 255);"
-                                        hasexdata="false">
-                                        <td> ${userfund.userfundIdObj.fundNum }</td>
-                                        <td> ${userfund.userfundIdObj.fundName}</td>
-                                        <td> ${userfund.userfundIdObj.fundNpv }</td>
-                                        <td> ${userfund.userfundFundunit }</td>
-                                        <td>
-                                            <fmt:formatNumber pattern=".##">
-                                                ${userfund.userfundFundunit * userfund.userfundIdObj.fundNpv }
-                                            </fmt:formatNumber></td>
-                                        <td>${userfund.userOrderMoney}</td>
-                                        <td><fmt:formatNumber pattern="###.####"
-                                                              value="${userfund.partCostRate}"/>
-                                        </td>
-                                        <td>
-                                            <a param="" ctr="" href="${pageContext.request.contextPath}/user/showWorkList?userFundId=${userfund.userfundId }" class="operate m-btn-table">请求服务</a>
-                                            <a param="" ctr="" href="${pageContext.request.contextPath}/user/buysale/UserLoadSaleFund?fundId=${userfund.userfundIdObj.fundId }" class="operate m-btn-table">赎回</a></td>
-                                    </tr>
-                                </c:forEach>
+
+                                <tr style="background-color: rgb(255, 255, 255);" hasexdata="false" th:each="userfund :${userfundlist}">
+                                    <td th:text="${userfund.userfundIdObj.fundNum }"> </td>
+                                    <td th:text="${userfund.userfundIdObj.fundName}"> </td>
+                                    <td th:text="${userfund.userfundIdObj.fundNpv }"> </td>
+                                    <td th:text="${userfund.userfundFundunit }"> </td>
+                                    <td th:text="${#numbers.formatDecimal(userfund.userfundFundunit * userfund.userfundIdObj.fundNpv,1,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal(userfund.partCostRate,1,3)}"></td>
+
+                                    </td>
+                                    <td>
+                                        <a param="" ctr="" href="${pageContext.request.contextPath}/user/showWorkList?userFundId=${userfund.userfundId }" class="operate m-btn-table">请求服务</a>
+                                        <a param="" ctr="" th:href="@{/user/buysale/UserLoadSaleFund(fundId=${userfund.userfundIdObj.fundId })}" class="operate m-btn-table">赎回</a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

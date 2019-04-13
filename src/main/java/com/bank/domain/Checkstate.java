@@ -6,8 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 public class Checkstate implements Serializable {
     private Integer stateId;
 

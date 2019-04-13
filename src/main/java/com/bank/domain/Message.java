@@ -2,8 +2,7 @@ package com.bank.domain;
 
 import java.io.Serializable;
 
-@lombok.Setter
-@lombok.Getter
+@lombok.Data
 public class Message implements Serializable {
 
     private Integer messageId;

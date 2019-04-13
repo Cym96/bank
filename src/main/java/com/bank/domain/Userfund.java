@@ -6,8 +6,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@lombok.Data
 public class Userfund implements Serializable {
 
     private User userfundUserObj;

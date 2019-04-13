@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">
     <link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">
     <link rel="stylesheet" href="fund.css" th:href="@{/user/findList/fund.css}">
-    <script type="text/javascript" src="writeObjectNew.js" th:href="@{/user/userlogin/writeObjectNew.js}">
+    <script th:inline ="javascript" type="text/javascript" src="writeObjectNew.js" th:src="@{/user/userlogin/writeObjectNew.js}">
+    <script th:inline ="javascript" src="jquery-1.12.0.min.js" th:src="@{/user/user/jquery-1.12.0.min.js}"> </script>
+
     </script>
 </head>
 
@@ -15,8 +17,8 @@
 <div style="height: 0px;"><object id="versionObj" type="application/npABCSafeInputApp" style="width: 0px; height: 0px;" height="0px" width="0px"></object></div>
 
 <div class="container">
-    <form name="errGoForm" action="${pageContext.request.contextPath}/user/buysale/userFundSale" method="post">
-        <input name="rsCode" type="hidden">
+    <form name="errGoForm" th:action="@{/user/buysale/userFundSale}" method="post">
+        <input th:name="rsCode" type="hidden">
         <input name="nextAction" value="FundHoldInitAct.do" type="hidden">
     </form>
     <div id="magContent" class="sign"></div>
@@ -33,36 +35,36 @@
         </ul>
         <div class="form-horizontal-half">
 
-            <form action="${pageContext.request.contextPath}/user/buysale/UserSaleFund" method="post" id="purcForm">
-                <input type="hidden" value="${requestScope.userfund.userfundIdObj.fundId }" name="fundId" />
+            <form th:action="@{/user/buysale/UserSaleFund}" method="post" th:id="purcForm">
+                <input type="hidden" th:value="${userfund.userfundIdObj.fundId }" th:name="fundId" />
                 <table class="buyMsg">
                     <tbody>
                     <tr>
                         <td class="subscribeName left">基金代码</td>
-                        <td class="right">${requestScope.userfund.userfundIdObj.fundNum }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.userfund.userfundIdObj.fundName}</td>
+                        <td class="right" th:name="userfund.userfundIdObj.fundNum" th:text="${userfund.userfundIdObj.fundNum} + '       ' + ${userfund.userfundIdObj.fundName}" th:value="${userfund.userfundIdObj.fundNum}"></td>
                     </tr>
                     <tr>
                         <td class="subscribeName left">赎回份额</td>
                         <td class="right">
-                            <input id="aBuyLotTemp" name="saleNum" value="${requestScope.userfund.userfundIdObj.fundMinsalemoney}" class="form-control" title="赎回最低${requestScope.userfund.userfundIdObj.fundMinsalemoney}份" type="text">可用份额：<span><em>${requestScope.userfund.userfundFundunit}</em></span>&nbsp;&nbsp;&nbsp;
+                            <input th:id="aBuyLotTemp" th:name="saleNum" th:value="${userfund.userfundIdObj.fundMinsalemoney}" class="form-control" th:title="'赎回最低'+${userfund.userfundIdObj.fundMinsalemoney}+'份'" type="text">可用份额：<span><em th:text="${userfund.userfundFundunit}"></em></span>&nbsp;&nbsp;&nbsp;
                             <a href="javascript:;" id="allSaleFunc">全部赎回</a>&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><span id="errorTipSpan" class="redFont"></span></td>
+                        <td><span th:id="errorTipSpan" class="redFont"></span></td>
                     </tr>
                     </tbody>
                 </table>
-                <span id="errorTipSpan" class="redFont"></span>
+                <span th:id="errorTipSpan" class="redFont"></span>
         </div>
         <p class="kindlyReminder" style="padding-left: 170px; margin: 0px; height: 27px;">温馨提示：该笔交易可能产生费用，详见农银汇理基金管理有限公司相关公告，咨询及投诉电话：400-689-5599/021-61095599</p>
         <p class="kindlyReminder" style="padding-left: 170px; margin: 0px; height: 27px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赎回本基金产品，基金公司将按规定要求收取【0.015】的赎回费，具体详见基金公司公告。</p>
         <div class="operaBtn">
-            <a id="subNext" href="javascript:js_method()" class="submitBtn btn btn-primary">提交</a>
+            <a th:id="subNext" href="javascript:js_method()" class="submitBtn btn btn-primary">提交</a>
             <a href="https://perbank.abchina.com/EbankSite/FundHoldInitAct.do" class="cancelBtn btn btn-secondary">取消</a>
         </div>
         </form>
-        <script type="text/javascript">
+        <script th:inline ="javascript" type="text/javascript">
             function js_method(){
                 $("#purcForm").submit();
             }
@@ -85,58 +87,50 @@
     </div>
 
 
-<script src="jquery-1.12.0.min.js" th:src="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
-<script src="placeholders.jquery.min.js" th:src="@{/user/findList/placeholders.jquery.min.js}">
-</script>
+    <script src="jquery-1.12.0.min.js" th:src="@{/user/userlogin/jquery-1.12.0.min.js}"> </script>
+    <script src="placeholders.jquery.min.js" th:src="@{/user/findList/placeholders.jquery.min.js}">
+    </script>
 
-<script type="text/javascript" src="hiddenPopDiv.js" th:src="@{/user/findList/hiddenPopDiv.js}">
-</script>
-<script type="text/javascript" src="fund_common.js" th:src="@{/user/findList/fund_common.js}">
-</script>
-<script type="text/javascript">
-    //submit提交的时候要自己手动判断如果input text 的值为data - prompt的值就提交后台一个控制
+    <script type="text/javascript" src="hiddenPopDiv.js" th:src="@{/user/findList/hiddenPopDiv.js}">
+    </script>
+    <script type="text/javascript" src="fund_common.js" th:src="@{/user/findList/fund_common.js}">
+    </script>
+    <script th:inline ="javascript" type="text/javascript">
     $(function() {
-        //			$('.resetBtn').click(function(){
-        //				$('.buyMsg input').each(function(i,n){
-        //					$(n).val("");
-        //				});
-        //			});
-
-        if("0" == "1") {
-            alert("该产品为指数熔断类产品，今日若发生熔断至收市情形，熔断时点后发生的该交易申请将于下一开放日处理。");
-        }
         $("#aBuyLotTemp").on("blur", function() {
-
+        console.log(111);
             var buyLotTemp = $("#aBuyLotTemp").val();
             if(buyLotTemp.length == 0) {
-                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;请输入份额！");
+                $("#errorTipSpan").html("请输入份额！");
                 $("#subNext").attr("disabled",true);
                 return false;
+            }else{
+              $("#errorTipSpan").html("");
             }
-
             if(checkLot(buyLotTemp) != "") {
-                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;"+checkLot(buyLotTemp));
+                $("#errorTipSpan").html(checkLot(buyLotTemp));
                 $("#subNext").attr("disabled",true);
                 return false;
             }
 
             if(isNaN(buyLotTemp)) {
-                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;请输入数字！");
+                $("#errorTipSpan").html("请输入数字！");
                 $("#subNext").attr("disabled",true);
                 return false;
             }
 
-            if(parseFloat(buyLotTemp) < parseFloat("${requestScope.myfund.fund.fundRedemption}")) {
-                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;赎回份额应该大于最小赎回份额！");
+            if(parseFloat(buyLotTemp) < parseFloat("[[${userfund.userfundIdObj.fundMinsalemoney}]]")) {
+                $("#errorTipSpan").html("赎回份额应该大于最小赎回份额！");
                 $("#subNext").attr("disabled",true);
                 return false;
             }
 
-            if(parseFloat(buyLotTemp) > parseFloat("${requestScope.myfund.myfundNumber}")) {
-                $("#errorTipSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;赎回份额应该小于可用份额！");
+            if(parseFloat(buyLotTemp) > parseFloat("[[${userfund.userfundFundunit}]]")) {
+                $("#errorTipSpan").html("赎回份额应该小于可用份额！");
                 $("#subNext").attr("disabled",true);
                 return false;
             }
+
             $("#subNext").attr("disabled",false);
             $("#buyAmtShow").text(buyLotTemp);
             showBg('hideDiv', 'buyFundSureAlert');
@@ -147,7 +141,7 @@
 
         $('#allSaleFunc').click(function() {
 
-            document.getElementById("aBuyLotTemp").value = "${requestScope.userfund.userfundFundunit}";
+            document.getElementById("aBuyLotTemp").value = "[[${userfund.userfundFundunit}]]";
 
         });
 
@@ -196,7 +190,7 @@
     });
 
     function checkLot(fromAcctAmt) {
-        //*金额有效性检查. 判断数值,可以有小数*
+        <!--//*金额有效性检查. 判断数值,可以有小数*-->
         if(fromAcctAmt.length == 0) {
             return "错误！份额必需输入！";
         }

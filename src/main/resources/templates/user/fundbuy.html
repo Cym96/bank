@@ -23,29 +23,30 @@
                 <a href="javascript:;" class="nowLink">基金申购</a>
             </li>
         </ul>
-        <form class="form-horizontal-half" id="purcForm" action="${pageContext.request.contextPath}/user/buysale/UserBuyFund" method="post">
-            <input type="hidden" name="fundId" value="${requestScope.fund.fundId }" />
-            <input type="hidden" name="userId" value="${requestScope.user.userId }" />
+        <form class="form-horizontal-half" th:id="purcForm" th:action="@{/user/buysale/UserBuyFund}" method="post">
+
+            <input type="hidden" th:name="fundId" th:value="${fund.fundId}" />
+            <!--<input type="hidden" th:name="userId" value="${user.userId }" />-->
             <div class="buyFundTableDiv">
                 <table class="buyMsg">
                     <tbody>
                     <tr>
                         <td class="subscribeName left">基金名称</td>
-                        <td class="right" th:text="${fund.fundName}" th:value="${fund.fundNum}"><!--${requestScope.fund.fundNum }-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.fund.fundName }</td>
+                        <td class="right" th:name="fund.fundName" th:text="${fund.fundName}" th:value="${fund.fundNum}"><!--${requestScope.fund.fundNum }-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.fund.fundName }</td>
                     </tr>
                     <tr>
                         <td class="left">基金类型</td>
-                     <td class="right" th:switch="${fund.userProductstateObj.stateName}">
-                         <p th:case ="债券型" th:text="中低风险等级"></p>
-                         <p th:case ="股票型" th:text="高风险"></p>
-                         <p th:case ="货币型" th:text="低风险"></p>
-                         <p th:case ="保本型" th:text="很低风险"></p>
-                         <p th:case ="混合型" th:text="中高风险"></p>
+                        <td class="right" th:switch="${fund.userProductstateObj.stateName}">
+                            <p th:case ="债券型" th:text="中低风险等级"></p>
+                            <p th:case ="股票型" th:text="高风险"></p>
+                            <p th:case ="货币型" th:text="低风险"></p>
+                            <p th:case ="保本型" th:text="很低风险"></p>
+                            <p th:case ="混合型" th:text="中高风险"></p>
                         </td>
                     </tr>
                     <tr  >
                         <td class="left">签约卡号</td>
-                   <td class="right">
+                        <td class="right">
                        <span id="acctIdSpan" class="number">
 						<select  tabindex="0" th:id="fromAcctNo" th:name="fromAcctNo" class="form-control trn_fromAcctNo" style="width: 61%;">
                         <option  th:each = "debitcard : ${debitcardList}" th:value="${debitcard.cardNum}" th:text="${debitcard.cardNum }" th:name="debitcard.cardNum"></option>
@@ -56,12 +57,12 @@
                         <td class="left" style="padding-right: 3px;">申购金额&nbsp;<span title="手续费用包含在此金额内"><img th:src="@{/user/findList/attention.png}" height="14" width="14"></span></td>
                         <td class="right"><input class="form-control" th:id="trnAmtInput" th:name="trnAmt" value=""
                                                  th:placeholder="'最低申购金额'+${fund.fundMinbuymoney}+'元'"
-                                                type="text">&nbsp;元&nbsp;&nbsp;<span id="errorTipSpan" class="redFont">
+                                                 type="text">&nbsp;元&nbsp;&nbsp;<span id="errorTipSpan" class="redFont">
                             <img th:src="@{/user/findList/check_error.png}" height="14" width="14">&nbsp;金额必需输入！</span></td>
                     </tr>
-                  <!--<tr>-->
-                        <!--<td class="left">大写金额 </td>-->
-                        <!--<td th:id="bigFromAcctAmt" class="right" class="orangeText"></td>-->
+                    <!--<tr>-->
+                    <!--<td class="left">大写金额 </td>-->
+                    <!--<td th:id="bigFromAcctAmt" class="right" class="orangeText"></td>-->
                     <!--</tr>-->
                     </tbody>
                     <tbody style="display: none;">
@@ -78,6 +79,7 @@
                     </tbody>
                 </table>
                 <div class="btn-group">
+                    <!--<button href="javascript:js_method()" onclick="submitFund()" th:text="提交"></button>-->
                     <a href="javascript:js_method()" id="submitBtn" class="submitBtn btn btn-primary">提交</a>
                     <a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="cancelBtn btn btn-secondary ">取消</a>
                 </div>
@@ -141,7 +143,7 @@
                                 <p></p>
                                 <h3 class="risk-message-title">风险提示书</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开放式基金是一种投资型产品，不是储蓄存款、不是银行理财产品。基金在投资运作过程中可能面临各种风险，既包括市场风险，也包括基金自身的管理风险等。基金管理人不保证本基金一定盈利，也不保证最低收益，您的本金可能出现亏损。我行仅为基金代理销售机构，对基金管理人的行为不承担法律责任，对您的投资本金和收益不承担保证或兜底责任。
                                 <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您须使用自有资金购买我行代销的基金产品，您已清楚知晓并理解将要购买的产品的详细情况与风险，本次投资是您独立自主做出的决定，投资的盈亏将由您自己承担。
-                                <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您在我行提交交易申请，须由基金管理人确认是否交易成功。产品业绩等信息可通过我行柜面、网上银行、手机银行、自助终端或基金管理人官网等渠道进行查询。如果您有任何意见和建议，可拨打我行客服电话95599或向当地网点咨询。
+                                <br> &nbsp;trnAmtInput&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您在我行提交交易申请，须由基金管理人确认是否交易成功。产品业绩等信息可通过我行柜面、网上银行、手机银行、自助终端或基金管理人官网等渠道进行查询。如果您有任何意见和建议，可拨打我行客服电话95599或向当地网点咨询。
                                 <br>
                                 <p></p>
                             </td>
@@ -153,86 +155,85 @@
 
         </div>
         <!--<div class="operaBtn">-->
-            <!--<div class="risk-message-checkbox">-->
-                <!--<input id="riskMessageBigCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险不匹配警示函》《投资者确认书》《风险提示书》</span>的提示和内容-->
-            <!--</div>-->
-            <!--<a id="fundRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'fundRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>-->
-            <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
+        <!--<div class="risk-message-checkbox">-->
+        <!--<input id="riskMessageBigCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险不匹配警示函》《投资者确认书》《风险提示书》</span>的提示和内容-->
+        <!--</div>-->
+        <!--<a id="fundRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'fundRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>-->
+        <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
         <!--</div>-->
     </div>
     <div id="customerRiskBig" class="customerRiskBig riskBuySureAlert" style="display: none;">
 
         <!--<div class="riskBuyCenter">-->
 
-            <!--<div class="content">-->
-                <!--<div class="account" style="height: 500px; width: 850px; overflow-y: auto; overflow-x: hidden;">-->
-                    <!--<table class="show">-->
-                        <!--<tbody>-->
-                        <!--<tr>-->
-                            <!--<td>-->
-                                <!--<h3 class="risk-message-title">投资者风险匹配告知书</h3>-->
-                                <!--<p></p>-->
-                                <!--<p>尊敬的投资者：</p>-->
-                                <!--<p></p>-->
-                                <!--<p>-->
-                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您/贵机构的投资者基本信息，依据相关法律、法规的规定，我行将您认定为普通投资者。结合您/贵机构填写的《风险承受能力评估问卷》以及其它相关信息，我行对您的风险承受能力进行了综合评估，现得到评估结果如下：<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您/贵机构的风险承受能力为：【保守型】，依据我行的投资者与产品、服务风险等级匹配规则，您/贵机构的风险承受能力等级与您要购买的基金产品的风险等级相匹配。-->
-                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我行在此郑重提醒，我行向您/贵机构销售的产品或提供的服务将以您的风险承受能力等级和投资品种、期限为基础，若您/贵机构提供的信息发生任何重大变化，您/贵机构应当及时更新。我行建议您/贵机构审慎评判自身风险承受能力、结合自身投资行为，认真选择投资品种、期限，并做出审慎的投资判断。-->
-                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如同意我行评估结果，请确认以示同意。-->
-                                <!--</p>-->
-                                <!--<p></p>-->
-                                <!--<p></p>-->
-                                <!--<h3 class="risk-message-title">投资者确认函</h3>-->
-                                <!--<p></p>-->
-                                <!--<p>尊敬的投资者：</p>-->
-                                <!--<p></p>-->
-                                <!--<p>-->
-                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构已仔细阅读贵行的《投资者风险匹配告知书》，已充分知晓并理解贵行对本人/本机构的风险承受能力评估及产品、服务风险等级匹配结果。本人/本机构对该《投资者风险匹配告知书》内容没有异议，愿意遵守法律、法规及贵行有关规定，通过贵行购买产品或者服务。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构承诺，将及时如实地向贵行告知本人/本机构的重大信息变更。-->
-                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本确认函系本人/本机构独立、自主、真实的意思表示。-->
-                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特此确认。-->
-                                <!--</p>-->
-                                <!--<p></p>-->
-                                <!--<h3 class="risk-message-title">风险提示书</h3>-->
-                                <!--<p>-->
-                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开放式基金是一种投资型产品，不是储蓄存款、不是银行理财产品。基金在投资运作过程中可能面临各种风险，既包括市场风险，也包括基金自身的管理风险等。基金管理人不保证本基金一定盈利，也不保证最低收益，您的本金可能出现亏损。我行仅为基金代理销售机构，对基金管理人的行为不承担法律责任，对您的投资本金和收益不承担保证或兜底责任。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您须使用自有资金购买我行代销的基金产品，您已清楚知晓并理解将要购买的产品的详细情况与风险，本次投资是您独立自主做出的决定，投资的盈亏将由您自己承担。-->
-                                    <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您在我行提交交易申请，须由基金管理人确认是否交易成功。产品业绩等信息可通过我行柜面、网上银行、手机银行、自助终端或基金管理人官网等渠道进行查询。如果您有任何意见和建议，可拨打我行客服电话95599或向当地网点咨询。-->
-                                    <!--<br>-->
-                                <!--</p>-->
-                                <!--<p></p>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</div>-->
-            <!--</div>-->
-
-        </div>
-
-        <!--<div class="operaBtn">-->
-            <!--<div class="risk-message-checkbox">-->
-                <!--<input id="riskMessageEquleCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险匹配告知书》《投资者确认函》《风险提示书》</span>的提示和内容-->
-            <!--</div>-->
-            <!--<a id="customerRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'customerRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>-->
-            <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
+        <!--<div class="content">-->
+        <!--<div class="account" style="height: 500px; width: 850px; overflow-y: auto; overflow-x: hidden;">-->
+        <!--<table class="show">-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td>-->
+        <!--<h3 class="risk-message-title">投资者风险匹配告知书</h3>-->
+        <!--<p></p>-->
+        <!--<p>尊敬的投资者：</p>-->
+        <!--<p></p>-->
+        <!--<p>-->
+        <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据您/贵机构的投资者基本信息，依据相关法律、法规的规定，我行将您认定为普通投资者。结合您/贵机构填写的《风险承受能力评估问卷》以及其它相关信息，我行对您的风险承受能力进行了综合评估，现得到评估结果如下：<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您/贵机构的风险承受能力为：【保守型】，依据我行的投资者与产品、服务风险等级匹配规则，您/贵机构的风险承受能力等级与您要购买的基金产品的风险等级相匹配。-->
+        <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我行在此郑重提醒，我行向您/贵机构销售的产品或提供的服务将以您的风险承受能力等级和投资品种、期限为基础，若您/贵机构提供的信息发生任何重大变化，您/贵机构应当及时更新。我行建议您/贵机构审慎评判自身风险承受能力、结合自身投资行为，认真选择投资品种、期限，并做出审慎的投资判断。-->
+        <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如同意我行评估结果，请确认以示同意。-->
+        <!--</p>-->
+        <!--<p></p>-->
+        <!--<p></p>-->
+        <!--<h3 class="risk-message-title">投资者确认函</h3>-->
+        <!--<p></p>-->
+        <!--<p>尊敬的投资者：</p>-->
+        <!--<p></p>-->
+        <!--<p>-->
+        <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构已仔细阅读贵行的《投资者风险匹配告知书》，已充分知晓并理解贵行对本人/本机构的风险承受能力评估及产品、服务风险等级匹配结果。本人/本机构对该《投资者风险匹配告知书》内容没有异议，愿意遵守法律、法规及贵行有关规定，通过贵行购买产品或者服务。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人/本机构承诺，将及时如实地向贵行告知本人/本机构的重大信息变更。-->
+        <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本确认函系本人/本机构独立、自主、真实的意思表示。-->
+        <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特此确认。-->
+        <!--</p>-->
+        <!--<p></p>-->
+        <!--<h3 class="risk-message-title">风险提示书</h3>-->
+        <!--<p>-->
+        <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开放式基金是一种投资型产品，不是储蓄存款、不是银行理财产品。基金在投资运作过程中可能面临各种风险，既包括市场风险，也包括基金自身的管理风险等。基金管理人不保证本基金一定盈利，也不保证最低收益，您的本金可能出现亏损。我行仅为基金代理销售机构，对基金管理人的行为不承担法律责任，对您的投资本金和收益不承担保证或兜底责任。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您须使用自有资金购买我行代销的基金产品，您已清楚知晓并理解将要购买的产品的详细情况与风险，本次投资是您独立自主做出的决定，投资的盈亏将由您自己承担。-->
+        <!--<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您在我行提交交易申请，须由基金管理人确认是否交易成功。产品业绩等信息可通过我行柜面、网上银行、手机银行、自助终端或基金管理人官网等渠道进行查询。如果您有任何意见和建议，可拨打我行客服电话95599或向当地网点咨询。-->
+        <!--<br>-->
+        <!--</p>-->
+        <!--<p></p>-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
         <!--</div>-->
+        <!--</div>-->
+
     </div>
-    <!--<div class="riskTestAlert" style="display: none;">-->
-        <!--<h2><a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="close"></a>风险提示</h2>-->
-        <!--<div class="risk-buy-center-test">-->
-            <!--你所购买的基金超过您的风险承受能力，请前往网点<br>销售专区购买。点击确认重新测评，否则请点击取消。-->
-        <!--</div>-->
-        <!--<div class="operaBtn">-->
-            <!--<a href="###" class="submitBtn btn btn-primary" id="riskTest">确认</a>-->
-            <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
-        <!--</div>-->
+
+    <!--<div class="operaBtn">-->
+    <!--<div class="risk-message-checkbox">-->
+    <!--<input id="riskMessageEquleCheckBox" checked="checked" type="checkbox">我已阅读并确认以上<span>《投资者风险匹配告知书》《投资者确认函》《风险提示书》</span>的提示和内容-->
     <!--</div>-->
+    <!--<a id="customerRiskBigCertainBuy" href="javascript:void(0);" class="submitBtn btn btn-primary" onclick=" closeBg('hideDiv', 'customerRiskBig');showBg('hideDiv', 'buyFundSureAlert'); ">同意</a>-->
+    <!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
+    <!--</div>-->
+</div>
+<!--<div class="riskTestAlert" style="display: none;">-->
+<!--<h2><a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="close"></a>风险提示</h2>-->
+<!--<div class="risk-buy-center-test">-->
+<!--你所购买的基金超过您的风险承受能力，请前往网点<br>销售专区购买。点击确认重新测评，否则请点击取消。-->
+<!--</div>-->
+<!--<div class="operaBtn">-->
+<!--<a href="###" class="submitBtn btn btn-primary" id="riskTest">确认</a>-->
+<!--<a href="https://perbank.abchina.com/EbankSite/FundBrowserInitAct.do" class="btn btn-secondary">取消</a>-->
+<!--</div>-->
+<!--</div>-->
 
 
-    <div id="magContent" class="sign"></div>
+<div id="magContent" class="sign"></div>
 </div>
 <script th:inline ="javascript"  type="text/javascript">
 
 		$(function(){
-		console.log(123);
 			$.ajax({
 				type:"POST",
 				url:"/user/findcardMoney",
@@ -281,178 +282,179 @@
 <script th:inline ="javascript" type="text/javascript">
     var timeOut = 5;
     var constTimeOut = 5;
-    $('#riskMessageBigCheckBox').on('click', function() {
-        if($('#riskMessageBigCheckBox').prop('checked') == true) {
-            $('#fundRiskBigCertainBuy').prop('disabled', false);
-        } else {
-            $('#fundRiskBigCertainBuy').prop('disabled', true);
-        }
-    });
-    $('#riskMessageEquleCheckBox').on('click', function() {
-        if($('#riskMessageEquleCheckBox').prop('checked') == true) {
-            $('#customerRiskBigCertainBuy').prop('disabled', false);
-        } else {
-            $('#customerRiskBigCertainBuy').prop('disabled', true);
-        }
-    });
-
-    function showFundRiskBigCertain() {
-        $('#fundRiskBigCertainBuy').attr('disabled', true);
-        $('#fundRiskBigCertainBuy').text('确定(' + timeOut + "s)");
-        var agreeInterval = setInterval(function() {
-            if(timeOut > 0) {
-                timeOut--;
-                $('#fundRiskBigCertainBuy').text('确定（' + timeOut + "s)");
-                $('#riskMessageBigCheckBox').attr("disabled", true);
-            } else {
-                $('#riskMessageBigCheckBox').attr("disabled", false);
-                $('#fundRiskBigCertainBuy').text('确定');
-                $('#fundRiskBigCertainBuy').attr('disabled', false);
-                clearInterval(agreeInterval);
-                timeOut = constTimeOut;
-            }
-        }, ${requestScope.fund.fundMinbuymoney});
-        //setTimeout(function () {
-        //    $('#fundRiskBigCertainBuy').attr('disabled', false);
-        //    $('#riskMessageBigCheckBox').attr("disabled", false);
-        //    $('#customerRiskBigCertainBuy').text('确定');
-        //    clearInterval(agreeInterval);
-        //}, (timeOut + 1) * 1000);
-        showBg('hideDiv', 'fundRiskBig');
-    }
-
-    function showCustomerRiskBig() {
-        $('#customerRiskBigCertainBuy').attr('disabled', false);
-        $('#customerRiskBigCertainBuy').text('确定');
-        showBg('hideDiv', 'customerRiskBig');
-    }
-
-    function judgeBeforeAct() { //基金风险匹配规则
-        if($("#fundRiskLevel").val() > $("#custRiskLevel").val()) {
-            if('01' === $("#custRiskLevel").val()) {
-                $('#riskTest').click(function() {
-                    closeBg('hideDiv', 'riskTestAlert');
-                    $('#magContent').html("");
-                    $('#magContent').load('FundRiskPaperAct.do?acctId=' + "6228452208036782970" + "&&acctOpenBankId=" + "31900" + "&&selectpaper=FPAndFund&&buttonFlag=2", function() {
-                        showTestPage();
-
-                        $('#btnPassTest2').on('click', function() {
-                            var score = doTestAndAnswer();
-                            if(score == false) {
-                                return;
-                            }
-                            var obj = {};
-                            obj.acctOpenBankId = '31900';
-                            obj.iRiskType = score.risktypeTmp;
-                            obj.answer = score.answer;
-                            obj.score = score.score;
-                            obj.cInvCustTp = score.cInvCustTp;
-                            $('#testResultShow').html(paramRiskLevel(score.risktypeTmp));
-                            $.post("FundRiskDoAct.do", obj, function(data) {
-                                var aa = eval('(' + data + ')');
-                                if(aa.rsCode == "0000") {
-                                    showResultPage("6228452208036782970", "测评结果");
-                                    var v = parseInt($('#backCount').html());
-                                    if(parseInt(aa.iReturnCnt) > 0) {
-                                        //返回持有基金有超过当前客户等级基金
-                                        $('#showBigFundResult').show();
-                                        $('#bigFundResult').text(aa.nameList);
-                                        $('#checkMoreFunds').hide();
-                                    }
-                                    if(parseInt(aa.iReturnCnt) == 10 && aa.sIndExist == 2) {
-                                        //返回10条，切存在超过20条的持有基金超过当前客户等级
-                                        $('#checkMoreFunds').show();
-                                    }
-                                } else {
-                                    goToError(aa.rsCode, aa.userErrorMsg, "FundAccountInitAct.do");
-                                }
-                            });
-                        });
-
-                        $('#btnAutoAnswer').on('click', function() {
-                            var score = doAutoTestAndAnser();
-                            if(score == false) {
-                                return;
-                            }
-                            var obj = {};
-                            obj.acctOpenBankId = '31900';
-                            obj.iRiskType = score.risktypeTmp;
-                            obj.answer = score.answer;
-                            obj.score = score.score;
-                            obj.cInvCustTp = score.cInvCustTp;
-                            $('#testResultShow').html(paramRiskLevel(score.risktypeTmp));
-                            $.post("FundRiskDoAct.do", obj, function(data) {
-                                var aa = eval('(' + data + ')');
-                                if(aa.rsCode == "0000") {
-                                    showResultPage("6228452208036782970", "测评结果");
-                                    var v = parseInt($('#backCount').html());
-                                    if(parseInt(aa.iReturnCnt) > 0) {
-                                        //返回持有基金有超过当前客户等级基金
-                                        $('#showBigFundResult').show();
-                                        $('#bigFundResult').text(aa.nameList);
-                                        $('#checkMoreFunds').hide();
-                                    }
-                                    if(parseInt(aa.iReturnCnt) == 10 && aa.sIndExist == 2) {
-                                        //返回10条，切存在超过20条的持有基金超过当前客户等级
-                                        $('#checkMoreFunds').show();
-                                    }
-                                } else {
-                                    goToError(aa.rsCode, aa.userErrorMsg, "FundAccountInitAct.do");
-                                }
-                            });
-
-                        });
-                        showBg("hideDiv", "sign");
-                        changeFrameHeight();
-                    });
-                });
-                showBg('hideDiv', 'riskTestAlert');
-            } else {
-                //showBg('hideDiv', 'riskBuySureAlert');
-
-                Confirm("你所购买的基金超过您的风险承受能力，请前往网点销售专区购买。<br/>若您已知悉并坚持购买，请点击确认，否则请点击取消。", "风险提示", function() {
-                    showFundRiskBigCertain();
-                }, function() {
-                    $.setPosInfo('投资/基金/基金购买');
-                    window.location.href = 'FundBrowserInitAct.do';
-                    return false;
-                }, '', '确定');
-
-            }
-        } else {
-            //showBg('hideDiv', 'buyFundSureAlert');
-            showCustomerRiskBig();
-        }
-    }
-    /*安全控件专用*/
-    //submit提交的时候要自己手动判断如果input text 的值为data - prompt的值就提交后台一个控制
-    $(function() {
-        if("0" == "1") {
-            alert("该产品为指数熔断类产品，今日若发生熔断至收市情形，熔断时点后发生的该交易申请将于下一开放日处理。");
-        }
-        if("7.0" == "10") {
-            $("#discount").text("无");
-        }
-        $.getBalance({
-            'acct': $("#acctIdSpan").text(),
-            /*'EAList[0].acctNo@6228460018008739076',*/
-            'type': 'one',
-            'element': '',
-            'target': 'balanceSpan'
-        });
-        var fundStt = "001110";
-        if(fundStt.substring(2, 4) === "01") {
-            $("#subBtn").text("预约申购");
-        }
+    // $('#riskMessageBigCheckBox').on('click', function() {
+    //     if($('#riskMessageBigCheckBox').prop('checked') == true) {
+    //         $('#fundRiskBigCertainBuy').prop('disabled', false);
+    //     } else {
+    //         $('#fundRiskBigCertainBuy').prop('disabled', true);
+    //     }
+    // });
+    // $('#riskMessageEquleCheckBox').on('click', function() {
+    //     if($('#riskMessageEquleCheckBox').prop('checked') == true) {
+    //         $('#customerRiskBigCertainBuy').prop('disabled', false);
+    //     } else {
+    //         $('#customerRiskBigCertainBuy').prop('disabled', true);
+    //     }
+    // });
+    //
+    // function showFundRiskBigCertain() {
+    //     $('#fundRiskBigCertainBuy').attr('disabled', true);
+    //     $('#fundRiskBigCertainBuy').text('确定(' + timeOut + "s)");
+    //     var agreeInterval = setInterval(function() {
+    //         if(timeOut > 0) {
+    //             timeOut--;
+    //             $('#fundRiskBigCertainBuy').text('确定（' + timeOut + "s)");
+    //             $('#riskMessageBigCheckBox').attr("disabled", true);
+    //         } else {
+    //             $('#riskMessageBigCheckBox').attr("disabled", false);
+    //             $('#fundRiskBigCertainBuy').text('确定');
+    //             $('#fundRiskBigCertainBuy').attr('disabled', false);
+    //             clearInterval(agreeInterval);
+    //             timeOut = constTimeOut;
+    //         }
+    //     }, ${requestScope.fund.fundMinbuymoney});
+    //     //setTimeout(function () {
+    //     //    $('#fundRiskBigCertainBuy').attr('disabled', false);
+    //     //    $('#riskMessageBigCheckBox').attr("disabled", false);
+    //     //    $('#customerRiskBigCertainBuy').text('确定');
+    //     //    clearInterval(agreeInterval);
+    //     //}, (timeOut + 1) * 1000);
+    //     showBg('hideDiv', 'fundRiskBig');
+    // }
+    //
+    // function showCustomerRiskBig() {
+    //     $('#customerRiskBigCertainBuy').attr('disabled', false);
+    //     $('#customerRiskBigCertainBuy').text('确定');
+    //     showBg('hideDiv', 'customerRiskBig');
+    // }
+    //
+    // function judgeBeforeAct() { //基金风险匹配规则
+    //     if($("#fundRiskLevel").val() > $("#custRiskLevel").val()) {
+    //         if('01' === $("#custRiskLevel").val()) {
+    //             $('#riskTest').click(function() {
+    //                 closeBg('hideDiv', 'riskTestAlert');
+    //                 $('#magContent').html("");
+    //                 $('#magContent').load('FundRiskPaperAct.do?acctId=' + "6228452208036782970" + "&&acctOpenBankId=" + "31900" + "&&selectpaper=FPAndFund&&buttonFlag=2", function() {
+    //                     showTestPage();
+    //
+    //                     $('#btnPassTest2').on('click', function() {
+    //                         var score = doTestAndAnswer();
+    //                         if(score == false) {
+    //                             return;
+    //                         }
+    //                         var obj = {};
+    //                         obj.acctOpenBankId = '31900';
+    //                         obj.iRiskType = score.risktypeTmp;
+    //                         obj.answer = score.answer;
+    //                         obj.score = score.score;
+    //                         obj.cInvCustTp = score.cInvCustTp;
+    //                         $('#testResultShow').html(paramRiskLevel(score.risktypeTmp));
+    //                         $.post("FundRiskDoAct.do", obj, function(data) {
+    //                             var aa = eval('(' + data + ')');
+    //                             if(aa.rsCode == "0000") {
+    //                                 showResultPage("6228452208036782970", "测评结果");
+    //                                 var v = parseInt($('#backCount').html());
+    //                                 if(parseInt(aa.iReturnCnt) > 0) {
+    //                                     //返回持有基金有超过当前客户等级基金
+    //                                     $('#showBigFundResult').show();
+    //                                     $('#bigFundResult').text(aa.nameList);
+    //                                     $('#checkMoreFunds').hide();
+    //                                 }
+    //                                 if(parseInt(aa.iReturnCnt) == 10 && aa.sIndExist == 2) {
+    //                                     //返回10条，切存在超过20条的持有基金超过当前客户等级
+    //                                     $('#checkMoreFunds').show();
+    //                                 }
+    //                             } else {
+    //                                 goToError(aa.rsCode, aa.userErrorMsg, "FundAccountInitAct.do");
+    //                             }
+    //                         });
+    //                     });
+    //
+    //                     $('#btnAutoAnswer').on('click', function() {
+    //                         var score = doAutoTestAndAnser();
+    //                         if(score == false) {
+    //                             return;
+    //                         }
+    //                         var obj = {};
+    //                         obj.acctOpenBankId = '31900';
+    //                         obj.iRiskType = score.risktypeTmp;
+    //                         obj.answer = score.answer;
+    //                         obj.score = score.score;
+    //                         obj.cInvCustTp = score.cInvCustTp;
+    //                         $('#testResultShow').html(paramRiskLevel(score.risktypeTmp));
+    //                         $.post("FundRiskDoAct.do", obj, function(data) {
+    //                             var aa = eval('(' + data + ')');
+    //                             if(aa.rsCode == "0000") {
+    //                                 showResultPage("6228452208036782970", "测评结果");
+    //                                 var v = parseInt($('#backCount').html());
+    //                                 if(parseInt(aa.iReturnCnt) > 0) {
+    //                                     //返回持有基金有超过当前客户等级基金
+    //                                     $('#showBigFundResult').show();
+    //                                     $('#bigFundResult').text(aa.nameList);
+    //                                     $('#checkMoreFunds').hide();
+    //                                 }
+    //                                 if(parseInt(aa.iReturnCnt) == 10 && aa.sIndExist == 2) {
+    //                                     //返回10条，切存在超过20条的持有基金超过当前客户等级
+    //                                     $('#checkMoreFunds').show();
+    //                                 }
+    //                             } else {
+    //                                 goToError(aa.rsCode, aa.userErrorMsg, "FundAccountInitAct.do");
+    //                             }
+    //                         });
+    //
+    //                     });
+    //                     showBg("hideDiv", "sign");
+    //                     changeFrameHeight();
+    //                 });
+    //             });
+    //             showBg('hideDiv', 'riskTestAlert');
+    //         } else {
+    //             //showBg('hideDiv', 'riskBuySureAlert');
+    //
+    //             Confirm("你所购买的基金超过您的风险承受能力，请前往网点销售专区购买。<br/>若您已知悉并坚持购买，请点击确认，否则请点击取消。", "风险提示", function() {
+    //                 showFundRiskBigCertain();
+    //             }, function() {
+    //                 $.setPosInfo('投资/基金/基金购买');
+    //                 window.location.href = 'FundBrowserInitAct.do';
+    //                 return false;
+    //             }, '', '确定');
+    //
+    //         }
+    //     } else {
+    //         //showBg('hideDiv', 'buyFundSureAlert');
+    //         showCustomerRiskBig();
+    //     }
+    // }
+    // /*安全控件专用*/
+    // //submit提交的时候要自己手动判断如果input text 的值为data - prompt的值就提交后台一个控制
+    // $(function() {
+    //     if("0" == "1") {
+    //         alert("该产品为指数熔断类产品，今日若发生熔断至收市情形，熔断时点后发生的该交易申请将于下一开放日处理。");
+    //     }
+    //     if("7.0" == "10") {
+    //         $("#discount").text("无");
+    //     }
+    //     $.getBalance({
+    //         'acct': $("#acctIdSpan").text(),
+    //         /*'EAList[0].acctNo@6228460018008739076',*/
+    //         'type': 'one',
+    //         'element': '',
+    //         'target': 'balanceSpan'
+    //     });
+    //     var fundStt = "001110";
+    //     if(fundStt.substring(2, 4) === "01") {
+    //         $("#subBtn").text("预约申购");
+    //     }
         $("#trnAmtInput").on("keyup", function() {
+            console.log(11111);
             var val = $(this).val();
             $("#feeTrnAmt").val(val);
-            $("#bigFromAcctAmt").text($.ChangeToBig(val));
+            // $("#bigFromAcctAmt").text($.ChangeToBig(val));
             $("#confirmAmt").text(val);
         }).on("blur", function() {
             var val = $(this).val();
             $("#feeTrnAmt").val(val);
-            $("#bigFromAcctAmt").text($.ChangeToBig(val));
+            // $("#bigFromAcctAmt").text($.ChangeToBig(val));
             $("#confirmAmt").text(val);
             var fromAcctAmt = $(this).val();
             var errorMsg = checkAcctAmt(fromAcctAmt);
@@ -501,30 +503,30 @@
             }
             $("#submitBtn").attr("disabled",false);
         });
-
-        var source = '';
-        var isElectric = 'False';
-        if(source == '0' && isElectric == 'false') {
-            showBg('hideDiv', 'electricTip');
-            $('#electricButton').on('click', function() {
-                closeBg("hideDiv", "electricTip");
-            });
-        }
-        $('#moreDiv').click(function(e) {
-            e.preventDefault();
-            $('#mmDiv').toggleClass("hidden");
-            var el = $(this).find('span');
-            el.text(el.text() === '收起' ? '更多' : '收起');
-        });
-        $("#marketManager").blur(function() {
-            var manager = $.trim($("#marketManager").val());
-            if(!/^(\d{11}|\d{18}|\d{17}X)?$/.test(manager)) {
-                $("#marketManagerSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;信息格式有误！");
-                return false;
-            } else {
-                $("#marketManagerSpan").text("");
-            }
-        });
+    //
+    //     var source = '';
+    //     var isElectric = 'False';
+    //     if(source == '0' && isElectric == 'false') {
+    //         showBg('hideDiv', 'electricTip');
+    //         $('#electricButton').on('click', function() {
+    //             closeBg("hideDiv", "electricTip");
+    //         });
+    //     }
+    //     $('#moreDiv').click(function(e) {
+    //         e.preventDefault();
+    //         $('#mmDiv').toggleClass("hidden");
+    //         var el = $(this).find('span');
+    //         el.text(el.text() === '收起' ? '更多' : '收起');
+    //     });
+    //     $("#marketManager").blur(function() {
+    //         var manager = $.trim($("#marketManager").val());
+    //         if(!/^(\d{11}|\d{18}|\d{17}X)?$/.test(manager)) {
+    //             $("#marketManagerSpan").html("<img src='check_error.png' width='14' height='14'/>&nbsp;信息格式有误！");
+    //             return false;
+    //         } else {
+    //             $("#marketManagerSpan").text("");
+    //         }
+    //     });
         $("#feeLink").click(function() {
             var fromAcctAmt = $("#trnAmtInput").val();
             var errorMsg = checkAcctAmt(fromAcctAmt);
@@ -597,8 +599,8 @@
             judgeBeforeAct();
             return true;
         });
-        $("#subBtn").preRepeSubmit(); //防止重复提交
-        $("#subBtn1").preRepeSubmit(); //防止重复提交
+        // $("#subBtn").preRepeSubmit(); //防止重复提交
+        // $("#subBtn1").preRepeSubmit(); //防止重复提交
 
         $("#subBtn").click(function() {
 
@@ -660,7 +662,6 @@
                 }
             });
             return true;
-        });
     });
 
     ///// 校验是否签约
