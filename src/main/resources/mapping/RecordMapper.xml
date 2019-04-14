@@ -16,6 +16,26 @@
     from record
     where record_id = #{recordId,jdbcType=INTEGER}
   </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT * FROM record WHERE record_fund =#{id}
+  </select>
+
+  <select id="findByDate" parameterType="com.bank.domain.DateVO"
+          resultMap="BaseResultMap">
+
+    SELECT * FROM record
+    <where>
+      <if test="fundId != null">
+        record_fund = #{fundId}
+      </if>
+      <if test="minDate != null">
+        and record_date &gt;= #{minDate}
+      </if>
+      <if test="maxDate != null">
+        and record_date &lt;= #{maxDate}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from record
     where record_id = #{recordId,jdbcType=INTEGER}

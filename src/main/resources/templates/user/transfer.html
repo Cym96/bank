@@ -25,24 +25,17 @@
 </head>
 <script th:inline ="javascript" type="text/javascript">
     $(function(){
-
         $("#toAcctNo").blur(function(){
             $.ajax({
                 type:"POST",
-                url:"<%=path%>/user/findcardNum",
+                url:"/user/findcardNum",
                 data:{"cardNum":$(this).val()},
                 dataType:"json",
                 success:function(data){
-                    //var identity = eval("("+data+")")
-
-                    //alert(data.identityName);
                     $("#toAcctNameKey").val(data.identityName);
-
                 }
             });
         });
-
-
     });
 </script>
 <script th:inline ="javascript" type="text/javascript">
@@ -67,13 +60,16 @@
                     $("#balanceSpan").text(data.cardRestmoney);
                 }
             });
+
+
+
         });
 
 
     });
 </script>
 <body>
-<form id="mainForm" name="mainForm" action="${pageContext.request.contextPath}/user/transfer" method="post">
+<form id="mainForm" name="mainForm" th:action="@{/user/transfer}" method="post">
     <input type="hidden" name="transfer" id="transfer" value="1"><!--transferPublic.js 1019-->
     <div class="container">
 
@@ -127,7 +123,22 @@
     <script th:inline ="javascript" type="text/javascript">
 
         $(function(){
-        console.log(111);
+          $("#ontimetrn").mousedown(function(){
+                document.getElementById("ontimetrn").className = "zz-div zz-backno1";
+                document.getElementById("nextdaytrn").className = "zz-div zz-backno2";
+                document.getElementById("commntrn").className = "zz-div zz-backno2";
+            });
+            $("#commntrn").mousedown(function(){
+                document.getElementById("nextdaytrn").className = "zz-div zz-backno2";
+                document.getElementById("ontimetrn").className = "zz-div zz-backno2";
+                document.getElementById("commntrn").className = "zz-div zz-backno1";
+            });
+            $("#nextdaytrn").mousedown(function(){
+                document.getElementById("commntrn").className = "zz-div zz-backno2";
+                document.getElementById("ontimetrn").className = "zz-div zz-backno2";
+                document.getElementById("nextdaytrn").className = "zz-div zz-backno1";
+            });
+
             $("#transferNext").attr("disabled", true);
             $("#transAmt").blur(function(){
                 if(parseInt($("#transAmt").val()) > parseInt($("#balanceSpan").text())){
@@ -150,7 +161,7 @@
             <div class="jia"></div>
         </td>
         <td class="right">
-            <div class="zz-div zz-backno1" th:id="ontimetrn" title="交易受理立即转出（需人工处理的除外）" typeId="1">实时转账</div>
+            <div class="zz-div zz-backno1"  th:id="ontimetrn" title="交易受理立即转出（需人工处理的除外）" typeId="1">实时转账</div>
             <div class="zz-div zz-backno2" th:id="commntrn" title="交易受理2小时后转出" typeId="2">普通转账</div>
             <div class="zz-div zz-backno2" th:id="nextdaytrn" title="交易受理24小时后转出" typeId="3">次日转账</div>
         </td>
@@ -166,7 +177,7 @@
                 <label class="trn_mustData">*&nbsp;&nbsp;</label>收款方&nbsp;&nbsp;</td>
             <td class="right">
                 <div class="right trn-position trn-positions m-div_label">
-                    <input id="toAcctNameKey" class="form-control trn_input_width required placeholderTrn" placeholder="请输入收款人姓名（例如：张三）" autocomplete="off">
+                    <input id="toAcctNameKey" readonly class="form-control trn_input_width required placeholderTrn" placeholder="收款人姓名（例如：张三）" autocomplete="off">
                     <div id="toAcctNameRst" class="trn_result" style="width: 61% ! important; display: none;"></div>
 
                     <div id="m-pp" class="m-pecparimg" style="position: absolute; cursor: pointer;" title="选择收款方"></div>
@@ -208,21 +219,21 @@
 
 
     <div class="trn_headline" id="moreHeadLine" style=""></div>
-    <div class="trn_more">
-        <a id="moreInfo" href="#">
-            <span id="morecli">收起</span>
-            <div class="trn_moreiconless"></div>
-        </a>
-    </div>
+    <!--<div class="trn_more">-->
+        <!--<a id="moreInfo" href="#">-->
+            <!--<span id="morecli">收起</span>-->
+            <!--<div class="trn_moreiconless"></div>-->
+        <!--</a>-->
+    <!--</div>-->
 
     <table class="table table-centre" id="moreInfoTable" style="">
         <tbody>
         <tr>
             <td class="trn-firsttd">
-                <label class="trn_mustData"></label> &nbsp;&nbsp;短信通知&nbsp;&nbsp;
+                <label class="trn_mustData"></label> &nbsp;&nbsp;邮件通知&nbsp;&nbsp;
             </td>
             <td class="right">
-                <input id="toAcctMobile" name="phone" maxlength="11" class="form-control trn_input_width " placeholder="请输入手机号">
+                <input type="text" id="toAcctMobile" name="phone" class="form-control trn_input_width " placeholder="请输入邮箱">
             </td>
         </tr>
         <tr>
@@ -230,9 +241,7 @@
                 <label class="trn_mustData">&nbsp;&nbsp;</label>附言&nbsp;&nbsp;</td>
             <td class="right">
                 <input id="text" name="phoneText" maxlength="11" class="form-control trn_input_width " placeholder="请输入附言">
-                <script type="text/javascript">
 
-                </script>
             </td>
         </tr>
         </tbody>

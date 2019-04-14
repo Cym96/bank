@@ -22,7 +22,7 @@
 <div id="testContentContainer">
     <div class="subscribeAlertWra">
         <div class="closeAlertButton" style="text-align: center;"><h2>风险能力评测</h2></div>
-        <form action="${pageContext.request.contextPath }/user/question/userQuestion" name="QuestionName" method="post">
+        <form th:action="@{/user/question/userQuestion}" name="QuestionName" method="post">
 
             <!--<div class="agesBox h240" id="agesBox">-->
             <div class="agesContent" id="agesContent" style="position: inherit;">
@@ -36,7 +36,7 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que0" value="-3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que0" th:value="-3" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>≤18岁</td>
                     </tr>
@@ -50,28 +50,28 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que0" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que0" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>26岁-40岁</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que0" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que0" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>41岁-54岁</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que0" value="-5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que0" th:value="-5" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>55岁-64岁</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que0" value="-10" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que0" th:value="-10" type="radio"></td>
                         <td class="RadioMsg2">6</td>
                         <td>≥65岁</td>
                     </tr>
@@ -82,7 +82,7 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que1" value="-3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que1" th:value="-3" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>初中</td>
                     </tr>
@@ -96,7 +96,7 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que1" value="0" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que1" th:value="0" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>本科及以上</td>
                     </tr>
@@ -107,35 +107,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que2" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que2" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>快速增长</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que2" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que2" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>缓慢增长</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que2" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que2" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>维持稳定</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que2" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que2" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>不确定</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que2" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que2" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>下降</td>
                     </tr>
@@ -146,35 +146,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que3" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que3" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>≥100万元</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que3" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que3" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>70万-99万元</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que3" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que3" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>50万-69万元</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que3" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que3" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>16万-49万元</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que3" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que3" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>≤15万元</td>
                     </tr>
@@ -185,35 +185,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que4" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que4" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>无</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que4" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que4" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>仅有银行发放的住房抵押贷款</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que4" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que4" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>以银行发放的信用类贷款为主</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que4" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que4" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>以非银行机构提供的短期融资为主</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que4" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que4" th:alue="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>以亲友借款为主</td>
                     </tr>
@@ -224,35 +224,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que5" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que5" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>＞70%</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que5" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que5" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>50%-70%（含）</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que5" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que5" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>30%-50%（含）</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que5" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que5" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>10%-30%（含）</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que5" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que5" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>≤10%</td>
                     </tr>
@@ -263,21 +263,21 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que6" value="0" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que6" th:value="0" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>1-2人</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que6" value="-1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que6" th:value="-1" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>3-4人</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que6" value="-3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que6" th:value="-3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>5人以上</td>
                     </tr>
@@ -289,35 +289,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que7" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que7" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>对金融产品及其风险有充分理解，大部分金融投资集中于权证、期货期权等产品的交易</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que7" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que7" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>对金融产品及其风险有充分理解，大部分金融投资集中于股票、基金、贵金属等产品的交易</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que7" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que7" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>对金融产品及其风险有基本理解，大部分金融投资集中于股票、基金、银行理财、信用债等产品</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que7" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que7" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>对金融产品及其风险有基本理解，大部分投资集中于国债和存款</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que7" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que7" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>除银行存款外，几乎没有其他投资</td>
                     </tr>
@@ -329,35 +329,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que8" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que8" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>偏低</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que8" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que8" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>正常</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que8" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que8" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>无所谓</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que8" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que8" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>偏高</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que8" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que8" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>太高</td>
                     </tr>
@@ -369,35 +369,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que9" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que9" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>13个以上</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que9" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que9" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>7-12个</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que9" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que9" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>4-6个</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que9" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que9" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>1-3个</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que9" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que9" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>0</td>
                     </tr>
@@ -409,35 +409,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que10" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que10" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>非常不同意</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que10" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que10" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>不同意</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que10" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que10" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>无所谓</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que10" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que10" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>同意</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que10" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que10" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>非常同意</td>
                     </tr>
@@ -449,21 +449,21 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que11" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que11" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>迅速获得高收益，大幅改善生活</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que11" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que11" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>在个人经营或证券投资之外，实现投资增值</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que11" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que11" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>获得股息、分红等</td>
                     </tr>
@@ -477,7 +477,7 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que11" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que11" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>偿付债务</td>
                     </tr>
@@ -489,35 +489,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que12" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que12" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>参与私募股权投资、创业投资等</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que12" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que12" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>期货、期权、融资融券等</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que12" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que12" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>股票、基金、贵金属等收益率波动较大的资产</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que12" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que12" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>中等风险以下的银行理财产品</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que12" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que12" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>国债、货币市场基金等低风险资产</td>
                     </tr>
@@ -529,35 +529,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que13" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que13" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>全部投资于B</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que13" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que13" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>大部分投资于B，小部分投资于A</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que13" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que13" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>各投一半</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que13" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que13" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>大部分投资于A，小部分投资于B</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que13" value="1" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que13" th:value="1" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>全部投资于A</td>
                     </tr>
@@ -569,35 +569,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que14" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que14" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>≥5年</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que14" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que14" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>3-4年</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que14" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que14" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>1-2年</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que14" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que14" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>1年以内</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que14" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que14" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>无所谓</td>
                     </tr>
@@ -609,35 +609,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que15" value="5" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que15" th:value="5" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>本金损失50%以上</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que15" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que15" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>本金损失30%-50%</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que15" value="3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que15" th:value="3" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>本金损失10%-30%</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que15" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que15" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>本金损失10%以内</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que15" value="-3" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que15" th:value="-3" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>本金无损失，但收益未达预期。</td>
                     </tr>
@@ -649,35 +649,35 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que16" value="10" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que16" th:value="10" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>我希望承担风险，愿意为获得较高收益而承受较大的负面波动，能够承担本金损失</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que16" value="8" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que16" th:value="8" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>我能够承担风险，愿意接受一定范围的负面波动以提高投资的潜在收益，能够承担部分本金损失</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que16" value="6" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que16" th:value="6" type="radio"></td>
                         <td class="RadioMsg2">3</td>
                         <td>我对风险的态度一般，愿意为较高潜在收益接受较小的负面波动</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que16" value="4" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que16" th:value="4" type="radio"></td>
                         <td class="RadioMsg2">4</td>
                         <td>我希望避免风险，愿意为较高潜在收益接受轻微的负面波动。</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que16" value="2" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que16" th:value="2" type="radio"></td>
                         <td class="RadioMsg2">5</td>
                         <td>我不愿意承担风险，也不能接受投资的价值下跌。</td>
                     </tr>
@@ -689,14 +689,14 @@
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que17" value="0" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que17" th:value="0" type="radio"></td>
                         <td class="RadioMsg2">1</td>
                         <td>有投资经验投资者，曾投资于股票、股票型基金、外汇及其衍生品、贵金属及其衍生品、投资于股票/股指的非保本理财产品、或与利率、汇率、股票、股指、信用、商品等挂钩的非保本结构性理财产品，且累计投资期限在两年以上。</td>
                     </tr>
 
 
                     <tr>
-                        <td class="RadioMsg"> <input name="que17" value="-35" type="radio"></td>
+                        <td class="RadioMsg"> <input th:name="que17" th:value="-35" type="radio"></td>
                         <td class="RadioMsg2">2</td>
                         <td>无投资经验投资者，未投资于上述产品，或投资上述产品的期限不满两年。</td>
                     </tr>
@@ -713,7 +713,7 @@
 
                     <a id="btnPassTest2" href="javascript:isSave();" class="submit  btn btn-primary">提交</a>
 
-                    <a id="btnAutoAnswer" data-buttonflag="2" href="javascript:void(0);" class="autoAnswer">自动答题，默认为保守型</a>
+                    <a id="btnAutoAnswer" data-buttonflag="2" href="javascript:isSave();" class="autoAnswer">自动答题，默认为保守型</a>
                 </div>
             </div>
         </form>

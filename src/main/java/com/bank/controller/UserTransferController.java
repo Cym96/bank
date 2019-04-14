@@ -96,7 +96,6 @@ public class UserTransferController {
 	@RequestMapping("findcardNum")
 	@ResponseBody
 	public Identity findDebitcardMessage(String cardNum){
-		System.out.println(cardNum);
 		 Debitcard debitcard = userTransferService.findDebitcardMessage(cardNum);
 		 User user = userService.findById(debitcard.getCardUser());
 		 Identity identity = userService.findIdentityById(user.getUserIdentity());
