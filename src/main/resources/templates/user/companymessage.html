@@ -31,39 +31,40 @@
 <body>
 
 <div class="wrapper">
-    <div class="innerBanner detailTitle"><span>基金产品名称</span></div>
+    <div class="innerBanner detailTitle"><span th:text="${fund.fundName} +' - '+ ${fund.fundNum}">基金产品名称</span></div>
 
 
     <div class="con962">
         <div class="companyTop">
-            <!--<DIV class="xq" id="hbxNo">-->
-            <!--<DIV class="xq_l" style="width: 600px;">-->
-            <!--<br>-->
-            <ul>
-                <li>投资类型：</li>
-                <li th:text="${#dates.format(compan.companyBuildtime, 'yyyy-MM-dd')}"></li>
-                <li>基金类型：</li>
-                <li th:text="${compan.companySignmoney} + '元'"></li>
-                <!--<li>合作基金数量：${requestScope.sum}</li>-->
-                <li>投资风格 ：</li>
-                <li th:text="${compan.companyLegalperson}"></li>
-                <li> 基金经理 ：</li>
-                <li th:text="${compan.companyLineperson}"></li>
-                <li>基金公司 ：</li>
-                <li style="width: 460px;" th:text="${compan.companyWebsite}"></li>
-                <li>  <a href="javascript:js_method()" class="companyTag"> 购买</a></li>
-            </ul>
+
+            <UL class="innerTag fundJzxx" style="height: 35px; width:850px; background-color: rgb(234, 240, 241);">
+                <LI style="line-height:30px; width:212.5px;" align="center" ><p th:text="投资类型" align="center"></p></LI>
+                <LI style="line-height:30px; width:212.5px;" align="center"><p th:text="当前净值" align="center"></p></LI>
+                <LI style="line-height:30px; width:212.5px;" align="center"><p th:text="基金经理" align="center"></p></LI>
+                <LI style="line-height:30px; width:212.5px;" align="center"><p th:text="基金公司" align="center"></p></LI>
+            </UL>
+
+            <UL class="innerDetail fundJzxx bgfa" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);">
+                <LI data-bind="text:NetDate" style="line-height:30px; width:212.5px;"  > <P th:text="${fund.userProductstateObj.stateName}" align="center"></P></LI>
+                <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="${fund.fundNpv}" align="center"></p></LI>
+                <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="${fund.userMangerObj.adminName }" align="center"></p></LI>
+                <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="${fund.userCompanyObj.companyName }" align="center"></p></LI>
+            </UL>
+
+
+            <UL class="innerDetail fundJzxx bgfa" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);">
+                <!--<LI style="line-height:30px; width:212.5px;" align="center" ><p th:text=""></p></LI>-->
+                <!--<LI style="line-height:30px; width:212.5px;" align="center"><p th:text=""></p></LI>-->
+                <!--<LI style="line-height:30px; width:212.5px;" align="center"><p th:text=""></p></LI>-->
+               <LI style="line-height:30px; width:212.5px;float:right;">
+                   <a href="@{/user/buysale/UserLoadSaleFund(fundId=${fund.fundId}})}" class="companyTag" style="float:right;" th:text="购买"> </a>
+               </LI>
+            </UL>
 
 
         </DIV>
     </DIV>
 </DIV>
-<script th:inline ="javascript" type="text/javascript">
-    function js_method(){
-        $("#purcForm").submit();
-    }
-
-</script>
 
 
 <div class="wrapper">
@@ -89,142 +90,89 @@
 <div class="wrapper">
     <DIV class="innerBanner detailTitle" id="zsqx">
 
-        <!--<DIV id="fundNetValueTable" style="width: 960px; float: left;">-->
-        <!--<DIV class="detailInnerBanner" id="jzxx">-->
         <SPAN  class="detailJzxxOff">净值信息</SPAN></DIV>
     <div class="con962">
         <div class="companyTop">
 
             <DIV class="con930">
-                <!--<DIV class="selDate">-->
-                <!--<DIV class="dateText">开始时间:<INPUT class="f-text" id="fundStartDate" onfocus="HS_setDate(this)" type="text" size="20p"></DIV>-->
-                <!--<DIV class="dateText">截止时间:<INPUT class="f-text" id="fundEndDate" onfocus="HS_setDate(this)" type="text" size="20p"></DIV>-->
-                <!--<DIV class="btn_cx" id="searchNet" style="float: left; display: inline;"-->
-                <!--onclick="SearchNetValue();">查询</DIV>   </DIV>-->
-                <UL class="innerTag fundJzxx" style="height: 35px; background-color: rgb(234, 240, 241);">
-                    <LI>净值日期</LI>
-                    <LI>最新净值</LI>
-                    <LI>累计净值</LI></UL>
+                <UL class="innerTag fundJzxx" style="height: 35px; width:850px; background-color: rgb(234, 240, 241);">
+                    <LI style="line-height:30px; width:425px;" align="center" ><p th:text="净值日期" align="center"></p></LI>
+                    <LI style="line-height:30px; width:425px;" align="center"><p th:text="最新净值" align="center"></p></LI>
+                </UL>
                 <SPAN data-bind="foreach:FundNets">
-                    <UL class="innerDetail fundJzxx bgfa">
-                      <LI data-bind="text:NetDate">201404113期</LI>
-                      <LI data-bind="text:NetValue">1.6533</LI>
-                      <LI data-bind="text:AccNetValue">1.7533</LI></UL>
+                    <!--th:text="${#dates.format(compan.companyBuildtime, 'yyyy-MM-dd')}"-->
+                    <UL class="innerDetail fundJzxx bgfa" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);">
+                      <LI data-bind="text:NetDate" style="line-height:30px; width:425px;"  > <P th:text="201404113期" align="center"></P></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:425px;"><p th:text="1.6533" align="center"></p></LI>
+                     </UL>
                       </SPAN>
             </DIV>
         </DIV>
     </DIV>
 </div>
 
-
-<!--<DIV class="con930">-->
-<!--<DIV class="selDate">-->
-<!--<DIV class="dateText">开始时间:<INPUT class="f-text" id="fundStartDate" onfocus="HS_setDate(this)"-->
-<!--type="text" size="20p"></DIV>-->
-<!--<DIV class="dateText">截止时间:<INPUT class="f-text" id="fundEndDate" onfocus="HS_setDate(this)"-->
-<!--type="text" size="20p"></DIV>-->
-<!--<DIV class="btn_cx" id="searchNet" style="float: left; display: inline;"-->
-<!--onclick="SearchNetValue();">查询-->
-<!--</DIV>-->
-<!--</DIV>-->
-<!--</DIV>-->
 </DIV>
 </DIV>
 </div>
 
 <div class="wrapper">
     <DIV class="innerBanner detailTitle" id="zsqx">
-        <DIV class="detailInnerBanner" id="gmxx">
-            <SPAN class="detailGmxxOff">购买信息</SPAN></DIV>
-        <DIV class="con930">
-            <TABLE class="list_cp_fund" cellspacing="0" cellpadding="0">
-                <TBODY>
-                <TR>
-                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
-                        colspan="4"></TD>
-                </TR>
-                <TR>
-                    <TH>首次申购\认购下限</TH>
-                    <TD style="background-color: rgb(250, 250, 250);">
-                        <SCRIPT>var rate = "0";
-                        rate = rate == "" ? "-" : (rate + "元");
-                        document.write(rate);</SCRIPT>
-                        \
-                        <SCRIPT>var rate = "0";
-                        rate = rate == "" ? "-" : (rate + "元");
-                        document.write(rate);</SCRIPT>
-                    </TD>
-                    <TH>认购费率</TH>
-                    <TD style="background-color: rgb(250, 250, 250);">
-                        <SCRIPT>var rate = "";
-                        var buyfee = new Array();
-                        buyfee = rate.split(";");
-                        for (var i = 0; i < buyfee.length - 1; i++) {
-                            document.write(buyfee[i] + "<br/>");
-                        }
-                        document.write(buyfee[buyfee.length - 1]);</SCRIPT>
-                    </TD>
-                </TR>
-                <TR>
-                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
-                        colspan="4"></TD>
-                </TR>
-                <TR>
-                    <TH>追加申购\认购额</TH>
-                    <TD>
-                        <SCRIPT>var rate = "0";
-                        rate = rate == "" ? "-" : (rate + "元");
-                        document.write(rate);</SCRIPT>
-                        \
-                        <SCRIPT>var rate = "0";
-                        rate = rate == "" ? "-" : (rate + "元");
-                        document.write(rate);</SCRIPT>
-                    </TD>
-                    <TH>申购费率</TH>
-                    <TD>
-                        <SCRIPT>var rate = "";
-                        var buyfee = new Array();
-                        buyfee = rate.split(";");
-                        for (var i = 0; i < buyfee.length - 1; i++) {
-                            document.write(buyfee[i] + "<br/>");
-                        }
-                        document.write(buyfee[buyfee.length - 1]);</SCRIPT>
-                    </TD>
-                </TR>
-                <TR>
-                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
-                        colspan="4"></TD>
-                </TR>
-                <TR>
-                    <TH>最低赎回份额</TH>
-                    <TD style="background-color: rgb(250, 250, 250);">
-                        <SCRIPT>var redemp = "0";
-                        redemp = redemp == "" ? "-" : redemp;
-                        document.write(redemp);</SCRIPT>
-                    </TD>
-                    <TH>赎回费率</TH>
-                    <TD style="background-color: rgb(250, 250, 250);">
-                        <SCRIPT>var rate = "";
-                        var buyfee = new Array();
-                        buyfee = rate.split(";");
-                        for (var i = 0; i < buyfee.length - 1; i++) {
-                            document.write(buyfee[i] + "<br/>");
-                        }
-                        document.write(buyfee[buyfee.length - 1]);</SCRIPT>
-                    </TD>
-                </TR>
-                <TR>
-                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
-                        colspan="4"></TD>
-                </TR>
-                <TR>
-                    <TH>托管费率</TH>
-                    <TD>0.15%%</TD>
-                    <TH>管理费率</TH>
-                    <TD>0.75%%</TD>
-                </TR>
-                </TBODY>
-            </TABLE>
+        <SPAN  class="detailJzxxOff">购买信息</SPAN></DIV>
+    <div class="con962">
+        <div class="companyTop">
+            <DIV class="con930">
+                <UL class="innerTag fundJzxx" style="height: 35px; width:850px; background-color: rgb(234, 240, 241);">
+                    <LI style="line-height:30px; width:212.5px;" align="center" ><p th:text="最低申购" align="center"></p></LI>
+                    <LI style="line-height:30px; width:212.5px;" align="center"><p th:text="最低赎回" align="center"></p></LI>
+                    <LI style="line-height:30px; width:212.5px;" align="center"><p th:text="申购费率" align="center"></p></LI>
+                    <LI style="line-height:30px; width:212.5px;" align="center"><p th:text="赎回费率" align="center"></p></LI>
+                </UL>
+
+                    <UL class="innerDetail fundJzxx bgfa" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);">
+                      <LI data-bind="text:NetDate" style="line-height:30px; width:212.5px;"  > <P th:text="11" align="center"></P></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="11" align="center"></p></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="0.0001" align="center"></p></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="0.00005" align="center"></p></LI>
+                     </UL>
+
+
+
+            <!--<TABLE class="list_cp_fund" cellspacing="0" cellpadding="0">-->
+                <!--<TBODY>-->
+                <!--<TR>-->
+                    <!--<TD style="height: 8px; background-color: rgb(255, 255, 255);"-->
+                        <!--colspan="4"></TD>-->
+                <!--</TR>-->
+                <!--<TR>-->
+                    <!--<TH>最低申购</TH>-->
+                    <!--<TD style="background-color: rgb(250, 250, 250);">-->
+                <!--11-->
+                    <!--</TD>-->
+                    <!--<TH>最低赎回份额</TH>-->
+                    <!--<TD style="background-color: rgb(250, 250, 250);">-->
+               <!--11-->
+                    <!--</TD>-->
+                <!--</TR>-->
+                <!--<TR>-->
+                    <!--<TD style="height: 8px; background-color: rgb(255, 255, 255);"-->
+                        <!--colspan="4"></TD>-->
+                <!--</TR>-->
+                <!--<TR>-->
+                    <!--<TH>申购费率</TH>-->
+                    <!--<TD>-->
+                    <!--0.003%-->
+                    <!--</TD>-->
+                    <!--<TH>赎回费率</TH>-->
+                    <!--<TD>-->
+                        <!--0.0005%-->
+                    <!--</TD>-->
+                <!--</TR>-->
+                <!--<TR>-->
+                    <!--<TD style="height: 8px; background-color: rgb(255, 255, 255);"-->
+                        <!--colspan="4"></TD>-->
+                <!--</TR>-->
+                <!--</TBODY>-->
+            <!--</TABLE>-->
         </DIV>
     </DIV>
 </div>

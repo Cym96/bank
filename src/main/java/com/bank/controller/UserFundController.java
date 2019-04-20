@@ -37,6 +37,8 @@ public class UserFundController {
     private OrderService orderService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private CompanyService companyService;
     /**
      * 查询所有存在基金
      *
@@ -152,9 +154,11 @@ public class UserFundController {
     public String fundById(Model model, Integer fundId) {
         Fund fund = fundService.findById(fundId);
         Admin admin = adminService.findbyId(fund.getFundManager());
+        Company compan = this.companyService.findById(fund.getFundCompany());
         fund.setUserMangerObj(admin);
         model.addAttribute("fund", fund);
-        return "user/fundmessage";
+        model.addAttribute("compan", compan);
+        return "user/companymessage";
     }
 
     @RequestMapping("/aa")
