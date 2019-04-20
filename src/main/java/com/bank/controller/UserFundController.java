@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bank.domain.*;
+import com.bank.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -14,17 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.bank.domain.Debitcard;
-import com.bank.domain.Fund;
-import com.bank.domain.Order;
-import com.bank.domain.User;
-import com.bank.domain.Userfund;
-import com.bank.service.FundService;
-import com.bank.service.OrderService;
-import com.bank.service.UserService;
-import com.bank.service.UserfundService;
 
 /**
  * @author meihao
@@ -42,7 +35,8 @@ public class UserFundController {
     private UserfundService userfundService;
     @Autowired
     private OrderService orderService;
-
+    @Autowired
+    private AdminService adminService;
     /**
      * 查询所有存在基金
      *
@@ -92,18 +86,22 @@ public class UserFundController {
         if (userfundlist != null) {
             //查询用户的某个基金的订单
             for (Userfund userfund : userfundlist) {
-                //累计参与成本
+                //累计参与成本，
                 BigDecimal orderMoney = new BigDecimal(0);
                 //参考收益率
                 BigDecimal partCostRate = new BigDecimal(0);
+                //购买分数*基金净值=基金价值
                 BigDecimal t1 = userfund.getUserfundFundunit().multiply(userfund.getUserfundIdObj().getFundNpv());
                 List<Order> orderList = this.orderService.findOrderByUserAndfund(userfund.getUserfundUser(), userfund.getUserfundFund());
                 for (Order order : orderList) {
                     if (0 == order.getOrderState()) {
+                        //买入基金
                         orderMoney = orderMoney.add(order.getOrderMoney());
                     } else {
+                        //卖出基金
                         orderMoney = orderMoney.subtract(order.getOrderMoney());
                     }
+                    //基金价值-
                     BigDecimal partCostRate1 = t1.subtract(orderMoney);
                     partCostRate = partCostRate1.divide(orderMoney, 4);
                     userfund.setUserOrderMoney(orderMoney);
@@ -149,6 +147,16 @@ public class UserFundController {
         model.addAttribute("debitcardList", debitcardList);
         return "user/fundbuy";
     }
+
+    @RequestMapping("/fundById")
+    public String fundById(Model model, Integer fundId) {
+        Fund fund = fundService.findById(fundId);
+        Admin admin = adminService.findbyId(fund.getFundManager());
+        fund.setUserMangerObj(admin);
+        model.addAttribute("fund", fund);
+        return "user/fundmessage";
+    }
+
     @RequestMapping("/aa")
     public String aa(){
         return "user/index";

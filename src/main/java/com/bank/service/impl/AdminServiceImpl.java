@@ -37,11 +37,10 @@ public class AdminServiceImpl implements AdminService {
         return this.adminMapper.companyAll(companyId);
     }
 
-//  @Override
-//  @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
-//	public Admin findbyId(Integer adminId) {
-//		return adminMapper.selectByPrimaryKey(adminId);
-//	}
+    @Override
+    public Admin findbyId(Integer adminId) {
+        return adminMapper.selectByPrimaryKey(adminId);
+    }
 //
 //
 //  @Transactional(propagation=Propagation.REQUIRED,rollbackFor={Exception.class})

@@ -11,6 +11,16 @@
     <link href="jqui.css" rel="stylesheet" th:href="@{/user/companymsg/jqui.css}">
     <link href="styles.css" rel="stylesheet" th:href="@{/user/companymsg/styles.css}">
     <link href="irezNew.css" rel="stylesheet" th:href="@{/user/companymsg/irezNew.css}">
+
+    <!--<link rel="stylesheet" href="normalize.css" th:href="@{/user/userlogin/normalize.css}">-->
+    <!--<link rel="stylesheet" href="main.css" th:href="@{/user/userlogin/main.css}">-->
+    <!--<link rel="stylesheet" href="fund.css" th:href="@{/user/findList/fund.css}">-->
+    <!--<link rel="stylesheet" href="jquery.selectric.css" th:href="@{/user/findList/jquery.selectric.css}">-->
+    <!--<script type="text/javascript" src="writeObjectNew.js" th:src="@{/user/userlogin/writeObjectNew.js}">-->
+    <!--</script>-->
+    <script src="jquery-1.12.0.min.js" th:src="@{/user/findList/jquery-1.12.0.min.js}"> </script>
+
+
     <script src="about:blank"></script>
     <script src="about:blank" type="text/javascript" charset="utf-8"></script>
     <script src="about:blank" type="text/javascript" charset="utf-8"></script>
@@ -19,13 +29,213 @@
     </script>
 </head>
 <body>
+
+<div class="wrapper">
+    <div class="innerBanner detailTitle"><span>基金产品名称</span></div>
+
+
+    <div class="con962">
+        <div class="companyTop">
+            <!--<DIV class="xq" id="hbxNo">-->
+            <!--<DIV class="xq_l" style="width: 600px;">-->
+            <!--<br>-->
+            <ul>
+                <li>投资类型：</li>
+                <li th:text="${#dates.format(compan.companyBuildtime, 'yyyy-MM-dd')}"></li>
+                <li>基金类型：</li>
+                <li th:text="${compan.companySignmoney} + '元'"></li>
+                <!--<li>合作基金数量：${requestScope.sum}</li>-->
+                <li>投资风格 ：</li>
+                <li th:text="${compan.companyLegalperson}"></li>
+                <li> 基金经理 ：</li>
+                <li th:text="${compan.companyLineperson}"></li>
+                <li>基金公司 ：</li>
+                <li style="width: 460px;" th:text="${compan.companyWebsite}"></li>
+                <li>  <a href="javascript:js_method()" class="companyTag"> 购买</a></li>
+            </ul>
+
+
+        </DIV>
+    </DIV>
+</DIV>
+<script th:inline ="javascript" type="text/javascript">
+    function js_method(){
+        $("#purcForm").submit();
+    }
+
+</script>
+
+
+<div class="wrapper">
+    <DIV class="innerBanner detailTitle" id="zsqx">
+        <SPAN class="detailZsqxOff">走势曲线</SPAN></DIV>
+    <DIV style="width: 100%; float: left; position: relative;">
+        <DIV class="selDate" style="left: 255px; width: 100px; position: absolute; z-index: 1;">
+            <SELECT
+                    id="selectdate">
+                <OPTION value="1">近一个月</OPTION>
+                <OPTION
+                        value="3">近三个月
+                </OPTION>
+                <OPTION value="6">近半年</OPTION>
+                <OPTION
+                        value="12">近一年
+                </OPTION>
+                <OPTION value="24">近两年</OPTION>
+            </SELECT>
+        </DIV>
+    </DIV>
+</div>
+<div class="wrapper">
+    <DIV class="innerBanner detailTitle" id="zsqx">
+
+        <!--<DIV id="fundNetValueTable" style="width: 960px; float: left;">-->
+        <!--<DIV class="detailInnerBanner" id="jzxx">-->
+        <SPAN  class="detailJzxxOff">净值信息</SPAN></DIV>
+    <div class="con962">
+        <div class="companyTop">
+
+            <DIV class="con930">
+                <!--<DIV class="selDate">-->
+                <!--<DIV class="dateText">开始时间:<INPUT class="f-text" id="fundStartDate" onfocus="HS_setDate(this)" type="text" size="20p"></DIV>-->
+                <!--<DIV class="dateText">截止时间:<INPUT class="f-text" id="fundEndDate" onfocus="HS_setDate(this)" type="text" size="20p"></DIV>-->
+                <!--<DIV class="btn_cx" id="searchNet" style="float: left; display: inline;"-->
+                <!--onclick="SearchNetValue();">查询</DIV>   </DIV>-->
+                <UL class="innerTag fundJzxx" style="height: 35px; background-color: rgb(234, 240, 241);">
+                    <LI>净值日期</LI>
+                    <LI>最新净值</LI>
+                    <LI>累计净值</LI></UL>
+                <SPAN data-bind="foreach:FundNets">
+                    <UL class="innerDetail fundJzxx bgfa">
+                      <LI data-bind="text:NetDate">201404113期</LI>
+                      <LI data-bind="text:NetValue">1.6533</LI>
+                      <LI data-bind="text:AccNetValue">1.7533</LI></UL>
+                      </SPAN>
+            </DIV>
+        </DIV>
+    </DIV>
+</div>
+
+
+<!--<DIV class="con930">-->
+<!--<DIV class="selDate">-->
+<!--<DIV class="dateText">开始时间:<INPUT class="f-text" id="fundStartDate" onfocus="HS_setDate(this)"-->
+<!--type="text" size="20p"></DIV>-->
+<!--<DIV class="dateText">截止时间:<INPUT class="f-text" id="fundEndDate" onfocus="HS_setDate(this)"-->
+<!--type="text" size="20p"></DIV>-->
+<!--<DIV class="btn_cx" id="searchNet" style="float: left; display: inline;"-->
+<!--onclick="SearchNetValue();">查询-->
+<!--</DIV>-->
+<!--</DIV>-->
+<!--</DIV>-->
+</DIV>
+</DIV>
+</div>
+
+<div class="wrapper">
+    <DIV class="innerBanner detailTitle" id="zsqx">
+        <DIV class="detailInnerBanner" id="gmxx">
+            <SPAN class="detailGmxxOff">购买信息</SPAN></DIV>
+        <DIV class="con930">
+            <TABLE class="list_cp_fund" cellspacing="0" cellpadding="0">
+                <TBODY>
+                <TR>
+                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
+                        colspan="4"></TD>
+                </TR>
+                <TR>
+                    <TH>首次申购\认购下限</TH>
+                    <TD style="background-color: rgb(250, 250, 250);">
+                        <SCRIPT>var rate = "0";
+                        rate = rate == "" ? "-" : (rate + "元");
+                        document.write(rate);</SCRIPT>
+                        \
+                        <SCRIPT>var rate = "0";
+                        rate = rate == "" ? "-" : (rate + "元");
+                        document.write(rate);</SCRIPT>
+                    </TD>
+                    <TH>认购费率</TH>
+                    <TD style="background-color: rgb(250, 250, 250);">
+                        <SCRIPT>var rate = "";
+                        var buyfee = new Array();
+                        buyfee = rate.split(";");
+                        for (var i = 0; i < buyfee.length - 1; i++) {
+                            document.write(buyfee[i] + "<br/>");
+                        }
+                        document.write(buyfee[buyfee.length - 1]);</SCRIPT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
+                        colspan="4"></TD>
+                </TR>
+                <TR>
+                    <TH>追加申购\认购额</TH>
+                    <TD>
+                        <SCRIPT>var rate = "0";
+                        rate = rate == "" ? "-" : (rate + "元");
+                        document.write(rate);</SCRIPT>
+                        \
+                        <SCRIPT>var rate = "0";
+                        rate = rate == "" ? "-" : (rate + "元");
+                        document.write(rate);</SCRIPT>
+                    </TD>
+                    <TH>申购费率</TH>
+                    <TD>
+                        <SCRIPT>var rate = "";
+                        var buyfee = new Array();
+                        buyfee = rate.split(";");
+                        for (var i = 0; i < buyfee.length - 1; i++) {
+                            document.write(buyfee[i] + "<br/>");
+                        }
+                        document.write(buyfee[buyfee.length - 1]);</SCRIPT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
+                        colspan="4"></TD>
+                </TR>
+                <TR>
+                    <TH>最低赎回份额</TH>
+                    <TD style="background-color: rgb(250, 250, 250);">
+                        <SCRIPT>var redemp = "0";
+                        redemp = redemp == "" ? "-" : redemp;
+                        document.write(redemp);</SCRIPT>
+                    </TD>
+                    <TH>赎回费率</TH>
+                    <TD style="background-color: rgb(250, 250, 250);">
+                        <SCRIPT>var rate = "";
+                        var buyfee = new Array();
+                        buyfee = rate.split(";");
+                        for (var i = 0; i < buyfee.length - 1; i++) {
+                            document.write(buyfee[i] + "<br/>");
+                        }
+                        document.write(buyfee[buyfee.length - 1]);</SCRIPT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD style="height: 8px; background-color: rgb(255, 255, 255);"
+                        colspan="4"></TD>
+                </TR>
+                <TR>
+                    <TH>托管费率</TH>
+                    <TD>0.15%%</TD>
+                    <TH>管理费率</TH>
+                    <TD>0.75%%</TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+        </DIV>
+    </DIV>
+</div>
+
 <div class="wrapper">
     <div class="innerBanner detailTitle"><span th:text="${compan.companyName}">南方基金管理有限公司</span></div>
     <div class="con962">
         <div class="companyTop">
             <ul>
                 <li>成立日期：</li>
-                <li th:text="${#dates.format(compan.companyBuildtime, 'yyyy-MM-dd')}"> </li>
+                <li th:text="${#dates.format(compan.companyBuildtime, 'yyyy-MM-dd')}"></li>
                 <li>注册资金：</li>
                 <li th:text="${compan.companySignmoney} + '元'"></li>
                 <!--<li>合作基金数量：${requestScope.sum}</li>-->
@@ -34,9 +244,9 @@
                 <li> 联系人：</li>
                 <li th:text="${compan.companyLineperson}"></li>
                 <li>公司网站：</li>
-                <li style="width: 460px;" th:text="${compan.companyWebsite}"> </li>
+                <li style="width: 460px;" th:text="${compan.companyWebsite}"></li>
                 <li>电话号码：</li>
-                <li style="width: 460px;" th:text="${compan.companyPhone}"> </li>
+                <li style="width: 460px;" th:text="${compan.companyPhone}"></li>
             </ul>
         </div>
         <div class="companyTag">公司简介:</div>
@@ -46,10 +256,10 @@
         <div class="companyTag">办公地址:</div>
         <div class="conDetail" style="padding-top: 10px; text-indent: 24px;" th:text="${compan.companyAddress}">
 
-            <p></p>
         </div>
     </div>
 
 </div>
+
 </body>
 </html>

@@ -72,21 +72,21 @@
 
 
 				<div id="userNameLogin">
-					<form class="m-uesrform" id="userNameForm" name="userNameForm" action="${pageContext.request.contextPath}/login/login" method="post">
+					<form class="m-uesrform" th:id="userNameForm" th:name="userNameForm" th:action="@{/login/login}" method="post">
 						<div class="m-uesrtxtbox" id="userDiv">
 							<div class="m-uesrtxtimg"></div>
-							<input class="m-uesrtxt" placeholder="用户名/身份证号/手机号" id="username" name="username" title="只能由英文字母、数字、汉字或下划线“_”组成" style="ime-mode: inactive;" autocomplete="off" type="text">
+							<input class="m-uesrtxt" placeholder="用户名/身份证号/手机号" th:id="username" th:name="username" title="只能由英文字母、数字、汉字或下划线“_”组成" style="ime-mode: inactive;" autocomplete="off" type="text">
 						</div>
 						<div class="m-uesrpassbox">
 							<div id="PowerEnterDiv_userName" style="display: inline; margin-left: 10px;">
-								<input class="m-uesrtxt" placeholder="请输入密码" id="password" name="password" title="只能由英文字母、数字、汉字或下划线“_”组成" style="ime-mode: inactive; width: 200px; margin-left: 15px;" autocomplete="off" type="password">
+								<input class="m-uesrtxt" placeholder="请输入密码" th:id="password" th:name="password" title="只能由英文字母、数字、汉字或下划线“_”组成" style="ime-mode: inactive; width: 200px; margin-left: 15px;" autocomplete="off" type="password">
 							</div>
 						</div>
 						<div class="pwdError" id="powerpass_ie_dyn_Msg" style="height: 20px;"></div>
 						<div id="m-verification-code" class="m-verification-code">
 							<input class="m-codetxt" placeholder="验证码" id="user_input_verifyCode" name="user_input_verifyCode" maxlength="4" autocomplete="off" style="ime-mode: disabled;" type="text">
 							<span class="code_img">
-								    <img src="${pageContext.request.contextPath }/login/getVerifyCode" width="70" height="33" id="verifyCodeImage">
+								    <img th:src="@{/login/getVerifyCode}" width="70" height="33" id="verifyCodeImage">
 								</span> <span>
 								 <a id="changeVerifImageRegister" onclick="javascript:changeImage();">换一张</a>
 								</span>
@@ -99,12 +99,12 @@
                                 function changeImage() {
                                     $('#verifyCodeImage').attr(
                                         'src',
-                                        '${pageContext.request.contextPath }/login/getVerifyCode?timestamp='
+                                        '/login/getVerifyCode?timestamp='
                                         + genTimestamp());
                                 }
 
 							</script>
-							<!-- chen --> </div>
+						</div>
 
 						<input class="m-uersbtn" id="logo" value="登  录" type="submit" >
 						<div class="logon-error" style="display: none;" title=""></div>

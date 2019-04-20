@@ -26,7 +26,7 @@ import com.bank.service.UserTransferService;
 @RequestMapping("/user")
 @Controller
 public class UserTransferController {
-    private org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UserTransferController.class);
+	private org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UserTransferController.class);
 
 	@Autowired
 	private UserTransferService userTransferService;
@@ -84,7 +84,8 @@ public class UserTransferController {
 			Debitcard yourDebitcard = this.userTransferService.findDebitcardMessage(yourCardNum);
 			User yourUser = this.userService.findById(yourDebitcard.getCardUser());
 			Identity yourIdentity = this.userService.findIdentityById(yourUser.getUserIdentity());
-			String messageText = "{\"myname\":\""+myIdentity.getIdentityName()+"\",\"name\":\""+yourIdentity.getIdentityName()+"\",\"cardnum\":\""+yourCardNum+"\",\"money\":\""+money+"\",\"text\":\""+phoneText+"\"}";
+			String messageText = "尊敬的" + yourIdentity.getIdentityName() + "," + myIdentity.getIdentityName() + "向您的"+ yourCardNum+ "卡转账" + ",金额为 " +money +"," + phoneText;
+//			String messageText = "{\"myname\":\""+myIdentity.getIdentityName()+"\",\"name\":\""+yourIdentity.getIdentityName()+"\",\"cardnum\":\""+yourCardNum+"\",\"money\":\""+money+"\",\"text\":\""+phoneText+"\"}";
 			message.setMessageText(messageText);
 			message = this.userTransferService.saveMessage(message);
 			transactionOther.setTransactionMessage(message.getMessageId());
@@ -96,14 +97,14 @@ public class UserTransferController {
 	@RequestMapping("findcardNum")
 	@ResponseBody
 	public Identity findDebitcardMessage(String cardNum){
-		 Debitcard debitcard = userTransferService.findDebitcardMessage(cardNum);
-		 User user = userService.findById(debitcard.getCardUser());
-		 Identity identity = userService.findIdentityById(user.getUserIdentity());
+		Debitcard debitcard = userTransferService.findDebitcardMessage(cardNum);
+		User user = userService.findById(debitcard.getCardUser());
+		Identity identity = userService.findIdentityById(user.getUserIdentity());
 		return identity;
 	}
 
 	/**
-	 * chen 查询卡中余额
+	 * 查询卡中余额
 	 * @param cardNum
 	 * @return
 	 */

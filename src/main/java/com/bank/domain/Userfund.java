@@ -1,12 +1,13 @@
 package com.bank.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@lombok.Data
+@Data
 public class Userfund implements Serializable {
 
     private User userfundUserObj;
@@ -15,6 +16,7 @@ public class Userfund implements Serializable {
 
     private BigDecimal userOrderMoney;
 
+    //参考收益率
     private BigDecimal partCostRate;
 
     private Integer userfundId;
