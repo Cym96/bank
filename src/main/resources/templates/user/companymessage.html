@@ -69,22 +69,22 @@
 
 <div class="wrapper">
     <DIV class="innerBanner detailTitle" id="zsqx">
-        <SPAN class="detailZsqxOff">走势曲线</SPAN></DIV>
-    <DIV style="width: 100%; float: left; position: relative;">
-        <DIV class="selDate" style="left: 255px; width: 100px; position: absolute; z-index: 1;">
-            <SELECT
-                    id="selectdate">
+        <SPAN class="detailZsqxOff">走势曲线</SPAN>
+    </DIV>
+    <div class="con962">
+        <div class="companyTop" style="width: 800px;" align="center" >
+    <!--<DIV style="width: 100%; float: left; position: relative;">-->
+        <!--<DIV class="selDate" style="left: 255px; width: 100px; position: absolute; z-index: 1;">-->
+            <SELECT id="selectdate" align="center" >
                 <OPTION value="1">近一个月</OPTION>
-                <OPTION
-                        value="3">近三个月
-                </OPTION>
+                <OPTION value="3">近三个月 </OPTION>
                 <OPTION value="6">近半年</OPTION>
-                <OPTION
-                        value="12">近一年
-                </OPTION>
-                <OPTION value="24">近两年</OPTION>
+                <!--<OPTION value="12">近一年 </OPTION>-->
+                <!--<OPTION value="24">近两年</OPTION>-->
             </SELECT>
-        </DIV>
+            <div id="container" style="float: left;margin: 0;height: 300px; width: 100%; position: relative;">
+
+            </DIV>
     </DIV>
 </div>
 <div class="wrapper">
@@ -94,18 +94,271 @@
     <div class="con962">
         <div class="companyTop">
 
-            <DIV class="con930">
+            <!--<DIV class="con930">-->
+                <!--<UL class="innerTag fundJzxx" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);">-->
+                    <!--<form id="myform">-->
+                    <!--<LI style="line-height:30px; width:300px;" align="center" ><input type="date" th:id="minDate" th:name="minDate"  align="center" th:text="开始时间："></LI>-->
+                    <!--<LI style="line-height:30px; width:300px;" align="center"><input type="date" th:id="maxDate" th:name="maxDate"  align="center" th:text="截止时间："></LI>-->
+
+                    <!--<LI style="line-height:30px; width:250px;" align="center"><input type="button" th:id ="net" th:value="查询"></LI>-->
+                    <!--</form>-->
+                <!--</UL>-->
+
+ <script th:inline ="javascript" type="text/javascript">
+	$(function() {
+		$("#net").click(function() {
+			$.ajax({
+				type : "POST",
+				url : "user/findRecord(fundId=${fund.fundId})",
+				 data : $('#myform').serialize(),
+				dataType : "json",
+				 success : function(json) {
+				 console.log(1111);
+					 <!--$("#datebody").empty();-->
+					  <!--for(var i=0;i<json.length;i++){-->
+					  <!--$("#datebody").append("-->
+					  <!--<ul class=\"innerDetail fundJzxx bgfa\" >-->
+					  <!--<li data-bind=\"text:NetDate\">"+json[i].recordDate+"</li>-->
+					  <!--<li data-bind=\"text:NetValue\">"+json[i].recordNpv+"</li>-->
+					  <!--</ul>");-->
+					}
+
+				<!--}-->
+			});
+		});
+		$("#net").click();
+	});
+
+</script>
+
+
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>-->
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>-->
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>-->
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>-->
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>-->
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>-->
+            <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>-->
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>-->
+            <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>-->
+            <script type="text/javascript">
+		var dom = document.getElementById("container");
+		var myChart = echarts.init(dom);
+		var a = [];
+		var s=[];
+		option = null;
+		$.ajax({
+					type : "POST",
+					url : "/bank-web-user/user/findRecord?fundId=${fund.fundId}",
+					dataType : "json",
+					success : function(json) {
+					/* var json = eval(msg); */
+		       for(var i=0;i<json.length;i++){
+		     s.push(json[i].recordDate)
+		     a.push(json[i].recordNpv)
+			option = {
+		     xAxis: {
+		        type: 'category',
+		        data: ""
+		    },
+		    yAxis: {
+		        type: 'value'
+		    },
+		    series: [{
+		        data: a,
+		        type: 'line',
+		        smooth: true
+		    }]
+		};
+		;
+		if (option && typeof option === "object") {
+		    myChart.setOption(option, true);
+
+		}}}		//myChart.setOption(option);
+		});
+
+       </script>
+            <script type="text/javascript">
+$(function() {
+		$("#aaaa").load(function() {
+			$.ajax({
+				type : "POST",
+				url : "/bank-web-user/user/findRecord?fundId=${fund.fundId}",
+				//data :  $('#myform').serialize() ,
+				dataType : "json",
+				success : function(json) {
+					//$("#aaaa").empty();
+					 for(var i=0;i<json.length;i++){
+					 }
+			     if(json.length >= 730){
+			     var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+					a=a.toFixed(2);
+
+					var b1 = 0;
+					for(var i=0;i<7;i++){
+					   b1+=json[i].recordNpv;
+					}
+					var b2=0;
+					for(var i=7;i<14;i++){
+					   b2+=json[i].recordNpv;
+					}
+					b1=(b1-b2)/b2*100;
+					b1=b1.toFixed(2);
+
+					var c1 = 0;
+					for(var i=0;i<30;i++){
+					   c1+=json[i].recordNpv;
+					}
+					var c2=0;
+					for(var i=30;i<60;i++){
+					   c2+=json[i].recordNpv;
+					}
+					c1=(c1-c2)/c2*100;
+					c1=c1.toFixed(2);
+
+					var d1 = 0;
+					for(var i=0;i<90;i++){
+					   d1+=json[i].recordNpv;
+					}
+					var d2=0;
+					for(var i=90;i<180;i++){
+					   d2+=json[i].recordNpv;
+					}
+					d1=(d1-d2)/d2*100;
+					d1=d1.toFixed(2);
+
+					var e1 = 0;
+					for(var i=0;i<365;i++){
+					   e1+=json[i].recordNpv;
+					}
+					var e2=0;
+					for(var i=365;i<730;i++){
+					   e2+=json[i].recordNpv;
+					}
+					e1=(e1-e2)/e2*100;
+					e1=e1.toFixed(2);
+				 $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+c1+"%"+"</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+d1+"%"+"</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+e1+"%"+"</font></li>");
+				 }
+				 if(json.length >=180 && json.length<730){
+				 var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+					a=a.toFixed(2);
+
+					var b1 = 0;
+					for(var i=0;i<7;i++){
+					   b1+=json[i].recordNpv;
+					}
+					var b2=0;
+					for(var i=7;i<14;i++){
+					   b2+=json[i].recordNpv;
+					}
+					b1=(b1-b2)/b2*100;
+					b1=b1.toFixed(2);
+
+					var c1 = 0;
+					for(var i=0;i<30;i++){
+					   c1+=json[i].recordNpv;
+					}
+					var c2=0;
+					for(var i=30;i<60;i++){
+					   c2+=json[i].recordNpv;
+					}
+					c1=(c1-c2)/c2*100;
+					c1=c1.toFixed(2);
+
+					var d1 = 0;
+					for(var i=0;i<90;i++){
+					   d1+=json[i].recordNpv;
+					}
+					var d2=0;
+					for(var i=90;i<180;i++){
+					   d2+=json[i].recordNpv;
+					}
+					d1=(d1-d2)/d2*100;
+					d1=d1.toFixed(2);
+
+				  $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+c1+"%"+"</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+d1+"%"+"</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+				}
+				if(json.length >=60 && json.length<180){
+				 var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+					a=a.toFixed(2);
+
+					var b1 = 0;
+					for(var i=0;i<7;i++){
+					   b1+=json[i].recordNpv;
+					}
+					var b2=0;
+					for(var i=7;i<14;i++){
+					   b2+=json[i].recordNpv;
+					}
+					b1=(b1-b2)/b2*100;
+					b1=b1.toFixed(2);
+
+					var c1 = 0;
+					for(var i=0;i<30;i++){
+					   c1+=json[i].recordNpv;
+					}
+					var c2=0;
+					for(var i=30;i<60;i++){
+					   c2+=json[i].recordNpv;
+					}
+					c1=(c1-c2)/c2*100;
+					c1=c1.toFixed(2);
+				  $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+c1+"%"+"</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+				}if(json.length >=14 && json.length<60){
+				 var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+					a=a.toFixed(2).to;
+
+					var b1 = 0;
+					for(var i=0;i<7;i++){
+					   b1+=json[i].recordNpv;
+					}
+					var b2=0;
+					for(var i=7;i<14;i++){
+					   b2+=json[i].recordNpv;
+					}
+					b1=(b1-b2)/b2*100;
+					b1=b1.toFixed(2);
+				  $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+b1+"%"+"</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+				}
+				if(json.length >=2 && json.length<7){
+				var a = (json[0].recordNpv-json[1].recordNpv)/json[1].recordNpv *100;
+				 	a=a.toFixed(2);
+				  $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+a+"%"+"</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+				}if(json.length<2){
+				  $("#aaaa").prepend("<li><span>日涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>周涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>月涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>季涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font><br><span>年涨幅：</span><font style=\"color: rgb(255, 136, 0);\">"+"-</font></li>");
+				}
+		 if (option && typeof option === "object") {
+		    myChart.setOption(option, true);
+
+		}
+					 }});
+			});
+		$("#aaaa").load();
+
+	});
+</script>
+
+
+            <span data-bind="foreach:FundNets" th:id="datebody" >
                 <UL class="innerTag fundJzxx" style="height: 35px; width:850px; background-color: rgb(234, 240, 241);">
                     <LI style="line-height:30px; width:425px;" align="center" ><p th:text="净值日期" align="center"></p></LI>
                     <LI style="line-height:30px; width:425px;" align="center"><p th:text="最新净值" align="center"></p></LI>
                 </UL>
+                      <span data-bind="foreach:FundNets" th:id="datebody" >
                 <SPAN data-bind="foreach:FundNets">
-                    <!--th:text="${#dates.format(compan.companyBuildtime, 'yyyy-MM-dd')}"-->
-                    <UL class="innerDetail fundJzxx bgfa" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);">
-                      <LI data-bind="text:NetDate" style="line-height:30px; width:425px;"  > <P th:text="201404113期" align="center"></P></LI>
-                      <LI data-bind="text:NetValue" style="line-height:30px; width:425px;"><p th:text="1.6533" align="center"></p></LI>
+                    <UL class="innerDetail fundJzxx bgfa" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);" th:each="recordList : ${recordList}">
+
+                      <LI data-bind="text:NetDate" style="line-height:30px; width:425px;"  >
+                          <P th:text="${#dates.format(recordList.recordDate, 'yyyy-MM-dd')}" align="center">
+                          </P></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:425px;">
+                          <p th:text="${recordList.recordNpv}" align="center">
+                          </p></LI>
                      </UL>
-                      </SPAN>
+                </SPAN>
+                      </span>
+            </span>
+        </div>
             </DIV>
         </DIV>
     </DIV>
@@ -129,50 +382,13 @@
                 </UL>
 
                     <UL class="innerDetail fundJzxx bgfa" style="height: 35px; width:850px; background-color: rgb(255, 255, 255);">
-                      <LI data-bind="text:NetDate" style="line-height:30px; width:212.5px;"  > <P th:text="11" align="center"></P></LI>
-                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="11" align="center"></p></LI>
-                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="0.0001" align="center"></p></LI>
-                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="0.00005" align="center"></p></LI>
+                      <LI data-bind="text:NetDate" style="line-height:30px; width:212.5px;"  > <P th:text="${fund.fundMinbuymoney}" align="center"></P></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="${fund.fundMinsalemoney}" align="center"></p></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="${fund.fundBuyratio}" align="center"></p></LI>
+                      <LI data-bind="text:NetValue" style="line-height:30px; width:212.5px;"><p th:text="${fund.fundSaleratio}" align="center"></p></LI>
                      </UL>
 
 
-
-            <!--<TABLE class="list_cp_fund" cellspacing="0" cellpadding="0">-->
-                <!--<TBODY>-->
-                <!--<TR>-->
-                    <!--<TD style="height: 8px; background-color: rgb(255, 255, 255);"-->
-                        <!--colspan="4"></TD>-->
-                <!--</TR>-->
-                <!--<TR>-->
-                    <!--<TH>最低申购</TH>-->
-                    <!--<TD style="background-color: rgb(250, 250, 250);">-->
-                <!--11-->
-                    <!--</TD>-->
-                    <!--<TH>最低赎回份额</TH>-->
-                    <!--<TD style="background-color: rgb(250, 250, 250);">-->
-               <!--11-->
-                    <!--</TD>-->
-                <!--</TR>-->
-                <!--<TR>-->
-                    <!--<TD style="height: 8px; background-color: rgb(255, 255, 255);"-->
-                        <!--colspan="4"></TD>-->
-                <!--</TR>-->
-                <!--<TR>-->
-                    <!--<TH>申购费率</TH>-->
-                    <!--<TD>-->
-                    <!--0.003%-->
-                    <!--</TD>-->
-                    <!--<TH>赎回费率</TH>-->
-                    <!--<TD>-->
-                        <!--0.0005%-->
-                    <!--</TD>-->
-                <!--</TR>-->
-                <!--<TR>-->
-                    <!--<TD style="height: 8px; background-color: rgb(255, 255, 255);"-->
-                        <!--colspan="4"></TD>-->
-                <!--</TR>-->
-                <!--</TBODY>-->
-            <!--</TABLE>-->
         </DIV>
     </DIV>
 </div>
@@ -208,6 +424,8 @@
     </div>
 
 </div>
+</div>
+
 
 </body>
 </html>

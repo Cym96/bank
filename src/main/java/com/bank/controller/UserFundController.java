@@ -18,7 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.text.*;
+import java.util.*;
 /**
  * @author meihao
  */
@@ -39,6 +40,22 @@ public class UserFundController {
     private AdminService adminService;
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+	private RecordService recordService;
+
+//	@RequestMapping(value = "/findRecord")
+//	@org.springframework.web.bind.annotation.ResponseBody
+//	public List<Record> findAll(int fundId,@org.springframework.format.annotation.DateTimeFormat(pattern="yyyy-MM-dd")java.util.Date minDate,
+//			@org.springframework.format.annotation.DateTimeFormat(pattern="yyyy-MM-dd")java.util.Date maxDate){
+//		DateVO dateVO = new DateVO();
+//		dateVO.setFundId(fundId);
+//		dateVO.setMinDate(minDate);
+//		dateVO.setMaxDate(maxDate);
+//		List<Record> recordList = this.recordService.findByDate(dateVO);
+//		logger.info(""+recordList);
+//		return recordList;
+//	}
     /**
      * 查询所有存在基金
      *
@@ -155,9 +172,23 @@ public class UserFundController {
         Fund fund = fundService.findById(fundId);
         Admin admin = adminService.findbyId(fund.getFundManager());
         Company compan = this.companyService.findById(fund.getFundCompany());
+        DateVO dateVO = new DateVO();
+
+        Calendar nowDate = java.util.Calendar.getInstance();
+        nowDate.add(Calendar.DATE,-7);
+        Date maxDate = new Date();
+
+        dateVO.setMinDate(nowDate.getTime());
+        dateVO.setMaxDate(maxDate);
+        dateVO.setFundId(fundId);
+        logger.info("" + nowDate);
+        logger.info("" + maxDate);
+        List<Record> recordList = this.recordService.findByDate(dateVO);
+        logger.info("" + recordList);
         fund.setUserMangerObj(admin);
         model.addAttribute("fund", fund);
         model.addAttribute("compan", compan);
+        model.addAttribute("recordList", recordList);
         return "user/companymessage";
     }
 
